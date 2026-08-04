@@ -1,0 +1,35 @@
+{
+  "swarm": {
+    "active": true,
+    "agent_count": 4,
+    "topology": "hierarchical",
+    "task": "@\"/Users/wififunded/Downloads/Meeting started 2026_08_04 12_38 EST - Notes by Ge",
+    "agents": [
+      {
+        "id": "planner-1785883329633-0",
+        "type": "planner",
+        "status": "spawning",
+        "startedAt": "2026-08-04T22:42:09.633Z"
+      },
+      {
+        "id": "coder-1785883329633-1",
+        "type": "coder",
+        "status": "spawning",
+        "startedAt": "2026-08-04T22:42:09.633Z"
+      },
+      {
+        "id": "reviewer-1785883329633-2",
+        "type": "reviewer",
+        "status": "spawning",
+        "startedAt": "2026-08-04T22:42:09.633Z"
+      },
+      {
+        "id": "tester-1785883329633-3",
+        "type": "tester",
+        "status": "spawning",
+        "startedAt": "2026-08-04T22:42:09.633Z"
+      }
+    ]
+  },
+  "ts": "2026-08-04T22:42:09.633Z"
+}

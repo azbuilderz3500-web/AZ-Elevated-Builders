@@ -1,0 +1,10 @@
+[
+  {
+    "id": "debug-statements",
+    "severity": "WARN",
+    "description": "Debug statement left in code (console.log / print / debugger)",
+    "file": "build-seo.mjs",
+    "filePath": "/Users/wififunded/AZ Elevated Builders/build-seo.mjs",
+    "timestamp": "2026-08-04T22:51:14.383Z"
+  }
+]

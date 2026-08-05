@@ -47,13 +47,21 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <meta name="twitter:image" content="${image}" />` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />${image ? `
-<link rel="preload" as="image" fetchpriority="high" href="${image}" />` : ""}
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/style.css?v=${ASSET_V}" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰</text></svg>" />
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>
 <body class="seo-page">`;
+
+// Build a responsive candidate set from an Unsplash URL (it resizes via &w=).
+const srcsetFor = (url) => {
+  const base = url.replace(/[?&]w=\d+/, "");
+  const join = base.includes("?") ? "&" : "?";
+  return [480, 800, 1200, 1600].map((w) => `${base}${join}w=${w} ${w}w`).join(", ");
+};
+const SIZES = "(max-width: 900px) 100vw, 900px";
 
 const PHONE_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>`;
 
@@ -128,15 +136,47 @@ const footer = `
 (function(){
   var f = document.querySelector('form[data-lead]');
   if (!f) return;
+  var sending = false;
+  function err(input, msg){
+    input.classList.add('is-error');
+    input.setAttribute('aria-invalid','true');
+    var e = input.nextElementSibling;
+    if (!e || e.className !== 'field-error') {
+      e = document.createElement('p');
+      e.className = 'field-error';
+      input.parentNode.insertBefore(e, input.nextSibling);
+    }
+    e.textContent = msg;
+    input.setAttribute('aria-describedby', e.id || (e.id = 'err-' + input.name));
+  }
+  function clear(input){
+    input.classList.remove('is-error');
+    input.removeAttribute('aria-invalid');
+    var e = input.nextElementSibling;
+    if (e && e.className === 'field-error') e.parentNode.removeChild(e);
+  }
+  f.addEventListener('input', function(e){ if (e.target.name) clear(e.target); });
   f.addEventListener('submit', function(e){
     e.preventDefault();
     var n = f.querySelector('[name=name]'), p = f.querySelector('[name=phone]'), ok = true;
-    [n,p].forEach(function(i){ i.classList.remove('is-error'); });
-    if (!n.value.trim()) { n.classList.add('is-error'); ok = false; }
-    if (p.value.replace(/\\D/g,'').length < 10) { p.classList.add('is-error'); ok = false; }
+    [n,p].forEach(clear);
+    if (!n.value.trim()) { err(n, 'Please enter your name.'); ok = false; }
+    if (p.value.replace(/\\D/g,'').length < 10) { err(p, 'Please enter a 10-digit phone number.'); ok = false; }
     if (!ok) { f.querySelector('.is-error').focus(); return; }
-    // No backend yet — point this at the real endpoint when one exists.
-    f.parentNode.innerHTML = '<p class="leadform__thanks">Thanks — we got it.<br>We\\'ll call you back within one business day.<br><br>Need us sooner? <a href="tel:${BRAND.phoneHref}">Call ${BRAND.phone}</a></p>';
+    if (sending) return;
+    sending = true;
+    var b = f.querySelector('button[type=submit]');
+    b.disabled = true; b.textContent = 'One moment\\u2026';
+    // No submission endpoint yet, so do NOT claim the request was received.
+    // Hand the visitor to a channel that actually reaches the business.
+    f.parentNode.innerHTML =
+      '<p class="leadform__thanks" role="status" tabindex="-1">' +
+      '<strong>Almost there \\u2014 our online form isn\\'t live yet.</strong><br>' +
+      'Call or text and we\\'ll pick it up today:<br><br>' +
+      '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>' +
+      '<br><a href="mailto:${BRAND.email}" style="text-decoration:underline">${BRAND.email}</a></p>';
+    var msg = document.querySelector('.leadform__thanks');
+    if (msg) msg.focus();
   });
 })();
 </script>
@@ -273,14 +313,14 @@ CITIES.forEach((city, ci) => {
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${img}" width="1600" height="900" alt="${esc(svc.imgAlt)} by AZ Elevated Builders, serving ${esc(city.name)}, California" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${img}" srcset="${srcsetFor(img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.imgAlt)} by AZ Elevated Builders, serving ${esc(city.name)}, California" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
     <h2>${esc(svc.name)} in ${esc(city.name)}: what's different here</h2>
     <p>${esc(city.blurb)}</p>
     <p>Most of ${esc(city.name)} is ${esc(city.era)}. ${esc(profileNote)}</p>
-    <p>We work throughout ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}. The local constant is ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
+    <p>We work throughout ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}.${city.adjacent ? ` We also cover neighboring ${esc(listPhrase(city.adjacent))} — those are unincorporated, so permits there run through ${esc(city.county)} rather than the city.` : ""} The local constant is ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
 
     <h2>Permits and inspections in ${esc(city.name)}</h2>
     <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)} You should never be the one standing at a counter or waiting on an inspector — that is part of what you hire a licensed contractor for.</p>
@@ -359,7 +399,7 @@ SERVICES.forEach((svc) => {
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.img}" width="1600" height="900" alt="${esc(svc.imgAlt)}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.img}" srcset="${srcsetFor(svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.imgAlt)}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>
@@ -447,11 +487,22 @@ write("sitemap.xml", sitemap);
 const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User",
   "anthropic-ai", "PerplexityBot", "Perplexity-User", "Google-Extended",
   "Applebot", "Applebot-Extended", "CCBot", "Bingbot", "DuckAssistBot", "cohere-ai", "meta-externalagent"];
+// Only the client-facing pitch decks. The privacy policy must stay crawlable —
+// it is a legal document, and a robots block would also hide its noindex tag.
+const DISALLOW = ["/brand/"];
 write("robots.txt",
-  `# ${BRAND.name} — ${BRAND.city}, ${BRAND.state}\nUser-agent: *\nAllow: /\n\n` +
-  `# Answer engines / AI assistants — explicitly allowed\n` +
-  AI_BOTS.map((b) => `User-agent: ${b}\nAllow: /`).join("\n\n") +
+  `# ${BRAND.name} — ${BRAND.city}, ${BRAND.state}\nUser-agent: *\nAllow: /\n` +
+  DISALLOW.map((d) => `Disallow: ${d}`).join("\n") + `\n\n` +
+  `# Answer engines / AI assistants — allowed, except client-facing material\n` +
+  AI_BOTS.map((b) => `User-agent: ${b}\nAllow: /\n` + DISALLOW.map((d) => `Disallow: ${d}`).join("\n")).join("\n\n") +
   `\n\nSitemap: ${BRAND.domain}/sitemap.xml\n`);
+
+// Host cache policy. The sha1 fingerprint on CSS makes immutable safe.
+write("_headers",
+  `/css/*\n  Cache-Control: public, max-age=31536000, immutable\n\n` +
+  `/js/*\n  Cache-Control: public, max-age=31536000, immutable\n\n` +
+  `/*.html\n  Cache-Control: public, max-age=0, must-revalidate\n\n` +
+  `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
 
 // llms.txt — an emerging convention giving AI assistants a clean, quotable summary.
 const llms = `# ${BRAND.name}

@@ -2,22 +2,44 @@
 (function () {
   "use strict";
 
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- Preloader ---------- */
-  // Phone users are here to call, not to watch an intro — keep it brief on small
-  // screens and skip it entirely for repeat visits in the same session.
-  const preloader = document.getElementById("preloader");
-  const isMobile = window.matchMedia("(max-width: 900px)").matches;
-  const seen = sessionStorage.getItem("azeb-seen");
-  const hold = prefersReduced || seen ? 0 : isMobile ? 550 : 1400;
-  const dismiss = () => {
-    preloader.classList.add("is-done");
-    sessionStorage.setItem("azeb-seen", "1");
+  /* ---------- Preloader ----------
+     Nothing above this may throw. Storage access raises SecurityError when a
+     browser is set to block all cookies (and in some embedded webviews), which
+     previously killed this whole script and left the preloader covering the
+     page forever — including the tap-to-call button. */
+  // Storage that can never throw. Defined first — it cannot fail at definition
+  // time, so everything below is safe to arm.
+  const store = {
+    get(k, session) {
+      try { return (session ? sessionStorage : localStorage).getItem(k); }
+      catch (_) { return null; }
+    },
+    set(k, v, session) {
+      try { (session ? sessionStorage : localStorage).setItem(k, v); }
+      catch (_) { /* private mode / blocked storage — non-fatal */ }
+    },
   };
-  window.addEventListener("load", () => setTimeout(dismiss, hold));
-  // Safety: never trap the user behind the loader
-  setTimeout(dismiss, 3000);
+
+  const preloader = document.getElementById("preloader");
+  const dismiss = () => {
+    if (preloader) preloader.classList.add("is-done");
+    store.set("azeb-seen", "1", true);
+  };
+  // Armed before anything else can fail, so no later error strands a visitor
+  // behind the overlay.
+  setTimeout(dismiss, 1200);
+
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+  const seen = store.get("azeb-seen", true);
+  const hold = prefersReduced || seen ? 0 : isMobile ? 400 : 900;
+  // DOMContentLoaded, not load: window.load waits on every image, which held the
+  // screen black for ~4s on mobile.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => setTimeout(dismiss, hold));
+  } else {
+    setTimeout(dismiss, hold);
+  }
 
   /* ---------- Smooth scroll (Lenis) ---------- */
   let lenis = null;
@@ -27,8 +49,11 @@
     requestAnimationFrame(raf);
   }
   const scrollTo = (target) => {
-    if (lenis) lenis.scrollTo(target, { offset: 0 });
-    else target.scrollIntoView({ behavior: "smooth" });
+    if (lenis) { lenis.scrollTo(target, { offset: 0 }); return; }
+    // Without Lenis, target may be the number 0 (scroll-to-top) — which has no
+    // scrollIntoView. Handle both shapes.
+    if (typeof target === "number") window.scrollTo({ top: target, behavior: "smooth" });
+    else if (target && target.scrollIntoView) target.scrollIntoView({ behavior: "smooth" });
   };
 
   /* ---------- Anchor links ---------- */
@@ -51,10 +76,13 @@
   let lastY = 0;
   const onScroll = () => {
     const y = window.scrollY;
-    if (y > 140 && y > lastY) nav.classList.add("is-hidden");
+    // Never hide the nav while the menu is open — its close button lives there,
+    // and hiding it stranded the user with no way out.
+    const menuOpen = menu && menu.classList.contains("is-open");
+    if (!menuOpen && y > 140 && y > lastY) nav.classList.add("is-hidden");
     else nav.classList.remove("is-hidden");
     lastY = y;
-    fab.classList.toggle("is-in", y > window.innerHeight * 0.6);
+    if (fab) fab.classList.toggle("is-in", y > window.innerHeight * 0.6);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -64,15 +92,24 @@
   const openMenu = () => {
     menu.classList.add("is-open");
     menu.setAttribute("aria-hidden", "false");
+    menu.removeAttribute("inert");
     menuBtn.setAttribute("aria-expanded", "true");
     menuBtn.setAttribute("aria-label", "Close menu");
+    const first = menu.querySelector("a");
+    if (first) setTimeout(() => first.focus(), 120);
   };
   const closeMenu = () => {
+    const wasOpen = menu.classList.contains("is-open");
     menu.classList.remove("is-open");
     menu.setAttribute("aria-hidden", "true");
+    // inert keeps the 12 links out of the tab order while hidden; CSS clip-path
+    // alone left them focusable inside an aria-hidden container.
+    menu.setAttribute("inert", "");
     menuBtn.setAttribute("aria-expanded", "false");
     menuBtn.setAttribute("aria-label", "Open menu");
+    if (wasOpen) menuBtn.focus();
   };
+  menu.setAttribute("inert", "");   // starts closed
   menuBtn.addEventListener("click", () =>
     menu.classList.contains("is-open") ? closeMenu() : openMenu()
   );
@@ -130,18 +167,45 @@
   /* ---------- Modals ---------- */
   const fab = document.getElementById("fab");
   const contactModal = document.getElementById("contactModal");
-  const reelModal = document.getElementById("reelModal");
-  const openModal = (m) => { m.classList.add("is-open"); m.setAttribute("aria-hidden", "false"); };
-  const closeModals = () => {
-    [contactModal, reelModal].forEach((m) => {
-      m.classList.remove("is-open");
-      m.setAttribute("aria-hidden", "true");
-      const v = m.querySelector("video");
-      if (v) v.pause();
-    });
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, summary, [tabindex]:not([tabindex="-1"])';
+  let lastFocused = null;
+
+  const openModal = (m) => {
+    if (!m) return;
+    lastFocused = document.activeElement;
+    m.classList.add("is-open");
+    m.setAttribute("aria-hidden", "false");
+    m.setAttribute("aria-modal", "true");
+    document.body.style.overflow = "hidden";      // stop the page scrolling behind
+    if (lenis) lenis.stop();
+    const first = m.querySelector(FOCUSABLE);
+    if (first) setTimeout(() => first.focus(), 60);
   };
-  fab.addEventListener("click", () => openModal(contactModal));
-  document.getElementById("reelBtn").addEventListener("click", () => openModal(reelModal));
+
+  const closeModals = () => {
+    if (!contactModal) return;
+    contactModal.classList.remove("is-open");
+    contactModal.setAttribute("aria-hidden", "true");
+    contactModal.removeAttribute("aria-modal");
+    document.body.style.overflow = "";
+    if (lenis) lenis.start();
+    if (lastFocused && lastFocused.focus) lastFocused.focus();   // restore focus
+    lastFocused = null;
+  };
+
+  // Keep Tab inside an open dialog.
+  if (contactModal) {
+    contactModal.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab" || !contactModal.classList.contains("is-open")) return;
+      const items = [...contactModal.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  }
+
+  if (fab) fab.addEventListener("click", () => openModal(contactModal));
   document.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModals));
 
   // Sticky mobile bar → estimate modal, focus the first field immediately
@@ -157,6 +221,7 @@
 
   /* ---------- Estimate form: validate, show errors, confirm ---------- */
   const form = document.getElementById("estimateForm");
+  let submitting = false;   // guards the keyboard "send" path too, not just the button
   if (form) {
     const showError = (input, msg) => {
       input.classList.add("is-error");
@@ -192,28 +257,40 @@
       else if (digits.length < 10) { showError(phone, "That number looks too short — 10 digits please."); ok = false; }
 
       if (!ok) { form.querySelector(".is-error").focus(); return; }
+      if (submitting) return;
+      submitting = true;
 
       const btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
       btn.setAttribute("aria-busy", "true");
-      btn.textContent = "Sending…";
+      btn.textContent = "One moment…";
 
-      // No backend yet — swap this for the real endpoint (Netlify Forms / Formspree / webhook)
+      // There is no submission endpoint yet, so we must NOT tell the visitor the
+      // request was received. Hand them straight to a channel that actually works.
+      // When a real endpoint exists, POST here and restore a true confirmation.
       setTimeout(() => {
         form.innerHTML =
-          '<p class="modal__thanks">Thanks — we got it.<br>' +
-          "We'll call you back within one business day.<br><br>" +
-          'Need us sooner? <a href="tel:+19258123150" style="text-decoration:underline">Call (925) 812-3150</a></p>';
-      }, 600);
+          '<p class="modal__thanks" role="status" tabindex="-1">' +
+          "<strong>Almost there — our online form isn't live yet.</strong><br>" +
+          "Call or text us and we'll pick it up today:<br><br>" +
+          '<a class="btn btn--solid" href="tel:+19258123150" data-cta="form-fallback-call" ' +
+          'style="justify-content:center">Call (925) 812-3150</a><br>' +
+          '<a href="mailto:Azbuild3rs@gmail.com" style="text-decoration:underline">Azbuild3rs@gmail.com</a></p>';
+        const msg = form.querySelector(".modal__thanks");
+        if (msg) msg.focus();   // move focus so screen readers land on the message
+      }, 400);
     });
   }
 
   /* ---------- Cookies ---------- */
   const cookies = document.getElementById("cookies");
-  if (localStorage.getItem("azeb-consent")) cookies.classList.add("is-hidden");
-  cookies.querySelectorAll("[data-consent]").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      localStorage.setItem("azeb-consent", btn.dataset.consent);
-      cookies.classList.add("is-hidden");
-    })
-  );
+  if (cookies) {
+    if (store.get("azeb-consent")) cookies.classList.add("is-hidden");
+    cookies.querySelectorAll("[data-consent]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        store.set("azeb-consent", btn.dataset.consent);
+        cookies.classList.add("is-hidden");
+      })
+    );
+  }
 })();

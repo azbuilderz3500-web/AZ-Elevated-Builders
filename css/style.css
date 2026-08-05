@@ -74,6 +74,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 ============================================================ */
 .preloader {
   position: fixed; inset: 0; z-index: 200;
+  pointer-events: none;   /* never intercept a tap-to-call, even mid-fade */
   background: var(--bg);
   display: flex; align-items: center; justify-content: center;
   transition: opacity 0.8s var(--ease), visibility 0.8s;
@@ -200,7 +201,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
    Hero
 ============================================================ */
 .hero {
-  position: relative; height: 100lvh; min-height: 620px;
+  position: relative; height: 100svh; min-height: 620px;
   overflow: hidden;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 var(--pad) clamp(1.5rem, 4vh, 3rem);
@@ -430,7 +431,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .service__row[aria-expanded="true"] .service__arrow { transform: rotate(45deg); }
 .service__body {
   max-height: 0; overflow: hidden;
-  transition: max-height 0.6s var(--ease);
+  visibility: hidden;   /* removes collapsed links from the tab order */
+  transition: max-height 0.6s var(--ease), visibility 0s linear 0.6s;
+}
+.service__row[aria-expanded="true"] + .service__body {
+  visibility: visible;
+  transition: max-height 0.6s var(--ease), visibility 0s;
 }
 .service__body p {
   padding: 0 var(--pad) 2.2rem;
@@ -507,7 +513,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   flex: 1; min-width: 0; background: none; border: 0; color: var(--fg);
   font: inherit; font-size: 0.9rem; padding: 0.6rem 0; outline: none;
 }
-.footer__news input::placeholder { color: var(--fg-faint); }
+.footer__news input::placeholder { color: var(--fg-dim); }
 .footer__news button {
   font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--fg-dim); transition: color 0.3s;
@@ -553,7 +559,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* ============================================================
    Modals
 ============================================================ */
-.modal { position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; padding: 1.5rem; visibility: hidden; }
+.modal {
+  position: fixed; inset: 0; z-index: 180;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 1.5rem; visibility: hidden;
+  overflow-y: auto; overscroll-behavior: contain;
+}
 .modal.is-open { visibility: visible; }
 .modal__backdrop {
   position: absolute; inset: 0; background: rgba(3, 3, 3, 0.75);
@@ -563,6 +574,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .modal.is-open .modal__backdrop { opacity: 1; }
 .modal__panel {
   position: relative; width: min(560px, 100%);
+  margin: auto 0;   /* centres when short, scrolls when tall */
   background: var(--navy-solid);
   border: 1px solid rgba(245, 239, 230, 0.1);
   border-radius: 22px;
@@ -601,7 +613,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: border-color 0.3s;
 }
 .modal__form input:focus, .modal__form textarea:focus { border-color: rgba(245, 239, 230, 0.45); }
-.modal__form input::placeholder, .modal__form textarea::placeholder { color: var(--fg-faint); }
+.modal__form input::placeholder, .modal__form textarea::placeholder { color: var(--fg-dim); }
 .modal__form .btn { margin-top: 0.4rem; min-height: 56px; font-size: 0.8rem; }
 .modal__thanks { font-size: 1rem; padding: 2rem 0; text-align: center; }
 .modal__form input { min-height: 54px; }
@@ -837,7 +849,7 @@ body.has-actionbar { padding-bottom: 0; }
   transition: border-color 0.3s;
 }
 .leadform__form input:focus { border-color: rgba(245, 239, 230, 0.5); }
-.leadform__form input::placeholder { color: var(--fg-faint); }
+.leadform__form input::placeholder { color: var(--fg-dim); }
 .leadform__form input.is-error { border-color: #e2725b; background: rgba(226, 114, 91, 0.08); }
 .leadform__form .btn { min-height: 56px; white-space: nowrap; }
 .leadform__call {
@@ -905,11 +917,12 @@ body.has-actionbar { padding-bottom: 0; }
   text-transform: uppercase; font-size: 0.95rem;
 }
 .city-grid .arrow { color: var(--fg-dim); }
-.city-grid .county { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-faint); display: block; margin-top: 0.2rem; }
+.city-grid .county { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-dim); display: block; margin-top: 0.25rem; }
 .page-footer-pad { height: clamp(4rem, 10vh, 7rem); }
 .simple-footer {
   border-top: 1px solid var(--line);
-  padding: 2.5rem var(--pad);
+  padding-top: 2.5rem; padding-left: var(--pad); padding-right: var(--pad);
+  padding-bottom: 2.5rem;
   display: flex; flex-wrap: wrap; gap: 1rem 2.5rem;
   justify-content: space-between; align-items: center;
   font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -925,8 +938,9 @@ body.has-actionbar { padding-bottom: 0; }
   /* iOS zooms the page when an input under 16px gets focus */
   input, textarea, select { font-size: 16px !important; }
 
-  /* Hero: fit the wordmark, keep CTAs above the fold */
-  .hero { padding-bottom: 1.5rem; }
+  /* Hero: fit the wordmark, and clear the sticky action bar so the
+     tap-to-call button is not hidden behind it. */
+  .hero { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
   .hero__title { font-size: clamp(2.4rem, 13vw, 4rem); line-height: 0.95; }
   .hero__tagline { font-size: 0.74rem; line-height: 1.85; top: 5.6rem; }
   .hero__reviews { font-size: 0.62rem; gap: 0.4rem 0.6rem; margin-bottom: 0.9rem; }
@@ -966,6 +980,14 @@ body.has-actionbar { padding-bottom: 0; }
   }
   .crumbs { gap: 0.2rem 0.6rem; }
   .nav__brand { min-height: 44px; }
+
+  /* Clear the sticky action bar. This must live AFTER the base .simple-footer
+     rule above — an earlier media query loses on source order at equal
+     specificity, which left "Home" and "Privacy" under the bar, where tapping
+     them dialled the phone instead. */
+  .footer, .simple-footer {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
 }
 
 .service__more {

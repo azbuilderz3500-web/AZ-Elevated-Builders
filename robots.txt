@@ -1,54 +1,71 @@
 # AZ Elevated Builders — Brentwood, CA
 User-agent: *
 Allow: /
+Disallow: /brand/
 
-# Answer engines / AI assistants — explicitly allowed
+# Answer engines / AI assistants — allowed, except client-facing material
 User-agent: GPTBot
 Allow: /
+Disallow: /brand/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /brand/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /brand/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /brand/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /brand/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /brand/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /brand/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /brand/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /brand/
 
 User-agent: Applebot
 Allow: /
+Disallow: /brand/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /brand/
 
 User-agent: CCBot
 Allow: /
+Disallow: /brand/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /brand/
 
 User-agent: DuckAssistBot
 Allow: /
+Disallow: /brand/
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /brand/
 
 User-agent: meta-externalagent
 Allow: /
+Disallow: /brand/
 
 Sitemap: https://azelevatedbuilders.com/sitemap.xml

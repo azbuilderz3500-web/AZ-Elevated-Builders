@@ -7,7 +7,11 @@
 import { mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BRAND, CITIES, SERVICES, OPENERS } from "./data/site-data.mjs";
+import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES } from "./data/site-data.mjs";
+
+// Join a list into readable prose: "a, b and c"
+const listPhrase = (arr) =>
+  arr.length <= 1 ? (arr[0] || "") : arr.slice(0, -1).join(", ") + " and " + arr[arr.length - 1];
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const esc = (s) => s.replace(/&(?![a-z]+;)/g, "&amp;");
@@ -200,7 +204,12 @@ CITIES.forEach((city, ci) => {
   SERVICES.forEach((svc, si) => {
     const path = `/service-areas/${city.slug}/${svc.slug}/`;
     const title = `${svc.name} in ${city.name}, CA | ${BRAND.name}`;
-    const desc = `${svc.name} in ${city.name}, CA by ${BRAND.name} — family-run, CA-licensed general contractor. Free estimates, 15+ year trade crews, warranties up to 5 years. Hablamos español.`;
+    const desc = `${svc.name} in ${city.name}, CA. ${BRAND.name} is a family-run, licensed general contractor working across ${listPhrase(city.hoods.slice(0, 3))}. Free estimates, 15+ years per trade, written warranty up to 5 years. Call ${BRAND.phone}.`;
+    const lens = SERVICE_LOCAL[svc.slug];
+    const profileNote = PROFILE_NOTES[svc.slug][city.profile];
+    // rotate the hero photo so adjacent city pages don't share an image
+    const imgSet = SERVICE_IMAGES[svc.slug] || [svc.img];
+    const img = imgSet[ci % imgSet.length];
     const isHome = city.slug === "brentwood";
     const opener = isHome
       ? `Looking for ${svc.name.toLowerCase()} in ${city.name}? ${BRAND.name} is headquartered right here in ${city.name} — a family-run, CA-licensed general contractor that can be at your door this week, with every trade on the crew carrying 15+ years in that trade.`
@@ -245,7 +254,7 @@ CITIES.forEach((city, ci) => {
       },
     ];
 
-    const html = head({ title, desc, path, jsonld }) + nav + `
+    const html = head({ title, desc, path, jsonld, image: img }) + nav + `
 <main class="page">
   ${crumbs([
     { label: "Home", href: "/" },
@@ -264,16 +273,25 @@ CITIES.forEach((city, ci) => {
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.img}" alt="${esc(svc.imgAlt)} in ${esc(city.name)}, California" loading="lazy" /></div>
+  <div class="page-img"><img src="${img}" width="1600" height="900" alt="${esc(svc.imgAlt)} by AZ Elevated Builders, serving ${esc(city.name)}, California" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
+
+    <h2>${esc(svc.name)} in ${esc(city.name)}: what's different here</h2>
     <p>${esc(city.blurb)}</p>
+    <p>Most of ${esc(city.name)} is ${esc(city.era)}. ${esc(profileNote)}</p>
+    <p>We work throughout ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}. The local constant is ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
+
+    <h2>Permits and inspections in ${esc(city.name)}</h2>
+    <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)} You should never be the one standing at a counter or waiting on an inspector — that is part of what you hire a licensed contractor for.</p>
+
     <h2>${esc(svc.name)} services we offer in ${esc(city.name)}</h2>
     <ul>
       ${svc.features.map((f) => `<li>${esc(f)}</li>`).join("\n      ")}
     </ul>
+
     <h2>Why ${esc(city.name)} homeowners choose us</h2>
-    <p>We're a family business out of Brentwood, and we treat every job like the neighbors are watching — because in this area, they are. Every trade on our crew has 15+ years in that specific trade, estimates are free, financing is available, and the work carries a written warranty of up to five years. Quality over budget, every time. Hablamos español.</p>
+    <p>${esc(WHY_VARIANTS[(ci * 7 + si * 3) % WHY_VARIANTS.length](city))} Hablamos español.</p>
   </div>
   <div class="prose"><h2>Frequently asked questions</h2></div>
   <div class="faq">
@@ -331,7 +349,7 @@ SERVICES.forEach((svc) => {
   const title = `${svc.name} — East Bay & Beyond | ${BRAND.name}`;
   const desc = `${svc.short} ${BRAND.name} serves Brentwood and 40 cities across the East Bay, Tri-Valley, Delta and North Bay. Free estimates.`;
   const html = head({
-    title, desc, path,
+    title, desc, path, image: svc.img,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])],
   }) + nav + `
 <main class="page">
@@ -341,7 +359,7 @@ SERVICES.forEach((svc) => {
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.img}" alt="${esc(svc.imgAlt)}" loading="lazy" /></div>
+  <div class="page-img"><img src="${svc.img}" width="1600" height="900" alt="${esc(svc.imgAlt)}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>

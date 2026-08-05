@@ -4,3 +4,10 @@ node_modules/
 .env
 .env.*
 assets/reel.mp4
+
+# CLAUDEMAX / claude-flow tooling state — machine-local, not part of the site
+.claude-flow/
+.swarm/
+.hive-mind/
+memory/
+coordination/

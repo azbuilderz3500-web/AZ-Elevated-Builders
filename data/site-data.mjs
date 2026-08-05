@@ -6,10 +6,19 @@ export const BRAND = {
   domain: "https://azelevatedbuilders.com",
   phone: "(925) 812-3150",
   phoneHref: "+19258123150",
+  phoneE164: "+19258123150",          // schema.org wants one canonical format
   email: "Azbuild3rs@gmail.com",
   city: "Brentwood",
   state: "CA",
   license: "CSLB License # 0000000",  // PLACEHOLDER — replace with real CSLB #
+  // Single canonical entity node every page points at, so Google and AI
+  // assistants resolve all 534 pages to one business.
+  entityId: "https://azelevatedbuilders.com/#organization",
+  gbp: "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
+  sameAs: [
+    "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
+    // TODO: add real Instagram / Facebook / Yelp / Houzz URLs when supplied
+  ],
 };
 
 export const CITIES = [
@@ -73,7 +82,7 @@ export const SERVICES = [
     features: ["Full kitchen gut-and-rebuild remodels", "Custom & semi-custom cabinetry installation", "Stone, quartz & butcher-block countertops", "Kitchen islands & layout changes", "Tile backsplashes & under-cabinet lighting", "In-house plumbing & electrical rough-in", "Appliance installation & venting", "Radiant heated flooring add-ons"],
     faqs: [
       { q: "How long does a kitchen remodel take?", a: "A pull-and-replace kitchen typically runs 3–5 weeks; a full layout change with structural work runs 6–10 weeks. You'll get a written schedule with your estimate — and because our trades are in-house, we control the timeline instead of waiting on subs." },
-      { q: "Do I need permits for a kitchen remodel in {CITY}?", a: "If plumbing, electrical or walls are moving — yes. We handle permitting in {CITY} as part of the job, including plans and inspections, so you never deal with the counter yourself." },
+      { q: "Do I need permits for a kitchen remodel in {CITY}?", a: "Yes — if plumbing, electrical or walls are moving, a kitchen remodel in {CITY} needs a permit. AZ Elevated Builders handles permitting in {CITY} as part of the job, including plans and inspections, so you never deal with the counter yourself." },
       { q: "What does a kitchen remodel cost?", a: "It depends on scope and finishes, which is why every project starts with a free on-site estimate and a written scope. Financing options are available, and all work carries our written warranty of up to five years." },
     ],
   },
@@ -89,8 +98,8 @@ export const SERVICES = [
     features: ["Full bathroom gut remodels", "Walk-in showers & frameless glass", "Steam showers & sauna installation", "Radiant heated bathroom floors", "Custom tile & natural stone work", "Vanities, counters & storage built-ins", "In-house plumbing & electrical", "Primary-suite bath additions"],
     faqs: [
       { q: "How long does a bathroom remodel take?", a: "A standard full remodel runs 2–4 weeks. Steam showers, saunas or layout changes add time, and your written schedule will show it before we start — no surprises mid-job." },
-      { q: "Can you add a steam shower or heated floors to an existing bathroom in {CITY}?", a: "Yes — that's one of our most-requested upgrades in {CITY}. We size the steam generator, waterproof the enclosure properly and run the electrical in-house so the whole system is warrantied together." },
-      { q: "Do you handle permits and inspections?", a: "Always. Bathroom remodels involving plumbing or electrical changes are permitted and inspected, and we manage the entire process as part of the project." },
+      { q: "Can you add a steam shower or heated floors to an existing bathroom in {CITY}?", a: "Yes. AZ Elevated Builders installs steam showers and heated floors in existing {CITY} bathrooms — it is one of our most-requested upgrades. We size the steam generator, waterproof the enclosure properly and run the electrical in-house so the whole system is warrantied together." },
+      { q: "Do you handle permits and inspections?", a: "Yes. AZ Elevated Builders handles all permits and inspections as part of the job — bathroom remodels involving plumbing or electrical changes are permitted and inspected, and we manage the entire process." },
     ],
   },
   {
@@ -105,8 +114,8 @@ export const SERVICES = [
     features: ["Full interior renovations", "Exterior remodels & curb-appeal packages", "Layout changes & wall removal", "Plumbing & electrical updates", "Flooring, drywall, paint & trim", "Kitchen + bath combination scopes", "Energy & comfort upgrades", "Design collaboration available"],
     faqs: [
       { q: "How do you price a whole-home remodel?", a: "We walk the house with you, build a written scope room by room, and price it line by line — free. You'll know what's included, what's optional and what the schedule looks like before signing anything." },
-      { q: "Can we live in the house during the remodel?", a: "Often, yes. We sequence the work by zone so part of the house stays livable, keep job sites clean daily, and are upfront when a phase is better done with the house empty." },
-      { q: "Do you work with designers in {CITY}?", a: "Yes. Bring your own designer or plans, or we can loop in a designer we trust. Either way, the drawings, the schedule and the build stay coordinated under one roof." },
+      { q: "Can we live in the house during the remodel?", a: "Often, yes — many clients stay in the house during a whole-home remodel. AZ Elevated Builders sequences the work by zone so part of the house stays livable, keep job sites clean daily, and are upfront when a phase is better done with the house empty." },
+      { q: "Do you work with designers in {CITY}?", a: "Yes. AZ Elevated Builders works with designers on {CITY} projects — bring your own designer or plans, or we can loop in a designer we trust. Either way, the drawings, the schedule and the build stay coordinated under one roof." },
     ],
   },
   {
@@ -120,7 +129,7 @@ export const SERVICES = [
     ],
     features: ["Room additions & home extensions", "Primary suite & bath additions", "Detached & attached ADUs", "Garage conversions", "Feasibility & permit management", "Utility connections & upsizing", "Full kitchens & baths in every unit", "Finish levels matched to the main house"],
     faqs: [
-      { q: "Are ADUs legal in {CITY}?", a: "California law requires cities to allow ADUs on most residential lots, and {CITY} processes them under those state rules. We confirm setbacks, size limits and utility requirements for your specific parcel during the free feasibility visit." },
+      { q: "Are ADUs legal in {CITY}?", a: "Yes — ADUs are legal in {CITY}. California law requires cities to allow ADUs on most residential lots, and {CITY} processes them under those state rules. We confirm setbacks, size limits and utility requirements for your specific parcel during the free feasibility visit." },
       { q: "What does an ADU cost to build?", a: "It varies with size, site and finish level — a garage conversion is a different project than a detached new build. We price it in a written scope after walking your property, and financing options are available." },
       { q: "How long does an addition take?", a: "Design and permitting typically run 2–4 months depending on the city; construction runs 3–6 months for most additions and detached ADUs. We give you the real timeline up front and keep you updated weekly." },
     ],
@@ -138,7 +147,7 @@ export const SERVICES = [
     faqs: [
       { q: "How long before I can use my new driveway?", a: "Foot traffic in 24–48 hours, vehicles in about 7 days as the slab cures toward full strength. We'll give you exact numbers for your pour and weather." },
       { q: "How fast can you pour a driveway in {CITY}?", a: "Driveways are one of our quickest turnarounds — most tear-out-and-repour projects in {CITY} run 3–5 working days from demo to finished pour, weather permitting." },
-      { q: "Do you build retaining walls?", a: "Yes — engineered where height requires it, with proper drainage behind the wall. Failed retaining walls are almost always drainage failures, so we treat the part you can't see as the most important part." },
+      { q: "Do you build retaining walls?", a: "Yes. AZ Elevated Builders builds retaining walls — engineered where height requires it, with proper drainage behind the wall. Failed retaining walls are almost always drainage failures, so we treat the part you can't see as the most important part." },
     ],
   },
   {
@@ -154,7 +163,7 @@ export const SERVICES = [
     faqs: [
       { q: "How long does an exterior repaint take?", a: "Most single-family exteriors run 4–7 working days including prep and dry time between coats. Larger homes or heavy repair scopes take longer — the written schedule comes with your free estimate." },
       { q: "What paint brands do you use?", a: "Premium lines from major manufacturers, chosen for the surface and exposure — and we're happy to match a brand or color spec you already have. Every coating is applied to manufacturer spec so warranties hold." },
-      { q: "Do you paint in winter in {CITY}?", a: "Yes — {CITY} winters have plenty of paintable windows. We track temperature and moisture and schedule exterior coats when conditions let the coating cure properly." },
+      { q: "Do you paint in winter in {CITY}?", a: "Yes. AZ Elevated Builders paints exteriors through the winter in {CITY} — the season has plenty of paintable windows. We track temperature and moisture and schedule exterior coats when conditions let the coating cure properly." },
     ],
   },
   {
@@ -170,7 +179,7 @@ export const SERVICES = [
     faqs: [
       { q: "Which flooring is right for my project?", a: "It depends on the room, the traffic and the look you want — solid hardwood refinishes for generations, engineered handles moisture swings better, tile wins wet rooms, laminate and LVP take a beating for less. We'll walk options and samples at the free estimate." },
       { q: "How long does flooring installation take?", a: "Most single-room installs run 1–3 days; whole-home flooring runs about a week depending on prep. Materials may need days on-site to acclimate first — we build that into the schedule." },
-      { q: "Do you level uneven floors in older {CITY} homes?", a: "Constantly — settling and out-of-flat slabs are standard in older {CITY} housing stock. We grind or self-level before install, because flooring is only as good as what's under it." },
+      { q: "Do you level uneven floors in older {CITY} homes?", a: "Yes. AZ Elevated Builders levels uneven floors before installing — settling and out-of-flat slabs are standard in older {CITY} housing stock. We grind or self-level before install, because flooring is only as good as what's under it." },
     ],
   },
   {
@@ -184,8 +193,8 @@ export const SERVICES = [
     ],
     features: ["New drywall for remodels & additions", "Water & fire damage repair", "Texture matching — orange peel, knockdown, smooth", "Level 5 smooth finishes", "Ceiling repair & popcorn removal", "Soundproofing & insulation upgrades", "Patching after plumbing/electrical work", "Paint-ready finishing"],
     faqs: [
-      { q: "Can you match my existing wall texture?", a: "Yes — texture matching is the difference between a repair and an eyesore, and it's a specialty of ours. Orange peel, knockdown, hand troweled or smooth, the patch should disappear after paint." },
-      { q: "Do you remove popcorn ceilings in {CITY}?", a: "Yes, including testing considerations for older {CITY} homes. We scrape, skim and refinish to a modern smooth or light texture, and leave the room paint-ready." },
+      { q: "Can you match my existing wall texture?", a: "Yes. AZ Elevated Builders matches existing wall textures — it is the difference between a repair and an eyesore, and a specialty of our drywall crew. Orange peel, knockdown, hand troweled or smooth, the patch should disappear after paint." },
+      { q: "Do you remove popcorn ceilings in {CITY}?", a: "Yes. AZ Elevated Builders removes popcorn ceilings in {CITY}, including testing considerations for older homes. We scrape, skim and refinish to a modern smooth or light texture, and leave the room paint-ready." },
       { q: "How fast can a repair be done?", a: "Small patches are often same-day with a return visit for texture and touch-up after drying. Larger repairs run 2–4 days because mud needs to dry between coats — rushing it is how bad patches happen." },
     ],
   },
@@ -202,7 +211,7 @@ export const SERVICES = [
     faqs: [
       { q: "Custom or semi-custom — which should I choose?", a: "Semi-custom covers most kitchens beautifully at a better price point; full custom earns its cost with unusual spaces, specific woods or furniture-grade details. We'll show you both against your budget at the estimate." },
       { q: "How long do new counters take?", a: "We template after cabinets are set, fabrication runs 1–2 weeks, and installation is usually a day. We sequence plumbing reconnection the same week so you're not without a sink." },
-      { q: "Do you install cabinetry outside of full remodels in {CITY}?", a: "Yes — cabinet and counter replacement is a common standalone project for {CITY} homeowners who want the biggest visual upgrade without a full gut." },
+      { q: "Do you install cabinetry outside of full remodels in {CITY}?", a: "Yes. AZ Elevated Builders installs cabinetry and countertops as a standalone project — it is a common choice for {CITY} homeowners who want the biggest visual upgrade without a full gut." },
     ],
   },
   {
@@ -216,9 +225,9 @@ export const SERVICES = [
     ],
     features: ["Baseboards & door/window casing", "Crown molding", "Wainscot, board-and-batten & paneling", "Custom built-ins & floating shelves", "Stair rails, treads & skirt boards", "Interior door replacement & hanging", "Mantels & feature walls", "Paint-grade & stain-grade work"],
     faqs: [
-      { q: "Can you match existing trim profiles?", a: "Usually yes — between stock profiles, combinations and custom knives for larger runs, we can continue what your house already speaks. Bring us a cutoff or we'll pull a profile on site." },
+      { q: "Can you match existing trim profiles?", a: "Yes, in most cases AZ Elevated Builders can match your existing trim profile. Between stock profiles, combinations and custom knives for larger runs, we can continue what your house already speaks. Bring us a cutoff or we'll pull a profile on site." },
       { q: "What does trim work cost?", a: "It scales with linear footage and profile complexity, which makes it one of the easiest scopes to price accurately at a free estimate — and one of the highest-impact upgrades per dollar." },
-      { q: "Do you do standalone trim projects in {CITY}?", a: "All the time. A base-casing-and-doors package is one of the fastest ways to lift an entire {CITY} home, usually inside a week." },
+      { q: "Do you do standalone trim projects in {CITY}?", a: "Yes. AZ Elevated Builders takes standalone trim projects in {CITY} — a base-casing-and-doors package is one of the fastest ways to lift an entire {CITY} home, usually inside a week." },
     ],
   },
   {
@@ -232,9 +241,9 @@ export const SERVICES = [
     ],
     features: ["Steam shower design & construction", "Steam generator sizing & installation", "Indoor & outdoor sauna builds", "Radiant heated floors — bathrooms, kitchens & more", "Full vapor-sealed waterproofing", "Dedicated electrical circuits & controls", "Tile & stone enclosure finishes", "Integration with full bath remodels"],
     faqs: [
-      { q: "Can a steam shower go in my existing bathroom?", a: "In most cases yes — the enclosure needs to be sealed and sized to the generator, and we confirm both at the free estimate. Retrofit is very doable when it's planned from the rough-in rather than bolted on." },
+      { q: "Can a steam shower go in my existing bathroom?", a: "Yes, in most cases a steam shower can be added to an existing bathroom. The enclosure needs to be sealed and sized to the generator, and we confirm both at the free estimate. Retrofit is very doable when it's planned from the rough-in rather than bolted on." },
       { q: "Are heated floors expensive to run?", a: "Less than most people expect — modern systems zone by room, run on programmable thermostats, and warm the tile you touch rather than the whole house. Bathrooms typically cost pennies a day to run." },
-      { q: "Do you install saunas in {CITY}?", a: "Yes — indoor conversions and outdoor builds both. {CITY} homeowners usually pair a sauna with a bath remodel or a backyard project, and we design it into the larger scope." },
+      { q: "Do you install saunas in {CITY}?", a: "Yes. AZ Elevated Builders installs saunas in {CITY} — indoor conversions and outdoor builds both. {CITY} homeowners usually pair a sauna with a bath remodel or a backyard project, and we design it into the larger scope." },
     ],
   },
   {
@@ -248,9 +257,9 @@ export const SERVICES = [
     ],
     features: ["Custom pergolas & patio covers", "Concrete patios & outdoor slabs", "Outdoor kitchens & BBQ islands", "Landscaping & planting design", "Low-voltage & string lighting", "Fences, gates & privacy screens", "Drainage & irrigation", "Full backyard transformations"],
     faqs: [
-      { q: "Do pergolas need permits in {CITY}?", a: "It depends on size, height and attachment to the house — {CITY} exempts some smaller detached structures. We confirm requirements for your design and pull the permit when one's needed." },
+      { q: "Do pergolas need permits in {CITY}?", a: "It depends. Whether a pergola needs a permit in {CITY} comes down to size, height and attachment to the house — {CITY} exempts some smaller detached structures. We confirm requirements for your design and pull the permit when one's needed." },
       { q: "Wood or aluminum pergola?", a: "Wood wins on warmth and customization; aluminum wins on maintenance. We build both and will talk honestly about how each ages in Delta sun before you choose." },
-      { q: "Can you do the whole backyard — concrete, pergola and landscaping?", a: "That's exactly how we prefer to build it: one plan, one schedule, one crew, so grades, drainage, footings and planting work together instead of being three contractors' problems." },
+      { q: "Can you do the whole backyard — concrete, pergola and landscaping?", a: "Yes. AZ Elevated Builders builds complete backyards — concrete, pergola and landscaping together — and prefers it that way: one plan, one schedule, one crew, so grades, drainage, footings and planting work together instead of being three contractors' problems." },
     ],
   },
 ];

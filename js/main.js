@@ -5,12 +5,19 @@
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Preloader ---------- */
+  // Phone users are here to call, not to watch an intro — keep it brief on small
+  // screens and skip it entirely for repeat visits in the same session.
   const preloader = document.getElementById("preloader");
-  window.addEventListener("load", () => {
-    setTimeout(() => preloader.classList.add("is-done"), prefersReduced ? 0 : 1600);
-  });
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+  const seen = sessionStorage.getItem("azeb-seen");
+  const hold = prefersReduced || seen ? 0 : isMobile ? 550 : 1400;
+  const dismiss = () => {
+    preloader.classList.add("is-done");
+    sessionStorage.setItem("azeb-seen", "1");
+  };
+  window.addEventListener("load", () => setTimeout(dismiss, hold));
   // Safety: never trap the user behind the loader
-  setTimeout(() => preloader.classList.add("is-done"), 4000);
+  setTimeout(dismiss, 3000);
 
   /* ---------- Smooth scroll (Lenis) ---------- */
   let lenis = null;
@@ -28,6 +35,9 @@
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
+      // A bare "#" is not a valid selector — querySelector would throw and the
+      // click would fall through to a jump-to-top.
+      if (!id || id === "#") { e.preventDefault(); return; }
       const el = id === "#top" ? document.body : document.querySelector(id);
       if (!el) return;
       e.preventDefault();
@@ -133,6 +143,69 @@
   fab.addEventListener("click", () => openModal(contactModal));
   document.getElementById("reelBtn").addEventListener("click", () => openModal(reelModal));
   document.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModals));
+
+  // Sticky mobile bar → estimate modal, focus the first field immediately
+  const barQuote = document.getElementById("barQuote");
+  if (barQuote) {
+    barQuote.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal(contactModal);
+      const first = contactModal.querySelector('input[name="name"]');
+      if (first) setTimeout(() => first.focus(), 350);
+    });
+  }
+
+  /* ---------- Estimate form: validate, show errors, confirm ---------- */
+  const form = document.getElementById("estimateForm");
+  if (form) {
+    const showError = (input, msg) => {
+      input.classList.add("is-error");
+      input.setAttribute("aria-invalid", "true");
+      let e = input.nextElementSibling;
+      if (!e || !e.classList.contains("field-error")) {
+        e = document.createElement("p");
+        e.className = "field-error";
+        input.insertAdjacentElement("afterend", e);
+      }
+      e.textContent = msg;
+    };
+    const clearError = (input) => {
+      input.classList.remove("is-error");
+      input.removeAttribute("aria-invalid");
+      const e = input.nextElementSibling;
+      if (e && e.classList.contains("field-error")) e.remove();
+    };
+    form.querySelectorAll("input").forEach((i) =>
+      i.addEventListener("input", () => clearError(i))
+    );
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = form.querySelector('input[name="name"]');
+      const phone = form.querySelector('input[name="phone"]');
+      let ok = true;
+
+      if (!name.value.trim()) { showError(name, "Please enter your name."); ok = false; }
+      // accept 10+ digits in any common US format
+      const digits = phone.value.replace(/\D/g, "");
+      if (!digits) { showError(phone, "Please enter a phone number."); ok = false; }
+      else if (digits.length < 10) { showError(phone, "That number looks too short — 10 digits please."); ok = false; }
+
+      if (!ok) { form.querySelector(".is-error").focus(); return; }
+
+      const btn = form.querySelector("button[type=submit]");
+      btn.setAttribute("aria-busy", "true");
+      btn.textContent = "Sending…";
+
+      // No backend yet — swap this for the real endpoint (Netlify Forms / Formspree / webhook)
+      setTimeout(() => {
+        form.innerHTML =
+          '<p class="modal__thanks">Thanks — we got it.<br>' +
+          "We'll call you back within one business day.<br><br>" +
+          'Need us sooner? <a href="tel:+19258123150" style="text-decoration:underline">Call (925) 812-3150</a></p>';
+      }, 600);
+    });
+  }
 
   /* ---------- Cookies ---------- */
   const cookies = document.getElementById("cookies");

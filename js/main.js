@@ -20,26 +20,7 @@
     },
   };
 
-  const preloader = document.getElementById("preloader");
-  const dismiss = () => {
-    if (preloader) preloader.classList.add("is-done");
-    store.set("azeb-seen", "1", true);
-  };
-  // Armed before anything else can fail, so no later error strands a visitor
-  // behind the overlay.
-  setTimeout(dismiss, 1200);
-
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isMobile = window.matchMedia("(max-width: 900px)").matches;
-  const seen = store.get("azeb-seen", true);
-  const hold = prefersReduced || seen ? 0 : isMobile ? 400 : 900;
-  // DOMContentLoaded, not load: window.load waits on every image, which held the
-  // screen black for ~4s on mobile.
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => setTimeout(dismiss, hold));
-  } else {
-    setTimeout(dismiss, hold);
-  }
 
   /* ---------- Smooth scroll (Lenis) ---------- */
   let lenis = null;
@@ -209,15 +190,16 @@
   document.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModals));
 
   // Sticky mobile bar → estimate modal, focus the first field immediately
-  const barQuote = document.getElementById("barQuote");
-  if (barQuote) {
-    barQuote.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(contactModal);
-      const first = contactModal.querySelector('input[name="name"]');
-      if (first) setTimeout(() => first.focus(), 350);
-    });
-  }
+  const openEstimate = (e) => {
+    if (e) e.preventDefault();
+    openModal(contactModal);
+    const first = contactModal.querySelector('input[name="name"]');
+    if (first) setTimeout(() => first.focus(), 350);
+  };
+  ["barQuote", "heroQuote"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", openEstimate);
+  });
 
   /* ---------- Estimate form: validate, show errors, confirm ---------- */
   const form = document.getElementById("estimateForm");

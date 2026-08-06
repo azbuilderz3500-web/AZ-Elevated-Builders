@@ -17,20 +17,18 @@
   <meta property="og:description" content="Family-run, CA-licensed general contractor in Brentwood. Kitchens, baths, whole-home remodels, ADUs, concrete and painting across the East Bay. Free estimates." />
   <meta property="og:url" content="https://azelevatedbuilders.com/" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:image" content="https://azelevatedbuilders.com/assets/projects/walnut-creek-exterior__after-wide-1200.jpg" />
   <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:height" content="800" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AZ Elevated Builders — East Bay Remodeling &amp; Construction" />
   <meta name="twitter:description" content="Family-run, CA-licensed general contractor in Brentwood. Free estimates, warranties up to 5 years. Hablamos español." />
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="twitter:image" content="https://azelevatedbuilders.com/assets/projects/walnut-creek-exterior__after-wide-1200.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-  <link rel="preload" as="image" fetchpriority="high" imagesrcset="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=600 600w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=900 900w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=1400 1400w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=2000 2000w" imagesizes="100vw" href="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=1600" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=6ae5afb0" />
+  <link rel="stylesheet" href="/css/style.css?v=c4375f69" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
   <script type="application/ld+json">
   {
@@ -100,56 +98,41 @@
 </head>
 <body>
 
-  <!-- ============ PRELOADER ============ -->
-  <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__inner">
-      <svg class="preloader__mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
-        <path d="M7 36 L24 11 L41 36"/><path d="M17 21 L32 21"/><path d="M32 21 L16 36"/><path d="M16 36 L32 36"/>
+  <!-- ============ NAV — solid bar, not a floating pill ============ -->
+  <header class="bar" id="nav">
+    <a href="#top" class="bar__brand" aria-label="AZ Elevated Builders — home">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <path d="M7 36 L24 11 L41 36" /><path d="M17 21 L32 21" />
+        <path d="M32 21 L16 36" /><path d="M16 36 L32 36" />
       </svg>
-      <div class="preloader__word">
-        <span>AZ Elevated</span>
-        <span>Builders</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ NAV ============ -->
-  <header class="nav" id="nav">
-    <div class="nav__pill">
-      <a href="#top" class="nav__brand" aria-label="AZ Elevated Builders — home">
-        <svg class="nav__mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 36 L24 11 L41 36" />
-          <path d="M17 21 L32 21" />
-          <path d="M32 21 L16 36" />
-          <path d="M16 36 L32 36" />
-        </svg>
-        <span class="nav__brandname">AZ&nbsp;Elevated<br>Builders</span>
-      </a>
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="/service-areas/">Areas</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="nav__call" href="tel:+19258123150" aria-label="Call AZ Elevated Builders at (925) 812-3150" data-cta="nav-call">
+      <span>AZ&nbsp;Elevated<br>Builders</span>
+    </a>
+    <nav class="bar__nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#crew">Crew</a>
+      <a href="/service-areas/">Areas</a>
+    </nav>
+    <div class="bar__actions">
+      <a class="bar__phone" href="tel:+19258123150" data-cta="nav-call">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>
+        <span>(925) 812-3150</span>
       </a>
-      <button class="nav__menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span><span></span>
+      <button class="bar__menu" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- ============ MENU OVERLAY ============ -->
+  <!-- ============ MENU ============ -->
   <div class="menu" id="menu" aria-hidden="true">
     <div class="menu__inner">
       <div class="menu__links">
         <a href="#top" data-i="01">Home</a>
         <a href="#work" data-i="02">Work</a>
         <a href="#services" data-i="03">Services</a>
-        <a href="#process" data-i="04">Process</a>
-        <a href="#about" data-i="05">About</a>
+        <a href="#crew" data-i="04">Crew</a>
+        <a href="#process" data-i="05">Process</a>
         <a href="/service-areas/" data-i="06">Service Areas</a>
         <a href="#contact" data-i="07">Contact</a>
       </div>
@@ -163,349 +146,261 @@
           <span class="label">Company</span>
           <p>Brentwood, California<br>CSLB License # 0000000<br>Hablamos español</p>
         </div>
-        <div class="menu__meta-block">
-          <span class="label">Social</span>
-          <a href="#" rel="noopener">Instagram</a>
-          <a href="#" rel="noopener">Facebook</a>
-          <a href="https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999" rel="noopener" target="_blank">Google Reviews</a>
-        </div>
       </div>
     </div>
   </div>
 
   <main id="top">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="hero__bg">
-        <img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=1600" srcset="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=600 600w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=900 900w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=1400 1400w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?q=80&auto=format&fit=crop&w=2000 2000w" sizes="100vw" width="2000" height="1338" fetchpriority="high" decoding="async" alt="California residence at night with pool and warm interior light" />
-      </div>
-      <div class="hero__vignette"></div>
-
-      <p class="hero__tagline reveal">
-        East Bay homes, elevated —<br>
-        remodeled, rebuilt and delivered<br>
-        by one family crew.
-      </p>
-
-      <div class="hero__reviews reveal">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span>5.0 / 5</span>
-        <span class="dot">·</span>
-        <span>Google Reviews</span>
-        <span class="dot">·</span>
-        <span>CA Licensed &amp; Bonded</span>
-        <span class="dot">·</span>
-        <span>Hablamos Español</span>
-      </div>
-
-      <h1 class="hero__title" aria-label="AZ Elevated Builders">
-        <span class="hero__title-line"><span>AZ&nbsp;Elevated<sup>©</sup></span></span>
-        <span class="hero__title-line"><span>Builders</span></span>
-      </h1>
-
-      <div class="hero__actions">
-        <a class="hero__call" href="tel:+19258123150" data-cta="hero-call">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>
-          Call (925) 812-3150
-        </a>
-      </div>
-
-    </section>
-
-    <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track" id="marqueeTrack">
-        <span>Kitchens</span><i>✦</i>
-        <span>Bathrooms</span><i>✦</i>
-        <span>Whole-Home Remodels</span><i>✦</i>
-        <span>ADUs &amp; Additions</span><i>✦</i>
-        <span>Concrete &amp; Driveways</span><i>✦</i>
-        <span>Interior &amp; Exterior Paint</span><i>✦</i>
-      </div>
-    </div>
-
-    <!-- ============ MANIFESTO ============ -->
-    <section class="manifesto" id="about">
-      <p class="manifesto__kicker reveal">® AZ Elevated Builders — Brentwood &amp; the East Bay, California</p>
-      <h2 class="manifesto__text" data-word-reveal>
-        AZ Elevated Builders remodels and builds homes across the East Bay —
-        from Brentwood and Discovery Bay to Walnut Creek, Oakland and Napa.
-        Interiors, exteriors and concrete, carried by one crew from first
-        walkthrough to final sign-off.
-      </h2>
-      <div class="manifesto__cols">
-        <p class="reveal" data-word-reveal>
-          Every trade on our crew has spent fifteen-plus years in that one
-          trade — the drywall, the paint, the finish carpentry. Estimates are
-          free, the schedule is honest, and the work carries a written
-          warranty of up to five years.
+    <!-- ============ HERO — split, not full-bleed cinematic ============ -->
+    <section class="lead">
+      <div class="lead__copy">
+        <p class="lead__eyebrow">Brentwood, California · Serving the East Bay</p>
+        <h1 class="lead__h1">The crew that<br><em>shows up,</em><br>and finishes.</h1>
+        <p class="lead__sub">
+          Family-run general contractor. Kitchens, bathrooms, whole-home remodels,
+          additions, concrete and paint — every trade on our crew with 15+ years in
+          that one trade.
         </p>
-        <p class="reveal" data-word-reveal>
-          We are a family business built on one thing: work you will never
-          have to redo. High-end finishes, straight lines, clean job sites,
-          and one signature on the job from demo day to the final walkthrough.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============ STATEMENT ============ -->
-    <section class="statement">
-      <h2 class="statement__text reveal">One family.<br>One standard.</h2>
-      <a href="#work" class="btn btn--outline reveal">Explore Selected Work</a>
-    </section>
-
-    <!-- ============ WORK ============ -->
-    <section class="work" id="work">
-      <div class="section-head">
-        <h2 class="section-head__title reveal">Selected<br><em>Work</em></h2>
-        <p class="section-head__note reveal">A few projects we've remodeled, poured and painted across the East Bay.</p>
-      </div>
-      <div class="work__grid">
-        <a class="work-card work-card--lg reveal" href="#contact">
-          <div class="work-card__img"><img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1800&auto=format&fit=crop" alt="Open-plan remodeled living space with floor-to-ceiling glazing"></div>
-          <div class="work-card__meta"><span class="work-card__num">01</span><h3>Brentwood Modern Farmhouse</h3><span class="work-card__tag">Whole-Home Remodel — Brentwood</span></div>
-        </a>
-        <a class="work-card reveal" href="#contact">
-          <div class="work-card__img"><img loading="lazy" src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=1400&auto=format&fit=crop" alt="Custom kitchen with island and natural stone countertops"></div>
-          <div class="work-card__meta"><span class="work-card__num">02</span><h3>Discovery Bay Kitchen</h3><span class="work-card__tag">Kitchen Remodel — Discovery Bay</span></div>
-        </a>
-        <a class="work-card reveal" href="#contact">
-          <div class="work-card__img"><img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop" alt="Freshly painted modern home exterior with new concrete"></div>
-          <div class="work-card__meta"><span class="work-card__num">03</span><h3>Danville Estate Refresh</h3><span class="work-card__tag">Exterior Paint &amp; Concrete — Danville</span></div>
-        </a>
-        <a class="work-card reveal" href="#contact">
-          <div class="work-card__img"><img loading="lazy" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1400&auto=format&fit=crop" alt="Remodeled bathroom with walk-in steam shower and tile"></div>
-          <div class="work-card__meta"><span class="work-card__num">04</span><h3>Walnut Creek Spa Bath</h3><span class="work-card__tag">Bathroom &amp; Steam Shower — Walnut Creek</span></div>
-        </a>
-        <a class="work-card work-card--lg reveal" href="#contact">
-          <div class="work-card__img"><img loading="lazy" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1800&auto=format&fit=crop" alt="Detached ADU with pool at dusk"></div>
-          <div class="work-card__meta"><span class="work-card__num">05</span><h3>Livermore Vineyard ADU</h3><span class="work-card__tag">ADU New Build — Livermore</span></div>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============ SERVICES ============ -->
-    <section class="services" id="services">
-      <div class="section-head">
-        <h2 class="section-head__title reveal">Our<br><em>Services</em></h2>
-      </div>
-
-      <div class="services__intro">
-        <div class="services__intro-col reveal">
-          <h3>Design &amp; Planning</h3>
-          <p>Bring finished plans or just an idea — we work with trusted
-          designers when a project calls for one, and every job starts with a
-          free on-site estimate, a clear scope and an honest schedule.</p>
+        <div class="lead__cta">
+          <a class="btn btn--solid" href="tel:+19258123150" data-cta="hero-call">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>
+            Call (925) 812-3150
+          </a>
+          <button class="btn btn--outline" id="heroQuote">Get a free estimate</button>
         </div>
-        <div class="services__intro-col reveal">
-          <h3>Construction</h3>
-          <p>Kitchens, bathrooms, whole-home remodels, additions and ADUs,
-          concrete and driveways, painting, flooring, drywall, cabinetry and
-          finish carpentry — inside and out, all under one licensed crew.</p>
-        </div>
+        <ul class="lead__proof">
+          <li><strong>5.0</strong><span>Google rating</span></li>
+          <li><strong>15+ yrs</strong><span>Per trade</span></li>
+          <li><strong>5 yr</strong><span>Written warranty</span></li>
+          <li><strong>Sí</strong><span>Hablamos español</span></li>
+        </ul>
+      </div>
+      <div class="lead__art">
+        <img src="/assets/projects/walnut-creek-exterior__after-wide-1200.jpg"
+             srcset="/assets/projects/walnut-creek-exterior__after-wide-800.jpg 800w,
+                     /assets/projects/walnut-creek-exterior__after-wide-1200.jpg 1200w,
+                     /assets/projects/walnut-creek-exterior__after-wide-1600.jpg 1600w"
+             sizes="(max-width: 900px) 100vw, 50vw"
+             width="1200" height="800" fetchpriority="high" decoding="async"
+             alt="Completed exterior remodel with new concrete walkway and retaining wall in Walnut Creek, California">
+        <figcaption class="lead__caption">Exterior &amp; concrete · Walnut Creek</figcaption>
+      </div>
+    </section>
+
+    <!-- ============ WORK — real projects, before to after ============ -->
+    <section class="work2" id="work">
+      <div class="sec-head">
+        <p class="sec-head__kicker">Recent work</p>
+        <h2 class="sec-head__h2">Our own jobs.<br>Our own photos.</h2>
+        <p class="sec-head__note">No stock images. Every photograph below is a house our crew actually built.</p>
       </div>
 
-      <ul class="services__list" id="servicesList">
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">01 / Service</span>
-            <span class="service__name">Kitchen Remodeling</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>The room that earns its keep — in daily use and at resale. We rework
-          layout, lighting, cabinetry, stone and fixtures into a kitchen that feels inevitable rather than
-          assembled, and we keep plumbing and electrical in-house so nothing waits on a sub. <a class="service__more" href="/services/kitchen-remodeling/">See Kitchen Remodeling across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">02 / Service</span>
-            <span class="service__name">Bathroom Remodeling</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Quiet, tactile rooms — tile, stone and calm light. Steam showers,
-          radiant heated floors and saunas are the add-ons our clients ask for most, and we build them in
-          from the rough-in, not as an afterthought. <a class="service__more" href="/services/bathroom-remodeling/">See Bathroom Remodeling across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">03 / Service</span>
-            <span class="service__name">Whole-Home Remodeling</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Interior and exterior, top to bottom — circulation, light, finishes and
-          systems reworked as one project. Plumbing, electrical, drywall and paint stay under our roof, which
-          matters in older East Bay housing stock where surprises behind the walls are the rule. <a class="service__more" href="/services/whole-home-remodeling/">See Whole-Home Remodeling across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">04 / Service</span>
-            <span class="service__name">Additions &amp; ADUs</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>New square footage that reads as if it was always there — and accessory
-          dwelling units that stand on their own as rental income or family space. We handle feasibility,
-          California's ADU rules and local permitting through construction. <a class="service__more" href="/services/additions-adus/">See Additions &amp; ADUs across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">05 / Service</span>
-            <span class="service__name">Concrete &amp; Driveways</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Driveways, patios, walkways and retaining walls — formed, poured and
-          finished by our own crew. Quick turnarounds without cutting the prep that keeps concrete from
-          cracking two winters in. <a class="service__more" href="/services/concrete-driveways/">See Concrete &amp; Driveways across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">06 / Service</span>
-            <span class="service__name">Interior &amp; Exterior Painting</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Our painter has 22 years on the brush. Full prep, clean masking, quality
-          coatings and straight cut lines — inside, outside, cabinets and trim. <a class="service__more" href="/services/painting/">See Interior &amp; Exterior Painting across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">07 / Service</span>
-            <span class="service__name">Flooring</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Hardwood, engineered hardwood, tile and laminate — plus radiant heated
-          flooring where you want warmth underfoot. Level substrates, tight seams, clean transitions. <a class="service__more" href="/services/flooring/">See Flooring across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">08 / Service</span>
-            <span class="service__name">Drywall</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Hung, taped, textured and finished by a specialist with two decades in
-          the trade. Walls you'll never think about again — which is the point. <a class="service__more" href="/services/drywall/">See Drywall across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">09 / Service</span>
-            <span class="service__name">Cabinetry &amp; Countertops</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Custom and semi-custom cabinetry, stone and quartz counters — specified,
-          templated and installed as one scope so the reveal lines actually line up. <a class="service__more" href="/services/cabinetry-countertops/">See Cabinetry &amp; Countertops across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">10 / Service</span>
-            <span class="service__name">Finish Carpentry &amp; Trim</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Baseboards, casing, wainscot, built-ins and stair work — the details that
-          separate a remodel from a renovation. Measured twice, scribed to the wall, filled and painted. <a class="service__more" href="/services/finish-carpentry-trim/">See Finish Carpentry &amp; Trim across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">11 / Service</span>
-            <span class="service__name">Steam Showers, Saunas &amp; Heated Floors</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>The upgrades clients ask for by name. Waterproofing done right, generators
-          sized right, controls where you actually want them — spa features that work for decades. <a class="service__more" href="/services/steam-showers-saunas/">See Steam Showers, Saunas &amp; Heated Floors across the East Bay →</a></p></div>
-        </li>
-        <li class="service reveal">
-          <button class="service__row" aria-expanded="false">
-            <span class="service__num">12 / Service</span>
-            <span class="service__name">Pergolas &amp; Outdoor Living</span>
-            <span class="service__arrow" aria-hidden="true">↗</span>
-          </button>
-          <div class="service__body"><p>Pergolas, landscaping, hardscape and the outdoor rooms East Bay weather
-          was made for — planned as part of the house, not a follow-up phase. <a class="service__more" href="/services/pergolas-outdoor-living/">See Pergolas &amp; Outdoor Living across the East Bay →</a></p></div>
-        </li>
+      <!-- Case study 1: full progression -->
+      <article class="case">
+        <header class="case__head">
+          <h3>Front yard, driveway &amp; retaining wall</h3>
+          <p class="case__meta">Walnut Creek · Concrete &amp; exterior · Completed 2026</p>
+        </header>
+        <div class="case__strip">
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/walnut-creek-exterior__before-bare-yard-800.jpg"
+                 alt="Bare graded front yard before construction in Walnut Creek">
+            <figcaption><span class="tag tag--before">Before</span> Bare lot, no drainage</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/walnut-creek-exterior__crew-pour-800.jpg"
+                 alt="AZ Elevated Builders crew placing concrete on site">
+            <figcaption><span class="tag">During</span> Forming and pouring</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/walnut-creek-exterior__finishing-slab-800.jpg"
+                 alt="Finishing fresh concrete with a trowel">
+            <figcaption><span class="tag">During</span> Hand-finishing the slab</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.jpg"
+                 alt="Completed retaining wall, railing and concrete walkway">
+            <figcaption><span class="tag tag--after">After</span> Wall, railing, walkway</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- Case study 2 -->
+      <article class="case">
+        <header class="case__head">
+          <h3>Kitchen &amp; two bathrooms</h3>
+          <p class="case__meta">Oakland · Whole-floor remodel · Completed 2026</p>
+        </header>
+        <div class="case__strip">
+          <figure class="case__shot case__shot--wide">
+            <img loading="lazy" decoding="async" width="1200" height="1800"
+                 src="/assets/projects/oakland-kitchen-bath__kitchen-wide-1200.jpg"
+                 alt="Remodeled white kitchen with island, brass fixtures and wood floors in Oakland">
+            <figcaption>Kitchen — shaker cabinetry, quartz, brass</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.jpg"
+                 alt="Farmhouse sink under a window with brass tap">
+            <figcaption>Farmhouse sink &amp; window run</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.jpg"
+                 alt="Bathroom with green zellige tile, brass shower fixtures and glass enclosure">
+            <figcaption>Green zellige guest bath</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/oakland-kitchen-bath__bath-terracotta-800.jpg"
+                 alt="Bathroom with terracotta zellige tile and brass fixtures">
+            <figcaption>Terracotta zellige bath</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- Case study 3 -->
+      <article class="case">
+        <header class="case__head">
+          <h3>Primary bathroom</h3>
+          <p class="case__meta">Lafayette · Bathroom remodel · Completed 2026</p>
+        </header>
+        <div class="case__strip">
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/lafayette-primary-bath__quartzite-shower-800.jpg"
+                 alt="Walk-in shower clad in book-matched quartzite with bench seat">
+            <figcaption>Book-matched quartzite shower</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="533"
+                 src="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.jpg"
+                 alt="Primary bathroom with walnut vanity and glass shower enclosure">
+            <figcaption>Walnut vanity, double basin</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.jpg"
+                 alt="Backlit mirror above a walnut vanity">
+            <figcaption>Backlit mirror &amp; makeup station</figcaption>
+          </figure>
+          <figure class="case__shot">
+            <img loading="lazy" decoding="async" width="800" height="1200"
+                 src="/assets/projects/pittsburg-bath__onyx-shower-800.jpg"
+                 alt="Shower clad in dark onyx-look porcelain with bronze fixtures">
+            <figcaption>Pittsburg · onyx-look shower</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ SERVICES — grid, not accordion ============ -->
+    <section class="svc" id="services">
+      <div class="sec-head">
+        <p class="sec-head__kicker">What we do</p>
+        <h2 class="sec-head__h2">Inside and out,<br>one crew.</h2>
+        <p class="sec-head__note">Plumbing, electrical, drywall, tile, cabinetry and paint are all in-house — so your job never waits on someone else's calendar.</p>
+      </div>
+      <ul class="svc__grid">
+        <li><a href="/services/kitchen-remodeling/"><h3>Kitchen Remodeling</h3><p>Layouts, cabinetry, stone and lighting rebuilt around how you actually cook.</p><span>View →</span></a></li>
+        <li><a href="/services/bathroom-remodeling/"><h3>Bathroom Remodeling</h3><p>Tile, stone, steam showers and heated floors — waterproofed from the rough-in.</p><span>View →</span></a></li>
+        <li><a href="/services/whole-home-remodeling/"><h3>Whole-Home Remodeling</h3><p>Circulation, light, finishes and systems reworked as one project.</p><span>View →</span></a></li>
+        <li><a href="/services/additions-adus/"><h3>Additions &amp; ADUs</h3><p>New square footage that reads as original, and ADUs that earn their keep.</p><span>View →</span></a></li>
+        <li><a href="/services/concrete-driveways/"><h3>Concrete &amp; Driveways</h3><p>Driveways, patios, walkways and retaining walls, formed and poured by our crew.</p><span>View →</span></a></li>
+        <li><a href="/services/painting/"><h3>Interior &amp; Exterior Paint</h3><p>Full prep, quality coatings, straight lines — 22 years on the brush.</p><span>View →</span></a></li>
+        <li><a href="/services/flooring/"><h3>Flooring</h3><p>Hardwood, engineered, tile and laminate over a properly levelled substrate.</p><span>View →</span></a></li>
+        <li><a href="/services/cabinetry-countertops/"><h3>Cabinetry &amp; Countertops</h3><p>Specified, templated and installed as one scope so the lines actually line up.</p><span>View →</span></a></li>
+        <li><a href="/services/"><h3>Everything else</h3><p>Drywall, trim, saunas, pergolas and outdoor living. See the full list.</p><span>All services →</span></a></li>
       </ul>
     </section>
 
-    <!-- ============ PROCESS ============ -->
-    <section class="process" id="process">
-      <div class="section-head">
-        <h2 class="section-head__title reveal">The<br><em>Process</em></h2>
+    <!-- ============ CREW — the thing a studio site can't show ============ -->
+    <section class="crew" id="crew">
+      <div class="crew__art">
+        <img loading="lazy" decoding="async" width="800" height="1200"
+             src="/assets/projects/walnut-creek-exterior__crew-grading-800.jpg"
+             alt="AZ Elevated Builders crew member grading a site by hand">
+        <img loading="lazy" decoding="async" width="800" height="1200"
+             src="/assets/projects/walnut-creek-exterior__crew-portrait-800.jpg"
+             alt="AZ Elevated Builders crew member on a job site in Walnut Creek">
       </div>
-      <ol class="process__steps">
-        <li class="reveal"><span>01</span><h3>Walk the Job</h3><p>Free on-site estimate. We listen, measure and talk budget honestly.</p></li>
-        <li class="reveal"><span>02</span><h3>Scope &amp; Schedule</h3><p>A clear written scope, real timelines, and financing options if you want them.</p></li>
-        <li class="reveal"><span>03</span><h3>Build</h3><p>Our own crews — 15+ years in every trade — one schedule, one point of contact.</p></li>
-        <li class="reveal"><span>04</span><h3>Stand Behind It</h3><p>Final walkthrough and a written warranty of up to five years on the work.</p></li>
+      <div class="crew__copy">
+        <p class="sec-head__kicker">Who turns up</p>
+        <h2 class="sec-head__h2">A family business,<br>not a call centre.</h2>
+        <p>Alfonso Zavala runs AZ Elevated Builders out of Brentwood. The people who
+        quote your job are the people standing in it — the drywall specialist with
+        twenty years in drywall, the painter with twenty-two on the brush, the
+        concrete crew that pours its own flatwork.</p>
+        <p>That is the whole pitch. No sales team, no handoff, no subcontractor
+        you have never met deciding what your house is worth.</p>
+        <a class="btn btn--outline" href="tel:+19258123150" data-cta="crew-call">Talk to Alfonso</a>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS — horizontal steps ============ -->
+    <section class="steps" id="process">
+      <div class="sec-head">
+        <p class="sec-head__kicker">How it goes</p>
+        <h2 class="sec-head__h2">Four steps.<br>No surprises.</h2>
+      </div>
+      <ol class="steps__list">
+        <li><span>01</span><h3>Walk the job</h3><p>Free on-site estimate. We measure, we listen, and we talk budget honestly.</p></li>
+        <li><span>02</span><h3>Scope &amp; schedule</h3><p>A written scope and a real timeline before anything is demolished.</p></li>
+        <li><span>03</span><h3>Build</h3><p>Our own crews, one schedule, one point of contact, clean site daily.</p></li>
+        <li><span>04</span><h3>Stand behind it</h3><p>Final walkthrough and a written warranty of up to five years.</p></li>
       </ol>
     </section>
 
-    <!-- ============ QUOTE ============ -->
-    <section class="quote">
-      <p class="quote__text" data-word-reveal>The best homes aren't found. They're built on purpose.</p>
-      <p class="quote__sub reveal">You've found the crew for yours.</p>
+    <!-- ============ AREAS ============ -->
+    <section class="areas">
+      <div class="sec-head">
+        <p class="sec-head__kicker">Where we work</p>
+        <h2 class="sec-head__h2">60 miles<br>from Brentwood.</h2>
+      </div>
+      <p class="areas__links">
+        <a href="/service-areas/brentwood/">Brentwood</a><a href="/service-areas/antioch/">Antioch</a><a href="/service-areas/oakley/">Oakley</a><a href="/service-areas/discovery-bay/">Discovery Bay</a><a href="/service-areas/concord/">Concord</a><a href="/service-areas/walnut-creek/">Walnut Creek</a><a href="/service-areas/danville/">Danville</a><a href="/service-areas/san-ramon/">San Ramon</a><a href="/service-areas/lafayette/">Lafayette</a><a href="/service-areas/orinda/">Orinda</a><a href="/service-areas/livermore/">Livermore</a><a href="/service-areas/pleasanton/">Pleasanton</a><a href="/service-areas/oakland/">Oakland</a><a href="/service-areas/berkeley/">Berkeley</a><a href="/service-areas/tracy/">Tracy</a><a href="/service-areas/napa/">Napa</a>
+        <a class="areas__all" href="/service-areas/">All 40 cities →</a>
+      </p>
     </section>
 
   </main>
 
-  <!-- ============ FOOTER / CONTACT ============ -->
-  <footer class="footer" id="contact">
-    <h2 class="footer__mega" aria-label="We craft spaces that last a lifetime">
-      <span class="reveal">We craft</span>
-      <span class="reveal">spaces</span>
-      <span class="reveal">that last</span>
-      <span class="reveal">a lifetime</span>
-    </h2>
-
-    <div class="footer__grid">
-      <div class="footer__col">
-        <span class="label">New business;</span>
-        <a href="mailto:Azbuild3rs@gmail.com">Azbuild3rs@gmail.com</a>
-        <a href="tel:+19258123150">(925) 812-3150</a>
-        <p>Free estimates · Hablamos español</p>
-      </div>
-      <div class="footer__col">
-        <span class="label">Stay connected</span>
-        <a href="#" rel="noopener">Instagram</a>
-        <a href="#" rel="noopener">Facebook</a>
-        <a href="https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999" rel="noopener" target="_blank">Google Reviews</a>
-        <a href="#" rel="noopener">Yelp</a>
-      </div>
-      <div class="footer__col">
-        <span class="label">Our company</span>
-        <p>AZ Elevated Builders<br>Brentwood, California</p>
-        <p>CSLB License # 0000000<br>Licensed · Bonded · Insured</p>
-      </div>
-      <div class="footer__col">
-        <span class="label">Prefer to talk?</span>
-        <a href="tel:+19258123150" data-cta="footer-call" style="font-size:1.15rem;font-weight:600;letter-spacing:0.01em">(925) 812-3150</a>
-        <p>Mon–Fri, 8am–6pm<br>Free estimates · Hablamos español</p>
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot" id="contact">
+    <div class="foot__cta">
+      <h2>Ready when you are.</h2>
+      <p>Free estimate, written scope, and a straight answer on what it costs.</p>
+      <div class="foot__cta-row">
+        <a class="btn btn--solid" href="tel:+19258123150" data-cta="footer-call">Call (925) 812-3150</a>
+        <a class="btn btn--outline" href="mailto:Azbuild3rs@gmail.com">Azbuild3rs@gmail.com</a>
       </div>
     </div>
-
-    <div class="footer__areas">
-      <span class="label">Serving the East Bay &amp; beyond;</span>
-      <p class="footer__areas-links">
-        <a href="/service-areas/brentwood/">Brentwood</a>
-        <a href="/service-areas/antioch/">Antioch</a>
-        <a href="/service-areas/discovery-bay/">Discovery Bay</a>
-        <a href="/service-areas/oakley/">Oakley</a>
-        <a href="/service-areas/concord/">Concord</a>
-        <a href="/service-areas/walnut-creek/">Walnut Creek</a>
-        <a href="/service-areas/danville/">Danville</a>
-        <a href="/service-areas/san-ramon/">San Ramon</a>
-        <a href="/service-areas/livermore/">Livermore</a>
-        <a href="/service-areas/tracy/">Tracy</a>
-        <a href="/service-areas/oakland/">Oakland</a>
-        <a href="/service-areas/berkeley/">Berkeley</a>
-        <a href="/service-areas/napa/">Napa</a>
-        <a href="/service-areas/" class="footer__areas-all">All service areas →</a>
-      </p>
+    <div class="foot__grid">
+      <div>
+        <span class="label">Company</span>
+        <p>AZ Elevated Builders<br>Brentwood, California<br>CSLB License # 0000000</p>
+      </div>
+      <div>
+        <span class="label">Hours</span>
+        <p>Monday – Friday<br>8am – 6pm<br>Hablamos español</p>
+      </div>
+      <div>
+        <span class="label">Explore</span>
+        <p><a href="/services/">Services</a><br><a href="/service-areas/">Service areas</a><br><a href="/privacy.html">Privacy</a></p>
+      </div>
+      <div>
+        <span class="label">Social</span>
+        <p><a href="https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999" rel="noopener" target="_blank">Google Reviews</a></p>
+      </div>
     </div>
-
-    <div class="footer__legal">
+    <div class="foot__legal">
       <span>© 2026 AZ Elevated Builders. All rights reserved.</span>
-      <span class="footer__legal-links">
-        <a href="#">Accessibility</a>
-        <a href="#">Cookies Policy</a>
-        <a href="/privacy.html">Privacy Policy</a>
-      </span>
+      <span>Licensed · Bonded · Insured</span>
     </div>
   </footer>
 
@@ -560,6 +455,6 @@
   </div>
 
   <script defer src="/js/lenis.min.js"></script>
-  <script defer src="/js/main.js?v=2ea5eeb1"></script>
+  <script defer src="/js/main.js?v=e62d5f78"></script>
 </body>
 </html>

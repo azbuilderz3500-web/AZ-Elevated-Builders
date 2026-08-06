@@ -200,6 +200,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .menu.is-open .menu__links a:nth-child(6) { transition-delay: 0.45s; }
 .menu__meta { display: flex; flex-direction: column; gap: 2rem; padding-bottom: 0.6rem; }
 .menu__meta-block a, .menu__meta-block p { display: block; font-size: 0.95rem; color: var(--fg); opacity: 0.85; line-height: 1.7; }
+.menu__meta-block a { min-height: 44px; display: flex; align-items: center; }
 .menu__meta-block a:hover { opacity: 1; text-decoration: underline; }
 
 /* ============================================================
@@ -593,7 +594,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .modal__note { font-size: 0.75rem; color: var(--fg-dim); padding: 0.8rem 0.4rem 0.2rem; }
 .modal__close {
   position: absolute; top: 1rem; right: 1rem;
-  width: 38px; height: 38px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid rgba(245, 239, 230, 0.2);
   display: grid; place-items: center; font-size: 0.8rem;
   transition: background 0.3s, color 0.3s;
@@ -1006,4 +1007,232 @@ body.has-actionbar { padding-bottom: 0; }
 @media (max-width: 420px) {
   .actionbar a { font-size: 0.85rem; letter-spacing: 0.02em; }
   .hero__title { font-size: clamp(2.1rem, 12.5vw, 3rem); }
+}
+
+/* ============================================================
+   HOMEPAGE v2 — deliberately structured differently:
+   split hero, before/after case studies, service grid, crew.
+============================================================ */
+
+/* --- Nav: solid bar --- */
+.bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 160;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 0.85rem var(--pad);
+  background: rgba(3, 3, 3, 0.86);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: transform 0.45s var(--ease);
+}
+.bar.is-hidden { transform: translateY(-110%); }
+.bar__brand { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
+.bar__brand svg { width: 30px; height: 30px; flex-shrink: 0; }
+.bar__brand span {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.2;
+}
+.bar__nav { display: flex; gap: 1.9rem; margin-left: auto; }
+.bar__nav a {
+  font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--fg-dim); transition: color 0.25s; min-height: 44px;
+  display: inline-flex; align-items: center;
+}
+.bar__nav a:hover { color: var(--fg); }
+.bar__actions { display: flex; align-items: center; gap: 0.7rem; }
+.bar__phone {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--fg); color: var(--bg);
+  padding: 0 1.1rem; min-height: 44px; border-radius: 8px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap;
+}
+.bar__phone svg { width: 16px; height: 16px; }
+.bar__menu { display: none; flex-direction: column; gap: 4px; width: 44px; height: 44px; align-items: center; justify-content: center; }
+.bar__menu span { width: 20px; height: 2px; background: var(--fg); }
+
+/* --- Split hero --- */
+.lead {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding: clamp(6rem, 11vh, 8rem) var(--pad) clamp(2.5rem, 6vh, 4rem);
+  max-width: 1400px; margin: 0 auto;
+}
+.lead__eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--fg-dim); margin-bottom: 1.4rem;
+}
+.lead__h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 0.98; letter-spacing: -0.035em;
+  margin-bottom: 1.4rem;
+}
+.lead__h1 em { font-style: normal; color: #c8a96a; }
+.lead__sub { color: var(--fg-dim); font-size: 1.02rem; line-height: 1.75; max-width: 46ch; }
+.lead__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 2rem 0 2.4rem; }
+.lead__cta .btn { min-height: 54px; border-radius: 10px; }
+.lead__proof {
+  list-style: none; display: grid; grid-template-columns: repeat(4, auto);
+  gap: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line);
+}
+.lead__proof strong {
+  display: block; font-family: var(--font-display); font-size: 1.3rem;
+  font-weight: 600; letter-spacing: -0.01em;
+}
+.lead__proof span { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); }
+.lead__art { position: relative; }
+.lead__art img { width: 100%; height: auto; border-radius: 16px; aspect-ratio: 3/2; object-fit: cover; }
+.lead__caption {
+  position: absolute; left: 0.9rem; bottom: 0.9rem;
+  background: rgba(3,3,3,0.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  padding: 0.5rem 0.9rem; border-radius: 8px;
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg);
+}
+
+/* --- Section heads (left-aligned, not centred) --- */
+.sec-head { max-width: 60ch; margin-bottom: clamp(2rem, 5vh, 3.2rem); }
+.sec-head__kicker {
+  font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: #c8a96a; margin-bottom: 0.9rem;
+}
+.sec-head__h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem); line-height: 1.02; letter-spacing: -0.03em;
+}
+.sec-head__note { color: var(--fg-dim); margin-top: 1rem; font-size: 0.97rem; line-height: 1.7; }
+
+/* --- Case studies --- */
+.work2 { padding: clamp(3.5rem, 9vh, 6rem) var(--pad); max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--line); }
+.case { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.case__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.2rem; margin-bottom: 1.2rem; }
+.case__head h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem); letter-spacing: -0.01em;
+}
+.case__meta { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); }
+.case__strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem;
+}
+.case__shot { position: relative; }
+.case__shot img {
+  /* height:auto is required — the width/height HTML attributes (kept to reserve
+     space and avoid layout shift) otherwise give the box a definite height,
+     which makes the browser ignore aspect-ratio entirely. */
+  width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px;
+  transition: transform 0.6s var(--ease);
+}
+.case__shot--wide img { aspect-ratio: 3/4; }
+.lead__art { align-self: center; }
+.case__shot:hover img { transform: scale(1.02); }
+.case__shot figcaption {
+  margin-top: 0.6rem; font-size: 0.74rem; color: var(--fg-dim); line-height: 1.5;
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+}
+.tag {
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.22rem 0.5rem; border-radius: 4px;
+  background: rgba(245,239,230,0.12); color: var(--fg);
+}
+.tag--before { background: rgba(245,239,230,0.1); color: var(--fg-dim); }
+.tag--after { background: #c8a96a; color: #18203a; }
+
+/* --- Service grid --- */
+.svc { padding: clamp(3.5rem, 9vh, 6rem) var(--pad); max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--line); }
+.svc__grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+.svc__grid a {
+  display: flex; flex-direction: column; height: 100%;
+  padding: 1.5rem; border: 1px solid var(--line); border-radius: 14px;
+  background: rgba(245,239,230,0.02);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+}
+.svc__grid a:hover { background: rgba(245,239,230,0.06); border-color: rgba(245,239,230,0.3); transform: translateY(-2px); }
+.svc__grid h3 {
+  font-family: var(--font-display); font-weight: 600; font-size: 1.05rem;
+  margin-bottom: 0.6rem; letter-spacing: -0.005em;
+}
+.svc__grid p { color: var(--fg-dim); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.1rem; }
+.svc__grid span { margin-top: auto; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c8a96a; }
+
+/* --- Crew --- */
+.crew {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding: clamp(3.5rem, 9vh, 6rem) var(--pad); max-width: 1400px; margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.crew__art { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.crew__art img { width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px; }
+.crew__art img:first-child { margin-top: 2rem; }
+.crew__copy p { color: var(--fg-dim); font-size: 0.99rem; line-height: 1.8; margin: 1rem 0; max-width: 48ch; }
+.crew__copy .btn { margin-top: 0.8rem; border-radius: 10px; min-height: 52px; }
+
+/* --- Steps --- */
+.steps { padding: clamp(3.5rem, 9vh, 6rem) var(--pad); max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--line); }
+.steps__list { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+.steps__list li { border-top: 2px solid #c8a96a; padding-top: 1.1rem; }
+.steps__list span { font-size: 0.7rem; letter-spacing: 0.2em; color: #c8a96a; }
+.steps__list h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin: 0.5rem 0 0.5rem; }
+.steps__list p { color: var(--fg-dim); font-size: 0.88rem; line-height: 1.65; }
+
+/* --- Areas --- */
+.areas { padding: clamp(3.5rem, 9vh, 6rem) var(--pad); max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--line); }
+.areas__links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.areas__links a {
+  font-size: 0.8rem; padding: 0.6rem 1rem; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--fg-dim); min-height: 44px; display: inline-flex; align-items: center;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.areas__links a:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.areas__all { color: #c8a96a !important; border-color: rgba(200,169,106,0.5) !important; }
+
+/* --- Footer --- */
+.foot { border-top: 1px solid var(--line); padding: clamp(3.5rem, 9vh, 6rem) var(--pad) 2rem; max-width: 1400px; margin: 0 auto; }
+.foot__cta { text-align: center; padding-bottom: clamp(2.5rem, 6vh, 4rem); border-bottom: 1px solid var(--line); }
+.foot__cta h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.03em; margin-bottom: 0.7rem;
+}
+.foot__cta p { color: var(--fg-dim); margin-bottom: 1.8rem; }
+.foot__cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+.foot__cta-row .btn { min-height: 54px; border-radius: 10px; }
+.foot__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding: 2.5rem 0; }
+.foot__grid p { font-size: 0.9rem; line-height: 1.9; color: var(--fg-dim); }
+.foot__grid a { color: var(--fg); }
+.foot__grid a:hover { text-decoration: underline; }
+.foot__legal {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--line);
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1000px) {
+  .svc__grid { grid-template-columns: repeat(2, 1fr); }
+  .steps__list { grid-template-columns: repeat(2, 1fr); }
+  .foot__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .bar__nav { display: none; }
+  .bar__menu { display: flex; }
+  .bar__phone span { display: none; }
+  .bar__phone { padding: 0; width: 44px; justify-content: center; }
+  .lead { grid-template-columns: 1fr; padding-top: 6rem; gap: 2rem; }
+  .lead__art { order: -1; }
+  .lead__art img { aspect-ratio: 3/2; }
+  .lead__proof { grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+  .case__strip { grid-template-columns: repeat(2, 1fr); }
+  .crew { grid-template-columns: 1fr; }
+  .crew__art img:first-child { margin-top: 0; }
+  .foot, .work2, .svc, .crew, .steps, .areas { padding-left: var(--pad); padding-right: var(--pad); }
+  .foot { padding-bottom: calc(7rem + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 560px) {
+  .svc__grid, .steps__list, .foot__grid { grid-template-columns: 1fr; }
+  .case__strip { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+}
+
+/* Footer links were 18–26px tall — under the 44px minimum on touch. */
+@media (max-width: 900px) {
+  .foot__grid a, .foot__legal a {
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .foot__grid p { line-height: 1.4; }
 }

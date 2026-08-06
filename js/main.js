@@ -98,6 +98,23 @@
     if (e.key === "Escape") { closeMenu(); closeModals(); }
   });
 
+  /* ---------- Editorial index: hover swaps a preview image ---------- */
+  const idxPreview = document.getElementById("idxPreview");
+  if (idxPreview && window.matchMedia("(min-width: 901px)").matches) {
+    const idxImg = idxPreview.querySelector("img");
+    document.querySelectorAll(".index__row").forEach((row) => {
+      row.addEventListener("mouseenter", () => {
+        const src = row.dataset.preview;
+        if (!src) return;
+        if (idxImg.getAttribute("src") !== src) idxImg.setAttribute("src", src);
+        idxPreview.classList.add("on");
+      });
+      row.addEventListener("mouseleave", () => idxPreview.classList.remove("on"));
+    });
+    const list = document.querySelector(".index__list");
+    if (list) list.addEventListener("mouseleave", () => idxPreview.classList.remove("on"));
+  }
+
   /* ---------- Cinema: clip-wipe reveals, parallax, counters ----------
      Same drama as the first design, driven differently: images arrive as a
      curtain wipe rather than a word-by-word fade. */
@@ -151,8 +168,12 @@
       const suffix = el.dataset.suffix || "";
       const decimals = (el.dataset.count.split(".")[1] || "").length;
       if (prefersReduced) { el.textContent = target.toFixed(decimals) + suffix; return; }
+      const final = target.toFixed(decimals) + suffix;
       el.textContent = (0).toFixed(decimals) + suffix;   // only zero it once we can animate
+      // Guarantee the true value lands even if rAF is throttled or the tab is
+      // backgrounded mid-count — a frozen counter would read "0 yr warranty".
       const dur = 1100, t0 = performance.now();
+      setTimeout(() => { el.textContent = final; }, dur + 400);
       const step = (t) => {
         const k = Math.min(1, (t - t0) / dur);
         const eased = 1 - Math.pow(1 - k, 3);

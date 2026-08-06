@@ -98,6 +98,75 @@
     if (e.key === "Escape") { closeMenu(); closeModals(); }
   });
 
+  /* ---------- Cinema: clip-wipe reveals, parallax, counters ----------
+     Same drama as the first design, driven differently: images arrive as a
+     curtain wipe rather than a word-by-word fade. */
+  const revealables = document.querySelectorAll(".r-up, .r-clip, .r-mask");
+  const revealAll = () => revealables.forEach((el) => el.classList.add("on"));
+  // Opt in to the hidden-by-default states only now that JS is confirmed running.
+  if (!prefersReduced && "IntersectionObserver" in window) {
+    document.documentElement.classList.add("cinema");
+    // Belt and braces: if anything is still hidden after 4s, show it.
+    setTimeout(revealAll, 4000);
+  }
+  if (prefersReduced || !("IntersectionObserver" in window)) {
+    revealAll();
+  } else {
+    const cine = new IntersectionObserver(
+      (entries) => entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add("on"); cine.unobserve(en.target); }
+      }),
+      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
+    );
+    revealables.forEach((el) => cine.observe(el));
+  }
+
+  /* Parallax — hero art and the full-bleed band drift against the scroll. */
+  const parallax = [...document.querySelectorAll("[data-parallax]")];
+  if (parallax.length && !prefersReduced) {
+    let ticking = false;
+    const runParallax = () => {
+      const vh = window.innerHeight;
+      parallax.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        const depth = parseFloat(el.dataset.parallax) || 0.12;
+        // -1 .. 1 across the viewport
+        const p = (r.top + r.height / 2 - vh / 2) / vh;
+        el.style.transform = `translate3d(0, ${(p * depth * 100).toFixed(2)}px, 0)`;
+      });
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(runParallax); }
+    }, { passive: true });
+    runParallax();
+  }
+
+  /* Stat counters tick up once, when they first come into view. */
+  const stats = document.querySelectorAll("[data-count]");
+  if (stats.length) {
+    const countUp = (el) => {
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || "";
+      const decimals = (el.dataset.count.split(".")[1] || "").length;
+      if (prefersReduced) { el.textContent = target.toFixed(decimals) + suffix; return; }
+      el.textContent = (0).toFixed(decimals) + suffix;   // only zero it once we can animate
+      const dur = 1100, t0 = performance.now();
+      const step = (t) => {
+        const k = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = (target * eased).toFixed(decimals) + suffix;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const so = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { countUp(en.target); so.unobserve(en.target); }
+    }), { threshold: 0.6 });
+    stats.forEach((el) => so.observe(el));
+  }
+
   /* ---------- Reveal on scroll ---------- */
   const io = new IntersectionObserver(
     (entries) => entries.forEach((en) => {

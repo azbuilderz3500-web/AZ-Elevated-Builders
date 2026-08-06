@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=c4375f69" />
+  <link rel="stylesheet" href="/css/style.css?v=ab62a655" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
   <script type="application/ld+json">
   {
@@ -97,6 +97,8 @@
   </script>
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
   <!-- ============ NAV — solid bar, not a floating pill ============ -->
   <header class="bar" id="nav">
@@ -156,7 +158,7 @@
     <section class="lead">
       <div class="lead__copy">
         <p class="lead__eyebrow">Brentwood, California · Serving the East Bay</p>
-        <h1 class="lead__h1">The crew that<br><em>shows up,</em><br>and finishes.</h1>
+        <h1 class="lead__h1"><span class="line"><span>The crew that</span></span><span class="line"><span><em>shows up,</em></span></span><span class="line"><span>and finishes.</span></span></h1>
         <p class="lead__sub">
           Family-run general contractor. Kitchens, bathrooms, whole-home remodels,
           additions, concrete and paint — every trade on our crew with 15+ years in
@@ -170,13 +172,14 @@
           <button class="btn btn--outline" id="heroQuote">Get a free estimate</button>
         </div>
         <ul class="lead__proof">
-          <li><strong>5.0</strong><span>Google rating</span></li>
-          <li><strong>15+ yrs</strong><span>Per trade</span></li>
-          <li><strong>5 yr</strong><span>Written warranty</span></li>
+          <li><strong data-count="5.0">5.0</strong><span>Google rating</span></li>
+          <li><strong data-count="15" data-suffix="+ yrs">15+ yrs</strong><span>Per trade</span></li>
+          <li><strong data-count="5" data-suffix=" yr">5 yr</strong><span>Written warranty</span></li>
           <li><strong>Sí</strong><span>Hablamos español</span></li>
         </ul>
       </div>
       <div class="lead__art">
+        <div data-parallax="0.14" style="height:100%">
         <img src="/assets/projects/walnut-creek-exterior__after-wide-1200.jpg"
              srcset="/assets/projects/walnut-creek-exterior__after-wide-800.jpg 800w,
                      /assets/projects/walnut-creek-exterior__after-wide-1200.jpg 1200w,
@@ -184,13 +187,14 @@
              sizes="(max-width: 900px) 100vw, 50vw"
              width="1200" height="800" fetchpriority="high" decoding="async"
              alt="Completed exterior remodel with new concrete walkway and retaining wall in Walnut Creek, California">
+        </div>
         <figcaption class="lead__caption">Exterior &amp; concrete · Walnut Creek</figcaption>
       </div>
     </section>
 
     <!-- ============ WORK — real projects, before to after ============ -->
     <section class="work2" id="work">
-      <div class="sec-head">
+      <div class="sec-head r-up">
         <p class="sec-head__kicker">Recent work</p>
         <h2 class="sec-head__h2">Our own jobs.<br>Our own photos.</h2>
         <p class="sec-head__note">No stock images. Every photograph below is a house our crew actually built.</p>
@@ -203,25 +207,25 @@
           <p class="case__meta">Walnut Creek · Concrete &amp; exterior · Completed 2026</p>
         </header>
         <div class="case__strip">
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/walnut-creek-exterior__before-bare-yard-800.jpg"
                  alt="Bare graded front yard before construction in Walnut Creek">
             <figcaption><span class="tag tag--before">Before</span> Bare lot, no drainage</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/walnut-creek-exterior__crew-pour-800.jpg"
                  alt="AZ Elevated Builders crew placing concrete on site">
             <figcaption><span class="tag">During</span> Forming and pouring</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/walnut-creek-exterior__finishing-slab-800.jpg"
                  alt="Finishing fresh concrete with a trowel">
             <figcaption><span class="tag">During</span> Hand-finishing the slab</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.jpg"
                  alt="Completed retaining wall, railing and concrete walkway">
@@ -237,25 +241,25 @@
           <p class="case__meta">Oakland · Whole-floor remodel · Completed 2026</p>
         </header>
         <div class="case__strip">
-          <figure class="case__shot case__shot--wide">
+          <figure class="case__shot case__shot--wide r-clip">
             <img loading="lazy" decoding="async" width="1200" height="1800"
                  src="/assets/projects/oakland-kitchen-bath__kitchen-wide-1200.jpg"
                  alt="Remodeled white kitchen with island, brass fixtures and wood floors in Oakland">
             <figcaption>Kitchen — shaker cabinetry, quartz, brass</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.jpg"
                  alt="Farmhouse sink under a window with brass tap">
             <figcaption>Farmhouse sink &amp; window run</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.jpg"
                  alt="Bathroom with green zellige tile, brass shower fixtures and glass enclosure">
             <figcaption>Green zellige guest bath</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/oakland-kitchen-bath__bath-terracotta-800.jpg"
                  alt="Bathroom with terracotta zellige tile and brass fixtures">
@@ -271,25 +275,25 @@
           <p class="case__meta">Lafayette · Bathroom remodel · Completed 2026</p>
         </header>
         <div class="case__strip">
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/lafayette-primary-bath__quartzite-shower-800.jpg"
                  alt="Walk-in shower clad in book-matched quartzite with bench seat">
             <figcaption>Book-matched quartzite shower</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="533"
                  src="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.jpg"
                  alt="Primary bathroom with walnut vanity and glass shower enclosure">
             <figcaption>Walnut vanity, double basin</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.jpg"
                  alt="Backlit mirror above a walnut vanity">
             <figcaption>Backlit mirror &amp; makeup station</figcaption>
           </figure>
-          <figure class="case__shot">
+          <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
                  src="/assets/projects/pittsburg-bath__onyx-shower-800.jpg"
                  alt="Shower clad in dark onyx-look porcelain with bronze fixtures">
@@ -299,29 +303,43 @@
       </article>
     </section>
 
+
+    <!-- ============ CINEMATIC BAND ============ -->
+    <section class="band">
+      <div class="band__bg" data-parallax="0.18">
+        <img loading="lazy" decoding="async"
+             src="/assets/projects/walnut-creek-exterior__aerial-site-1600.jpg"
+             alt="Aerial view of an AZ Elevated Builders concrete pour in progress">
+      </div>
+      <div class="band__inner">
+        <h2 class="r-up">Anyone can<br>quote it.<br><em>We pour it.</em></h2>
+        <p class="r-up" style="--i:1">Own crews · Own equipment · Own standard</p>
+      </div>
+    </section>
+
     <!-- ============ SERVICES — grid, not accordion ============ -->
     <section class="svc" id="services">
-      <div class="sec-head">
+      <div class="sec-head r-up">
         <p class="sec-head__kicker">What we do</p>
         <h2 class="sec-head__h2">Inside and out,<br>one crew.</h2>
         <p class="sec-head__note">Plumbing, electrical, drywall, tile, cabinetry and paint are all in-house — so your job never waits on someone else's calendar.</p>
       </div>
       <ul class="svc__grid">
-        <li><a href="/services/kitchen-remodeling/"><h3>Kitchen Remodeling</h3><p>Layouts, cabinetry, stone and lighting rebuilt around how you actually cook.</p><span>View →</span></a></li>
-        <li><a href="/services/bathroom-remodeling/"><h3>Bathroom Remodeling</h3><p>Tile, stone, steam showers and heated floors — waterproofed from the rough-in.</p><span>View →</span></a></li>
-        <li><a href="/services/whole-home-remodeling/"><h3>Whole-Home Remodeling</h3><p>Circulation, light, finishes and systems reworked as one project.</p><span>View →</span></a></li>
-        <li><a href="/services/additions-adus/"><h3>Additions &amp; ADUs</h3><p>New square footage that reads as original, and ADUs that earn their keep.</p><span>View →</span></a></li>
-        <li><a href="/services/concrete-driveways/"><h3>Concrete &amp; Driveways</h3><p>Driveways, patios, walkways and retaining walls, formed and poured by our crew.</p><span>View →</span></a></li>
-        <li><a href="/services/painting/"><h3>Interior &amp; Exterior Paint</h3><p>Full prep, quality coatings, straight lines — 22 years on the brush.</p><span>View →</span></a></li>
-        <li><a href="/services/flooring/"><h3>Flooring</h3><p>Hardwood, engineered, tile and laminate over a properly levelled substrate.</p><span>View →</span></a></li>
-        <li><a href="/services/cabinetry-countertops/"><h3>Cabinetry &amp; Countertops</h3><p>Specified, templated and installed as one scope so the lines actually line up.</p><span>View →</span></a></li>
-        <li><a href="/services/"><h3>Everything else</h3><p>Drywall, trim, saunas, pergolas and outdoor living. See the full list.</p><span>All services →</span></a></li>
+        <li class="r-up" style="--i:0"><a href="/services/kitchen-remodeling/"><h3>Kitchen Remodeling</h3><p>Layouts, cabinetry, stone and lighting rebuilt around how you actually cook.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:1"><a href="/services/bathroom-remodeling/"><h3>Bathroom Remodeling</h3><p>Tile, stone, steam showers and heated floors — waterproofed from the rough-in.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:2"><a href="/services/whole-home-remodeling/"><h3>Whole-Home Remodeling</h3><p>Circulation, light, finishes and systems reworked as one project.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:3"><a href="/services/additions-adus/"><h3>Additions &amp; ADUs</h3><p>New square footage that reads as original, and ADUs that earn their keep.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:4"><a href="/services/concrete-driveways/"><h3>Concrete &amp; Driveways</h3><p>Driveways, patios, walkways and retaining walls, formed and poured by our crew.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:5"><a href="/services/painting/"><h3>Interior &amp; Exterior Paint</h3><p>Full prep, quality coatings, straight lines — 22 years on the brush.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:6"><a href="/services/flooring/"><h3>Flooring</h3><p>Hardwood, engineered, tile and laminate over a properly levelled substrate.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:7"><a href="/services/cabinetry-countertops/"><h3>Cabinetry &amp; Countertops</h3><p>Specified, templated and installed as one scope so the lines actually line up.</p><span>View →</span></a></li>
+        <li class="r-up" style="--i:8"><a href="/services/"><h3>Everything else</h3><p>Drywall, trim, saunas, pergolas and outdoor living. See the full list.</p><span>All services →</span></a></li>
       </ul>
     </section>
 
     <!-- ============ CREW — the thing a studio site can't show ============ -->
     <section class="crew" id="crew">
-      <div class="crew__art">
+      <div class="crew__art r-clip">
         <img loading="lazy" decoding="async" width="800" height="1200"
              src="/assets/projects/walnut-creek-exterior__crew-grading-800.jpg"
              alt="AZ Elevated Builders crew member grading a site by hand">
@@ -329,7 +347,7 @@
              src="/assets/projects/walnut-creek-exterior__crew-portrait-800.jpg"
              alt="AZ Elevated Builders crew member on a job site in Walnut Creek">
       </div>
-      <div class="crew__copy">
+      <div class="crew__copy r-up">
         <p class="sec-head__kicker">Who turns up</p>
         <h2 class="sec-head__h2">A family business,<br>not a call centre.</h2>
         <p>Alfonso Zavala runs AZ Elevated Builders out of Brentwood. The people who
@@ -344,21 +362,21 @@
 
     <!-- ============ PROCESS — horizontal steps ============ -->
     <section class="steps" id="process">
-      <div class="sec-head">
+      <div class="sec-head r-up">
         <p class="sec-head__kicker">How it goes</p>
         <h2 class="sec-head__h2">Four steps.<br>No surprises.</h2>
       </div>
       <ol class="steps__list">
-        <li><span>01</span><h3>Walk the job</h3><p>Free on-site estimate. We measure, we listen, and we talk budget honestly.</p></li>
-        <li><span>02</span><h3>Scope &amp; schedule</h3><p>A written scope and a real timeline before anything is demolished.</p></li>
-        <li><span>03</span><h3>Build</h3><p>Our own crews, one schedule, one point of contact, clean site daily.</p></li>
-        <li><span>04</span><h3>Stand behind it</h3><p>Final walkthrough and a written warranty of up to five years.</p></li>
+        <li class="r-up" style="--i:0"><span>01</span><h3>Walk the job</h3><p>Free on-site estimate. We measure, we listen, and we talk budget honestly.</p></li>
+        <li class="r-up" style="--i:1"><span>02</span><h3>Scope &amp; schedule</h3><p>A written scope and a real timeline before anything is demolished.</p></li>
+        <li class="r-up" style="--i:2"><span>03</span><h3>Build</h3><p>Our own crews, one schedule, one point of contact, clean site daily.</p></li>
+        <li class="r-up" style="--i:3"><span>04</span><h3>Stand behind it</h3><p>Final walkthrough and a written warranty of up to five years.</p></li>
       </ol>
     </section>
 
     <!-- ============ AREAS ============ -->
     <section class="areas">
-      <div class="sec-head">
+      <div class="sec-head r-up">
         <p class="sec-head__kicker">Where we work</p>
         <h2 class="sec-head__h2">60 miles<br>from Brentwood.</h2>
       </div>
@@ -455,6 +473,6 @@
   </div>
 
   <script defer src="/js/lenis.min.js"></script>
-  <script defer src="/js/main.js?v=e62d5f78"></script>
+  <script defer src="/js/main.js?v=0cbac199"></script>
 </body>
 </html>

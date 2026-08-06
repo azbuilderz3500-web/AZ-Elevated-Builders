@@ -50,7 +50,7 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/style.css?v=${ASSET_V}" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>
 <body class="seo-page">`;
@@ -92,8 +92,8 @@ const nav = `
   <div class="nav__pill">
     <a href="/" class="nav__brand" aria-label="AZ Elevated Builders — home">
       <svg class="nav__mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M6 34 L24 10 L42 34" /><path d="M14 34 L24 21 L34 34" />
-        <line x1="24" y1="34" x2="24" y2="44" /><line x1="19" y1="40" x2="29" y2="40" />
+        <path d="M7 36 L24 11 L41 36" /><path d="M17 21 L32 21" />
+        <path d="M32 21 L16 36" /><path d="M16 36 L32 36" />
       </svg>
       <span class="nav__brandname">AZ&nbsp;Elevated<br>Builders</span>
     </a>

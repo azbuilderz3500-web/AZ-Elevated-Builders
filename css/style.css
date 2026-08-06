@@ -80,7 +80,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: opacity 0.8s var(--ease), visibility 0.8s;
 }
 .preloader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
-.preloader__inner { display: flex; align-items: center; gap: 1.4rem; }
+/* Stacked lockup — the arrangement Alfonso approved */
+.preloader__inner {
+  display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+  text-align: center;
+}
 .preloader__mark { width: 64px; height: 64px; color: var(--fg); }
 .preloader__mark path, .preloader__mark line {
   stroke-dasharray: 120; stroke-dashoffset: 120;
@@ -90,10 +94,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .preloader__mark line { animation-delay: 0.45s; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .preloader__word {
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; align-items: center;
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
-  font-weight: 500; line-height: 1.08; letter-spacing: -0.01em;
+  font-size: clamp(1.15rem, 3.2vw, 1.7rem);
+  font-weight: 600; line-height: 1.2; letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 .preloader__word span {
   opacity: 0; transform: translateY(0.6em);

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AZ Elevated Builders — Brand Guidelines</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="/assets/brand/svg/favicon.svg" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--navy:#18203A;--cream:#F5EFE6;--brass:#C8A96A;--ink:#0A0C14;--slate:#8B93A7;
+        --paper:#F4F2ED;--line:#DCD8CF;--body:#54504A;--mute:#8A857B}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:#1A1917;line-height:1.6}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+  h1,h2,h3{font-family:"Inter Tight",sans-serif;letter-spacing:-.02em}
+  a{color:inherit}
+
+  .cover{background:var(--navy);color:var(--cream);padding:clamp(3rem,9vh,6rem) 0}
+  .cover .row{display:flex;align-items:center;gap:1.6rem;margin-bottom:2.4rem}
+  .cover img{width:86px;height:86px}
+  .cover h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1;text-transform:uppercase}
+  .cover .sub{color:rgba(245,239,230,.72);margin-top:.8rem;max-width:54ch}
+  .cover .meta{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:2.4rem;
+    font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,239,230,.55)}
+  .cover .meta b{display:block;color:var(--brass);font-weight:600;margin-top:.3rem;letter-spacing:.14em}
+
+  section{padding:clamp(2.8rem,7vh,4.5rem) 0;border-bottom:1px solid var(--line)}
+  .kicker{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mute);margin-bottom:.7rem}
+  section h2{font-size:clamp(1.4rem,3.2vw,2.1rem);font-weight:600;text-transform:uppercase;margin-bottom:.6rem}
+  section > .wrap > p.lede{color:var(--body);max-width:64ch;margin-bottom:2rem}
+
+  .grid{display:grid;gap:1rem}
+  .g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)} .g5{grid-template-columns:repeat(5,1fr)}
+  @media(max-width:900px){.g4,.g3,.g5{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+
+  .tile{border:1px solid var(--line);border-radius:0;background:#FBFAF7;overflow:hidden}
+  .tile .art{display:grid;place-items:center;min-height:180px;padding:1.4rem}
+  .tile .art.dark{background:var(--navy)} .tile .art.brass{background:var(--brass)}
+  .tile .art.light{background:#fff} .tile .art.check{
+    background:conic-gradient(#eee 0 25%,#fff 0 50%,#eee 0 75%,#fff 0)0 0/18px 18px}
+  .tile img{max-width:78%;max-height:130px}
+  .tile .cap{padding:.7rem .9rem;border-top:1px solid var(--line);font-size:.68rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+  .tile .cap b{display:block;color:#1A1917;letter-spacing:.04em;font-size:.78rem;margin-bottom:.15rem}
+
+  /* colour */
+  .sw{border:1px solid rgba(0,0,0,.07)}
+  .sw .chip{height:130px} .sw .info{padding:.8rem .9rem;background:#FBFAF7;border-top:1px solid var(--line)}
+  .sw .info b{display:block;font-size:.82rem} .sw .info span{font-size:.7rem;color:var(--mute);display:block;line-height:1.7}
+
+  /* type */
+  .type{border:1px solid var(--line);background:#FBFAF7;padding:1.4rem}
+  .type .big{font-family:"Inter Tight",sans-serif;font-weight:700;font-size:2rem;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:.5rem}
+  .type .body{font-size:.9rem;color:var(--body);margin-bottom:.9rem}
+  .type .meta{border-top:1px solid var(--line);padding-top:.7rem;font-size:.7rem;color:var(--mute)}
+  .type .meta b{display:block;color:#1A1917;font-size:.84rem}
+  .scale{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;margin-top:1rem;font-size:.72rem;color:var(--mute)}
+
+  /* rules */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:900px){.rules{grid-template-columns:1fr}}
+  .rule{border:1px solid var(--line);background:#FBFAF7;padding:1.1rem 1.2rem}
+  .rule h4{font-family:"Inter Tight",sans-serif;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+  .rule.do h4{color:#2f7d4f} .rule.dont h4{color:#a8402f}
+  .rule p{font-size:.86rem;color:var(--body)}
+
+  /* clearspace diagram */
+  .clear{display:grid;place-items:center;background:var(--navy);padding:2.2rem;position:relative}
+  .clear .box{position:relative;padding:38px}
+  .clear .box::before{content:"";position:absolute;inset:0;border:1px dashed rgba(200,169,106,.6)}
+  .clear img{width:120px;height:120px;display:block}
+  .clear .x{position:absolute;font-size:.6rem;letter-spacing:.2em;color:var(--brass);text-transform:uppercase}
+  .clear .x.t{top:12px;left:50%;transform:translateX(-50%)}
+  .clear .x.l{left:8px;top:50%;transform:translateY(-50%) rotate(-90deg)}
+
+  /* files */
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid var(--line)}
+  th{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+  td code{font-size:.8rem;background:#EDEAE3;padding:.12rem .4rem}
+
+  footer{padding:2.6rem 0 4rem;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="row">
+      <img src="/assets/brand/svg/azeb-mark-accent-dark.svg" alt="AZ Elevated Builders mark">
+      <div>
+        <h1>Brand<br>Guidelines</h1>
+      </div>
+    </div>
+    <p class="sub">Everything needed to use the AZ Elevated Builders identity correctly —
+    the mark, colour, type, and the files for web, print and signage.</p>
+    <div class="meta">
+      <span>Prepared for<b>Alfonso Zavala</b></span>
+      <span>By<b>To The Max Media</b></span>
+      <span>Version<b>1.0 · August 2026</b></span>
+      <span>Licence<b>CSLB 1106795</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ THE MARK ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">01 — The mark</p>
+    <h2>An A-frame with a Z inside it</h2>
+    <p class="lede">The outer form is a roofline — the shape of a house under construction, and the
+    letter <b>A</b>. Locked inside it is a <b>Z</b>, for Zavala. The Z's diagonal is the only stroke
+    that carries brass, so the monogram still reads A‑Z at favicon size.</p>
+    <div class="grid g4">
+      <div class="tile"><div class="art dark"><img src="/assets/brand/svg/azeb-mark-accent-dark.svg" alt="Primary mark on navy"></div><div class="cap"><b>Primary</b>On dark</div></div>
+      <div class="tile"><div class="art light"><img src="/assets/brand/svg/azeb-mark-accent-light.svg" alt="Primary mark on white"></div><div class="cap"><b>Primary</b>On light</div></div>
+      <div class="tile"><div class="art check"><img src="/assets/brand/svg/azeb-mark-mono-black.svg" alt="One-colour black mark"></div><div class="cap"><b>One colour</b>Black · print</div></div>
+      <div class="tile"><div class="art brass"><img src="/assets/brand/svg/azeb-mark-mono-navy.svg" alt="Navy mark on brass"></div><div class="cap"><b>One colour</b>Navy on brass</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCKUPS ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">02 — Lockups</p>
+    <h2>How the mark meets the name</h2>
+    <p class="lede">Horizontal is the default — website header, truck doors, letterhead. Stacked suits
+    yard signs and shirt backs. The badge is for avatars, stamps and hard-hat stickers, where the
+    name would be unreadable anyway.</p>
+    <div class="grid g3">
+      <div class="tile"><div class="art dark"><img src="/assets/brand/png/web/azeb-lockup-horizontal-cream-384.png" alt="Horizontal lockup" style="max-width:92%"></div><div class="cap"><b>Horizontal</b>Header · truck · letterhead</div></div>
+      <div class="tile"><div class="art dark"><img src="/assets/brand/png/print/azeb-lockup-stacked-cream-600.png" alt="Stacked lockup" style="max-height:150px"></div><div class="cap"><b>Stacked</b>Yard signs · shirt backs</div></div>
+      <div class="tile"><div class="art dark"><img src="/assets/brand/svg/azeb-badge-circle-navy.svg" alt="Circle badge"></div><div class="cap"><b>Badge</b>Avatar · stamp · sticker</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLEARSPACE ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">03 — Clearspace &amp; minimum size</p>
+    <h2>Give it room</h2>
+    <p class="lede">Keep clear space equal to <b>one third of the mark's height</b> on every side.
+    Nothing — type, edges, photography — enters that zone. Minimum sizes below are where the Z is
+    still legible; go smaller and use the badge instead.</p>
+    <div class="grid g2">
+      <div class="tile"><div class="clear">
+        <span class="x t">⅓ height</span><span class="x l">⅓ height</span>
+        <div class="box"><img src="/assets/brand/svg/azeb-mark-accent-dark.svg" alt="Clearspace diagram"></div>
+      </div><div class="cap"><b>Clearspace</b>⅓ of mark height, all sides</div></div>
+      <div class="tile"><div class="art dark" style="gap:2rem;display:flex;align-items:flex-end;justify-content:center">
+        <img src="/assets/brand/png/web/azeb-mark-cream-transparent-96.png" alt="24mm" style="width:72px;height:72px">
+        <img src="/assets/brand/png/web/azeb-mark-cream-transparent-48.png" alt="Minimum digital" style="width:40px;height:40px">
+        <img src="/assets/brand/png/web/azeb-badge-square-navy-32.png" alt="Badge at 32px" style="width:32px;height:32px">
+      </div><div class="cap"><b>Minimum size</b>40px digital · 12mm print · use the badge below that</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLOUR ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">04 — Colour</p>
+    <h2>Navy, cream, brass</h2>
+    <p class="lede">Navy carries the brand; cream is the voice; brass is the accent and never more
+    than a few percent of any layout. Ink and slate are supporting neutrals.</p>
+    <div class="grid g5">
+      <div class="sw"><div class="chip" style="background:#18203A"></div><div class="info"><b>Navy</b><span>HEX #18203A</span><span>RGB 24 32 58</span><span>CMYK 88 78 45 42</span></div></div>
+      <div class="sw"><div class="chip" style="background:#F5EFE6"></div><div class="info"><b>Cream</b><span>HEX #F5EFE6</span><span>RGB 245 239 230</span><span>CMYK 3 4 8 0</span></div></div>
+      <div class="sw"><div class="chip" style="background:#C8A96A"></div><div class="info"><b>Brass</b><span>HEX #C8A96A</span><span>RGB 200 169 106</span><span>CMYK 22 32 68 2</span></div></div>
+      <div class="sw"><div class="chip" style="background:#0A0C14"></div><div class="info"><b>Ink</b><span>HEX #0A0C14</span><span>RGB 10 12 20</span><span>CMYK 82 74 58 78</span></div></div>
+      <div class="sw"><div class="chip" style="background:#8B93A7"></div><div class="info"><b>Slate</b><span>HEX #8B93A7</span><span>RGB 139 147 167</span><span>CMYK 48 38 27 3</span></div></div>
+    </div>
+    <p style="margin-top:1.2rem;font-size:.82rem;color:var(--mute)">CMYK values are conversions for
+    coated stock — ask your printer to match to the HEX/RGB on press before a large run.</p>
+  </div>
+</section>
+
+<!-- ============ TYPE ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">05 — Typography</p>
+    <h2>Inter Tight &amp; Inter</h2>
+    <p class="lede">Inter Tight sets headlines — tight, modern, confident. Inter sets everything
+    else. Both are free and open-licensed, so they can be installed on any machine and used in
+    print, on signs and on the website without a licence fee.</p>
+    <div class="grid g2">
+      <div class="type">
+        <div class="big">Built to a higher standard</div>
+        <p class="body">Headlines. Uppercase, weight 700, letter-spacing −0.03em. Set it big — the
+        scale is part of the identity.</p>
+        <div class="meta"><b>Inter Tight — Bold (700)</b>Headlines, wordmark, signage</div>
+      </div>
+      <div class="type">
+        <div style="font-size:1rem;line-height:1.75;margin-bottom:.9rem;color:#1A1917">
+          Family-run general contractor serving Brentwood and the East Bay. Every trade on our
+          crew has fifteen or more years in that one trade.</div>
+        <p class="body">Body copy, captions, forms, and anything a customer has to read on a phone.</p>
+        <div class="meta"><b>Inter — Regular / Medium (400 / 500)</b>Body, UI, captions</div>
+      </div>
+    </div>
+    <div class="scale">
+      <span><b>H1</b> 64–144px / −0.035em</span><span><b>H2</b> 34–64px / −0.03em</span>
+      <span><b>H3</b> 18–26px / −0.01em</span><span><b>Body</b> 16–17px / 1.7</span>
+      <span><b>Caption</b> 12–13px / 0.14em uppercase</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USAGE ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">06 — Usage</p>
+    <h2>Do and don't</h2>
+    <div class="rules">
+      <div class="rule do"><h4>✓ Do</h4><p>Use the supplied files. Put the primary mark on navy or cream. Keep the ⅓ clearspace. Use the badge when the space is small or square.</p></div>
+      <div class="rule dont"><h4>✕ Don't</h4><p>Don't stretch, rotate, or re-draw the mark. Don't change the stroke weight.</p></div>
+      <div class="rule do"><h4>✓ Do</h4><p>Reverse to one-colour white or black when a vendor needs a single ink — embroidery, etched glass, stamps.</p></div>
+      <div class="rule dont"><h4>✕ Don't</h4><p>Don't recolour the mark outside the palette, and don't put brass on brass or navy on ink — there isn't enough contrast.</p></div>
+      <div class="rule do"><h4>✓ Do</h4><p>Place the mark over the calm part of a photograph, and darken the image behind it if needed.</p></div>
+      <div class="rule dont"><h4>✕ Don't</h4><p>Don't add drop shadows, outlines, gradients or bevels to the mark. It is a line drawing; keep it flat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILES ============ -->
+<section>
+  <div class="wrap">
+    <p class="kicker">07 — The files</p>
+    <h2>What's in the package</h2>
+    <p class="lede">Everything lives in <code>/assets/brand/</code>. SVG is the master — it is
+    vector, scales to a billboard, and is what a sign shop or printer should be given.</p>
+    <table>
+      <tr><th>Folder</th><th>Contents</th><th>Use it for</th></tr>
+      <tr><td><code>svg/</code></td><td>14 vector files — all mark variants, badges, lockups, favicon</td><td>Print, signage, vehicle wraps, embroidery, anything scaled</td></tr>
+      <tr><td><code>png/web/</code></td><td>Mark &amp; badges at 16–1024px, transparent + on-colour; lockups to 768px</td><td>Website, social avatars, email signature, app icons</td></tr>
+      <tr><td><code>png/print/</code></td><td>1200 / 2400 / 4096px at 300 dpi, plus stacked lockups</td><td>Business cards, flyers, yard signs, shirts</td></tr>
+      <tr><td><code>favicon.ico</code></td><td>Multi-resolution 16–256px</td><td>Browser tabs, legacy browsers</td></tr>
+      <tr><td><code>fonts/</code></td><td>Inter Tight 600 &amp; 700 (SIL Open Font Licence)</td><td>Give to any designer or printer — free to install and use</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">AZ Elevated Builders · Brentwood, California · CSLB Lic. # 1106795 · Brand guidelines v1.0 · Prepared by To The Max Media</div>
+</footer>
+
+</body>
+</html>

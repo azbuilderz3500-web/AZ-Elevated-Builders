@@ -11,3 +11,6 @@ assets/reel.mp4
 .hive-mind/
 memory/
 coordination/
+
+# photo-tool working files (thumbnails, picks)
+.photo-tool/

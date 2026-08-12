@@ -335,22 +335,40 @@
       const btn = form.querySelector("button[type=submit]");
       btn.disabled = true;
       btn.setAttribute("aria-busy", "true");
-      btn.textContent = "One moment…";
+      btn.textContent = "Sending\u2026";
 
-      // There is no submission endpoint yet, so we must NOT tell the visitor the
-      // request was received. Hand them straight to a channel that actually works.
-      // When a real endpoint exists, POST here and restore a true confirmation.
-      setTimeout(() => {
-        form.innerHTML =
-          '<p class="modal__thanks" role="status" tabindex="-1">' +
-          "<strong>Almost there — our online form isn't live yet.</strong><br>" +
-          "Call or text us and we'll pick it up today:<br><br>" +
-          '<a class="btn btn--solid" href="tel:+19258123150" data-cta="form-fallback-call" ' +
-          'style="justify-content:center">Call (925) 812-3150</a><br>' +
-          '<a href="mailto:Azbuild3rs@gmail.com" style="text-decoration:underline">Azbuild3rs@gmail.com</a></p>';
+      const finish = (html) => {
+        form.innerHTML = '<p class="modal__thanks" role="status" tabindex="-1">' + html + "</p>";
         const msg = form.querySelector(".modal__thanks");
-        if (msg) msg.focus();   // move focus so screen readers land on the message
-      }, 400);
+        if (msg) msg.focus();
+      };
+      const CALL_BTN =
+        '<a class="btn btn--solid" href="tel:+19258123150" data-cta="form-fallback-call" ' +
+        'style="justify-content:center">Call (925) 812-3150</a>';
+
+      // Set window.AZEB_LEAD_ENDPOINT (or edit here) to the Make webhook URL.
+      const ENDPOINT = window.AZEB_LEAD_ENDPOINT || "";
+      if (!ENDPOINT) {
+        setTimeout(() => finish(
+          "<strong>Almost there \u2014 our online form isn't live yet.</strong><br>" +
+          "Call or text us and we'll pick it up today:<br><br>" + CALL_BTN), 400);
+        return;
+      }
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          phone: phone.value.trim(),
+          details: (form.querySelector("[name=details]") || {}).value || "",
+          page: location.pathname, url: location.href,
+          source: "website-modal", submittedAt: new Date().toISOString(),
+        }),
+      })
+        .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status);
+          finish("<strong>Got it \u2014 thanks.</strong><br>We'll call you back within one business day.<br><br>" +
+                 'Need us sooner? <a href="tel:+19258123150" style="text-decoration:underline">Call (925) 812-3150</a>'); })
+        .catch(() => finish("<strong>That didn't send.</strong><br>Please call or text us directly:<br><br>" + CALL_BTN));
     });
   }
 

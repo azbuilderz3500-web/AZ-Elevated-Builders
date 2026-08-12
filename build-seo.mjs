@@ -136,24 +136,26 @@ const footer = `
 (function(){
   var f = document.querySelector('form[data-lead]');
   if (!f) return;
+  var ENDPOINT = ${JSON.stringify(BRAND.leadWebhook || "")};
   var sending = false;
   function err(input, msg){
     input.classList.add('is-error');
     input.setAttribute('aria-invalid','true');
     var e = input.nextElementSibling;
     if (!e || e.className !== 'field-error') {
-      e = document.createElement('p');
-      e.className = 'field-error';
+      e = document.createElement('p'); e.className = 'field-error';
       input.parentNode.insertBefore(e, input.nextSibling);
     }
     e.textContent = msg;
-    input.setAttribute('aria-describedby', e.id || (e.id = 'err-' + input.name));
   }
   function clear(input){
-    input.classList.remove('is-error');
-    input.removeAttribute('aria-invalid');
+    input.classList.remove('is-error'); input.removeAttribute('aria-invalid');
     var e = input.nextElementSibling;
     if (e && e.className === 'field-error') e.parentNode.removeChild(e);
+  }
+  function done(html){
+    f.parentNode.innerHTML = '<p class="leadform__thanks" role="status" tabindex="-1">' + html + '</p>';
+    var m = document.querySelector('.leadform__thanks'); if (m) m.focus();
   }
   f.addEventListener('input', function(e){ if (e.target.name) clear(e.target); });
   f.addEventListener('submit', function(e){
@@ -166,17 +168,32 @@ const footer = `
     if (sending) return;
     sending = true;
     var b = f.querySelector('button[type=submit]');
-    b.disabled = true; b.textContent = 'One moment\\u2026';
-    // No submission endpoint yet, so do NOT claim the request was received.
-    // Hand the visitor to a channel that actually reaches the business.
-    f.parentNode.innerHTML =
-      '<p class="leadform__thanks" role="status" tabindex="-1">' +
-      '<strong>Almost there \\u2014 our online form isn\\'t live yet.</strong><br>' +
-      'Call or text and we\\'ll pick it up today:<br><br>' +
-      '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>' +
-      '<br><a href="mailto:${BRAND.email}" style="text-decoration:underline">${BRAND.email}</a></p>';
-    var msg = document.querySelector('.leadform__thanks');
-    if (msg) msg.focus();
+    b.disabled = true; b.textContent = 'Sending\\u2026';
+
+    if (!ENDPOINT) {
+      // No destination configured yet — never claim we received it.
+      done('<strong>Almost there \\u2014 our online form isn\\'t live yet.</strong><br>' +
+           'Call or text and we\\'ll pick it up today:<br><br>' +
+           '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>');
+      return;
+    }
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: n.value.trim(), phone: p.value.trim(),
+        page: location.pathname, url: location.href,
+        source: 'website', submittedAt: new Date().toISOString()
+      })
+    }).then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      done('<strong>Got it \\u2014 thanks.</strong><br>We\\'ll call you back within one business day.<br><br>' +
+           'Need us sooner? <a href="tel:${BRAND.phoneHref}">Call ${BRAND.phone}</a>');
+    }).catch(function(){
+      // Never lose a lead to a network error — hand them the phone.
+      done('<strong>That didn\\'t send.</strong><br>Please call or text us directly:<br><br>' +
+           '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>');
+    });
   });
 })();
 </script>
@@ -217,6 +234,12 @@ const orgLd = {
   }],
   priceRange: "$$$",
   knowsLanguage: ["en", "es"],
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "license",
+    recognizedBy: { "@type": "Organization", name: "California Contractors State License Board" },
+    identifier: "1106795",
+  },
   sameAs: BRAND.sameAs,
 };
 

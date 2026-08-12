@@ -10,9 +10,12 @@ export const BRAND = {
   email: "Azbuild3rs@gmail.com",
   city: "Brentwood",
   state: "CA",
-  license: "CSLB License # 0000000",  // PLACEHOLDER — replace with real CSLB #
+  license: "CSLB Lic. # 1106795",
   // Single canonical entity node every page points at, so Google and AI
   // assistants resolve all 534 pages to one business.
+  // Lead destination. Paste the Make custom-webhook URL here and rebuild —
+  // it wires all 535 pages at once. Empty = forms fall back to phone/email.
+  leadWebhook: "",
   entityId: "https://azelevatedbuilders.com/#organization",
   gbp: "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
   sameAs: [

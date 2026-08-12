@@ -114,8 +114,8 @@ function build() {
 }
 
 /* --------------------------------- picker -------------------------------- */
-const picker = (items, folders, src) => `<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>Photo finalizer — AZ Elevated Builders</title>
+const picker = (items, folders, src, opt = {}) => `<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>${opt.client ? "Choose your photos — AZ Elevated Builders" : "Photo finalizer — AZ Elevated Builders"}</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font:14px/1.5 -apple-system,system-ui,sans-serif;background:#14161c;color:#eee}
@@ -142,21 +142,22 @@ figure.on .nm{display:block}
 .nm input{width:100%;font-size:11px;padding:4px 6px}
 </style></head><body>
 <header>
-  <h1>Photo finalizer</h1>
+  <h1>${opt.client ? "Choose your photos" : "Photo finalizer"}</h1>
   <select id="folder"><option value="">All folders (${items.length})</option>
     ${folders.map((f) => `<option value="${f}">${f}</option>`).join("")}</select>
   <select id="orient"><option value="">Any orientation</option>
     <option value="landscape">Landscape</option><option value="portrait">Portrait</option></select>
-  <input id="project" placeholder="Project slug e.g. oakland-kitchen" style="min-width:230px">
+  ${opt.client ? "" : '<input id="project" placeholder="Project slug e.g. oakland-kitchen" style="min-width:230px">'}
   <span class="sp"></span>
   <span class="count" id="count">0 selected</span>
   <button class="ghost" id="clear">Clear</button>
-  <button id="export">Export picks.json</button>
+  <button id="export">${opt.client ? "Send my picks" : "Export picks.json"}</button>
 </header>
+${opt.client ? '<p style="padding:14px 18px 0;color:#8b93a7;max-width:70ch">Tap every photo you are happy for us to put on the website. Pick as many as you like — we will crop, resize and optimise them. When you are done, press <b style="color:#C8A96A">Send my picks</b>.</p>' : ""}
 <main id="grid"></main>
 <script>
 const ITEMS = ${JSON.stringify(items)};
-const SRC = ${JSON.stringify(src)};
+const SRC = ${JSON.stringify(src)};\nconst CLIENT = ${JSON.stringify(!!opt.client)};\nconst LABEL = ${JSON.stringify(opt.label || "")};
 const picked = new Map();
 const grid = document.getElementById('grid');
 const countEl = document.getElementById('count');
@@ -171,8 +172,8 @@ function render(){
     fig.innerHTML =
       '<img loading="lazy" src="' + i.thumb + '">' +
       '<div class="tick">' + (picked.has(i.id) ? '✓' : '') + '</div>' +
-      '<div class="nm"><input placeholder="name e.g. kitchen-wide" value="' +
-        (picked.get(i.id)?.name || '') + '"></div>' +
+      (CLIENT ? '' : '<div class="nm"><input placeholder="name e.g. kitchen-wide" value="' +
+        (picked.get(i.id)?.name || '') + '"></div>') +
       '<figcaption><span>' + i.folder + '</span><span>' + i.w + '×' + i.h + '</span></figcaption>';
     fig.querySelector('img').onclick = () => {
       if (picked.has(i.id)) picked.delete(i.id);
@@ -191,7 +192,8 @@ document.getElementById('folder').onchange = render;
 document.getElementById('orient').onchange = render;
 document.getElementById('clear').onclick = () => { picked.clear(); render(); };
 document.getElementById('export').onclick = () => {
-  const project = document.getElementById('project').value.trim();
+  const el = document.getElementById('project');
+  const project = CLIENT ? (LABEL || 'client-picks') : (el ? el.value.trim() : '');
   if (!project) { alert('Give the project a slug first — e.g. oakland-kitchen'); return; }
   if (!picked.size) { alert('Pick some photos first.'); return; }
   const out = [...picked.values()].map((p, n) => ({
@@ -201,14 +203,53 @@ document.getElementById('export').onclick = () => {
   const blob = new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = 'picks.json'; a.click();
-  alert('Saved picks.json — move it into .photo-tool/ then run:\\n\\n  node photo-tool.mjs build');
+  alert(CLIENT
+    ? 'Thanks! A file called picks.json just downloaded.\\n\\nPlease email that file back to us and we will do the rest.'
+    : 'Saved picks.json — move it into .photo-tool/ then run:\\n\\n  node photo-tool.mjs build');
 };
 render();
 </script></body></html>`;
 
+/* --------------------------------- share ---------------------------------
+   Bundles the picker into ONE self-contained .html with the thumbnails
+   inlined as data URIs, so it can be emailed or dropped in Drive and opened
+   by the client on any machine with no server and no folder of images.
+-------------------------------------------------------------------------- */
+function share(label) {
+  const itemsPath = join(WORK, "items.json");
+  if (!existsSync(itemsPath)) { console.error("Run `scan <folder>` first."); process.exit(1); }
+  const items = JSON.parse(readFileSync(itemsPath, "utf8"));
+  const small = join(WORK, "share");
+  mkdirSync(small, { recursive: true });
+
+  console.log(`inlining ${items.length} thumbnails…`);
+  const inlined = items.map((it, i) => {
+    const sm = join(small, `${it.id}.jpg`);
+    if (!existsSync(sm)) {
+      sips(["-s", "format", "jpeg", "-s", "formatOptions", "66", "-Z", "400",
+            join(WORK, it.thumb), "--out", sm]);
+    }
+    if (i % 25 === 0) process.stdout.write(`\r  ${i}/${items.length}`);
+    const b64 = existsSync(sm) ? readFileSync(sm).toString("base64") : "";
+    return { ...it, thumb: `data:image/jpeg;base64,${b64}` };
+  });
+  process.stdout.write(`\r  ${items.length}/${items.length}\n`);
+
+  const folders = [...new Set(items.map((i) => i.folder))].sort();
+  const html = picker(inlined, folders, "", { client: true, label: label || "" });
+  const out = join(ROOT, "Photo-Selection-AZ-Elevated-Builders.html");
+  writeFileSync(out, html);
+  const mb = (statSync(out).size / 1048576).toFixed(1);
+  console.log(`\nSend this one file to the client (${mb} MB):\n  ${out}\n`);
+  console.log("They tick the photos they want and press Send — it downloads a small");
+  console.log("picks.json they email back. Drop that into .photo-tool/ and run:\n");
+  console.log("  node photo-tool.mjs build\n");
+}
+
 /* ---------------------------------- cli ---------------------------------- */
 const [cmd, arg] = process.argv.slice(2);
 if (cmd === "scan") scan(arg);
+else if (cmd === "share") share(arg);
 else if (cmd === "build") build();
 else {
   console.log(`AZ Elevated Builders — photo finalizer

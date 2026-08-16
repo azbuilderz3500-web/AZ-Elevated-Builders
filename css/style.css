@@ -1543,3 +1543,8 @@ body.has-actionbar { padding-bottom: 0; }
   }
   .open__bg { inset: 0; }
 }
+
+/* Designer credit — quiet, matches the legal line */
+.foot__credit { color: var(--fg-dim); }
+.foot__credit a { color: var(--fg-dim); transition: color 0.25s; }
+.foot__credit a:hover { color: var(--fg); text-decoration: underline; }

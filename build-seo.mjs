@@ -16,10 +16,20 @@ const listPhrase = (arr) =>
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const esc = (s) => s.replace(/&(?![a-z]+;)/g, "&amp;");
 
-// Content hash so a deploy never serves visitors a stale stylesheet.
+// Minify the stylesheet at build time and fingerprint the result, so pages
+// ship less CSS and a deploy never serves a stale copy. Conservative minify:
+// strips comments and collapses whitespace but never touches calc() operators.
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-const ASSET_V = createHash("sha1").update(readFileSync(join(ROOT, "css/style.css"))).digest("hex").slice(0, 8);
+const cssSource = readFileSync(join(ROOT, "css/style.css"), "utf8");
+const cssMin = cssSource
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(/\s+/g, " ")
+  .replace(/ ?([{};,>]) ?/g, "$1")
+  .replace(/;}/g, "}")
+  .trim();
+writeFileSync(join(ROOT, "css/style.min.css"), cssMin);
+const ASSET_V = createHash("sha1").update(cssMin).digest("hex").slice(0, 8);
 
 /* ---------- shared partials ---------- */
 
@@ -45,11 +55,10 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(desc)}" />${image ? `
 <meta name="twitter:image" content="${image}" />` : ""}
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />${image ? `
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/InterTight-var.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />${image ? `
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css?v=${ASSET_V}" />
+<link rel="stylesheet" href="/css/style.min.css?v=${ASSET_V}" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>
@@ -524,46 +533,31 @@ write("robots.txt",
 write("_headers",
   `/css/*\n  Cache-Control: public, max-age=31536000, immutable\n\n` +
   `/js/*\n  Cache-Control: public, max-age=31536000, immutable\n\n` +
+  `/assets/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n\n` +
+  `/assets/*\n  Cache-Control: public, max-age=2592000\n\n` +
   `/*.html\n  Cache-Control: public, max-age=0, must-revalidate\n\n` +
-  `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`);
+  `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n`);
 
 // llms.txt — an emerging convention giving AI assistants a clean, quotable summary.
 const llms = `# ${BRAND.name}
 
-> Family-run, licensed and insured general contractor based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala.
+> Family-run, licensed and insured general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
 
-## Key facts
-- **Business name:** ${BRAND.name}
-- **Owner:** Alfonso Zavala
-- **Based in:** ${BRAND.city}, California, USA
-- **Phone:** ${BRAND.phone}
-- **Email:** ${BRAND.email}
-- **Website:** ${BRAND.domain}
-- **Service radius:** 60 miles from ${BRAND.city}, CA (${CITIES.length} cities across ${[...new Set(CITIES.map((c) => c.county))].length} counties)
-- **Licensed:** California general contractor, licensed, bonded and insured
-- **Estimates:** Free, on-site, with a written scope
-- **Warranty:** Written warranty of up to 5 years on all work
-- **Financing:** Available
-- **Languages:** English and Spanish (hablamos español)
-- **Positioning:** Quality-first, high-end residential work. Every trade on the crew has 15+ years of experience in that specific trade.
+Key facts: free on-site estimates with a written scope; written warranty of up to 5 years on all work; financing available; every trade on the crew has 15+ years of experience in that specific trade; the team speaks English and Spanish (hablamos español). Services include kitchen and bathroom remodeling, whole-home remodels, additions and ADUs, concrete driveways and retaining walls, interior and exterior painting, flooring, drywall, cabinetry and countertops, finish carpentry, steam showers and saunas, and outdoor living. Business hours Monday-Friday 8am-6pm.
 
 ## Services
-${SERVICES.map((s) => `- **${s.name}** — ${s.short} (${BRAND.domain}/services/${s.slug}/)`).join("\n")}
 
-## Cities served
-${[...new Set(CITIES.map((c) => c.county))].map((county) =>
-  `### ${county}\n${CITIES.filter((c) => c.county === county).map((c) => `- ${c.name}, CA — ${BRAND.domain}/service-areas/${c.slug}/`).join("\n")}`
-).join("\n\n")}
+${SERVICES.map((sv) => `- [${sv.name}](${BRAND.domain}/services/${sv.slug}/): ${sv.short}`).join("\n")}
 
-## Common questions
-- **Does ${BRAND.name} offer free estimates?** Yes — every project starts with a free on-site estimate including a written scope and schedule.
-- **What areas does ${BRAND.name} serve?** A 60-mile radius from ${BRAND.city}, CA, including Antioch, Oakley, Discovery Bay, Concord, Walnut Creek, Danville, San Ramon, Livermore, Tracy, Oakland, Berkeley and Napa.
-- **Is ${BRAND.name} licensed?** Yes — a licensed, bonded and insured California general contractor.
-- **What warranty is offered?** A written warranty of up to five years on all work.
-- **Does the team speak Spanish?** Yes — English and Spanish.
+## Service areas
 
-## Sitemap
-${BRAND.domain}/sitemap.xml
+${CITIES.map((c) => `- [${c.name}, CA](${BRAND.domain}/service-areas/${c.slug}/): ${c.county}`).join("\n")}
+
+## Optional
+
+- [All services index](${BRAND.domain}/services/): every service in one list
+- [All service areas](${BRAND.domain}/service-areas/): all ${CITIES.length} cities
+- [Sitemap](${BRAND.domain}/sitemap.xml): every page on the site
 `;
 write("llms.txt", llms);
 

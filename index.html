@@ -24,11 +24,9 @@
   <meta name="twitter:title" content="AZ Elevated Builders — East Bay Remodeling &amp; Construction" />
   <meta name="twitter:description" content="Family-run, CA-licensed general contractor in Brentwood. Free estimates, warranties up to 5 years. Hablamos español." />
   <meta name="twitter:image" content="https://azelevatedbuilders.com/assets/projects/walnut-creek-exterior__after-wide-1200.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css?v=18031c82" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/InterTight-var.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />
+  <link rel="stylesheet" href="/css/style.min.css?v=60af3fb2" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
   <script type="application/ld+json">
   {
@@ -122,7 +120,7 @@
       <a href="/service-areas/">Areas</a>
     </nav>
     <div class="bar__actions">
-      <a class="bar__phone" href="tel:+19258123150" data-cta="nav-call">
+      <a class="bar__phone" href="tel:+19258123150" data-cta="nav-call" aria-label="Call AZ Elevated Builders at (925) 812-3150">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>
         <span>(925) 812-3150</span>
       </a>
@@ -163,10 +161,10 @@
     <!-- ============ OPENING — full bleed ============ -->
     <section class="open">
       <div class="open__bg" data-parallax="0.10">
-        <img src="/assets/projects/walnut-creek-exterior__after-wide-1600.jpg"
-             srcset="/assets/projects/walnut-creek-exterior__after-wide-800.jpg 800w,
-                     /assets/projects/walnut-creek-exterior__after-wide-1200.jpg 1200w,
-                     /assets/projects/walnut-creek-exterior__after-wide-1600.jpg 1600w"
+        <img src="/assets/projects/walnut-creek-exterior__after-wide-1600.webp"
+             srcset="/assets/projects/walnut-creek-exterior__after-wide-800.webp 800w,
+                     /assets/projects/walnut-creek-exterior__after-wide-1200.webp 1200w,
+                     /assets/projects/walnut-creek-exterior__after-wide-1600.webp 1600w"
              sizes="100vw" width="1600" height="1067"
              fetchpriority="high" decoding="async"
              alt="Completed exterior remodel with new concrete walkway and retaining wall in Walnut Creek, California">
@@ -220,25 +218,25 @@
         <div class="case__strip">
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/walnut-creek-exterior__before-bare-yard-800.jpg"
+                 srcset="/assets/projects/walnut-creek-exterior__before-bare-yard-480.webp 480w, /assets/projects/walnut-creek-exterior__before-bare-yard-800.webp 800w, /assets/projects/walnut-creek-exterior__before-bare-yard-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__before-bare-yard-800.webp"
                  alt="Bare graded front yard before construction in Walnut Creek">
             <figcaption><span class="tag tag--before">Before</span> Bare lot, no drainage</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/walnut-creek-exterior__crew-pour-800.jpg"
+                 srcset="/assets/projects/walnut-creek-exterior__crew-pour-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-pour-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-pour-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-pour-800.webp"
                  alt="AZ Elevated Builders crew placing concrete on site">
             <figcaption><span class="tag">During</span> Forming and pouring</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/walnut-creek-exterior__finishing-slab-800.jpg"
+                 srcset="/assets/projects/walnut-creek-exterior__finishing-slab-480.webp 480w, /assets/projects/walnut-creek-exterior__finishing-slab-800.webp 800w, /assets/projects/walnut-creek-exterior__finishing-slab-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__finishing-slab-800.webp"
                  alt="Finishing fresh concrete with a trowel">
             <figcaption><span class="tag">During</span> Hand-finishing the slab</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.jpg"
+                 srcset="/assets/projects/walnut-creek-exterior__after-retaining-wall-480.webp 480w, /assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp 800w, /assets/projects/walnut-creek-exterior__after-retaining-wall-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp"
                  alt="Completed retaining wall, railing and concrete walkway">
             <figcaption><span class="tag tag--after">After</span> Wall, railing, walkway</figcaption>
           </figure>
@@ -254,25 +252,25 @@
         <div class="case__strip">
           <figure class="case__shot case__shot--wide r-clip">
             <img loading="lazy" decoding="async" width="1200" height="1800"
-                 src="/assets/projects/oakland-kitchen-bath__kitchen-wide-1200.jpg"
+                 src="/assets/projects/oakland-kitchen-bath__kitchen-wide-1200.webp"
                  alt="Remodeled white kitchen with island, brass fixtures and wood floors in Oakland">
             <figcaption>Kitchen — shaker cabinetry, quartz, brass</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.jpg"
+                 srcset="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-480.webp 480w, /assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.webp 800w, /assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.webp"
                  alt="Farmhouse sink under a window with brass tap">
             <figcaption>Farmhouse sink &amp; window run</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.jpg"
+                 srcset="/assets/projects/oakland-kitchen-bath__bath-green-wide-480.webp 480w, /assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp 800w, /assets/projects/oakland-kitchen-bath__bath-green-wide-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp"
                  alt="Bathroom with green zellige tile, brass shower fixtures and glass enclosure">
             <figcaption>Green zellige guest bath</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/oakland-kitchen-bath__bath-terracotta-800.jpg"
+                 srcset="/assets/projects/oakland-kitchen-bath__bath-terracotta-480.webp 480w, /assets/projects/oakland-kitchen-bath__bath-terracotta-800.webp 800w, /assets/projects/oakland-kitchen-bath__bath-terracotta-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__bath-terracotta-800.webp"
                  alt="Bathroom with terracotta zellige tile and brass fixtures">
             <figcaption>Terracotta zellige bath</figcaption>
           </figure>
@@ -288,25 +286,25 @@
         <div class="case__strip">
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/lafayette-primary-bath__quartzite-shower-800.jpg"
+                 srcset="/assets/projects/lafayette-primary-bath__quartzite-shower-480.webp 480w, /assets/projects/lafayette-primary-bath__quartzite-shower-800.webp 800w, /assets/projects/lafayette-primary-bath__quartzite-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__quartzite-shower-800.webp"
                  alt="Walk-in shower clad in book-matched quartzite with bench seat">
             <figcaption>Book-matched quartzite shower</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="533"
-                 src="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.jpg"
+                 srcset="/assets/projects/lafayette-primary-bath__wide-vanity-shower-480.webp 480w, /assets/projects/lafayette-primary-bath__wide-vanity-shower-800.webp 800w, /assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.webp"
                  alt="Primary bathroom with walnut vanity and glass shower enclosure">
             <figcaption>Walnut vanity, double basin</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.jpg"
+                 srcset="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-480.webp 480w, /assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.webp 800w, /assets/projects/lafayette-primary-bath__vanity-backlit-mirror-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.webp"
                  alt="Backlit mirror above a walnut vanity">
             <figcaption>Backlit mirror &amp; makeup station</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 src="/assets/projects/pittsburg-bath__onyx-shower-800.jpg"
+                 srcset="/assets/projects/pittsburg-bath__onyx-shower-480.webp 480w, /assets/projects/pittsburg-bath__onyx-shower-800.webp 800w, /assets/projects/pittsburg-bath__onyx-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/pittsburg-bath__onyx-shower-800.webp"
                  alt="Shower clad in dark onyx-look porcelain with bronze fixtures">
             <figcaption>Pittsburg · onyx-look shower</figcaption>
           </figure>
@@ -319,7 +317,7 @@
     <section class="band">
       <div class="band__bg" data-parallax="0.18">
         <img loading="lazy" decoding="async"
-             src="/assets/projects/walnut-creek-exterior__aerial-site-1600.jpg"
+             src="/assets/projects/walnut-creek-exterior__aerial-site-1600.webp"
              alt="Aerial view of an AZ Elevated Builders concrete pour in progress">
       </div>
       <div class="band__inner">
@@ -336,15 +334,15 @@
         <p class="sec-head__note">Plumbing, electrical, drywall, tile, cabinetry and paint are all in-house — so your job never waits on someone else's calendar.</p>
       </div>
       <ul class="index__list">
-          <li><a class="index__row" href="/services/kitchen-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-wide-800.jpg"><span class="index__num">01</span><span class="index__name">Kitchen Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/bathroom-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.jpg"><span class="index__num">02</span><span class="index__name">Bathroom Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/whole-home-remodeling/" data-preview="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.jpg"><span class="index__num">03</span><span class="index__name">Whole-Home Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/additions-adus/" data-preview="/assets/projects/walnut-creek-exterior__after-front-800.jpg"><span class="index__num">04</span><span class="index__name">Additions &amp; ADUs</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/concrete-driveways/" data-preview="/assets/projects/walnut-creek-exterior__finishing-slab-800.jpg"><span class="index__num">05</span><span class="index__name">Concrete &amp; Driveways</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/painting/" data-preview="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.jpg"><span class="index__num">06</span><span class="index__name">Interior &amp; Exterior Paint</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/flooring/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-run-800.jpg"><span class="index__num">07</span><span class="index__name">Flooring</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/cabinetry-countertops/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-island-800.jpg"><span class="index__num">08</span><span class="index__name">Cabinetry &amp; Countertops</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/" data-preview="/assets/projects/walnut-creek-exterior__crew-pour-800.jpg"><span class="index__num">09</span><span class="index__name">Every other trade</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/kitchen-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-wide-800.webp"><span class="index__num">01</span><span class="index__name">Kitchen Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/bathroom-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp"><span class="index__num">02</span><span class="index__name">Bathroom Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/whole-home-remodeling/" data-preview="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.webp"><span class="index__num">03</span><span class="index__name">Whole-Home Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/additions-adus/" data-preview="/assets/projects/walnut-creek-exterior__after-front-800.webp"><span class="index__num">04</span><span class="index__name">Additions &amp; ADUs</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/concrete-driveways/" data-preview="/assets/projects/walnut-creek-exterior__finishing-slab-800.webp"><span class="index__num">05</span><span class="index__name">Concrete &amp; Driveways</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/painting/" data-preview="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp"><span class="index__num">06</span><span class="index__name">Interior &amp; Exterior Paint</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/flooring/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-run-800.webp"><span class="index__num">07</span><span class="index__name">Flooring</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/cabinetry-countertops/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-island-800.webp"><span class="index__num">08</span><span class="index__name">Cabinetry &amp; Countertops</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/" data-preview="/assets/projects/walnut-creek-exterior__crew-pour-800.webp"><span class="index__num">09</span><span class="index__name">Every other trade</span><span class="index__go" aria-hidden="true">↗</span></a></li>
       </ul>
       <div class="index__preview" id="idxPreview" aria-hidden="true"><img alt="" decoding="async"></div>
     </section>
@@ -353,10 +351,10 @@
     <section class="crew" id="crew">
       <div class="crew__art r-clip">
         <img loading="lazy" decoding="async" width="800" height="1200"
-             src="/assets/projects/walnut-creek-exterior__crew-grading-800.jpg"
+             srcset="/assets/projects/walnut-creek-exterior__crew-grading-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-grading-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-grading-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-grading-800.webp"
              alt="AZ Elevated Builders crew member grading a site by hand">
         <img loading="lazy" decoding="async" width="800" height="1200"
-             src="/assets/projects/walnut-creek-exterior__crew-portrait-800.jpg"
+             srcset="/assets/projects/walnut-creek-exterior__crew-portrait-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-portrait-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-portrait-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-portrait-800.webp"
              alt="AZ Elevated Builders crew member on a job site in Walnut Creek">
       </div>
       <div class="crew__copy r-up">

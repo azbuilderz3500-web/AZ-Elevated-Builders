@@ -1345,7 +1345,12 @@ body.has-actionbar { padding-bottom: 0; }
 /* --- Case studies: cinematic hover + sticky heading --- */
 .case__head { position: sticky; top: 74px; z-index: 2;
   background: linear-gradient(180deg, var(--bg) 62%, transparent);
-  padding-top: 0.6rem; padding-bottom: 0.9rem; }
+  padding-top: 0.6rem; padding-bottom: 0.9rem;
+  /* Track the nav: it hides on scroll-down, and a fixed 74px offset would
+     leave an open band above this title with content scrolling through it.
+     Same duration/ease as .bar so the two move together. */
+  transition: top 0.45s var(--ease); }
+body.nav-hidden .case__head { top: 0; }
 .case__shot { overflow: hidden; border-radius: 12px; }
 .case__shot img { transition: transform 1.1s var(--ease), filter .6s ease; }
 .case__shot:hover img { transform: scale(1.07); filter: brightness(1.08); }

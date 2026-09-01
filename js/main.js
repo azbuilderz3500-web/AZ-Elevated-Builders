@@ -60,8 +60,12 @@
     // Never hide the nav while the menu is open — its close button lives there,
     // and hiding it stranded the user with no way out.
     const menuOpen = menu && menu.classList.contains("is-open");
-    if (!menuOpen && y > 140 && y > lastY) nav.classList.add("is-hidden");
-    else nav.classList.remove("is-hidden");
+    const hide = !menuOpen && y > 140 && y > lastY;
+    nav.classList.toggle("is-hidden", hide);
+    // Body flag lets sticky elements (case-study titles) follow the nav:
+    // when the bar slides away, they slide up to top:0 so no gap opens
+    // above them where content scrolls through.
+    document.body.classList.toggle("nav-hidden", hide);
     lastY = y;
     if (fab) fab.classList.toggle("is-in", y > window.innerHeight * 0.6);
   };

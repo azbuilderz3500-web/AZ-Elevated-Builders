@@ -141,19 +141,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 .nav__brand { display: flex; align-items: center; gap: 0.65rem; }
-/* Brand logo — the approved lockup artwork, wordmark converted to outlines so
-   it never depends on a webfont loading. Below 420px the kit says drop the
-   wordmark rather than take it under its 108px minimum, so the mark stands alone. */
-.brandlogo { width: 120px; height: 40px; display: block; flex-shrink: 0; }
-.brandlogo--mark { display: none; width: 34.8px; height: 28px; flex-shrink: 0; }
-/* The lockup still clears its 108px minimum on a 320px phone, so it only gives
-   way to the mark on genuinely tiny screens. Either way the link keeps a 44px
-   tap target. */
-@media (max-width: 359px) {
-  .brandlogo { display: none; }
-  .brandlogo--mark { display: block; }
-}
-.bar__brand, .nav__brand { min-width: 44px; }
+/* Brand logo — composed from the kit's separate mark and wordmark files so each
+   can be sized on its own. The mark keeps its lockup size; the wordmark sits a
+   little larger than the packaged lockup would place it, which brings its caps
+   up to the nav links beside it. Both are outlined artwork, so no webfont is
+   involved. Below 360px the wordmark drops and the mark stands alone, as the
+   kit prescribes, and the link keeps a 44px tap target either way. */
+.bar__brand, .nav__brand { gap: 0.5rem; min-width: 44px; }
+.brandmark { width: 49.65px; height: 40px; display: block; flex-shrink: 0; }
+.brandword { width: 79.71px; height: 18px; display: block; flex-shrink: 0; }
+@media (max-width: 359px) { .brandword { display: none; } }
 .nav__links { display: flex; gap: clamp(1rem, 2.6vw, 2.4rem); }
 .nav__links a {
   font-size: 0.75rem; letter-spacing: 0.24em; text-transform: uppercase;

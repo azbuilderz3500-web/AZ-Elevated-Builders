@@ -102,8 +102,8 @@ const nav = `
 <header class="nav">
   <div class="nav__pill">
     <a href="/" class="nav__brand" aria-label="AZ Elevated Builders — home">
-      <img class="brandlogo" src="/assets/brand/lockup-white.svg" alt="" width="232" height="77" />
-      <img class="brandlogo--mark" src="/assets/brand/mark-white.svg" alt="" width="96" height="77" />
+      <img class="brandmark" src="/assets/brand/mark-white.svg" alt="" width="96" height="77" />
+      <img class="brandword" src="/assets/brand/wordmark-white.svg" alt="" width="132" height="30" />
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="/#work">Work</a>

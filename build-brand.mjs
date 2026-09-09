@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 // AZ Elevated Builders — brand asset generator.
+//
+// SUPERSEDED (Sep 2026). The client-approved final identity is the vector kit
+// in assets/brand/final/ (one ink: black or white, interlocked A/Z mark with
+// weave slits). This generator still emits the EARLIER navy/cream/brass
+// geometry, so running it would overwrite assets/brand/ with artwork the
+// client no longer uses. Port the final geometry here before running it again.
+//
 // Emits every SVG variant + lockup from one geometry definition.
 // PNG/ICO rasterisation is handled by build-brand-raster.py (PIL).
 // Run: node build-brand.mjs

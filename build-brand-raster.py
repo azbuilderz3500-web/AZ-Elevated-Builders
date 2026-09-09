@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """AZ Elevated Builders — raster brand exports.
 
+SUPERSEDED (Sep 2026): the approved final identity ships as vectors in
+assets/brand/final/. This script still draws the earlier navy/cream/brass
+geometry and would overwrite assets/brand/ with superseded artwork.
+Port the final geometry before running it again.
+
 Draws the mark from the same geometry as build-brand.mjs, supersampled 4x and
 downsampled, so every PNG is crisp at its own size rather than a blurry
 resize of one master. Emits web PNGs, print-resolution PNGs (300dpi), app

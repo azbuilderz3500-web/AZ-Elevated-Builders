@@ -59,7 +59,9 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />${image ? `
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
 <link rel="stylesheet" href="/css/style.min.css?v=${ASSET_V}" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%23F5EFE6' stroke-width='2.6'><rect width='48' height='48' fill='%2318203A'/><path d='M7 36 L24 11 L41 36'/><path d='M17 21 L32 21'/><path d='M32 21 L16 36'/><path d='M16 36 L32 36'/></svg>" />
+<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>
 <body class="seo-page">`;
@@ -100,9 +102,8 @@ const nav = `
 <header class="nav">
   <div class="nav__pill">
     <a href="/" class="nav__brand" aria-label="AZ Elevated Builders — home">
-      <svg class="nav__mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M7 36 L24 11 L41 36" /><path d="M17 21 L32 21" />
-        <path d="M32 21 L16 36" /><path d="M16 36 L32 36" />
+      <svg class="nav__mark" viewBox="0 0 96 77.34" fill="currentColor" aria-hidden="true">
+        <path d="M14.05 26.9L52.74 26.9L54.35 30.14L16.52 30.14ZM62.24 26.9L78.11 26.9L73.96 30.14L63.91 30.14ZM24.35 63.47L71.61 63.47L73.42 67.1L19.37 67.1ZM74.02 63.47L93.44 63.47L96 67.1L75.83 67.1ZM67.34 30.14L74.18 30.14L31.75 63.47L24.59 63.47Z"/><path d="M46.66 0L0 77.34L5.74 77.34L46.55 8.38ZM46.66 0L46.55 8.38L59.33 34.01L62.76 31.34ZM62.98 41.33L80.94 77.34L86.4 77.34L66.48 38.58Z"/>
       </svg>
       <span class="nav__brandname">AZ&nbsp;Elevated<br>Builders</span>
     </a>

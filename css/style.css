@@ -141,7 +141,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 .nav__brand { display: flex; align-items: center; gap: 0.65rem; }
-.nav__mark { width: 30px; height: 30px; }
+.nav__mark { width: 34.8px; height: 28px; flex-shrink: 0; }
 .nav__brandname {
   font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
   text-transform: uppercase; line-height: 1.25;
@@ -1038,7 +1038,7 @@ body.has-actionbar { padding-bottom: 0; }
 }
 .bar.is-hidden { transform: translateY(-110%); }
 .bar__brand { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
-.bar__brand svg { width: 30px; height: 30px; flex-shrink: 0; }
+.bar__brand svg { width: 34.8px; height: 28px; flex-shrink: 0; }
 .bar__brand span {
   font-family: var(--font-display); font-weight: 600;
   font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.2;

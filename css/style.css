@@ -141,11 +141,19 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 .nav__brand { display: flex; align-items: center; gap: 0.65rem; }
-.nav__mark { width: 34.8px; height: 28px; flex-shrink: 0; }
-.nav__brandname {
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
-  text-transform: uppercase; line-height: 1.25;
+/* Brand logo — the approved lockup artwork, wordmark converted to outlines so
+   it never depends on a webfont loading. Below 420px the kit says drop the
+   wordmark rather than take it under its 108px minimum, so the mark stands alone. */
+.brandlogo { width: 120px; height: 40px; display: block; flex-shrink: 0; }
+.brandlogo--mark { display: none; width: 34.8px; height: 28px; flex-shrink: 0; }
+/* The lockup still clears its 108px minimum on a 320px phone, so it only gives
+   way to the mark on genuinely tiny screens. Either way the link keeps a 44px
+   tap target. */
+@media (max-width: 359px) {
+  .brandlogo { display: none; }
+  .brandlogo--mark { display: block; }
 }
+.bar__brand, .nav__brand { min-width: 44px; }
 .nav__links { display: flex; gap: clamp(1rem, 2.6vw, 2.4rem); }
 .nav__links a {
   font-size: 0.75rem; letter-spacing: 0.24em; text-transform: uppercase;
@@ -1038,11 +1046,6 @@ body.has-actionbar { padding-bottom: 0; }
 }
 .bar.is-hidden { transform: translateY(-110%); }
 .bar__brand { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
-.bar__brand svg { width: 34.8px; height: 28px; flex-shrink: 0; }
-.bar__brand span {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.2;
-}
 .bar__nav { display: flex; gap: 1.9rem; margin-left: auto; }
 .bar__nav a {
   font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase;

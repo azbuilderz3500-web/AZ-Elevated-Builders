@@ -102,10 +102,8 @@ const nav = `
 <header class="nav">
   <div class="nav__pill">
     <a href="/" class="nav__brand" aria-label="AZ Elevated Builders — home">
-      <svg class="nav__mark" viewBox="0 0 96 77.34" fill="currentColor" aria-hidden="true">
-        <path d="M14.05 26.9L52.74 26.9L54.35 30.14L16.52 30.14ZM62.24 26.9L78.11 26.9L73.96 30.14L63.91 30.14ZM24.35 63.47L71.61 63.47L73.42 67.1L19.37 67.1ZM74.02 63.47L93.44 63.47L96 67.1L75.83 67.1ZM67.34 30.14L74.18 30.14L31.75 63.47L24.59 63.47Z"/><path d="M46.66 0L0 77.34L5.74 77.34L46.55 8.38ZM46.66 0L46.55 8.38L59.33 34.01L62.76 31.34ZM62.98 41.33L80.94 77.34L86.4 77.34L66.48 38.58Z"/>
-      </svg>
-      <span class="nav__brandname">AZ&nbsp;Elevated<br>Builders</span>
+      <img class="brandlogo" src="/assets/brand/lockup-white.svg" alt="" width="232" height="77" />
+      <img class="brandlogo--mark" src="/assets/brand/mark-white.svg" alt="" width="96" height="77" />
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="/#work">Work</a>
@@ -523,11 +521,11 @@ const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude
   "Applebot", "Applebot-Extended", "CCBot", "Bingbot", "DuckAssistBot", "cohere-ai", "meta-externalagent"];
 // Only the client-facing pitch decks. The privacy policy must stay crawlable —
 // it is a legal document, and a robots block would also hide its noindex tag.
-const DISALLOW = ["/brand/"];
+const DISALLOW = [];
 write("robots.txt",
   `# ${BRAND.name} — ${BRAND.city}, ${BRAND.state}\nUser-agent: *\nAllow: /\n` +
   DISALLOW.map((d) => `Disallow: ${d}`).join("\n") + `\n\n` +
-  `# Answer engines / AI assistants — allowed, except client-facing material\n` +
+  `# Answer engines / AI assistants — allowed\n` +
   AI_BOTS.map((b) => `User-agent: ${b}\nAllow: /\n` + DISALLOW.map((d) => `Disallow: ${d}`).join("\n")).join("\n\n") +
   `\n\nSitemap: ${BRAND.domain}/sitemap.xml\n`);
 

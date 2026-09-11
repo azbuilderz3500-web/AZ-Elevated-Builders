@@ -33,12 +33,12 @@
     if (lenis) { lenis.scrollTo(target, { offset: 0 }); return; }
     // Without Lenis, target may be the number 0 (scroll-to-top) — which has no
     // scrollIntoView. Handle both shapes.
-    if (typeof target === "number") window.scrollTo({ top: target, behavior: "smooth" });
-    else if (target && target.scrollIntoView) target.scrollIntoView({ behavior: "smooth" });
+    if (typeof target === "number") window.scrollTo({ top: target, behavior: prefersReduced ? "instant" : "smooth" });
+    else if (target && target.scrollIntoView) target.scrollIntoView({ behavior: prefersReduced ? "instant" : "smooth" });
   };
 
   /* ---------- Anchor links ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  document.querySelectorAll('a[href^="#"]:not(#heroQuote):not(#barQuote)').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
       // A bare "#" is not a valid selector — querySelector would throw and the
@@ -49,6 +49,7 @@
       e.preventDefault();
       closeMenu();
       scrollTo(id === "#top" ? 0 : el);
+      if (id !== "#top") { el.setAttribute("tabindex", "-1"); el.focus({ preventScroll: true }); }
     });
   });
 
@@ -76,6 +77,9 @@
   const menuBtn = document.getElementById("menuBtn");
   const openMenu = () => {
     menu.classList.add("is-open");
+    nav.classList.remove("is-hidden");
+    document.body.style.overflow = "hidden";
+    if (lenis) lenis.stop();
     menu.setAttribute("aria-hidden", "false");
     menu.removeAttribute("inert");
     menuBtn.setAttribute("aria-expanded", "true");
@@ -92,8 +96,29 @@
     menu.setAttribute("inert", "");
     menuBtn.setAttribute("aria-expanded", "false");
     menuBtn.setAttribute("aria-label", "Open menu");
-    if (wasOpen) menuBtn.focus();
+    if (wasOpen) {
+      document.body.style.overflow = "";
+      if (lenis) lenis.start();
+      menuBtn.focus();
+    }
   };
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab" || !menu.classList.contains("is-open")) return;
+    const items = [menuBtn, ...menu.querySelectorAll('a[href], button')];
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !items.includes(document.activeElement))) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !items.includes(document.activeElement))) {
+      e.preventDefault(); first.focus();
+    }
+  });
+  // A desktop breakpoint hides the mobile close button. Close its overlay too.
+  window.matchMedia("(min-width: 901px)").addEventListener("change", (event) => {
+    if (event.matches && menu.classList.contains("is-open")) {
+      closeMenu();
+      document.querySelector(".bar__brand").focus();
+    }
+  });
   menu.setAttribute("inert", "");   // starts closed
   menuBtn.addEventListener("click", () =>
     menu.classList.contains("is-open") ? closeMenu() : openMenu()
@@ -179,7 +204,7 @@
       const dur = 1100, t0 = performance.now();
       setTimeout(() => { el.textContent = final; }, dur + 400);
       const step = (t) => {
-        const k = Math.min(1, (t - t0) / dur);
+        const k = Math.max(0, Math.min(1, (t - t0) / dur));
         const eased = 1 - Math.pow(1 - k, 3);
         el.textContent = (target * eased).toFixed(decimals) + suffix;
         if (k < 1) requestAnimationFrame(step);
@@ -249,6 +274,7 @@
     if (!m) return;
     lastFocused = document.activeElement;
     m.classList.add("is-open");
+    m.removeAttribute("inert");
     m.setAttribute("aria-hidden", "false");
     m.setAttribute("aria-modal", "true");
     document.body.style.overflow = "hidden";      // stop the page scrolling behind
@@ -260,6 +286,7 @@
   const closeModals = () => {
     if (!contactModal) return;
     contactModal.classList.remove("is-open");
+    contactModal.setAttribute("inert", "");
     contactModal.setAttribute("aria-hidden", "true");
     contactModal.removeAttribute("aria-modal");
     document.body.style.overflow = "";
@@ -295,96 +322,4 @@
     if (el) el.addEventListener("click", openEstimate);
   });
 
-  /* ---------- Estimate form: validate, show errors, confirm ---------- */
-  const form = document.getElementById("estimateForm");
-  let submitting = false;   // guards the keyboard "send" path too, not just the button
-  if (form) {
-    const showError = (input, msg) => {
-      input.classList.add("is-error");
-      input.setAttribute("aria-invalid", "true");
-      let e = input.nextElementSibling;
-      if (!e || !e.classList.contains("field-error")) {
-        e = document.createElement("p");
-        e.className = "field-error";
-        input.insertAdjacentElement("afterend", e);
-      }
-      e.textContent = msg;
-    };
-    const clearError = (input) => {
-      input.classList.remove("is-error");
-      input.removeAttribute("aria-invalid");
-      const e = input.nextElementSibling;
-      if (e && e.classList.contains("field-error")) e.remove();
-    };
-    form.querySelectorAll("input").forEach((i) =>
-      i.addEventListener("input", () => clearError(i))
-    );
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = form.querySelector('input[name="name"]');
-      const phone = form.querySelector('input[name="phone"]');
-      let ok = true;
-
-      if (!name.value.trim()) { showError(name, "Please enter your name."); ok = false; }
-      // accept 10+ digits in any common US format
-      const digits = phone.value.replace(/\D/g, "");
-      if (!digits) { showError(phone, "Please enter a phone number."); ok = false; }
-      else if (digits.length < 10) { showError(phone, "That number looks too short — 10 digits please."); ok = false; }
-
-      if (!ok) { form.querySelector(".is-error").focus(); return; }
-      if (submitting) return;
-      submitting = true;
-
-      const btn = form.querySelector("button[type=submit]");
-      btn.disabled = true;
-      btn.setAttribute("aria-busy", "true");
-      btn.textContent = "Sending\u2026";
-
-      const finish = (html) => {
-        form.innerHTML = '<p class="modal__thanks" role="status" tabindex="-1">' + html + "</p>";
-        const msg = form.querySelector(".modal__thanks");
-        if (msg) msg.focus();
-      };
-      const CALL_BTN =
-        '<a class="btn btn--solid" href="tel:+19258123150" data-cta="form-fallback-call" ' +
-        'style="justify-content:center">Call (925) 812-3150</a>';
-
-      // Set window.AZEB_LEAD_ENDPOINT (or edit here) to the Make webhook URL.
-      const ENDPOINT = window.AZEB_LEAD_ENDPOINT || "";
-      if (!ENDPOINT) {
-        setTimeout(() => finish(
-          "<strong>Almost there \u2014 our online form isn't live yet.</strong><br>" +
-          "Call or text us and we'll pick it up today:<br><br>" + CALL_BTN), 400);
-        return;
-      }
-      fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.value.trim(),
-          phone: phone.value.trim(),
-          details: (form.querySelector("[name=details]") || {}).value || "",
-          page: location.pathname, url: location.href,
-          source: "website-modal", submittedAt: new Date().toISOString(),
-        }),
-      })
-        .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status);
-          finish("<strong>Got it \u2014 thanks.</strong><br>We'll call you back within one business day.<br><br>" +
-                 'Need us sooner? <a href="tel:+19258123150" style="text-decoration:underline">Call (925) 812-3150</a>'); })
-        .catch(() => finish("<strong>That didn't send.</strong><br>Please call or text us directly:<br><br>" + CALL_BTN));
-    });
-  }
-
-  /* ---------- Cookies ---------- */
-  const cookies = document.getElementById("cookies");
-  if (cookies) {
-    if (store.get("azeb-consent")) cookies.classList.add("is-hidden");
-    cookies.querySelectorAll("[data-consent]").forEach((btn) =>
-      btn.addEventListener("click", () => {
-        store.set("azeb-consent", btn.dataset.consent);
-        cookies.classList.add("is-hidden");
-      })
-    );
-  }
 })();

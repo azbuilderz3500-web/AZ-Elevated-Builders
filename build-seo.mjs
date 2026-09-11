@@ -4,9 +4,10 @@
 //            /service-areas/<city>/<service>/  sitemap.xml  robots.txt
 // Run: node build-seo.mjs
 
-import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { drivewayBody } from "./build-driveway.mjs";
 import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES } from "./data/site-data.mjs";
 
 // Join a list into readable prose: "a, b and c"
@@ -14,7 +15,7 @@ const listPhrase = (arr) =>
   arr.length <= 1 ? (arr[0] || "") : arr.slice(0, -1).join(", ") + " and " + arr[arr.length - 1];
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const esc = (s) => s.replace(/&(?![a-z]+;)/g, "&amp;");
+const esc = (s) => String(s).replace(/&(?![a-z]+;)/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 // Minify the stylesheet at build time and fingerprint the result, so pages
 // ship less CSS and a deploy never serves a stale copy. Conservative minify:
@@ -33,7 +34,7 @@ const ASSET_V = createHash("sha1").update(cssMin).digest("hex").slice(0, 8);
 
 /* ---------- shared partials ---------- */
 
-const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
+const head = ({ title, desc, path, jsonld, image, robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1", extraStyles = "" }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -41,7 +42,7 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}" />
 <link rel="canonical" href="${BRAND.domain}${path}" />
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="robots" content="${robots}" />
 <meta name="geo.region" content="US-CA" />
 <meta name="geo.placename" content="${esc(BRAND.city)}, California" />
 <meta property="og:type" content="website" />
@@ -59,19 +60,23 @@ const head = ({ title, desc, path, jsonld, image }) => `<!DOCTYPE html>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />${image ? `
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
 <link rel="stylesheet" href="/css/style.min.css?v=${ASSET_V}" />
+${extraStyles}
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
   <link rel="alternate icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>
-<body class="seo-page">`;
+<body class="seo-page">
+<a class="skip-link" href="#main">Skip to content</a>`;
 
 // Build a responsive candidate set from an Unsplash URL (it resizes via &w=).
 const srcsetFor = (url) => {
+  if (url.startsWith("/assets/projects/")) return [480, 800, 1200, 1600].map((w) => `${url.replace(/-\d+\.webp$/, `-${w}.webp`)} ${w}w`).join(", ");
   const base = url.replace(/[?&]w=\d+/, "");
   const join = base.includes("?") ? "&" : "?";
   return [480, 800, 1200, 1600].map((w) => `${base}${join}w=${w} ${w}w`).join(", ");
 };
+const concretePhoto = "/assets/projects/walnut-creek-exterior__after-wide-1600.webp";
 const SIZES = "(max-width: 900px) 100vw, 900px";
 
 const PHONE_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>`;
@@ -90,11 +95,14 @@ const leadForm = (context) => `
 <section class="leadform" id="estimate">
   <h2>Get a free estimate${context ? ` for your ${esc(context)}` : ""}</h2>
   <p>Two fields. We'll call you back within one business day — or skip the form and call us now.</p>
-  <form class="leadform__form" data-lead>
-    <input type="text" name="name" placeholder="Your name" required autocomplete="name" aria-label="Your name">
-    <input type="tel" name="phone" placeholder="Phone number" required autocomplete="tel" inputmode="tel" aria-label="Phone number">
-    <button type="submit" class="btn btn--solid">Request My Free Estimate</button>
+  <form class="leadform__form" data-lead data-source="website-service" method="post">
+    <label class="lead-field">Your name<input type="text" name="name" maxlength="100" placeholder="Your name" required autocomplete="name"></label>
+    <label class="lead-field">Phone number<input type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel"></label>
+    <button type="submit" class="btn btn--solid" disabled>Request My Free Estimate</button>
+    <p class="lead-privacy">By submitting, you ask ${esc(BRAND.name)} to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
+    <p class="lead-status" data-lead-status role="status" aria-live="polite" tabindex="-1"></p>
   </form>
+  <noscript><p>To request your free estimate, please call <a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a>.</p></noscript>
   <a class="leadform__call" href="tel:${BRAND.phoneHref}" data-cta="form-call">${PHONE_SVG} Or call ${esc(BRAND.phone)}</a>
 </section>`;
 
@@ -134,80 +142,18 @@ const ctaBand = (line) => `
   <a class="btn btn--outline" href="mailto:${BRAND.email}">Email Us</a>
 </section>`;
 
-const footer = `
+const renderFooter = (leadEndpoint = BRAND.leadWebhook) => `
 <div class="page-footer-pad"></div>
 <footer class="simple-footer">
   <span>© 2026 ${BRAND.name} · ${BRAND.city}, ${BRAND.state} · ${BRAND.license}</span>
   <span><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a> · <a href="mailto:${BRAND.email}">${BRAND.email}</a> · <a href="/services/">Services</a> · <a href="/service-areas/">Service Areas</a> · <a href="/privacy.html">Privacy</a> · <a href="/">Home</a></span>
   <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="noopener">To The Max Media</a></span>
 </footer>
-<script>
-(function(){
-  var f = document.querySelector('form[data-lead]');
-  if (!f) return;
-  var ENDPOINT = ${JSON.stringify(BRAND.leadWebhook || "")};
-  var sending = false;
-  function err(input, msg){
-    input.classList.add('is-error');
-    input.setAttribute('aria-invalid','true');
-    var e = input.nextElementSibling;
-    if (!e || e.className !== 'field-error') {
-      e = document.createElement('p'); e.className = 'field-error';
-      input.parentNode.insertBefore(e, input.nextSibling);
-    }
-    e.textContent = msg;
-  }
-  function clear(input){
-    input.classList.remove('is-error'); input.removeAttribute('aria-invalid');
-    var e = input.nextElementSibling;
-    if (e && e.className === 'field-error') e.parentNode.removeChild(e);
-  }
-  function done(html){
-    f.parentNode.innerHTML = '<p class="leadform__thanks" role="status" tabindex="-1">' + html + '</p>';
-    var m = document.querySelector('.leadform__thanks'); if (m) m.focus();
-  }
-  f.addEventListener('input', function(e){ if (e.target.name) clear(e.target); });
-  f.addEventListener('submit', function(e){
-    e.preventDefault();
-    var n = f.querySelector('[name=name]'), p = f.querySelector('[name=phone]'), ok = true;
-    [n,p].forEach(clear);
-    if (!n.value.trim()) { err(n, 'Please enter your name.'); ok = false; }
-    if (p.value.replace(/\\D/g,'').length < 10) { err(p, 'Please enter a 10-digit phone number.'); ok = false; }
-    if (!ok) { f.querySelector('.is-error').focus(); return; }
-    if (sending) return;
-    sending = true;
-    var b = f.querySelector('button[type=submit]');
-    b.disabled = true; b.textContent = 'Sending\\u2026';
-
-    if (!ENDPOINT) {
-      // No destination configured yet — never claim we received it.
-      done('<strong>Almost there \\u2014 our online form isn\\'t live yet.</strong><br>' +
-           'Call or text and we\\'ll pick it up today:<br><br>' +
-           '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>');
-      return;
-    }
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: n.value.trim(), phone: p.value.trim(),
-        page: location.pathname, url: location.href,
-        source: 'website', submittedAt: new Date().toISOString()
-      })
-    }).then(function(r){
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      done('<strong>Got it \\u2014 thanks.</strong><br>We\\'ll call you back within one business day.<br><br>' +
-           'Need us sooner? <a href="tel:${BRAND.phoneHref}">Call ${BRAND.phone}</a>');
-    }).catch(function(){
-      // Never lose a lead to a network error — hand them the phone.
-      done('<strong>That didn\\'t send.</strong><br>Please call or text us directly:<br><br>' +
-           '<a class="btn btn--solid" href="tel:${BRAND.phoneHref}" style="justify-content:center">Call ${BRAND.phone}</a>');
-    });
-  });
-})();
-</script>
+<script>window.AZEB_LEAD_ENDPOINT=${JSON.stringify(leadEndpoint || "")};</script>
+<script defer src="/js/leads.js?v=${createHash("sha1").update(readFileSync(join(ROOT, "js/leads.js"))).digest("hex").slice(0, 8)}"></script>
 </body>
 </html>`;
+const footer = renderFooter();
 
 const crumbs = (items) =>
   `<nav class="crumbs" aria-label="Breadcrumb">` +
@@ -264,7 +210,7 @@ const breadcrumbLd = (items) => ({
 const write = (relPath, html) => {
   const full = join(ROOT, relPath);
   mkdirSync(dirname(full), { recursive: true });
-  writeFileSync(full, html);
+  writeFileSync(full, html.replace(/[ \t]+$/gm, ""));
   return relPath;
 };
 
@@ -284,7 +230,7 @@ CITIES.forEach((city, ci) => {
     const img = imgSet[ci % imgSet.length];
     const isHome = city.slug === "brentwood";
     const opener = isHome
-      ? `Looking for ${svc.name.toLowerCase()} in ${city.name}? ${BRAND.name} is headquartered right here in ${city.name} — a family-run, CA-licensed general contractor that can be at your door this week, with every trade on the crew carrying 15+ years in that trade.`
+      ? `Looking for ${svc.name.toLowerCase()} in ${city.name}? ${BRAND.name} is headquartered right here in ${city.name} — a family-run, CA-licensed general contractor serving local homeowners, with every trade on the crew carrying 15+ years in that trade.`
       : OPENERS[(ci + si) % OPENERS.length](svc, city);
     const otherSvcs = SERVICES.filter((s) => s.slug !== svc.slug);
     const nearby = CITIES.filter((c) => c.county === city.county && c.slug !== city.slug).slice(0, 6);
@@ -319,15 +265,11 @@ CITIES.forEach((city, ci) => {
         name: title,
         url: BRAND.domain + path,
         inLanguage: "en-US",
-        speakable: {
-          "@type": "SpeakableSpecification",
-          cssSelector: [".answer-box__a", ".page-hero .lede"],
-        },
       },
     ];
 
     const html = head({ title, desc, path, jsonld, image: img }) + nav + `
-<main class="page">
+<main class="page" id="main" tabindex="-1">
   ${crumbs([
     { label: "Home", href: "/" },
     { label: "Service Areas", href: "/service-areas/" },
@@ -345,7 +287,7 @@ CITIES.forEach((city, ci) => {
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${img}" srcset="${srcsetFor(img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.imgAlt)} by AZ Elevated Builders, serving ${esc(city.name)}, California" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : svc.imgAlt)}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
@@ -395,7 +337,7 @@ CITIES.forEach((city, ci) => {
     title: cityTitle, desc: cityDesc, path: cityPath,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Service Areas", href: "/service-areas/" }, { label: city.name }])],
   }) + nav + `
-<main class="page">
+<main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Service Areas", href: "/service-areas/" }, { label: city.name }])}
   <div class="page-hero">
     <h1>Remodeling &amp; Construction<br><em>in ${esc(city.name)}, CA</em></h1>
@@ -424,14 +366,14 @@ SERVICES.forEach((svc) => {
     title, desc, path, image: svc.img,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])],
   }) + nav + `
-<main class="page">
+<main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])}
   <div class="page-hero">
     <h1>${esc(svc.name)}<br><em>East Bay &amp; Beyond</em></h1>
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.img}" srcset="${srcsetFor(svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.imgAlt)}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : svc.imgAlt)}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>
@@ -443,6 +385,10 @@ SERVICES.forEach((svc) => {
       ${CITIES.map((c) => `<a class="chip" href="/service-areas/${c.slug}/${svc.slug}/">${esc(c.name)}</a>`).join("\n      ")}
     </div>
   </div>
+  <section aria-labelledby="service-faq"><div class="prose"><h2 id="service-faq">Frequently asked questions</h2></div><div class="faq">
+    ${svc.faqs.map((f) => `<details><summary>${esc(f.q.replaceAll("{CITY}", "the East Bay"))}</summary><p>${esc(f.a.replaceAll("{CITY}", "the East Bay"))}</p></details>`).join("\n    ")}
+  </div></section>
+  ${svc.slug === "concrete-driveways" ? `<div class="prose"><h2>Replacing an existing driveway?</h2><p>See our <a href="/driveway-replacement/">concrete driveway replacement guide and estimate form</a> for demolition, preparation, finish options and what affects the cost.</p></div>` : ""}
   ${leadForm(svc.name.toLowerCase())}
   ${ctaBand(`Tell us about your ${svc.name.toLowerCase()} project.`)}
 </main>` + actionBar + footer;
@@ -460,7 +406,7 @@ const areasHtml = head({
   path: "/service-areas/",
   jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Service Areas" }])],
 }) + nav + `
-<main class="page">
+<main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Service Areas" }])}
   <div class="page-hero">
     <h1>Service<br><em>Areas</em></h1>
@@ -487,7 +433,7 @@ const servicesHtml = head({
   path: "/services/",
   jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services" }])],
 }) + nav + `
-<main class="page">
+<main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Services" }])}
   <div class="page-hero">
     <h1>Our<br><em>Services</em></h1>
@@ -504,18 +450,31 @@ const servicesHtml = head({
 urls.push("/services/");
 write("services/index.html", servicesHtml);
 
+/* ---------- focused Google Ads destination ---------- */
+const drivewayCssHash = createHash("sha1").update(readFileSync(join(ROOT, "css/driveway.css"))).digest("hex").slice(0, 8);
+const drivewayScriptHash = createHash("sha1").update(readFileSync(join(ROOT, "js/driveway-wizard.js"))).digest("hex").slice(0, 8);
+const drivewayHtml = head({
+  title: "Concrete Driveway Replacement | AZ Elevated Builders",
+  desc: `Concrete driveway replacement across the East Bay, Tri-Valley, Delta, Solano and Napa areas. Serving ${CITIES.length} communities. Request a free on-site estimate.`,
+  path: "/driveway-replacement/",
+  robots: "noindex, follow",
+  image: BRAND.domain + "/assets/projects/walnut-creek-exterior__after-wide-1200.jpg",
+  jsonld: [orgLd, { "@context": "https://schema.org", "@type": "Service", name: "Concrete driveway replacement", provider: { "@id": BRAND.entityId }, areaServed: CITIES.map(city => `${city.name}, CA`) }],
+  extraStyles: `<link rel="stylesheet" href="/css/driveway.css?v=${drivewayCssHash}">`,
+}) + drivewayBody({ brand: BRAND, cities: CITIES, phoneIcon: PHONE_SVG, footer: renderFooter(BRAND.drivewayLeadWebhook), wizardScript: `<script defer src="/js/driveway-wizard.js?v=${drivewayScriptHash}"></script>` });
+write("driveway-replacement/index.html", drivewayHtml);
+
 /* ---------- sitemap & robots ---------- */
 
-const today = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>${BRAND.domain}/</loc><lastmod>${today}</lastmod><priority>1.0</priority></url>
-${urls.map((u) => `<url><loc>${BRAND.domain}${u}</loc><lastmod>${today}</lastmod><priority>${u.split("/").filter(Boolean).length >= 3 ? "0.7" : "0.8"}</priority></url>`).join("\n")}
+<url><loc>${BRAND.domain}/</loc></url>
+${urls.map((u) => `<url><loc>${BRAND.domain}${u}</loc></url>`).join("\n")}
 </urlset>
 `;
 write("sitemap.xml", sitemap);
 
-// Explicitly welcome answer-engine crawlers — these drive AI-assistant citations.
+// Keep the existing crawler permissions. Access is not a ranking guarantee.
 const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User",
   "anthropic-ai", "PerplexityBot", "Perplexity-User", "Google-Extended",
   "Applebot", "Applebot-Extended", "CCBot", "Bingbot", "DuckAssistBot", "cohere-ai", "meta-externalagent"];
@@ -538,7 +497,7 @@ write("_headers",
   `/*.html\n  Cache-Control: public, max-age=0, must-revalidate\n\n` +
   `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n`);
 
-// llms.txt — an emerging convention giving AI assistants a clean, quotable summary.
+// Optional machine-readable summary; Google Search does not use llms.txt for ranking.
 const llms = `# ${BRAND.name}
 
 > Family-run, licensed and insured general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
@@ -566,3 +525,14 @@ console.log(`  ${CITIES.length * SERVICES.length} service×city pages`);
 console.log(`  ${CITIES.length} city hubs`);
 console.log(`  ${SERVICES.length} service hubs`);
 console.log(`  1 service-areas index + sitemap.xml + robots.txt`);
+
+const homePath = join(ROOT, "index.html");
+let home = readFileSync(homePath, "utf8");
+home = home.replace(/\/css\/style\.min\.css(?:\?v=[a-f0-9]+)?/g, `/css/style.min.css?v=${ASSET_V}`);
+for (const file of ["main.js", "leads.js", "lenis.min.js"]) {
+  const hash = createHash("sha1").update(readFileSync(join(ROOT, "js", file))).digest("hex").slice(0, 8);
+  home = home.replace(new RegExp(`/js/${file.replaceAll(".", "\\.")}(?:\\?v=[a-f0-9]+)?`, "g"), `/js/${file}?v=${hash}`);
+}
+home = home.replace(/<script>window\.AZEB_LEAD_ENDPOINT=.*?;<\/script>/, `<script>window.AZEB_LEAD_ENDPOINT=${JSON.stringify(BRAND.leadWebhook || "")};</script>`);
+home = home.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(orgLd)}</script>`);
+writeFileSync(homePath, home);

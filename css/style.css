@@ -31,7 +31,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
@@ -1553,3 +1553,29 @@ body.nav-hidden .case__head { top: 0; }
 .foot__credit { color: var(--fg-dim); }
 .foot__credit a { color: var(--fg-dim); transition: color 0.25s; }
 .foot__credit a:hover { color: var(--fg); text-decoration: underline; }
+
+/* Audit fixes: visible focus, field labels and stable failure states. */
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid #d0b378; outline-offset: 5px; }
+.skip-link { position:fixed; left:1rem; top:1rem; z-index:300; padding:.8rem 1.2rem; background:var(--fg); color:var(--bg); transform:translateY(-200%); }
+.skip-link:focus { transform:none; }
+.lead-field { display:flex; flex-direction:column; gap:.4rem; font-size:.875rem; min-width:0; }
+.lead-field .field-error { margin:0; font-size:.875rem; line-height:1.5; }
+.leadform__form { align-items:start; }
+.leadform__form > button { margin-top:1.8rem; }
+.lead-privacy, .lead-status { grid-column:1 / -1; font-size:.875rem; line-height:1.65; }
+.lead-privacy { color:#c2c3ca; }
+.lead-privacy a { text-decoration:underline; text-underline-offset:3px; }
+.lead-status { color:var(--fg); }
+.lead-status:empty { display:none; }
+.lead-status:not(:empty) { padding:1rem; border:1px solid var(--line); }
+.leadform__call { display:flex; }
+.home-faq { padding:clamp(3rem,7vw,7rem) var(--pad); border-top:1px solid var(--line); }
+.home-faq .faq { max-width:850px; }
+.home-faq .faq summary, .home-faq .faq p { font-size:1rem; }
+.modal__form input, .modal__form textarea { font-size:1rem; }
+@media(max-width:700px) { .leadform__form > button { margin-top:0; } }
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto !important; }
+  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}

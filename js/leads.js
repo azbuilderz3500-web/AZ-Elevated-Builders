@@ -12,6 +12,11 @@
   function track(event, source, leadId) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, lead_source: source, page_path: window.location.pathname, ...(leadId ? { lead_id: leadId } : {}) });
+    // Ad-platform conversion, only where a tag is configured (the paid landing
+    // page). leadId doubles as the dedupe key so a retry is not counted twice.
+    if (event === "generate_lead" && window.AZEB_ADS_CONVERSION && typeof window.gtag === "function") {
+      window.gtag("event", "conversion", { send_to: window.AZEB_ADS_CONVERSION, transaction_id: leadId });
+    }
   }
   document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
     link.addEventListener("click", () => track("phone_click", link.dataset.cta || "phone"));

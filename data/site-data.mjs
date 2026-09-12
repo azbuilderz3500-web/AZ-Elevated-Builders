@@ -17,6 +17,13 @@ export const BRAND = {
   // Used by the organic website forms. Empty = forms fall back to phone/email.
   leadWebhook: "https://hook.us2.make.com/iva9bps6bve2k4lodckbgu266qets1yr",
   drivewayLeadWebhook: "https://hook.us2.make.com/rfn92i38h057afwomnibttrt0v0vhhtx",
+  // Google Ads conversion tracking, paid landing page only. While the id is
+  // empty nothing loads — no tag, no advertising cookies — which is what
+  // privacy.html currently promises. Paste the conversion ID and label from
+  // Google Ads to switch it on, and update that privacy paragraph in the same
+  // change. Format: adsConversionId "AW-123456789", label "AbC-D_efGh12"
+  adsConversionId: "",
+  adsConversionLabel: "",
   entityId: "https://azelevatedbuilders.com/#organization",
   gbp: "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
   sameAs: [

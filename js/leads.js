@@ -68,6 +68,10 @@
       if (!name.value.trim()) error(name, "Please enter your name.");
       if (!/^(1)?[2-9]\d{2}[2-9]\d{6}$/.test(digits)) error(phone, "Enter a valid 10-digit US phone number, including area code.");
       if (city?.required && !city.value.trim()) error(city, "Please enter your project city.");
+      const email = form.elements.namedItem("email");
+      if (email?.required && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
+        error(email, "Enter an email address we can send the written scope to.");
+      }
       if (form.hasAttribute("data-wizard")) {
         const value = key => form.elements.namedItem(key)?.value.trim() || "";
         if (!value("project")) error(form.querySelector('[name="project"]'), "Please choose a project option.");
@@ -107,6 +111,7 @@
           body: JSON.stringify({
             leadId, name: name.value.trim(), phone: phone.value.trim(),
             city: city?.value.trim() || "",
+            email: form.elements.namedItem("email")?.value.trim() || "",
             details: form.elements.namedItem("details")?.value.trim() || "",
             service: form.elements.namedItem("service")?.value || "",
             page: window.location.pathname,

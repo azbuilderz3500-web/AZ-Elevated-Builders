@@ -36,10 +36,6 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
   ];
 
   return `
-<header class="drive-nav">
-  <a href="/" class="drive-brand" aria-label="AZ Elevated Builders home"><img src="/assets/brand/mark-white.svg" alt="" width="60" height="48"><img src="/assets/brand/wordmark-white.svg" alt="" width="148" height="34"></a>
-  <a class="drive-nav__phone" href="tel:${brand.phoneHref}" data-cta="driveway-header">${phoneIcon}<span>${brand.phone}</span></a>
-</header>
 <main class="drive" id="main" tabindex="-1">
   <section class="drive-hero" aria-labelledby="drive-title">
     <div class="drive-estimate" id="estimate">
@@ -82,6 +78,7 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
             <div class="wizard-contact">
               <label class="lead-field">Your name<input name="name" autocomplete="name" maxlength="100" required placeholder="Your name"></label>
               <label class="lead-field">Phone number<input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></label>
+              <label class="lead-field lead-field--wide">Email<input type="email" name="email" autocomplete="email" inputmode="email" maxlength="150" required placeholder="you@example.com"></label>
             </div>
             <div class="wizard-review" hidden><p>Your project, at a glance</p><dl>
               <div><dt>Project</dt><dd data-review="project"></dd><button type="button" data-edit="0" aria-label="Edit project">Edit</button></div>
@@ -113,9 +110,8 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
     <p class="drive-fineprint" id="turnaround-note">*A typical single- or two-car driveway with good equipment access. Extra demolition, drainage work, a stamped finish or weather can add days, and concrete keeps curing after we leave &mdash; your written scope confirms the dates before anything starts.</p>
   </section>
 </main>
-<div class="drive-bar" role="group" aria-label="Contact AZ Elevated Builders">
-  <a class="drive-bar__call" href="tel:${brand.phoneHref}" data-cta="driveway-sticky">${phoneIcon}<span>Call now</span></a>
-  <a class="drive-bar__cta" href="#estimate">Free estimate</a>
+<div class="drive-bar">
+  <a class="drive-bar__call" href="tel:${brand.phoneHref}" data-cta="driveway-sticky">${phoneIcon}<span>Call ${brand.phone}</span></a>
 </div>
 ${wizardScript}
 ${footer}`;

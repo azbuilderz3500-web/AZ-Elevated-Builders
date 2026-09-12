@@ -21,6 +21,18 @@
   document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
     link.addEventListener("click", () => track("phone_click", link.dataset.cta || "phone"));
   });
+  // Make rebuilds these values into a raw JSON body by string interpolation, so a
+  // straight double quote typed by a homeowner ("the 6\" slab") would break that
+  // JSON and the lead would be dropped with no error anywhere. A typographic quote
+  // reads identically and cannot break it; stray backslashes and control characters
+  // go the same way.
+  // Newlines survive that round trip and carry the shape of the answers, so they
+  // stay; every other control character and the backslash do not.
+  const jsonSafe = (value) => String(value || "")
+    .replace(/[\\\u0000-\u0009\u000b-\u001f]/g, " ")
+    .replace(/"/g, "\u201D")
+    .replace(/[ \t]+$/gm, "");
+
   document.querySelectorAll("form[data-lead]").forEach((form, formIndex) => {
     const button = form.querySelector('button[type="submit"]');
     const originalContent = button.innerHTML;
@@ -109,10 +121,10 @@
           headers: { "Content-Type": "application/json" },
           signal: controller.signal,
           body: JSON.stringify({
-            leadId, name: name.value.trim(), phone: phone.value.trim(),
-            city: city?.value.trim() || "",
+            leadId, name: jsonSafe(name.value.trim()), phone: phone.value.trim(),
+            city: jsonSafe(city?.value.trim() || ""),
             email: form.elements.namedItem("email")?.value.trim() || "",
-            details: form.elements.namedItem("details")?.value.trim() || "",
+            details: jsonSafe(form.elements.namedItem("details")?.value.trim() || ""),
             service: form.elements.namedItem("service")?.value || "",
             page: window.location.pathname,
             url: window.location.origin + window.location.pathname,

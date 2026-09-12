@@ -464,7 +464,7 @@ const drivewayHtml = head({
   extraStyles: `<link rel="stylesheet" href="/css/driveway.css?v=${drivewayCssHash}">`,
   // Ad-platform tag, this page only, and only once a conversion ID is configured.
   extraHead: BRAND.adsConversionId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${BRAND.adsConversionId}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config",${JSON.stringify(BRAND.adsConversionId)});window.AZEB_ADS_CONVERSION=${JSON.stringify(BRAND.adsConversionId + "/" + BRAND.adsConversionLabel)};</script>` : "",
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config",${JSON.stringify(BRAND.adsConversionId)});${BRAND.adsConversionLabel ? `window.AZEB_ADS_CONVERSION=${JSON.stringify(BRAND.adsConversionId + "/" + BRAND.adsConversionLabel)};` : ""}</script>` : "",
 }) + drivewayBody({ brand: BRAND, cities: CITIES, phoneIcon: PHONE_SVG, footer: renderFooter(BRAND.drivewayLeadWebhook), wizardScript: `<script defer src="/js/driveway-wizard.js?v=${drivewayScriptHash}"></script>` });
 write("driveway-replacement/index.html", drivewayHtml);
 

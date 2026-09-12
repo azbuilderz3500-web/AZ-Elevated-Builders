@@ -24,7 +24,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 <link rel="stylesheet" href="/css/style.min.css?v=3da0d1d4" />
-<link rel="stylesheet" href="/css/driveway.css?v=b03fccf6">
+<link rel="stylesheet" href="/css/driveway.css?v=232a267e">
 
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
   <link rel="alternate icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48" />
@@ -39,50 +39,43 @@
 </header>
 <main class="drive" id="main" tabindex="-1">
   <section class="drive-hero" aria-labelledby="drive-title">
-    <div class="drive-hero__copy">
-      <h1 id="drive-title">Concrete driveway <em>replacement.</em></h1>
-      <p class="drive-hero__intro">Tell us about your driveway. We’ll arrange your free on-site estimate.</p>
-    </div>
-    <section class="drive-estimate" id="estimate" aria-labelledby="estimate-title">
-      <div class="wizard-topline"><h2 id="estimate-title">Plan your driveway</h2><span>Free on-site estimate</span></div>
-      <form data-lead data-wizard data-source="driveway-landing" class="drive-form" method="post">
+    <div class="drive-estimate" id="estimate">
+      <p class="drive-badge"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.2 7.9 8 9 4.8-1.1 8-4.6 8-9V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></span>CSLB #1106795 &middot; Licensed &amp; insured</p>
+      <h1 id="drive-title">Get your free driveway estimate.</h1>
+      <p class="drive-hero__intro">Tell us about your driveway. We call back <strong>within two hours</strong>, Mon&ndash;Fri, 8am&ndash;6pm.</p>
+      <form data-lead data-wizard data-source="driveway-landing" data-success="Thank you. Your request is in. We will call you back within two hours, Monday to Friday, 8am to 6pm. Need us sooner? Call (925) 812-3150 below." class="drive-form" method="post">
         <input type="hidden" name="service" value="Concrete driveway replacement">
         <input type="hidden" name="details">
         <ol class="wizard-progress" aria-label="Estimate steps" hidden><li aria-current="step"><span class="wizard-progress__number" aria-hidden="true">1</span><span>Project</span></li><li><span class="wizard-progress__number" aria-hidden="true">2</span><span>Size</span></li><li><span class="wizard-progress__number" aria-hidden="true">3</span><span>Location</span></li><li><span class="wizard-progress__number" aria-hidden="true">4</span><span>Contact</span></li></ol>
         <div class="wizard-panels">
           <fieldset class="wizard-step" data-step="0">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 1 of 4 / Your project</span>What’s the plan?</legend>
-            <p class="wizard-hint">Choose the option that sounds most like your project.</p>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 1 of 4 / Your project</span>What are we replacing?</legend>
             <div class="wizard-choices">
               <label class="wizard-choice"><input type="radio" name="project" value="Replace my driveway" required><span class="wizard-choice__surface"><svg class="wizard-sketch" viewBox="0 0 100 76" fill="none" aria-hidden="true"><path d="M20 29 50 12l30 17v20L50 67 20 49Z" fill="currentColor" opacity=".06"/><path d="m20 29 30-17 30 17M28 33V22m44 11V22M20 29v20l30 18 30-18V29M20 49l30-17 30 17M50 32v35" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m44 38 9 4-7 6 10 4-5 8" stroke="currentColor" stroke-width="2"/></svg><span class="wizard-choice__text"><strong>Replace my driveway</strong><span>Out with the old concrete. In with a fresh start.</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
               <label class="wizard-choice"><input type="radio" name="project" value="Replace and widen" required><span class="wizard-choice__surface"><svg class="wizard-sketch" viewBox="0 0 100 76" fill="none" aria-hidden="true"><path d="M20 29 50 12l30 17v20L50 67 20 49Z" fill="currentColor" opacity=".06"/><path d="m20 29 30-17 30 17M28 33V22m44 11V22M20 29v20l30 18 30-18V29M20 49l30-17 30 17M50 32v35" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m80 37 13 8-30 17M84 30l9 5m-4-8 4 8-9 1" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/></svg><span class="wizard-choice__text"><strong>Replace &amp; widen</strong><span>A new driveway, with a little more room.</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
-              <label class="wizard-choice"><input type="radio" name="project" value="Help me decide" required><span class="wizard-choice__surface"><svg class="wizard-sketch" viewBox="0 0 100 76" fill="none" aria-hidden="true"><path d="M20 29 50 12l30 17v20L50 67 20 49Z" fill="currentColor" opacity=".06"/><path d="m20 29 30-17 30 17M28 33V22m44 11V22M20 29v20l30 18 30-18V29M20 49l30-17 30 17M50 32v35" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="73" cy="28" r="13" fill="#172033" stroke="currentColor"/><path d="M70 24c0-4 7-4 7 0 0 3-4 3-4 6m0 3v1" stroke="currentColor" stroke-width="1.8"/></svg><span class="wizard-choice__text"><strong>Help me decide</strong><span>Let’s look at the condition and talk through options.</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
+              <label class="wizard-choice"><input type="radio" name="project" value="Help me decide" required><span class="wizard-choice__surface"><svg class="wizard-sketch" viewBox="0 0 100 76" fill="none" aria-hidden="true"><path d="M20 29 50 12l30 17v20L50 67 20 49Z" fill="currentColor" opacity=".06"/><path d="m20 29 30-17 30 17M28 33V22m44 11V22M20 29v20l30 18 30-18V29M20 49l30-17 30 17M50 32v35" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="73" cy="28" r="13" fill="#172033" stroke="currentColor"/><path d="M70 24c0-4 7-4 7 0 0 3-4 3-4 6m0 3v1" stroke="currentColor" stroke-width="1.8"/></svg><span class="wizard-choice__text"><strong>Help me decide</strong><span>Let us look at the condition and talk through options.</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
             </div>
             <p class="wizard-error" id="wizard-error-0" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="1">
             <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 2 of 4 / The footprint</span>About how wide is it?</legend>
-            <p class="wizard-hint">Think about cars parked side by side. A rough idea is plenty.</p>
             <div class="wizard-choices wizard-choices--size">
               <label class="wizard-choice"><input type="radio" name="size" value="Single-car width" required><span class="wizard-choice__surface"><svg class="wizard-garage" viewBox="0 0 110 64" fill="none" aria-hidden="true"><path d="m10 22 45-16 45 16v32H10Z" stroke="currentColor" stroke-width="1.5"/><path d="m4 23 51-19 51 19" stroke="currentColor" stroke-width="1.5"/><path d="M19 54V27h66v27M22 33h60m-60 6h60m-60 6h60" stroke="currentColor"/></svg><span class="wizard-choice__text"><strong>Single-car</strong><span>One car wide</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
               <label class="wizard-choice"><input type="radio" name="size" value="Two-car width" required><span class="wizard-choice__surface"><svg class="wizard-garage" viewBox="0 0 110 64" fill="none" aria-hidden="true"><path d="m10 22 45-16 45 16v32H10Z" stroke="currentColor" stroke-width="1.5"/><path d="m4 23 51-19 51 19" stroke="currentColor" stroke-width="1.5"/><path d="M19 54V27h30v27M22 33h24m-24 6h24m-24 6h24" stroke="currentColor"/><path d="M55 54V27h30v27M58 33h24m-24 6h24m-24 6h24" stroke="currentColor"/></svg><span class="wizard-choice__text"><strong>Two-car</strong><span>Two cars wide</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
               <label class="wizard-choice"><input type="radio" name="size" value="Three-plus-car width" required><span class="wizard-choice__surface"><svg class="wizard-garage" viewBox="0 0 110 64" fill="none" aria-hidden="true"><path d="m10 22 45-16 45 16v32H10Z" stroke="currentColor" stroke-width="1.5"/><path d="m4 23 51-19 51 19" stroke="currentColor" stroke-width="1.5"/><path d="M19 54V27h18v27M22 33h12m-12 6h12m-12 6h12" stroke="currentColor"/><path d="M43 54V27h18v27M46 33h12m-12 6h12m-12 6h12" stroke="currentColor"/><path d="M67 54V27h18v27M70 33h12m-12 6h12m-12 6h12" stroke="currentColor"/></svg><span class="wizard-choice__text"><strong>Three or more</strong><span>A wider driveway</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
-              <label class="wizard-choice"><input type="radio" name="size" value="Not sure" required><span class="wizard-choice__surface"><span class="wizard-unsure" aria-hidden="true">?</span><span class="wizard-choice__text"><strong>Not sure yet</strong><span>We’ll measure on site</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
+              <label class="wizard-choice"><input type="radio" name="size" value="Not sure" required><span class="wizard-choice__surface"><svg class="wizard-garage" viewBox="0 0 110 64" fill="none" aria-hidden="true"><rect x="12" y="24" width="86" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M26 24v8m12-8v11m12-11v8m12-8v11m12-11v8m12-8v11" stroke="currentColor" stroke-width="1.5"/></svg><span class="wizard-choice__text"><strong>Not sure yet</strong><span>We measure it on site</span></span><span class="wizard-choice__check" aria-hidden="true"></span></span></label>
             </div>
             <p class="wizard-error" id="wizard-error-1" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="2">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 3 of 4 / A little closer</span>Where are we headed?</legend>
-            <p class="wizard-hint">We serve 40 communities across the East Bay, Tri-Valley, Delta, Solano and Napa areas.</p>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 3 of 4 / A little closer</span>Where is the driveway?</legend>
             <label class="lead-field">Project city<input name="city" list="driveway-cities" autocomplete="address-level2" maxlength="100" required placeholder="Start typing your city"></label>
             <datalist id="driveway-cities"><option value="Brentwood"></option><option value="Oakley"></option><option value="Antioch"></option><option value="Discovery Bay"></option><option value="Pittsburg"></option><option value="Concord"></option><option value="Clayton"></option><option value="Walnut Creek"></option><option value="Pleasant Hill"></option><option value="Martinez"></option><option value="Lafayette"></option><option value="Orinda"></option><option value="Moraga"></option><option value="Alamo"></option><option value="Danville"></option><option value="San Ramon"></option><option value="Richmond"></option><option value="El Cerrito"></option><option value="Oakland"></option><option value="Berkeley"></option><option value="Alameda"></option><option value="San Leandro"></option><option value="Castro Valley"></option><option value="Hayward"></option><option value="Dublin"></option><option value="Pleasanton"></option><option value="Livermore"></option><option value="Fremont"></option><option value="Tracy"></option><option value="Mountain House"></option><option value="Lathrop"></option><option value="Manteca"></option><option value="Stockton"></option><option value="Rio Vista"></option><option value="Fairfield"></option><option value="Vacaville"></option><option value="Vallejo"></option><option value="Benicia"></option><option value="Napa"></option><option value="American Canyon"></option></datalist>
             <p class="wizard-error" id="wizard-error-2" hidden></p>
-            <fieldset class="wizard-timing"><legend>When are you thinking? <span>(optional)</span></legend><div class="wizard-timing__options"><label><input type="radio" name="timing" value="As soon as practical"><span>As soon as practical</span></label><label><input type="radio" name="timing" value="In 1–3 months"><span>In 1–3 months</span></label><label><input type="radio" name="timing" value="Just planning"><span>Just planning</span></label></div></fieldset>
-            <p class="wizard-location-note">No street address needed yet. We’ll confirm the details when we call.</p>
+            <fieldset class="wizard-timing"><legend>When are you thinking? <span>(optional)</span></legend><div class="wizard-timing__options"><label><input type="radio" name="timing" value="As soon as practical"><span>As soon as practical</span></label><label><input type="radio" name="timing" value="In 1&ndash;3 months"><span>In 1&ndash;3 months</span></label><label><input type="radio" name="timing" value="Just planning"><span>Just planning</span></label></div></fieldset>
           </fieldset>
           <fieldset class="wizard-step" data-step="3">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 4 of 4 / Let’s connect</span>Let’s make a plan.</legend>
-            <p class="wizard-hint">Leave your details. We’ll call within one business day to discuss your driveway and arrange a free on-site estimate.</p>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 4 of 4 / Where to reach you</span>Who should we call?</legend>
             <div class="wizard-contact">
               <label class="lead-field">Your name<input name="name" autocomplete="name" maxlength="100" required placeholder="Your name"></label>
               <label class="lead-field">Phone number<input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></label>
@@ -93,48 +86,34 @@
               <div><dt>Location</dt><dd data-review="city"></dd><button type="button" data-edit="2" aria-label="Edit location and timing">Edit</button></div>
               <div><dt>Timing</dt><dd data-review="timing"></dd></div>
             </dl></div>
-            <details class="drive-details"><summary>Anything else we should know? <span>(optional)</span></summary><label class="lead-field">Project notes<textarea name="notes" rows="2" maxlength="1500" placeholder="Damage, access, a finish you like…"></textarea></label></details>
+            <details class="drive-details"><summary>Anything else we should know? <span>(optional)</span></summary><label class="lead-field">Project notes<textarea name="notes" rows="2" maxlength="1500" placeholder="Damage, access, a finish you like&hellip;"></textarea></label></details>
             <p class="lead-privacy">By submitting, you ask AZ Elevated Builders to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
           </fieldset>
         </div>
-        <div class="wizard-actions"><button class="wizard-back" type="button" data-back hidden><span aria-hidden="true">←</span> Back</button><button type="button" class="btn btn--solid wizard-next" data-next hidden>Continue <span aria-hidden="true">→</span></button><button type="submit" class="btn btn--solid" disabled>Request my free estimate <span aria-hidden="true">↗</span></button></div>
-        <p class="wizard-reassurance">Free estimate · No obligation</p>
-        <div class="wizard-success" hidden><span class="wizard-success__mark" aria-hidden="true">✓</span><p class="wizard-eyebrow">You’re all set</p><h3>One step closer<br>to a new driveway.</h3><p>Your next step: a call with our team to talk through your project.</p></div>
+        <div class="wizard-actions"><button class="wizard-back" type="button" data-back hidden><span aria-hidden="true">&larr;</span> Back</button><button type="button" class="btn btn--solid wizard-next" data-next hidden>Continue <span aria-hidden="true">&rarr;</span></button><button type="submit" class="btn btn--solid" disabled>Request my free estimate</button></div>
+        <p class="wizard-reassurance">Free &middot; No obligation &middot; Takes about 2 minutes</p>
+        <div class="wizard-success" hidden><span class="wizard-success__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><h3>Your request is in.</h3><p>We will call you back within two hours, Monday to Friday, 8am to 6pm.</p></div>
         <p class="lead-status" data-lead-status role="status" aria-live="polite" tabindex="-1"></p>
       </form>
       <noscript><p>Please call us to request your estimate.</p></noscript>
       <a class="drive-form-call" href="tel:+19258123150" data-cta="driveway-form">Prefer to talk? (925) 812-3150</a>
-    </section>
+    </div>
   </section>
-  <section class="drive-project drive-section" aria-label="Our work and experience">
-  <div class="drive-trust"><span>Family-run in Brentwood</span><span>CSLB Lic. # 1106795</span><span>Hablamos español</span></div>
-  <figure class="drive-result" id="project">
-    <img src="/assets/projects/stamped-driveway__after-wide-1200.webp" srcset="/assets/projects/stamped-driveway__after-wide-480.webp 480w, /assets/projects/stamped-driveway__after-wide-800.webp 800w, /assets/projects/stamped-driveway__after-wide-1200.webp 1200w, /assets/projects/stamped-driveway__after-wide-1600.webp 1600w" sizes="(max-width: 800px) 100vw, 55vw" width="1200" height="800" alt="Finished stamped concrete driveway replacement by AZ Elevated Builders, ashlar slate pattern running the full width of the property" loading="lazy" decoding="async">
-    <figcaption><span>Actual AZ Elevated Builders project</span><span>Stamped concrete · Driveway replacement</span></figcaption>
-  </figure>
-  </section>
-  <section class="drive-scope drive-section" id="scope">
-    <div><p class="drive-kicker">More than a new surface</p><h2>The work underneath<br>makes the difference.</h2><p>A cracked, uneven or worn driveway deserves a closer look. We assess the existing concrete, access and drainage before recommending a replacement scope.</p></div>
-    <ol class="drive-scope__list">
-      <li><span>01</span><div><h3>Remove &amp; prepare</h3><p>Discuss demolition, hauling and site access. Evaluate the base and grading for the new driveway.</p></div></li>
-      <li><span>02</span><div><h3>Form &amp; pour</h3><p>Plan the layout, drainage, reinforcement and finish to suit your property and intended use.</p></div></li>
-      <li><span>03</span><div><h3>Finish &amp; hand over</h3><p>Walk through the finished work and get guidance on curing, vehicle access and care.</p></div></li>
+
+  <section class="drive-steps" aria-labelledby="steps-title">
+    <h2 id="steps-title">Most driveways: three days on site.<a class="drive-fn" href="#turnaround-note" aria-label="See turnaround conditions">*</a></h2>
+    <ol class="drive-steps__list">
+      <li><span>Day 1</span><div><h3>Out with the old</h3><p>Demolition, hauling and disposal, then the base and grading prepared for the new pour.</p></div></li>
+      <li><span>Day 2</span><div><h3>Form &amp; pour</h3><p>Layout, drainage and reinforcement set, then the concrete placed and finished by hand.</p></div></li>
+      <li><span>Day 3</span><div><h3>Finish &amp; hand over</h3><p>Joints cut, the site left clean, and a walk through the work with your curing instructions.</p></div></li>
     </ol>
-  </section>
-  <section class="drive-proof drive-section" aria-labelledby="proof-title">
-    <div class="drive-proof__image"><img src="/assets/projects/walnut-creek-exterior__finishing-slab-1200.webp" srcset="/assets/projects/walnut-creek-exterior__finishing-slab-480.webp 480w, /assets/projects/walnut-creek-exterior__finishing-slab-800.webp 800w, /assets/projects/walnut-creek-exterior__finishing-slab-1200.webp 1200w, /assets/projects/walnut-creek-exterior__finishing-slab-1600.webp 1600w" sizes="(max-width: 800px) 100vw, 55vw" width="1200" height="1800" alt="Concrete being hand-finished by the AZ Elevated Builders crew" loading="lazy" decoding="async"><p>Concrete finishing · Walnut Creek project</p></div>
-    <div class="drive-proof__copy"><p class="drive-kicker">Real people. Real work.</p><h2 id="proof-title">Know who you’re<br>building with.</h2><p>AZ Elevated Builders is a family-run general contractor based in Brentwood. Alfonso Zavala and the team bring the same attention to the concrete beneath your feet as the rest of your home.</p><ul><li>A free on-site assessment</li><li>A written scope before work begins</li><li>A clear plan for access and scheduling</li><li>English and Spanish spoken</li></ul><a class="drive-review" href="https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999" target="_blank" rel="noopener">Read our Google reviews <span aria-hidden="true">↗</span></a><a class="btn btn--outline" href="#estimate">Plan my driveway replacement</a></div>
-  </section>
-  <section class="drive-answers drive-section" id="questions"><div><p class="drive-kicker">Before you replace it</p><h2>Good questions.<br>Straight answers.</h2><p>Every property is different. Start with the essentials, then let’s look at yours.</p></div><div class="faq"><details><summary>How much does a concrete driveway replacement cost?</summary><p>The size of the driveway, demolition and disposal, access for equipment, base condition, drainage and finish all affect the price. We measure the site and provide a written scope with your estimate. An on-site assessment is needed to price your project accurately.</p></details><details><summary>What is included in the replacement?</summary><p>We assess the existing driveway and discuss removal, hauling, grading, base preparation, reinforcement, the new concrete and finish. Your written proposal identifies the work included for your property before demolition begins.</p></details><details><summary>Should I repair the driveway or replace it?</summary><p>That depends on the cause and extent of the damage. Surface wear may need a different solution from settling, recurring cracks or drainage problems. We look at the existing slab and site during the estimate and explain the proposed scope.</p></details><details><summary>When can I park on the new driveway?</summary><p>Plan to park elsewhere during removal, installation and curing. The concrete mix, weather and intended vehicle loads affect when the driveway can be used. We discuss access before work begins and provide instructions for your specific pour.</p></details><details><summary>Can I widen the driveway or change the finish?</summary><p>Tell us what you have in mind during the estimate. We can discuss layout and broom-finished, exposed-aggregate or stamped concrete options. Property limits, drainage, local requirements and any HOA review can affect the final design.</p></details><details><summary>Do you serve my city?</summary><p>We serve 40 cities and communities across the East Bay, Tri-Valley, Delta, Solano and Napa areas. The full list is below, grouped by county. Add your project city to the estimate form and we’ll discuss your property and scheduling.</p></details></div></section>
-  <section class="drive-area drive-section" id="service-area" aria-labelledby="area-title">
-    <p class="drive-kicker">Based in Brentwood · Serving 40 communities</p>
-    <h2 id="area-title">A better driveway,<br>closer to home.</h2>
-    <p>From the East Bay and Tri-Valley to the Delta, Solano and Napa areas, we serve the communities below.</p>
-    <div class="drive-city-groups"><details class="drive-city-group"><summary>Contra Costa County <span>18 communities</span></summary><ul><li data-service-city="brentwood">Brentwood</li><li data-service-city="oakley">Oakley</li><li data-service-city="antioch">Antioch</li><li data-service-city="discovery-bay">Discovery Bay</li><li data-service-city="pittsburg">Pittsburg</li><li data-service-city="concord">Concord</li><li data-service-city="clayton">Clayton</li><li data-service-city="walnut-creek">Walnut Creek</li><li data-service-city="pleasant-hill">Pleasant Hill</li><li data-service-city="martinez">Martinez</li><li data-service-city="lafayette">Lafayette</li><li data-service-city="orinda">Orinda</li><li data-service-city="moraga">Moraga</li><li data-service-city="alamo">Alamo</li><li data-service-city="danville">Danville</li><li data-service-city="san-ramon">San Ramon</li><li data-service-city="richmond">Richmond</li><li data-service-city="el-cerrito">El Cerrito</li></ul></details><details class="drive-city-group"><summary>Alameda County <span>10 communities</span></summary><ul><li data-service-city="oakland">Oakland</li><li data-service-city="berkeley">Berkeley</li><li data-service-city="alameda">Alameda</li><li data-service-city="san-leandro">San Leandro</li><li data-service-city="castro-valley">Castro Valley</li><li data-service-city="hayward">Hayward</li><li data-service-city="dublin">Dublin</li><li data-service-city="pleasanton">Pleasanton</li><li data-service-city="livermore">Livermore</li><li data-service-city="fremont">Fremont</li></ul></details><details class="drive-city-group"><summary>San Joaquin County <span>5 communities</span></summary><ul><li data-service-city="tracy">Tracy</li><li data-service-city="mountain-house">Mountain House</li><li data-service-city="lathrop">Lathrop</li><li data-service-city="manteca">Manteca</li><li data-service-city="stockton">Stockton</li></ul></details><details class="drive-city-group"><summary>Solano County <span>5 communities</span></summary><ul><li data-service-city="rio-vista">Rio Vista</li><li data-service-city="fairfield">Fairfield</li><li data-service-city="vacaville">Vacaville</li><li data-service-city="vallejo">Vallejo</li><li data-service-city="benicia">Benicia</li></ul></details><details class="drive-city-group"><summary>Napa County <span>2 communities</span></summary><ul><li data-service-city="napa">Napa</li><li data-service-city="american-canyon">American Canyon</li></ul></details></div>
-    <p>Add your city to the form and we’ll discuss your driveway, access and scheduling.</p>
-    <div class="drive-area__actions"><a class="btn btn--solid" href="#estimate">Get my free estimate</a><a class="drive-area__call" href="tel:+19258123150" data-cta="driveway-bottom">(925) 812-3150</a></div>
+    <p class="drive-fineprint" id="turnaround-note">*A typical single- or two-car driveway with good equipment access. Extra demolition, drainage work, a stamped finish or weather can add days, and concrete keeps curing after we leave &mdash; your written scope confirms the dates before anything starts.</p>
   </section>
 </main>
+<div class="drive-bar" role="group" aria-label="Contact AZ Elevated Builders">
+  <a class="drive-bar__call" href="tel:+19258123150" data-cta="driveway-sticky"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg><span>Call now</span></a>
+  <a class="drive-bar__cta" href="#estimate">Free estimate</a>
+</div>
 <script defer src="/js/driveway-wizard.js?v=0cf91b20"></script>
 
 <div class="page-footer-pad"></div>
@@ -144,6 +123,6 @@
   <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="noopener">To The Max Media</a></span>
 </footer>
 <script>window.AZEB_LEAD_ENDPOINT="https://hook.us2.make.com/rfn92i38h057afwomnibttrt0v0vhhtx";</script>
-<script defer src="/js/leads.js?v=6c84b255"></script>
+<script defer src="/js/leads.js?v=a228250a"></script>
 </body>
 </html>

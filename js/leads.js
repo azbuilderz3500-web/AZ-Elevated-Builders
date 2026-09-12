@@ -118,7 +118,8 @@
         complete = true;
         fields.forEach((field) => { field.readOnly = true; });
         button.textContent = "Request sent";
-        status.textContent = "Thank you. Your request has been sent. We’ll call you back within one business day. Need us sooner? Call (925) 812-3150 below.";
+        // Pages can promise their own callback window; the default is the site-wide one.
+        status.textContent = form.dataset.success || "Thank you. Your request has been sent. We’ll call you back within one business day. Need us sooner? Call (925) 812-3150 below.";
         track("generate_lead", source, leadId);
       } catch (err) {
         status.textContent = err.name === "AbortError"

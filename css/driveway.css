@@ -212,3 +212,21 @@
 }
 
 .lead-field--wide { grid-column: 1 / -1; }
+
+/* Desktop gets a wider card, and the extra width buys a layout rather than
+   stretched rows: every option in one glance instead of a scrolling stack.
+   Phone layout is untouched — all of this sits above the 901px line. */
+@media (min-width: 901px) {
+  .drive-estimate { max-width: 880px; }
+  .wizard-choices { grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .wizard-choices .wizard-choice__surface {
+    position: relative; flex-direction: column; text-align: center;
+    gap: .55rem; padding: 1.25rem .85rem; min-height: 168px;
+  }
+  .wizard-choices .wizard-choice__check { position: absolute; top: .75rem; right: .75rem; width: 17px; height: 17px; }
+  .wizard-choices .wizard-sketch { width: 74px; height: 58px; }
+  .wizard-choices--size { grid-template-columns: repeat(4, 1fr); }
+  .wizard-choices--size .wizard-garage { width: 84px; height: 46px; }
+  .wizard-contact { grid-template-columns: repeat(3, 1fr); }
+  .lead-field--wide { grid-column: auto; }
+}

@@ -12,6 +12,9 @@
   function track(event, source, leadId) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, lead_source: source, page_path: window.location.pathname, ...(leadId ? { lead_id: leadId } : {}) });
+    if (typeof window.gtag === "function") {
+      window.gtag("event", event, { lead_source: source, ...(leadId ? { lead_id: leadId } : {}) });
+    }
     // Ad-platform conversion, only where a tag is configured (the paid landing
     // page). leadId doubles as the dedupe key so a retry is not counted twice.
     if (event === "generate_lead" && window.AZEB_ADS_CONVERSION && typeof window.gtag === "function") {

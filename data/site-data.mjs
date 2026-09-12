@@ -22,6 +22,10 @@ export const BRAND = {
   // privacy.html currently promises. Paste the conversion ID and label from
   // Google Ads to switch it on, and update that privacy paragraph in the same
   // change. Format: adsConversionId "AW-123456789", label "AbC-D_efGh12"
+  // GA4, site-wide. Ads conversion tracking can also be driven from a GA4 key
+  // event imported into Google Ads, which is the route that does not need a
+  // conversion label.
+  gaMeasurementId: "G-5Y4CM5S793",
   adsConversionId: "AW-17025083840",
   adsConversionLabel: "",
   entityId: "https://azelevatedbuilders.com/#organization",

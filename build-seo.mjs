@@ -34,7 +34,24 @@ const ASSET_V = createHash("sha1").update(cssMin).digest("hex").slice(0, 8);
 
 /* ---------- shared partials ---------- */
 
-const head = ({ title, desc, path, jsonld, image, robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1", extraStyles = "", extraHead = "" }) => `<!DOCTYPE html>
+// gtag.js loads once and carries whichever properties this page reports to:
+// GA4 everywhere, plus the Google Ads account on the paid landing page. The
+// conversion destination is only declared once a label exists, so nothing fires
+// half-formed before then.
+const analyticsTag = (ads = false) => {
+  if (!BRAND.gaMeasurementId && !(ads && BRAND.adsConversionId)) return "";
+  const loaderId = BRAND.gaMeasurementId || BRAND.adsConversionId;
+  const configs = [];
+  if (BRAND.gaMeasurementId) configs.push(`gtag("config",${JSON.stringify(BRAND.gaMeasurementId)});`);
+  if (ads && BRAND.adsConversionId) configs.push(`gtag("config",${JSON.stringify(BRAND.adsConversionId)});`);
+  if (ads && BRAND.adsConversionId && BRAND.adsConversionLabel) {
+    configs.push(`window.AZEB_ADS_CONVERSION=${JSON.stringify(BRAND.adsConversionId + "/" + BRAND.adsConversionLabel)};`);
+  }
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${loaderId}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());${configs.join("")}</script>`;
+};
+
+const head = ({ title, desc, path, jsonld, image, robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1", extraStyles = "", extraHead = "", ads = false }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -62,6 +79,7 @@ const head = ({ title, desc, path, jsonld, image, robots = "index, follow, max-i
 <link rel="stylesheet" href="/css/style.min.css?v=${ASSET_V}" />
 ${extraStyles}
 ${extraHead}
+${analyticsTag(ads)}
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
   <link rel="alternate icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
@@ -462,9 +480,7 @@ const drivewayHtml = head({
   image: BRAND.domain + "/assets/projects/stamped-driveway__after-wide-1200.jpg",
   jsonld: [orgLd, { "@context": "https://schema.org", "@type": "Service", name: "Concrete driveway replacement", provider: { "@id": BRAND.entityId }, areaServed: CITIES.map(city => `${city.name}, CA`) }],
   extraStyles: `<link rel="stylesheet" href="/css/driveway.css?v=${drivewayCssHash}">`,
-  // Ad-platform tag, this page only, and only once a conversion ID is configured.
-  extraHead: BRAND.adsConversionId ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${BRAND.adsConversionId}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config",${JSON.stringify(BRAND.adsConversionId)});${BRAND.adsConversionLabel ? `window.AZEB_ADS_CONVERSION=${JSON.stringify(BRAND.adsConversionId + "/" + BRAND.adsConversionLabel)};` : ""}</script>` : "",
+  ads: true,
 }) + drivewayBody({ brand: BRAND, cities: CITIES, phoneIcon: PHONE_SVG, footer: renderFooter(BRAND.drivewayLeadWebhook), wizardScript: `<script defer src="/js/driveway-wizard.js?v=${drivewayScriptHash}"></script>` });
 write("driveway-replacement/index.html", drivewayHtml);
 

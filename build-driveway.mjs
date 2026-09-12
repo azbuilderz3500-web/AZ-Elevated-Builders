@@ -93,8 +93,8 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
   <section class="drive-project drive-section" aria-label="Our work and experience">
   <div class="drive-trust"><span>Family-run in Brentwood</span><span>${esc(brand.license)}</span><span>Hablamos español</span></div>
   <figure class="drive-result" id="project">
-    ${photo('vacaville-driveway__replacement-wide', 'AZ Elevated Builders crew removing an old concrete driveway with a skid steer, ready for the new pour', 800)}
-    <figcaption><span>Actual AZ Elevated Builders project</span><span>Vacaville · Driveway replacement</span></figcaption>
+    ${photo('stamped-driveway__after-wide', 'Finished stamped concrete driveway replacement by AZ Elevated Builders, ashlar slate pattern running the full width of the property', 800)}
+    <figcaption><span>Actual AZ Elevated Builders project</span><span>Stamped concrete · Driveway replacement</span></figcaption>
   </figure>
   </section>
   <section class="drive-scope drive-section" id="scope">

@@ -459,7 +459,7 @@ const drivewayHtml = head({
   desc: `Concrete driveway replacement across the East Bay, Tri-Valley, Delta, Solano and Napa areas. Serving ${CITIES.length} communities. Request a free on-site estimate.`,
   path: "/driveway-replacement/",
   robots: "noindex, follow",
-  image: BRAND.domain + "/assets/projects/vacaville-driveway__replacement-wide-1200.jpg",
+  image: BRAND.domain + "/assets/projects/stamped-driveway__after-wide-1200.jpg",
   jsonld: [orgLd, { "@context": "https://schema.org", "@type": "Service", name: "Concrete driveway replacement", provider: { "@id": BRAND.entityId }, areaServed: CITIES.map(city => `${city.name}, CA`) }],
   extraStyles: `<link rel="stylesheet" href="/css/driveway.css?v=${drivewayCssHash}">`,
   // Ad-platform tag, this page only, and only once a conversion ID is configured.

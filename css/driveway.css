@@ -218,6 +218,7 @@
    Phone layout is untouched — all of this sits above the 901px line. */
 @media (min-width: 901px) {
   .drive-estimate { max-width: 880px; }
+  .is-wizard-ready .wizard-panels { min-height: 0; }
   .wizard-choices { grid-template-columns: repeat(3, 1fr); gap: .75rem; }
   .wizard-choices .wizard-choice__surface {
     position: relative; flex-direction: column; text-align: center;

@@ -50,14 +50,14 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
           <fieldset class="wizard-step" data-step="0">
             <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 1 of 4 / Your project</span>What are we replacing?</legend>
             <div class="wizard-choices">
-              ${choice('project', 'Replace my driveway', 'Replace my driveway', 'Out with the old concrete. In with a fresh start.', sketch('replace'))}
-              ${choice('project', 'Replace and widen', 'Replace &amp; widen', 'A new driveway, with a little more room.', sketch('widen'))}
+              ${choice('project', 'Replace my driveway', 'Replace my driveway', 'Remove and replace the existing concrete.', sketch('replace'))}
+              ${choice('project', 'Replace and widen', 'Replace &amp; widen', 'Replace the concrete and add parking space.', sketch('widen'))}
               ${choice('project', 'Help me decide', 'Help me decide', 'Let us look at the condition and talk through options.', sketch('advice'))}
             </div>
             <p class="wizard-error" id="wizard-error-0" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="1">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 2 of 4 / The footprint</span>About how wide is it?</legend>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 2 of 4 / Driveway size</span>About how wide is it?</legend>
             <div class="wizard-choices wizard-choices--size">
               ${choice('size', 'Single-car width', 'Single-car', 'One car wide', garage(1))}
               ${choice('size', 'Two-car width', 'Two-car', 'Two cars wide', garage(2))}
@@ -67,11 +67,11 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
             <p class="wizard-error" id="wizard-error-1" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="2">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 3 of 4 / A little closer</span>Where is the driveway?</legend>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 3 of 4 / Project location</span>Where is the driveway?</legend>
             <label class="lead-field">Project city<input name="city" list="driveway-cities" autocomplete="address-level2" maxlength="100" required placeholder="Start typing your city"></label>
             <datalist id="driveway-cities">${cities.map(city => `<option value="${esc(city.name)}"></option>`).join('')}</datalist>
             <p class="wizard-error" id="wizard-error-2" hidden></p>
-            <fieldset class="wizard-timing"><legend>When are you thinking? <span>(optional)</span></legend><div class="wizard-timing__options">${['As soon as practical', 'In 1&ndash;3 months', 'Just planning'].map(value => `<label><input type="radio" name="timing" value="${value}"><span>${value}</span></label>`).join('')}</div></fieldset>
+            <fieldset class="wizard-timing"><legend>When would you like to start? <span>(optional)</span></legend><div class="wizard-timing__options">${['As soon as practical', 'In 1&ndash;3 months', 'Just planning'].map(value => `<label><input type="radio" name="timing" value="${value}"><span>${value}</span></label>`).join('')}</div></fieldset>
           </fieldset>
           <fieldset class="wizard-step" data-step="3">
             <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 4 of 4 / Where to reach you</span>Who should we call?</legend>
@@ -80,7 +80,7 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
               <label class="lead-field">Phone number<input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></label>
               <label class="lead-field lead-field--wide">Email<input type="email" name="email" autocomplete="email" inputmode="email" maxlength="150" required placeholder="you@example.com"></label>
             </div>
-            <div class="wizard-review" hidden><p>Your project, at a glance</p><dl>
+            <div class="wizard-review" hidden><p>Review your project details</p><dl>
               <div><dt>Project</dt><dd data-review="project"></dd><button type="button" data-edit="0" aria-label="Edit project">Edit</button></div>
               <div><dt>Size</dt><dd data-review="size"></dd><button type="button" data-edit="1" aria-label="Edit driveway size">Edit</button></div>
               <div><dt>Location</dt><dd data-review="city"></dd><button type="button" data-edit="2" aria-label="Edit location and timing">Edit</button></div>
@@ -103,9 +103,9 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
   <section class="drive-steps" aria-labelledby="steps-title">
     <h2 id="steps-title">Most driveways: three days on site.<a class="drive-fn" href="#turnaround-note" aria-label="See turnaround conditions">*</a></h2>
     <ol class="drive-steps__list">
-      <li><span>Day 1</span><div><h3>Out with the old</h3><p>Demolition, hauling and disposal, then the base and grading prepared for the new pour.</p></div></li>
+      <li><span>Day 1</span><div><h3>Remove &amp; prepare</h3><p>Demolition, hauling and disposal, then the base and grading prepared for the new pour.</p></div></li>
       <li><span>Day 2</span><div><h3>Form &amp; pour</h3><p>Layout, drainage and reinforcement set, then the concrete placed and finished by hand.</p></div></li>
-      <li><span>Day 3</span><div><h3>Finish &amp; hand over</h3><p>Joints cut, the site left clean, and a walk through the work with your curing instructions.</p></div></li>
+      <li><span>Day 3</span><div><h3>Cleanup &amp; walkthrough</h3><p>We cut the joints, clean the site and review the finished work and curing instructions with you.</p></div></li>
     </ol>
     <p class="drive-fineprint" id="turnaround-note">*A typical single- or two-car driveway with good equipment access. Extra demolition, drainage work, a stamped finish or weather can add days, and concrete keeps curing after we leave &mdash; your written scope confirms the dates before anything starts.</p>
   </section>

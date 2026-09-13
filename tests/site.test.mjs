@@ -104,10 +104,8 @@ test('home FAQ structured data has matching visible questions and answers', () =
   }
 });
 
-test('ad landing page coverage, city suggestions and service schema match every website city', () => {
+test('ad landing page city suggestions and service schema match every website city', () => {
   const html = read('driveway-replacement/index.html');
-  const visible = [...html.matchAll(/data-service-city="([^"]+)"/g)].map(match => match[1]).sort();
-  assert.deepEqual(visible, CITIES.map(city => city.slug).sort());
   const options = [...html.matchAll(/<option value="([^"]+)"><\/option>/g)].map(match => match[1]).sort();
   assert.deepEqual(options, CITIES.map(city => city.name).sort());
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(match => JSON.parse(match[1]));

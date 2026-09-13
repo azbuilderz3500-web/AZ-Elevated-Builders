@@ -203,11 +203,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--fg);
 }
 .menu.is-open .menu__links a { opacity: 1; transform: none; }
-.menu__links a::before {
-  content: attr(data-i);
-  font-family: var(--font-body);
-  font-size: 0.7rem; letter-spacing: 0.2em; color: var(--fg-dim);
-}
 .menu__links a:hover { color: var(--fg-dim); }
 .menu.is-open .menu__links a:nth-child(1) { transition-delay: 0.15s; }
 .menu.is-open .menu__links a:nth-child(2) { transition-delay: 0.21s; }
@@ -1462,16 +1457,16 @@ body.nav-hidden .case__head { top: 0; }
 
 /* --- Editorial service index (replaces the card grid) --- */
 .index { position: relative; padding: clamp(4rem,11vh,7rem) 0; border-top: 1px solid var(--line); }
+.index > .sec-head { margin-inline: clamp(1.25rem, 4vw, 4rem); }
 .index__list { list-style: none; border-top: 1px solid var(--line); }
 .index__row {
-  display: grid; grid-template-columns: 5rem 1fr auto; align-items: center; gap: 1.5rem;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem;
   padding: clamp(1.1rem, 2.6vh, 1.9rem) clamp(1.25rem, 4vw, 4rem);
   border-bottom: 1px solid var(--line);
   position: relative; z-index: 1;
   transition: background .45s var(--ease), padding-left .5s var(--ease);
 }
 .index__row:hover { background: linear-gradient(90deg, rgba(200,169,106,.10), transparent 65%); padding-left: calc(clamp(1.25rem,4vw,4rem) + 14px); }
-.index__num { font-size: 0.7rem; letter-spacing: 0.2em; color: #c8a96a; }
 .index__name {
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(1.35rem, 3.6vw, 2.6rem); line-height: 1.05; letter-spacing: -0.025em;
@@ -1510,7 +1505,7 @@ body.nav-hidden .case__head { top: 0; }
   .open__side { flex-direction: row; align-items: flex-start; gap: 1.6rem; flex-wrap: wrap; }
   .open__stat { text-align: left; }
   .open__meta { display: none; }
-  .index__row { grid-template-columns: 3rem 1fr auto; gap: 0.9rem; }
+  .index__row { gap: 0.9rem; }
 }
 
 /* Masked line reveal for the full-bleed opening headline */

@@ -112,8 +112,8 @@ const actionBar = `
 // Short inline lead form — the SEO pages are landing pages, so the form lives on the page
 const leadForm = (context) => `
 <section class="leadform" id="estimate">
-  <h2>Get a free estimate${context ? ` for your ${esc(context)}` : ""}</h2>
-  <p>Two fields. We'll call you back within one business day — or skip the form and call us now.</p>
+  <h2>Get a free estimate</h2>
+  <p>Leave your name and number. We'll call you back within one business day.</p>
   <form class="leadform__form" data-lead data-source="website-service" method="post">
     <label class="lead-field">Your name<input type="text" name="name" maxlength="100" placeholder="Your name" required autocomplete="name"></label>
     <label class="lead-field">Phone number<input type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel"></label>
@@ -249,7 +249,7 @@ CITIES.forEach((city, ci) => {
     const img = imgSet[ci % imgSet.length];
     const isHome = city.slug === "brentwood";
     const opener = isHome
-      ? `Looking for ${svc.name.toLowerCase()} in ${city.name}? ${BRAND.name} is headquartered right here in ${city.name} — a family-run, CA-licensed general contractor serving local homeowners, with every trade on the crew carrying 15+ years in that trade.`
+      ? `${BRAND.name} provides ${svc.name.toLowerCase()} in ${city.name}. We're a family-run, CA-licensed contractor based here in Brentwood. Contact us for a free on-site estimate.`
       : OPENERS[(ci + si) % OPENERS.length](svc, city);
     const otherSvcs = SERVICES.filter((s) => s.slug !== svc.slug);
     const nearby = CITIES.filter((c) => c.county === city.county && c.slug !== city.slug).slice(0, 6);
@@ -300,9 +300,9 @@ CITIES.forEach((city, ci) => {
     <p class="lede">${esc(opener)}</p>
   </div>
   <div class="answer-box">
-    <p class="answer-box__q">Who does ${esc(svc.name.toLowerCase())} in ${esc(city.name)}, CA?</p>
+    <p class="answer-box__q">Who offers ${esc(svc.name.toLowerCase())} in ${esc(city.name)}, CA?</p>
     <p class="answer-box__a"><strong>${esc(BRAND.name)}</strong> provides ${esc(svc.name.toLowerCase())} in ${esc(city.name)}, California. We are a family-run, licensed and insured general contractor ${isHome
-      ? `headquartered right here in ${esc(city.name)}, serving the surrounding ${esc(city.county)} area`
+      ? `based in ${esc(city.name)}, serving the surrounding ${esc(city.county)} area`
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
@@ -310,20 +310,20 @@ CITIES.forEach((city, ci) => {
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
-    <h2>${esc(svc.name)} in ${esc(city.name)}: what's different here</h2>
+    <h2>Planning your project in ${esc(city.name)}</h2>
     <p>${esc(city.blurb)}</p>
-    <p>Most of ${esc(city.name)} is ${esc(city.era)}. ${esc(profileNote)}</p>
-    <p>We work throughout ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}.${city.adjacent ? ` We also cover neighboring ${esc(listPhrase(city.adjacent))} — those are unincorporated, so permits there run through ${esc(city.county)} rather than the city.` : ""} The local constant is ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
+    <p>The local housing includes ${esc(city.era)}. ${esc(profileNote)}</p>
+    <p>We serve ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}.${city.adjacent ? ` We also cover neighboring ${esc(listPhrase(city.adjacent))}. These unincorporated areas handle permits through ${esc(city.county)}.` : ""} Project planning here accounts for ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
 
     <h2>Permits and inspections in ${esc(city.name)}</h2>
-    <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)} You should never be the one standing at a counter or waiting on an inspector — that is part of what you hire a licensed contractor for.</p>
+    <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)} We handle the permit application and coordinate inspections.</p>
 
-    <h2>${esc(svc.name)} services we offer in ${esc(city.name)}</h2>
+    <h2>What's included</h2>
     <ul>
       ${svc.features.map((f) => `<li>${esc(f)}</li>`).join("\n      ")}
     </ul>
 
-    <h2>Why ${esc(city.name)} homeowners choose us</h2>
+    <h2>What to expect</h2>
     <p>${esc(WHY_VARIANTS[(ci * 7 + si * 3) % WHY_VARIANTS.length](city))} Hablamos español.</p>
   </div>
   <div class="prose"><h2>Frequently asked questions</h2></div>
@@ -360,7 +360,7 @@ CITIES.forEach((city, ci) => {
   ${crumbs([{ label: "Home", href: "/" }, { label: "Service Areas", href: "/service-areas/" }, { label: city.name }])}
   <div class="page-hero">
     <h1>Remodeling &amp; Construction<br><em>in ${esc(city.name)}, CA</em></h1>
-    <p class="lede">${esc(city.blurb)} From single-room remodels to whole-home transformations, ${BRAND.name} brings one family crew — every trade with 15+ years of experience — to ${esc(city.name)} projects of every size.</p>
+    <p class="lede">${esc(city.blurb)} Our family-run crew handles individual rooms and whole-home projects, with 15+ years of experience in each trade.</p>
   </div>
   ${trustStrip}
   <div class="prose"><h2>Our services in ${esc(city.name)}</h2></div>
@@ -429,7 +429,7 @@ const areasHtml = head({
   ${crumbs([{ label: "Home", href: "/" }, { label: "Service Areas" }])}
   <div class="page-hero">
     <h1>Service<br><em>Areas</em></h1>
-    <p class="lede">Based in Brentwood, serving a 60-mile radius: the East Bay, Tri-Valley, the Delta, wine country and over the Altamont. One family crew, the same standard everywhere we build.</p>
+    <p class="lede">Based in Brentwood, we serve a 60-mile radius across the East Bay, Tri-Valley, the Delta, wine country and over the Altamont.</p>
   </div>
   ${trustStrip}
   ${counties.map((county) => `
@@ -456,7 +456,7 @@ const servicesHtml = head({
   ${crumbs([{ label: "Home", href: "/" }, { label: "Services" }])}
   <div class="page-hero">
     <h1>Our<br><em>Services</em></h1>
-    <p class="lede">Interiors, exteriors and everything between — delivered by one family crew out of ${esc(BRAND.city)}, California. Every trade on the crew has 15+ years in that trade, estimates are free, and the work carries a written warranty of up to five years.</p>
+    <p class="lede">Our family-run crew provides interior and exterior remodeling from ${esc(BRAND.city)}, California, with 15+ years of experience in each trade. Estimates are free, and our work carries a written warranty of up to five years.</p>
   </div>
   ${trustStrip}
   <div class="city-grid">

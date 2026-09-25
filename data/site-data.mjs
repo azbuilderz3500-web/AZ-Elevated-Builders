@@ -185,7 +185,7 @@ export const SERVICES = [
     name: "Flooring Installation", slug: "flooring",
     short: "Hardwood, engineered, tile and laminate — plus radiant heat — installed flat, tight and clean.",
     img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
-    imgAlt: "New hardwood flooring in a bright remodeled living space",
+    imgAlt: "Flooring installed by AZ Elevated Builders",
     body: [
       "We flatten and prepare substrates, then install hardwood, engineered hardwood, tile and laminate with the specified expansion gaps and transitions.",
       "We also install radiant heated flooring under compatible tile and engineered flooring.",
@@ -233,7 +233,7 @@ export const SERVICES = [
     name: "Finish Carpentry & Trim", slug: "finish-carpentry-trim",
     short: "Baseboards, casing, wainscot, built-ins and stairs, fitted to your home.",
     img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
-    imgAlt: "Detailed interior trim and finish carpentry work",
+    imgAlt: "Finish carpentry and trim by AZ Elevated Builders",
     body: [
       "Our finish carpenters install and repair baseboards, door and window casing, crown molding, wainscot, paneling, shelves, built-ins and stair details. We fit each piece to the surrounding walls and prepare it for paint or stain.",
       "Trim work can be included with a remodel, repaint or flooring project, or scheduled separately.",
@@ -388,7 +388,7 @@ export const SERVICE_IMAGES = {
   "flooring": [
     "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566752734-2a0cd53d1d1f?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp",
   ],
   "drywall": [
     "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop",
@@ -402,7 +402,7 @@ export const SERVICE_IMAGES = {
   ],
   "finish-carpentry-trim": [
     "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1595514535215-9a5e0e8e04be?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp",
     "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=1600&auto=format&fit=crop",
   ],
   "steam-showers-saunas": [

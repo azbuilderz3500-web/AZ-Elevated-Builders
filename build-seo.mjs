@@ -68,13 +68,13 @@ const head = ({ title, desc, path, jsonld, image, robots = "index, follow, max-i
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:url" content="${BRAND.domain}${path}" />
 <meta property="og:locale" content="en_US" />${image ? `
-<meta property="og:image" content="${image}" />` : ""}
+<meta property="og:image" content="${shareImage(image)}" />` : ""}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(desc)}" />${image ? `
-<meta name="twitter:image" content="${image}" />` : ""}
+<meta name="twitter:image" content="${shareImage(image)}" />` : ""}
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/InterTight-var.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />${image ? `
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />${image && image.includes("images.unsplash.com") ? `
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />` : ""}
 <link rel="stylesheet" href="/css/style.min.css?v=${ASSET_V}" />
 ${extraStyles}
@@ -95,6 +95,11 @@ const srcsetFor = (url) => {
   const join = base.includes("?") ? "&" : "?";
   return [480, 800, 1200, 1600].map((w) => `${base}${join}w=${w} ${w}w`).join(", ");
 };
+// Share previews need an absolute URL, and JPEG reaches every platform
+// (several link unfurlers still drop WebP).
+const shareImage = (url) => url.startsWith("/assets/projects/")
+  ? BRAND.domain + url.replace(/\.webp$/, ".jpg")
+  : url;
 const concretePhoto = "/assets/projects/walnut-creek-exterior__after-wide-1600.webp";
 const SIZES = "(max-width: 900px) 100vw, 900px";
 
@@ -287,7 +292,7 @@ CITIES.forEach((city, ci) => {
       },
     ];
 
-    const html = head({ title, desc, path, jsonld, image: img }) + nav + `
+    const html = head({ title, desc, path, jsonld, image: svc.slug === "concrete-driveways" ? concretePhoto : img }) + nav + `
 <main class="page" id="main" tabindex="-1">
   ${crumbs([
     { label: "Home", href: "/" },
@@ -382,7 +387,7 @@ SERVICES.forEach((svc) => {
   const title = `${svc.name} — East Bay & Beyond | ${BRAND.name}`;
   const desc = `${svc.short} ${BRAND.name} serves Brentwood and 40 cities across the East Bay, Tri-Valley, Delta and North Bay. Free estimates.`;
   const html = head({
-    title, desc, path, image: svc.img,
+    title, desc, path, image: svc.slug === "concrete-driveways" ? concretePhoto : svc.img,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])],
   }) + nav + `
 <main class="page" id="main" tabindex="-1">

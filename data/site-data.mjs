@@ -88,7 +88,7 @@ export const SERVICES = [
   {
     name: "Kitchen Remodeling", slug: "kitchen-remodeling",
     short: "Kitchen layout, cabinetry, stone, lighting and fixtures, installed by our crew.",
-    img: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
     imgAlt: "Remodeled kitchen with custom island and stone countertops",
     body: [
       "We remodel kitchens from layout through installation: wall changes, cabinetry, stone and quartz counters, and lighting placed for cooking and everyday use.",
@@ -184,7 +184,7 @@ export const SERVICES = [
   {
     name: "Flooring Installation", slug: "flooring",
     short: "Hardwood, engineered, tile and laminate — plus radiant heat — installed flat, tight and clean.",
-    img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp",
     imgAlt: "Newly installed flooring in a remodeled home",
     body: [
       "We flatten and prepare substrates, then install hardwood, engineered hardwood, tile and laminate with the specified expansion gaps and transitions.",
@@ -361,24 +361,33 @@ export const PHOTO_ALT = {
   "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp": "Walk-in shower by AZ Elevated Builders with large-format tile, a fixed glass panel, a recessed niche and a linear drain",
   "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp": "Living space remodeled by AZ Elevated Builders with a wood slat divider, built-in cabinetry, wood floors and a quartz counter",
   "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp": "Lafayette primary bathroom remodeled by AZ Elevated Builders",
+  "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp": "Oakland kitchen remodeled by AZ Elevated Builders with a live-edge table, wood floors and white shaker cabinetry",
+  "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp": "Farmhouse sink under a window in an Oakland kitchen remodeled by AZ Elevated Builders",
+  "/assets/projects/oakland-kitchen-bath__kitchen-range-wall-wide-1200.webp": "White shaker cabinets, stone counters and zellige backsplash in an AZ Elevated Builders kitchen remodel in Oakland",
+  "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp": "Run of white shaker cabinets with brass knobs over wood floors in an Oakland kitchen by AZ Elevated Builders",
+  "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp": "Wood flooring through an Oakland kitchen remodeled by AZ Elevated Builders",
+  "/assets/projects/oakland-kitchen-bath__kitchen-pendant-wide-1200.webp": "Open Oakland kitchen remodeled by AZ Elevated Builders, with wood floors, a live-edge table and stainless appliances",
+  "/assets/projects/oakland-kitchen-bath__kitchen-corner-wide-1200.webp": "Kitchen corner with shaker cabinets and under-cabinet lighting in an Oakland remodel by AZ Elevated Builders",
+  "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp": "Lafayette primary bathroom by AZ Elevated Builders with a walnut floating vanity, makeup station and glass-enclosed shower",
+  "/assets/projects/lafayette-primary-bath__makeup-desk-wide-1200.webp": "Built-in walnut makeup desk in a Lafayette primary bathroom by AZ Elevated Builders",
   "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp": "Porch and exterior trim on an AZ Elevated Builders project in Walnut Creek",
 };
 
 export const SERVICE_IMAGES = {
   "kitchen-remodeling": [
-    "https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-range-wall-wide-1200.webp",
   ],
   "bathroom-remodeling": [
     "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
     "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp",
   ],
   "whole-home-remodeling": [
     "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
-    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/oakland-kitchen-bath__kitchen-corner-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-pendant-wide-1200.webp",
   ],
   "additions-adus": [
     "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1600&auto=format&fit=crop",
@@ -396,8 +405,8 @@ export const SERVICE_IMAGES = {
     "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1600&auto=format&fit=crop",
   ],
   "flooring": [
-    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
     "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp",
   ],
   "drywall": [
@@ -406,14 +415,14 @@ export const SERVICE_IMAGES = {
     "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop",
   ],
   "cabinetry-countertops": [
-    "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
+    "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp",
     "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
   ],
   "finish-carpentry-trim": [
     "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp",
-    "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/lafayette-primary-bath__makeup-desk-wide-1200.webp",
   ],
   "steam-showers-saunas": [
     "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1600&auto=format&fit=crop",

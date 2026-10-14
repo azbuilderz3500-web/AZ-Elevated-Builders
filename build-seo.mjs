@@ -8,7 +8,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { drivewayBody } from "./build-driveway.mjs";
-import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES } from "./data/site-data.mjs";
+import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES, PHOTO_ALT } from "./data/site-data.mjs";
 
 // Join a list into readable prose: "a, b and c"
 const listPhrase = (arr) =>
@@ -306,7 +306,7 @@ CITIES.forEach((city, ci) => {
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : svc.imgAlt)}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : (PHOTO_ALT[img] || svc.imgAlt))}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
@@ -392,7 +392,7 @@ SERVICES.forEach((svc) => {
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : svc.imgAlt)}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : (PHOTO_ALT[svc.img] || svc.imgAlt))}" loading="lazy" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>

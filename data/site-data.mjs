@@ -104,7 +104,7 @@ export const SERVICES = [
   {
     name: "Bathroom Remodeling", slug: "bathroom-remodeling",
     short: "Bathroom remodeling with tile, stone, steam showers and heated floors, including waterproofing and plumbing.",
-    img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
     imgAlt: "Modern remodeled bathroom with walk-in shower and custom tile",
     body: [
       "We plan bathroom remodels around waterproofing, shower-pan slope and wall support, then install the tile, stone and fixtures you choose.",
@@ -120,7 +120,7 @@ export const SERVICES = [
   {
     name: "Whole-Home Remodeling", slug: "whole-home-remodeling",
     short: "Interior and exterior remodeled as one project — layout, systems, finishes and paint under one crew.",
-    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     imgAlt: "Open-plan whole home remodel with new flooring and glazing",
     body: [
       "A whole-home remodel can update the layout, kitchen, bathrooms, flooring, systems and finishes in one project. We plan the work in sequence and coordinate the trades.",
@@ -185,7 +185,7 @@ export const SERVICES = [
     name: "Flooring Installation", slug: "flooring",
     short: "Hardwood, engineered, tile and laminate — plus radiant heat — installed flat, tight and clean.",
     img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
-    imgAlt: "Flooring installed by AZ Elevated Builders",
+    imgAlt: "Newly installed flooring in a remodeled home",
     body: [
       "We flatten and prepare substrates, then install hardwood, engineered hardwood, tile and laminate with the specified expansion gaps and transitions.",
       "We also install radiant heated flooring under compatible tile and engineered flooring.",
@@ -216,7 +216,7 @@ export const SERVICES = [
   {
     name: "Cabinetry & Countertops", slug: "cabinetry-countertops",
     short: "Custom and semi-custom cabinets with stone and quartz countertops.",
-    img: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     imgAlt: "Custom kitchen cabinetry with stone countertops",
     body: [
       "We specify, order, template and install cabinets and countertops together, coordinating cabinet alignment, counter levels and seam placement.",
@@ -232,8 +232,8 @@ export const SERVICES = [
   {
     name: "Finish Carpentry & Trim", slug: "finish-carpentry-trim",
     short: "Baseboards, casing, wainscot, built-ins and stairs, fitted to your home.",
-    img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
-    imgAlt: "Finish carpentry and trim by AZ Elevated Builders",
+    img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
+    imgAlt: "Finish carpentry and interior trim",
     body: [
       "Our finish carpenters install and repair baseboards, door and window casing, crown molding, wainscot, paneling, shelves, built-ins and stair details. We fit each piece to the surrounding walls and prepare it for paint or stain.",
       "Trim work can be included with a remodel, repaint or flooring project, or scheduled separately.",
@@ -354,6 +354,16 @@ export const WHY_VARIANTS = [
 
 // Several images per service, rotated by city so neighboring pages don't
 // share a hero. PLACEHOLDERS — swap for Alfonso's real job photos.
+// Alt text for real AZ job photos. Pages fall back to the service's generic
+// imgAlt for anything not listed here (the remaining stock placeholders).
+export const PHOTO_ALT = {
+  "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp": "Bathroom remodeled by AZ Elevated Builders with a floating wood vanity, trough sink, wall-mounted faucets and a backlit mirror",
+  "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp": "Walk-in shower by AZ Elevated Builders with large-format tile, a fixed glass panel, a recessed niche and a linear drain",
+  "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp": "Living space remodeled by AZ Elevated Builders with a wood slat divider, built-in cabinetry, wood floors and a quartz counter",
+  "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp": "Lafayette primary bathroom remodeled by AZ Elevated Builders",
+  "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp": "Porch and exterior trim on an AZ Elevated Builders project in Walnut Creek",
+};
+
 export const SERVICE_IMAGES = {
   "kitchen-remodeling": [
     "https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=1600&auto=format&fit=crop",
@@ -361,12 +371,12 @@ export const SERVICE_IMAGES = {
     "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=1600&auto=format&fit=crop",
   ],
   "bathroom-remodeling": [
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
+    "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp",
     "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1600&auto=format&fit=crop",
   ],
   "whole-home-remodeling": [
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
   ],
@@ -398,10 +408,10 @@ export const SERVICE_IMAGES = {
   "cabinetry-countertops": [
     "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
   ],
   "finish-carpentry-trim": [
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp",
     "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=1600&auto=format&fit=crop",
   ],

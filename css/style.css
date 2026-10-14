@@ -1486,7 +1486,9 @@ body.nav-hidden .case__head { top: 0; }
 .index__preview {
   position: fixed; top: 50%; right: 5vw; width: 26vw; max-width: 420px;
   aspect-ratio: 3/4; transform: translateY(-50%) scale(.96);
-  opacity: 0; pointer-events: none; z-index: 0;
+  /* Above the rows (z 1) so their rules and arrows don't cut across the photo;
+     below the nav, menu and estimate button. pointer-events: none keeps hover on the rows. */
+  opacity: 0; pointer-events: none; z-index: 2;
   transition: opacity .4s var(--ease), transform .5s var(--ease);
   overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6);
 }

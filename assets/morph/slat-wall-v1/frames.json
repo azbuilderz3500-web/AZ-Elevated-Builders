@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "count": 60,
+  "file": "frame_{i}.webp",
+  "pad": 3,
+  "start": 1,
+  "poster": "poster.webp",
+  "final": "final.webp",
+  "variants": [
+    {"name":"desktop","dir":"desktop","width":1080,"height":1440,"orientation":"portrait"},
+    {"name":"mobile","dir":"mobile","width":640,"height":854,"orientation":"portrait"}
+  ]
+}

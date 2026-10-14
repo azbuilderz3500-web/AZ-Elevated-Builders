@@ -26,6 +26,7 @@
   let lenis = null;
   if (window.Lenis && !prefersReduced) {
     lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+    window.AZEB_LENIS = lenis;   // the scroll morph hooks ScrollTrigger to it
     const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
   }
@@ -147,6 +148,21 @@
   /* ---------- Cinema: clip-wipe reveals, parallax, counters ----------
      Same drama as the first design, driven differently: images arrive as a
      curtain wipe rather than a word-by-word fade. */
+  /* ---------- Photos: fetch ahead of the scroll ----------
+     Native lazy-loading waits too long on iOS Safari (it starts a photo
+     roughly as it enters the screen), so boxes sat blank while the visitor
+     scrolled. Start each lazy photo about two screens early instead; the
+     native attribute stays as the fallback when there is no observer. */
+  const lazyImgs = [...document.querySelectorAll('img[loading="lazy"]')];
+  if (lazyImgs.length && "IntersectionObserver" in window) {
+    const ahead = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      en.target.loading = "eager";
+      ahead.unobserve(en.target);
+    }), { rootMargin: "200% 0px" });
+    lazyImgs.forEach((img) => ahead.observe(img));
+  }
+
   const revealables = document.querySelectorAll(".r-up, .r-clip, .r-mask");
   const revealAll = () => revealables.forEach((el) => el.classList.add("on"));
   // Wipe only once the photos inside have decoded, so the curtain uncovers a
@@ -159,7 +175,7 @@
     el.dataset.revealing = "1";
     Promise.race([
       Promise.all(pending.map((img) => img.decode().catch(() => {}))),
-      new Promise((done) => setTimeout(done, 1200)),
+      new Promise((done) => setTimeout(done, 500)),
     ]).then(() => el.classList.add("on"));
   };
   if (prefersReduced || !("IntersectionObserver" in window)) {
@@ -171,7 +187,7 @@
       (entries) => entries.forEach((en) => {
         if (en.isIntersecting) { reveal(en.target); cine.unobserve(en.target); }
       }),
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
     );
     revealables.forEach((el) => cine.observe(el));
     // Safety net for anything the observer missed — but only what is already

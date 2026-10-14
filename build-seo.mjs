@@ -311,7 +311,7 @@ CITIES.forEach((city, ci) => {
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : (PHOTO_ALT[img] || svc.imgAlt))}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : (PHOTO_ALT[img] || svc.imgAlt))}" fetchpriority="high" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
@@ -397,7 +397,7 @@ SERVICES.forEach((svc) => {
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : (PHOTO_ALT[svc.img] || svc.imgAlt))}" loading="lazy" decoding="async" /></div>
+  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : (PHOTO_ALT[svc.img] || svc.imgAlt))}" fetchpriority="high" decoding="async" /></div>
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>
@@ -554,7 +554,7 @@ console.log(`  1 service-areas index + sitemap.xml + robots.txt`);
 const homePath = join(ROOT, "index.html");
 let home = readFileSync(homePath, "utf8");
 home = home.replace(/\/css\/style\.min\.css(?:\?v=[a-f0-9]+)?/g, `/css/style.min.css?v=${ASSET_V}`);
-for (const file of ["main.js", "leads.js", "lenis.min.js"]) {
+for (const file of ["main.js", "leads.js", "lenis.min.js", "morph.js", "scroll-scrub.js"]) {
   const hash = createHash("sha1").update(readFileSync(join(ROOT, "js", file))).digest("hex").slice(0, 8);
   home = home.replace(new RegExp(`/js/${file.replaceAll(".", "\\.")}(?:\\?v=[a-f0-9]+)?`, "g"), `/js/${file}?v=${hash}`);
 }

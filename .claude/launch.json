@@ -4,8 +4,8 @@
     {
       "name": "azeb-site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173"],
-      "port": 4173
+      "runtimeArgs": ["-m", "http.server", "4187"],
+      "port": 4187
     }
   ]
 }

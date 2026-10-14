@@ -149,22 +149,41 @@
      curtain wipe rather than a word-by-word fade. */
   const revealables = document.querySelectorAll(".r-up, .r-clip, .r-mask");
   const revealAll = () => revealables.forEach((el) => el.classList.add("on"));
-  // Opt in to the hidden-by-default states only now that JS is confirmed running.
-  if (!prefersReduced && "IntersectionObserver" in window) {
-    document.documentElement.classList.add("cinema");
-    // Belt and braces: if anything is still hidden after 4s, show it.
-    setTimeout(revealAll, 4000);
-  }
+  // Wipe only once the photos inside have decoded, so the curtain uncovers a
+  // picture rather than an empty box that pops in afterwards (slow phones,
+  // lazy images). Capped, so a stalled download never holds the reveal back.
+  const reveal = (el) => {
+    if (el.classList.contains("on") || el.dataset.revealing) return;
+    const pending = [...el.querySelectorAll("img")].filter((img) => !img.complete);
+    if (!pending.length) { el.classList.add("on"); return; }
+    el.dataset.revealing = "1";
+    Promise.race([
+      Promise.all(pending.map((img) => img.decode().catch(() => {}))),
+      new Promise((done) => setTimeout(done, 1200)),
+    ]).then(() => el.classList.add("on"));
+  };
   if (prefersReduced || !("IntersectionObserver" in window)) {
     revealAll();
   } else {
+    // Opt in to the hidden-by-default states only now that JS is confirmed running.
+    document.documentElement.classList.add("cinema");
     const cine = new IntersectionObserver(
       (entries) => entries.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add("on"); cine.unobserve(en.target); }
+        if (en.isIntersecting) { reveal(en.target); cine.unobserve(en.target); }
       }),
       { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
     );
     revealables.forEach((el) => cine.observe(el));
+    // Safety net for anything the observer missed — but only what is already
+    // on screen. The old blanket 4s timer revealed the whole page before
+    // anyone scrolled to it, so the reveals never actually played.
+    const sweep = () => {
+      const limit = window.innerHeight * 0.85;
+      revealables.forEach((el) => { if (el.getBoundingClientRect().top < limit) reveal(el); });
+    };
+    setTimeout(sweep, 2500);
+    let sweepT;
+    window.addEventListener("scroll", () => { clearTimeout(sweepT); sweepT = setTimeout(sweep, 400); }, { passive: true });
   }
 
   /* Parallax — hero art and the full-bleed band drift against the scroll. */

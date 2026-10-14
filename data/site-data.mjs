@@ -136,7 +136,7 @@ export const SERVICES = [
   {
     name: "Home Additions & ADUs", slug: "additions-adus",
     short: "Home additions and ADUs, from feasibility and permits through construction.",
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp",
     imgAlt: "Detached ADU guest house with pool at dusk",
     body: [
       "We design and build primary-suite additions, kitchen expansions, family rooms and second-story additions. Rooflines, windows and finishes are planned to work with the existing house.",
@@ -152,7 +152,7 @@ export const SERVICES = [
   {
     name: "Concrete & Driveways", slug: "concrete-driveways",
     short: "Driveways, patios, walkways and retaining walls — formed, poured and finished by our own crew.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/walnut-creek-exterior__after-wide-1200.webp",
     imgAlt: "Modern home exterior with new concrete driveway and walkways",
     body: [
       "Our crew builds driveways, patios, walkways, slabs and retaining walls. We plan base compaction, reinforcement and joints for the site and the way the concrete will be used.",
@@ -168,7 +168,7 @@ export const SERVICES = [
   {
     name: "Interior & Exterior Painting", slug: "painting",
     short: "Full-prep painting inside and out — 22 years on the brush, straight lines, quality coatings.",
-    img: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/concept__painting-exterior-repaint-wide-1200.webp",
     imgAlt: "Freshly painted home exterior at dusk",
     body: [
       "Our lead painter has 22 years of experience. We wash, scrape, sand, patch and prime as needed, then apply coatings to manufacturer specifications with careful masking and edging.",
@@ -200,7 +200,7 @@ export const SERVICES = [
   {
     name: "Drywall Installation & Repair", slug: "drywall",
     short: "Drywall installation, taping, texturing and repairs by a specialist with 20 years of experience.",
-    img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp",
     imgAlt: "Clean finished interior walls in a remodeled home",
     body: [
       "Our drywall specialist has 20 years of experience in installation, finishing and repairs. We prepare flat surfaces, finish corners and match surrounding textures.",
@@ -248,7 +248,7 @@ export const SERVICES = [
   {
     name: "Steam Showers, Saunas & Heated Floors", slug: "steam-showers-saunas",
     short: "Steam showers, saunas and radiant heated floors, including waterproofing and electrical installation.",
-    img: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp",
     imgAlt: "Spa bathroom with steam shower and warm stone finishes",
     body: [
       "Steam showers, saunas and heated floors require coordinated waterproofing, electrical work and equipment sizing. We plan those requirements with the room layout.",
@@ -264,7 +264,7 @@ export const SERVICES = [
   {
     name: "Pergolas & Outdoor Living", slug: "pergolas-outdoor-living",
     short: "Pergolas, patios, landscaping and outdoor rooms, designed and built together.",
-    img: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?q=80&w=1600&auto=format&fit=crop",
+    img: "/assets/projects/concept__pergolas-outdoor-living-wood-pergola-patio-wide-1200.webp",
     imgAlt: "Backyard pergola and outdoor living space at dusk",
     body: [
       "We design and build pergolas, patio covers, outdoor kitchens, concrete patios and landscaping as one coordinated project.",
@@ -353,10 +353,29 @@ export const WHY_VARIANTS = [
 ];
 
 // Several images per service, rotated by city so neighboring pages don't
-// share a hero. PLACEHOLDERS — swap for Alfonso's real job photos.
+// share a hero. Real AZ job photos wherever one exists; concept__ files are
+// AI illustrations modelled on AZ's work, for services with no job photos yet
+// — swap them for real photos as Alfonso sends them.
 // Alt text for real AZ job photos. Pages fall back to the service's generic
 // imgAlt for anything not listed here (the remaining stock placeholders).
 export const PHOTO_ALT = {
+  // AI-generated service illustrations (Higgsfield), modelled on AZ's real work.
+  // Used only as service-page banners in place of stock, never as an AZ project.
+  "/assets/projects/concept__painting-exterior-repaint-wide-1200.webp": "Single-story ranch house with freshly painted taupe lap siding, white trim, a board-and-batten porch gable, a black front door and a white garage door",
+  "/assets/projects/concept__painting-interior-room-wide-1200.webp": "Empty freshly painted living room with warm white walls, white trim and baseboards, two black double-hung windows above a white oak bench, and light oak flooring in morning sun",
+  "/assets/projects/concept__painting-painted-cabinetry-wide-1200.webp": "Kitchen wall of sage green painted shaker cabinets with brass knobs, a white quartz countertop, a white square-tile backsplash and an undermount sink with a brass faucet beneath a window",
+  "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp": "Empty living room with smooth white walls and ceiling, recessed lights, a black-framed window, light oak flooring and a hallway opening, with morning sun across the back wall",
+  "/assets/projects/concept__drywall-taped-mudded-in-progress-wide-1200.webp": "Bedroom partway through drywall finishing, with taped and first-coated seams, spotted screws, a masked window and rosin paper on the floor, with a bucket, mud pan, tape roll and pole sander",
+  "/assets/projects/concept__drywall-seamless-wall-repair-wide-1200.webp": "Kitchen wall with a sanded drywall patch ready for primer, beside white shaker cabinets with brass hardware and quartz counters, with a mud pan, taping knife and sanding sponge on a drop cloth",
+  "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp": "Detached single-story backyard cottage with white board-and-batten siding, black windows, a black half-glass entry door under a small bracketed overhang, a wall lantern and a concrete walkway lined with lavender and ornamental grasses beneath a large oak",
+  "/assets/projects/concept__additions-adus-matched-single-story-addition-wide-1200.webp": "Rear view of a single-story ranch house with a gable-end addition clad in matching white lap siding, black French doors, black double-hung windows, a wall lantern and a new concrete patio facing a lawn and redwood lattice-top fence",
+  "/assets/projects/concept__additions-adus-adu-interior-kitchenette-wide-1200.webp": "Single-wall kitchenette in a small studio with white shaker cabinets and brass pulls, a panel-ready refrigerator column, white quartz counter and full-height quartz backsplash, a matte black faucet under a black-framed window, and a flush induction cooktop, with light oak floors, a skylight and an oak dining table",
+  "/assets/projects/concept__pergolas-outdoor-living-wood-pergola-patio-wide-1200.webp": "Freestanding wood pergola with knee-braced posts over a concrete patio with a wooden dining table and chairs, behind a white single-story home with lap siding and black windows",
+  "/assets/projects/concept__pergolas-outdoor-living-outdoor-kitchen-patio-wide-1200.webp": "Freestanding L-shaped stacked-stone outdoor kitchen with a stainless steel grill, access doors, drawers, an under-counter fridge and a bar sink with a black faucet, under a four-post cedar pergola on a light-gray large-format paver patio beside a white board-and-batten single-story home",
+  "/assets/projects/concept__pergolas-outdoor-living-covered-patio-golden-hour-wide-1200.webp": "Attached solid-roof patio cover with white square posts and a stained tongue-and-groove wood ceiling with recessed lights and a black ceiling fan, sheltering an outdoor sectional and wood coffee table on a jute rug beside a black sliding door",
+  "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp": "Walk-in steam shower with floor-to-ceiling frameless glass, light grey large-format porcelain tile, a floating tiled bench, a long wall niche, a matte black ceiling rain head and a handheld shower on a slide bar",
+  "/assets/projects/concept__steam-showers-saunas-cedar-home-sauna-wide-1200.webp": "Indoor cedar sauna with a glass front and door, an L-shaped slatted bench with warm under-bench lighting, a stainless electric heater with stones behind a wood guard rail, and a slatted duckboard floor",
+  // Real AZ job photos.
   "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp": "Bathroom remodeled by AZ Elevated Builders with a floating wood vanity, trough sink, wall-mounted faucets and a backlit mirror",
   "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp": "Walk-in shower by AZ Elevated Builders with large-format tile, a fixed glass panel, a recessed niche and a linear drain",
   "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp": "Living space remodeled by AZ Elevated Builders with a wood slat divider, built-in cabinetry, wood floors and a quartz counter",
@@ -390,19 +409,17 @@ export const SERVICE_IMAGES = {
     "/assets/projects/oakland-kitchen-bath__kitchen-pendant-wide-1200.webp",
   ],
   "additions-adus": [
-    "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp",
+    "/assets/projects/concept__additions-adus-matched-single-story-addition-wide-1200.webp",
+    "/assets/projects/concept__additions-adus-adu-interior-kitchenette-wide-1200.webp",
   ],
   "concrete-driveways": [
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600585153490-76fb20a32601?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/walnut-creek-exterior__after-wide-1200.webp",
   ],
   "painting": [
-    "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/concept__painting-exterior-repaint-wide-1200.webp",
+    "/assets/projects/concept__painting-interior-room-wide-1200.webp",
+    "/assets/projects/concept__painting-painted-cabinetry-wide-1200.webp",
   ],
   "flooring": [
     "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp",
@@ -410,9 +427,9 @@ export const SERVICE_IMAGES = {
     "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp",
   ],
   "drywall": [
-    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp",
+    "/assets/projects/concept__drywall-taped-mudded-in-progress-wide-1200.webp",
+    "/assets/projects/concept__drywall-seamless-wall-repair-wide-1200.webp",
   ],
   "cabinetry-countertops": [
     "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
@@ -425,14 +442,13 @@ export const SERVICE_IMAGES = {
     "/assets/projects/lafayette-primary-bath__makeup-desk-wide-1200.webp",
   ],
   "steam-showers-saunas": [
-    "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp",
+    "/assets/projects/concept__steam-showers-saunas-cedar-home-sauna-wide-1200.webp",
   ],
   "pergolas-outdoor-living": [
-    "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600566752229-250ed79470f8?q=80&w=1600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1598902108854-10e335adac99?q=80&w=1600&auto=format&fit=crop",
+    "/assets/projects/concept__pergolas-outdoor-living-wood-pergola-patio-wide-1200.webp",
+    "/assets/projects/concept__pergolas-outdoor-living-outdoor-kitchen-patio-wide-1200.webp",
+    "/assets/projects/concept__pergolas-outdoor-living-covered-patio-golden-hour-wide-1200.webp",
   ],
 };
 

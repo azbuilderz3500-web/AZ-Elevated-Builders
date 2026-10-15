@@ -175,7 +175,7 @@
     el.dataset.revealing = "1";
     Promise.race([
       Promise.all(pending.map((img) => img.decode().catch(() => {}))),
-      new Promise((done) => setTimeout(done, 500)),
+      new Promise((done) => setTimeout(done, 250)),
     ]).then(() => el.classList.add("on"));
   };
   if (prefersReduced || !("IntersectionObserver" in window)) {
@@ -187,7 +187,7 @@
       (entries) => entries.forEach((en) => {
         if (en.isIntersecting) { reveal(en.target); cine.unobserve(en.target); }
       }),
-      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px -2% 0px" }
     );
     revealables.forEach((el) => cine.observe(el));
     // Safety net for anything the observer missed — but only what is already

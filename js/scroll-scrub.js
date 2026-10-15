@@ -331,7 +331,8 @@ export function createScrollScrub(userOptions = {}) {
   }
 
   async function loadFrame(i) {
-    const res = await fetch(urlFor(i), { signal: abort.signal });
+    // Low priority: frames must never compete with the photos already on screen.
+    const res = await fetch(urlFor(i), { signal: abort.signal, priority: 'low' });
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${urlFor(i)}`);
     blobs[i] = await res.blob();
     loadedCount++;

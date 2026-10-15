@@ -1276,14 +1276,18 @@ body.has-actionbar { padding-bottom: 0; }
 .r-up { transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .cinema .r-up.on{ opacity: 1; transform: none; }
 
-/* clip wipe — images arrive like a curtain, not a fade */
-.cinema .r-clip { clip-path: inset(0 0 100% 0); }
-.r-clip { transition: clip-path .8s var(--ease); }
-.cinema .r-clip.on { clip-path: inset(0 0 0% 0); }
+/* clip wipe — images arrive like a curtain, not a fade.
+   The clip sits on the children, never on the .r-clip element main.js
+   observes: Chrome measures an IntersectionObserver target through its own
+   clip-path, so a fully clipped figure read as 0% visible and the wipe never
+   fired while scrolling (photos only appeared once scrolling stopped). */
+.cinema .r-clip > * { clip-path: inset(0 0 100% 0); }
+.r-clip > * { transition: clip-path .8s var(--ease); }
+.cinema .r-clip.on > * { clip-path: inset(0 0 0% 0); }
 
 /* the image itself drifts up inside its frame as it reveals */
 .cinema .r-clip img { transform: scale(1.12); }
-.r-clip img { transition: transform 1.1s var(--ease); }
+.r-clip img { transition: clip-path .8s var(--ease), transform 1.1s var(--ease); }
 .cinema .r-clip.on img { transform: scale(1); }
 
 .r-mask { overflow: hidden; display: block; }
@@ -1355,8 +1359,9 @@ body.nav-hidden .case__head { top: 0; }
 .case__shot { overflow: hidden; border-radius: 12px; }
 /* A quiet tone holds each photo's box while it downloads (the caption sits
    inside the figure, so the tone goes on the image, not the figure). */
-.case__shot img { background: var(--line); transition: transform 1.1s var(--ease), filter .6s ease; }
-.case__shot:hover img { transform: scale(1.07); filter: brightness(1.08); }
+.case__shot img { background: var(--line); transition: clip-path .8s var(--ease), transform 1.1s var(--ease), filter .6s ease; }
+.case__shot:hover img,
+.cinema .case__shot.on:hover img { transform: scale(1.07); filter: brightness(1.08); }  /* .on rule would otherwise pin scale(1) */
 
 /* --- Service cards: lift + sweep --- */
 .svc__grid a { position: relative; overflow: hidden; }
@@ -1371,7 +1376,7 @@ body.nav-hidden .case__head { top: 0; }
 .lead__proof strong { font-variant-numeric: tabular-nums; }
 
 @media (prefers-reduced-motion: reduce) {
-  .r-up, .r-clip, .r-mask > *, .lead__h1 span.line > span,
+  .r-up, .r-clip, .r-clip > *, .r-mask > *, .lead__h1 span.line > span,
   .lead__eyebrow, .lead__sub, .lead__cta, .lead__proof {
     opacity: 1 !important; transform: none !important; clip-path: none !important;
     animation: none !important; transition: none !important;

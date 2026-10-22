@@ -171,7 +171,7 @@ const renderFooter = (leadEndpoint = BRAND.leadWebhook) => `
 <footer class="simple-footer">
   <span>© 2026 ${BRAND.name} · ${BRAND.city}, ${BRAND.state} · ${BRAND.license}</span>
   <span><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a> · <a href="mailto:${BRAND.email}">${BRAND.email}</a> · <a href="/services/">Services</a> · <a href="/service-areas/">Service Areas</a> · <a href="/privacy.html">Privacy</a> · <a href="/">Home</a></span>
-  <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="noopener">To The Max Media</a></span>
+  <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="nofollow noopener">To The Max Media</a></span>
 </footer>
 <script>window.AZEB_LEAD_ENDPOINT=${JSON.stringify(leadEndpoint || "")};</script>
 <script defer src="/js/leads.js?v=${createHash("sha1").update(readFileSync(join(ROOT, "js/leads.js"))).digest("hex").slice(0, 8)}"></script>

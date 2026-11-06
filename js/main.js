@@ -57,19 +57,31 @@
   /* ---------- Nav hide/show on scroll ---------- */
   const nav = document.getElementById("nav");
   let lastY = 0;
+  // Phones: while the sketch-to-room stage is pinned, keep the bar away; on
+  // any upward flick it slid back over the section's heading.
+  const drawn = document.getElementById("drawn");
+  const phoneMq = window.matchMedia("(max-width: 900px), (orientation: landscape) and (max-height: 500px)");
   const onScroll = () => {
     const y = window.scrollY;
     // Never hide the nav while the menu is open — its close button lives there,
     // and hiding it stranded the user with no way out.
     const menuOpen = menu && menu.classList.contains("is-open");
-    const hide = !menuOpen && y > 140 && y > lastY;
+    let pinned = false;
+    if (drawn && phoneMq.matches) {
+      const r = drawn.getBoundingClientRect();
+      pinned = r.top <= 1 && r.bottom >= window.innerHeight - 1;
+    }
+    const hide = !menuOpen && y > 140 && (y > lastY || pinned);
     nav.classList.toggle("is-hidden", hide);
     // Body flag lets sticky elements (case-study titles) follow the nav:
     // when the bar slides away, they slide up to top:0 so no gap opens
     // above them where content scrolls through.
     document.body.classList.toggle("nav-hidden", hide);
     lastY = y;
-    if (fab) fab.classList.toggle("is-in", y > window.innerHeight * 0.6);
+    // Step aside at the footer: it has its own Call and Email buttons, and the
+    // pill would otherwise sit on top of the legal and credit line.
+    const atFoot = window.innerHeight + y > document.documentElement.scrollHeight - 260;
+    if (fab) fab.classList.toggle("is-in", y > window.innerHeight * 0.6 && !atFoot);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -137,6 +149,7 @@
         const src = row.dataset.preview;
         if (!src) return;
         if (idxImg.getAttribute("src") !== src) idxImg.setAttribute("src", src);
+        idxPreview.classList.toggle("is-illustration", src.includes("/concept__"));
         idxPreview.classList.add("on");
       });
       row.addEventListener("mouseleave", () => idxPreview.classList.remove("on"));
@@ -153,14 +166,20 @@
      roughly as it enters the screen), so boxes sat blank while the visitor
      scrolled. Start each lazy photo about two screens early instead; the
      native attribute stays as the fallback when there is no observer. */
+  // Waits for the page's load event, so the hero photo (the largest paint)
+  // isn't competing with photos further down on a phone connection.
   const lazyImgs = [...document.querySelectorAll('img[loading="lazy"]')];
-  if (lazyImgs.length && "IntersectionObserver" in window) {
+  const fetchAhead = () => {
     const ahead = new IntersectionObserver((entries) => entries.forEach((en) => {
       if (!en.isIntersecting) return;
       en.target.loading = "eager";
       ahead.unobserve(en.target);
     }), { rootMargin: "200% 0px" });
     lazyImgs.forEach((img) => ahead.observe(img));
+  };
+  if (lazyImgs.length && "IntersectionObserver" in window) {
+    if (document.readyState === "complete") fetchAhead();
+    else window.addEventListener("load", fetchAhead, { once: true });
   }
 
   const revealables = document.querySelectorAll(".r-up, .r-clip, .r-mask");

@@ -42,67 +42,69 @@ export const CITIES = [
   { name: "Oakley", slug: "oakley", county: "Contra Costa County", blurb: "We offer remodeling and construction services in Oakley's subdivisions and Delta-side neighborhoods.", permit: "the City of Oakley Building Division", era: "late-1990s through 2010s tract construction with pockets of older Delta cottages", hoods: ["Summer Lake", "Magnolia Park", "Cypress Grove"], profile: "delta", terrain: "sandy Delta soil and a high water table close to the shoreline" },
   { name: "Antioch", slug: "antioch", county: "Contra Costa County", blurb: "We serve Antioch, from Rivertown to the neighborhoods around Lone Tree Way.", permit: "the City of Antioch Building Inspection Division", era: "everything from pre-war Rivertown cottages to 1970s ranches and 2000s hillside tracts", hoods: ["Rivertown", "Lone Tree Valley", "Mira Vista Hills", "Black Diamond"], profile: "postwar", terrain: "a mix of river-flat lots downtown and clay hillsides to the south" },
   { name: "Discovery Bay", slug: "discovery-bay", county: "Contra Costa County", blurb: "Waterfront living puts extra demands on a house. We build and remodel around docks, decks and Delta weather in Discovery Bay.", permit: "Contra Costa County Building Inspection, since Discovery Bay is unincorporated", era: "1980s through 2000s waterfront and golf-course homes", hoods: ["Discovery Bay Country Club", "Ravenswood", "Lakeshore", "The Willows"], profile: "delta", terrain: "levee-adjacent lots, a high water table and constant Delta wind and humidity" },
-  { name: "Pittsburg", slug: "pittsburg", county: "Contra Costa County", blurb: "We offer remodeling and concrete work for Pittsburg's older homes and newer developments.", permit: "the City of Pittsburg Building Division", era: "1940s–60s working-town housing plus newer hillside development to the south", hoods: ["Old Town", "Vista Del Mar", "San Marco", "Woodlands"], profile: "postwar", terrain: "waterfront flats giving way to steep clay slopes inland" },
+  { name: "Pittsburg", slug: "pittsburg", county: "Contra Costa County", blurb: "We offer remodeling and concrete work for Pittsburg's older homes and newer developments.", permit: "the City of Pittsburg Building Division", era: "1940s–60s working-town homes plus newer hillside development to the south", hoods: ["Old Town", "Vista Del Mar", "San Marco", "Woodlands"], profile: "postwar", terrain: "waterfront flats giving way to steep clay slopes inland" },
   { name: "Concord", slug: "concord", county: "Contra Costa County", blurb: "We offer whole-home remodeling and additions for Concord's ranch and split-level homes.", permit: "the City of Concord Building Division", era: "post-war 1950s and 60s ranch and split-level tracts", hoods: ["Todos Santos", "Dana Estates", "Ygnacio Valley", "Clayton Valley"], profile: "postwar", terrain: "flat valley lots with expansive clay and hot inland summers" },
-  { name: "Clayton", slug: "clayton", county: "Contra Costa County", blurb: "Our Clayton services include kitchen remodeling, outdoor living and exterior updates.", permit: "the City of Clayton Building Division", era: "1970s–90s custom and semi-custom homes on generous lots", hoods: ["Oakhurst", "Peacock Creek", "Regency Woods", "downtown Clayton"], profile: "modern", terrain: "Mt. Diablo foothill slopes and wildland-urban interface fire requirements" },
+  { name: "Clayton", slug: "clayton", county: "Contra Costa County", blurb: "Our Clayton services include kitchen remodeling, outdoor living and exterior updates.", permit: "the City of Clayton Building Division", era: "1970s–90s custom and semi-custom homes on generous lots", hoods: ["Oakhurst", "Peacock Creek", "Regency Woods", "Downtown Clayton"], profile: "modern", terrain: "Mt. Diablo foothill slopes and wildland-urban interface fire requirements" },
   { name: "Walnut Creek", slug: "walnut-creek", county: "Contra Costa County", blurb: "We provide remodeling, concrete and finish work for Walnut Creek homes.", permit: "the City of Walnut Creek Building Division", era: "1950s–70s ranches, mid-century customs and newer downtown infill", hoods: ["Rossmoor", "Northgate", "Walnut Heights", "Downtown Walnut Creek"], adjacent: ["Saranap"], profile: "postwar", terrain: "valley floor and oak-covered hillside lots with mature tree protection rules" },
-  { name: "Pleasant Hill", slug: "pleasant-hill", county: "Contra Costa County", blurb: "We offer remodeling services for Pleasant Hill's post-war homes, including plumbing, electrical and finish work.", permit: "the City of Pleasant Hill Building Division", era: "1950s and 60s post-war tracts, many never significantly updated", hoods: ["Gregory Gardens", "Poets Corner", "Sherman Acres", "Valley High"], profile: "postwar", terrain: "flat lots with original clay sewer laterals and aging service panels" },
-  { name: "Martinez", slug: "martinez", county: "Contra Costa County", blurb: "We offer remodeling services for Martinez homes, from downtown Victorians to hillside ranches.", permit: "the City of Martinez Building Division", era: "Victorian and Craftsman downtown stock alongside 1960s–80s hillside homes", hoods: ["Downtown Martinez", "Muir Station", "Virginia Hills"], adjacent: ["Alhambra Valley", "Vine Hill"], profile: "historic", terrain: "steep older streets, knob-and-tube legacies and hillside drainage" },
-  { name: "Lafayette", slug: "lafayette", county: "Contra Costa County", blurb: "We offer remodeling, finish carpentry and cabinetry services in Lafayette.", permit: "the City of Lafayette Building Division", era: "1950s–70s ranch homes on wooded lots, many now extensively remodeled", hoods: ["Happy Valley", "Burton Valley", "Trail neighborhood", "Reliez Valley"], profile: "postwar", terrain: "wooded hillside parcels with tree ordinances and fire-zone construction rules" },
+  { name: "Pleasant Hill", slug: "pleasant-hill", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Contra Costa County", blurb: "We offer remodeling services for Pleasant Hill's post-war homes, including plumbing, electrical and finish work.", permit: "the City of Pleasant Hill Building Division", era: "1950s and 60s post-war tracts, many never significantly updated", hoods: ["Gregory Gardens", "Poets Corner", "Sherman Acres", "Valley High"], profile: "postwar", terrain: "flat lots with original clay sewer laterals and aging service panels" },
+  { name: "Martinez", slug: "martinez", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Contra Costa County", blurb: "We offer remodeling services for Martinez homes, from downtown Victorians to hillside ranches.", permit: "the City of Martinez Building Division", era: "Victorian and Craftsman downtown stock alongside 1960s–80s hillside homes", hoods: ["Downtown Martinez", "Muir Station", "Virginia Hills"], adjacent: ["Alhambra Valley", "Vine Hill"], profile: "historic", terrain: "steep older streets, knob-and-tube legacies and hillside drainage" },
+  { name: "Lafayette", slug: "lafayette", county: "Contra Costa County", blurb: "We offer remodeling, finish carpentry and cabinetry services in Lafayette.", permit: "the City of Lafayette Building Division", era: "1950s–70s ranch homes on wooded lots, many now extensively remodeled", hoods: ["Happy Valley", "Burton Valley", "Trail Neighborhood", "Reliez Valley"], profile: "postwar", terrain: "wooded hillside parcels with tree ordinances and fire-zone construction rules" },
   { name: "Orinda", slug: "orinda", county: "Contra Costa County", blurb: "Orinda's wooded lots and custom homes call for careful additions, structural know-how and finishes that disappear into the original.", permit: "the City of Orinda Building Department", era: "1930s–60s custom homes, many original and architecturally distinctive", hoods: ["Orinda Downs", "Sleepy Hollow", "Glorietta", "Orinda Village"], profile: "historic", terrain: "steep wooded canyons, narrow access roads and strict fire-zone requirements" },
   { name: "Moraga", slug: "moraga", county: "Contra Costa County", blurb: "In Moraga we handle everything from kitchen and bath remodels to full exterior repaints and new concrete.", permit: "the Town of Moraga Planning and Building Department", era: "1960s and 70s family homes on large lots", hoods: ["Moraga Country Club", "Campolindo", "Sanders Ranch", "Rheem Valley"], profile: "postwar", terrain: "rolling hillside lots with slope-stability and drainage considerations" },
   { name: "Alamo", slug: "alamo", county: "Contra Costa County", blurb: "Our Alamo services include bathroom remodeling, custom cabinetry, outdoor kitchens and painting.", permit: "Contra Costa County Building Inspection, since Alamo is unincorporated", era: "large custom estates from the 1960s onward, many on acre-plus parcels", hoods: ["Westside Alamo", "Round Hill", "Stone Valley", "Alamo Oaks"], profile: "modern", terrain: "acre-plus lots, private drives and septic systems on some parcels" },
   { name: "Danville", slug: "danville", county: "Contra Costa County", blurb: "We offer remodeling and construction services in Danville and neighboring Blackhawk.", permit: "the Town of Danville Building Division", era: "1970s–90s custom homes plus older Westside cottages near downtown", hoods: ["Westside Danville", "Greenbrook", "Sycamore Valley", "Tassajara Ranch"], adjacent: ["Blackhawk", "Diablo"], profile: "modern", terrain: "valley and foothill lots, several with HOA design review on top of town permits" },
-  { name: "San Ramon", slug: "san-ramon", county: "Contra Costa County", blurb: "We offer kitchen and bathroom remodeling, ADUs and outdoor living projects in San Ramon.", permit: "the City of San Ramon Building and Safety Division", era: "1980s through 2010s planned communities, many with original builder finishes", hoods: ["Dougherty Valley", "Windemere", "Bishop Ranch area", "Gale Ranch"], profile: "modern", terrain: "planned-community lots where HOA architectural review runs alongside city permits" },
-  { name: "Richmond", slug: "richmond", county: "Contra Costa County", blurb: "We offer remodeling services for Richmond's bungalows, hillside homes and waterfront properties.", permit: "the City of Richmond Building Regulations Division", era: "pre-war bungalows and wartime housing alongside newer hillside and marina builds", hoods: ["Point Richmond", "Marina Bay", "Richmond Annex", "May Valley"], profile: "historic", terrain: "older foundations, dated wiring and bay-adjacent moisture exposure" },
-  { name: "El Cerrito", slug: "el-cerrito", county: "Contra Costa County", blurb: "We offer remodeling services in El Cerrito, with planning for sloped lots and existing home layouts.", permit: "the City of El Cerrito Building Division", era: "1920s–50s bungalows and mid-century homes stepping up the hillside", hoods: ["El Cerrito Hills", "Fairmount", "Richmond Annex border", "Cerrito Vista"], profile: "historic", terrain: "narrow sloped lots with tight access and downhill drainage to manage" },
+  { name: "San Ramon", slug: "san-ramon", county: "Contra Costa County", blurb: "We offer kitchen and bathroom remodeling, ADUs and outdoor living projects in San Ramon.", permit: "the City of San Ramon Building and Safety Division", era: "1980s through 2010s planned communities, many with original builder finishes", hoods: ["Dougherty Valley", "Windemere", "Canyon Lakes", "Gale Ranch"], profile: "modern", terrain: "planned-community lots where HOA architectural review runs alongside city permits" },
+  { name: "Richmond", slug: "richmond", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Contra Costa County", blurb: "We offer remodeling services for Richmond's bungalows, hillside homes and waterfront properties.", permit: "the City of Richmond Building Regulations Division", era: "pre-war bungalows and wartime housing alongside newer hillside and marina builds", hoods: ["Point Richmond", "Marina Bay", "Richmond Annex", "May Valley"], profile: "historic", terrain: "older foundations, dated wiring and bay-adjacent moisture exposure" },
+  { name: "El Cerrito", slug: "el-cerrito", county: "Contra Costa County", blurb: "We offer remodeling services in El Cerrito, with planning for sloped lots and existing home layouts.", permit: "the City of El Cerrito Building Division", era: "1920s–50s bungalows and mid-century homes stepping up the hillside", hoods: ["El Cerrito Hills", "Fairmount", "Cerrito Vista"], profile: "historic", terrain: "narrow sloped lots with tight access and downhill drainage to manage" },
   // Alameda County
-  { name: "Oakland", slug: "oakland", county: "Alameda County", blurb: "We offer remodeling services across Oakland, from Rockridge Craftsman homes to hillside properties.", permit: "the City of Oakland Bureau of Building", era: "Craftsman, Victorian and Mediterranean stock largely pre-1940", hoods: ["Rockridge", "Montclair", "Temescal", "Glenview"], profile: "historic", terrain: "older foundations, seismic considerations and steep hillside lots" },
-  { name: "Berkeley", slug: "berkeley", county: "Alameda County", blurb: "We offer remodeling services for Berkeley's older homes, with attention to existing materials and current code requirements.", permit: "the City of Berkeley Permit Service Center", era: "brown-shingle and Craftsman homes, a great many built before 1930", hoods: ["Elmwood", "North Berkeley", "Claremont", "Westbrae"], profile: "historic", terrain: "century-old framing, knob-and-tube remnants and strict local review" },
-  { name: "Alameda", slug: "alameda", county: "Alameda County", blurb: "We offer remodeling and finish carpentry for Alameda's Victorian, Edwardian and Craftsman homes.", permit: "the City of Alameda Permit Center", era: "Victorian, Edwardian and Craftsman housing on a flat island grid", hoods: ["Gold Coast", "East End", "Bronze Coast", "Bay Farm Island"], profile: "historic", terrain: "island salt air, original millwork worth preserving and historic review in places" },
-  { name: "San Leandro", slug: "san-leandro", county: "Alameda County", blurb: "Our San Leandro services include kitchen updates, ADU conversions and interior remodeling.", permit: "the City of San Leandro Building Division", era: "1940s–60s post-war tracts on compact, regular lots", hoods: ["Broadmoor", "Estudillo Estates", "Bal Theatre area", "Marina Faire"], profile: "postwar", terrain: "flat lots and detached garages to assess for possible ADU conversions" },
-  { name: "Castro Valley", slug: "castro-valley", county: "Alameda County", blurb: "We offer remodeling, concrete and painting services throughout Castro Valley.", permit: "Alameda County Building Inspection, since Castro Valley is unincorporated", era: "1950s–70s ranch homes with newer custom builds up the canyon", hoods: ["Palomares Hills", "Five Canyons", "Proctor", "Lake Chabot area"], profile: "postwar", terrain: "canyon lots, sloped driveways and fire-zone requirements in the upper hills" },
-  { name: "Hayward", slug: "hayward", county: "Alameda County", blurb: "Our Hayward services include ADUs, kitchen and bathroom remodeling, and concrete driveways.", permit: "the City of Hayward Permit Center", era: "1950s–70s tracts plus older downtown stock and newer hillside homes", hoods: ["Hayward Highlands", "Fairway Park", "Mt. Eden", "Glen Eden"], profile: "postwar", terrain: "proximity to the Hayward Fault, which shapes structural work on additions" },
+  { name: "Oakland", slug: "oakland", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Alameda County", blurb: "We offer remodeling services across Oakland, from Rockridge Craftsman homes to hillside properties.", permit: "the City of Oakland Bureau of Building", era: "Craftsman, Victorian and Mediterranean stock largely pre-1940", hoods: ["Rockridge", "Montclair", "Temescal", "Glenview"], profile: "historic", terrain: "older foundations, seismic considerations and steep hillside lots" },
+  { name: "Berkeley", slug: "berkeley", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Alameda County", blurb: "We offer remodeling services for Berkeley's older homes, with attention to existing materials and current code requirements.", permit: "the City of Berkeley Permit Service Center", era: "brown-shingle and Craftsman homes, a great many built before 1930", hoods: ["Elmwood", "North Berkeley", "Claremont", "Westbrae"], profile: "historic", terrain: "century-old framing, knob-and-tube remnants and strict local review" },
+  { name: "Alameda", slug: "alameda", county: "Alameda County", blurb: "We offer remodeling and finish carpentry for Alameda's Victorian, Edwardian and Craftsman homes.", permit: "the City of Alameda Permit Center", era: "Victorian, Edwardian and Craftsman homes on a flat island grid", hoods: ["Gold Coast", "East End", "Bronze Coast", "Bay Farm Island"], profile: "historic", terrain: "island salt air, original millwork worth preserving and historic review in places" },
+  { name: "San Leandro", slug: "san-leandro", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Alameda County", blurb: "Our San Leandro services include kitchen updates, ADU conversions and interior remodeling.", permit: "the City of San Leandro Building Division", era: "1940s–60s post-war tracts on compact, regular lots", hoods: ["Broadmoor", "Estudillo Estates", "Washington Manor", "Marina Faire"], profile: "postwar", terrain: "flat lots and detached garages to assess for possible ADU conversions" },
+  { name: "Castro Valley", slug: "castro-valley", county: "Alameda County", blurb: "We offer remodeling, concrete and painting services throughout Castro Valley.", permit: "Alameda County Building Inspection, since Castro Valley is unincorporated", era: "1950s–70s ranch homes with newer custom builds up the canyon", hoods: ["Palomares Hills", "Five Canyons", "Proctor", "Jensen Ranch"], profile: "postwar", terrain: "canyon lots, sloped driveways and fire-zone requirements in the upper hills" },
+  { name: "Hayward", slug: "hayward", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Alameda County", blurb: "Our Hayward services include ADUs, kitchen and bathroom remodeling, and concrete driveways.", permit: "the City of Hayward Permit Center", era: "1950s–70s tracts plus older downtown stock and newer hillside homes", hoods: ["Hayward Highlands", "Fairway Park", "Mt. Eden", "Glen Eden"], profile: "postwar", terrain: "proximity to the Hayward Fault, which shapes structural work on additions" },
   { name: "Dublin", slug: "dublin", county: "Alameda County", blurb: "We offer kitchen, bathroom and interior updates for Dublin homes.", permit: "the City of Dublin Building and Safety Division", era: "late-1990s through 2010s planned developments with builder-grade finishes", hoods: ["Dublin Ranch", "Positano", "Schaefer Ranch", "West Dublin"], profile: "modern", terrain: "newer construction and HOA review requirements on some properties" },
   { name: "Pleasanton", slug: "pleasanton", county: "Alameda County", blurb: "We offer remodeling services throughout Pleasanton, from downtown cottages to Ruby Hill homes.", permit: "the City of Pleasanton Building and Safety Division", era: "downtown Victorians and Craftsman cottages alongside 1980s–2000s estates", hoods: ["Ruby Hill", "Downtown Pleasanton", "Vintage Hills", "Birdland"], profile: "postwar", terrain: "a downtown historic district with design review, plus large estate parcels east of town" },
-  { name: "Livermore", slug: "livermore", county: "Alameda County", blurb: "We offer outdoor living projects, ADUs and whole-home remodeling in Livermore.", permit: "the City of Livermore Building Division", era: "older downtown bungalows through 1990s and 2000s vineyard-adjacent homes", hoods: ["Downtown Livermore", "South Livermore", "Sunset East", "Vineyard Avenue"], profile: "postwar", terrain: "hot dry summers and larger parcels near rural areas" },
+  { name: "Livermore", slug: "livermore", county: "Alameda County", blurb: "We offer outdoor living projects, ADUs and whole-home remodeling in Livermore.", permit: "the City of Livermore Building Division", era: "older downtown bungalows through 1990s and 2000s vineyard-adjacent homes", hoods: ["Downtown Livermore", "South Livermore", "Sunset East", "Springtown"], profile: "postwar", terrain: "hot dry summers and larger parcels near rural areas" },
   { name: "Fremont", slug: "fremont", county: "Alameda County", blurb: "We offer remodeling and construction services across Fremont's neighborhoods.", permit: "the City of Fremont Building and Safety Division", era: "1950s–70s tracts across its several merged districts, plus newer infill", hoods: ["Mission San Jose", "Niles", "Irvington", "Warm Springs"], profile: "postwar", terrain: "distinct districts with different housing eras, and hillside lots toward Mission Peak" },
   // San Joaquin County
   { name: "Tracy", slug: "tracy", county: "San Joaquin County", blurb: "We offer concrete, painting and whole-home remodeling services in Tracy.", permit: "the City of Tracy Building Division", era: "older downtown homes ringed by fast 1990s–2010s subdivision growth", hoods: ["Downtown Tracy", "Edgewood", "Berkshire", "Presidio"], profile: "modern", terrain: "Central Valley heat and wind that punish exterior finishes and paint" },
-  { name: "Mountain House", slug: "mountain-house", county: "San Joaquin County", blurb: "Our Mountain House services include kitchen remodeling, flooring, backyard projects and ADUs.", permit: "the Town of Mountain House, which incorporated in 2024 and now runs its own building department", era: "homes in a master-planned community built almost entirely since 2001", hoods: ["Questa", "Bethany", "Altamont", "Wicklund"], profile: "modern", terrain: "newer construction in planned neighborhoods" },
+  { name: "Mountain House", slug: "mountain-house", county: "San Joaquin County", blurb: "Our Mountain House services include kitchen remodeling, flooring, backyard projects and ADUs.", permit: "the Town of Mountain House, which incorporated in 2024 and now runs its own building department", era: "master-planned neighborhoods built almost entirely since 2001", hoods: ["Questa", "Bethany", "Altamont", "Wicklund"], profile: "modern", terrain: "newer construction in planned neighborhoods" },
   { name: "Lathrop", slug: "lathrop", county: "San Joaquin County", blurb: "We serve Lathrop, including River Islands, Mossdale Landing and established neighborhoods throughout the city.", permit: "the City of Lathrop Building Division", era: "established older neighborhoods plus the rapidly growing River Islands development", hoods: ["River Islands", "Mossdale Landing", "Historic Lathrop"], profile: "modern", terrain: "river-adjacent lots with drainage and levee considerations" },
   { name: "Manteca", slug: "manteca", county: "San Joaquin County", blurb: "We offer remodeling and construction services throughout Manteca.", permit: "the City of Manteca Building Division", era: "mid-century cores with heavy 2000s and 2010s subdivision expansion", hoods: ["Downtown Manteca", "Woodward Park", "Union Ranch"], profile: "modern", terrain: "flat valley lots and long hot summers that drive shade and cooling upgrades" },
-  { name: "Stockton", slug: "stockton", county: "San Joaquin County", blurb: "We offer remodeling services for Stockton's older homes and newer neighborhoods.", permit: "the City of Stockton Community Development Building Division", era: "grand pre-war homes in the older districts alongside post-war and newer north-side tracts", hoods: ["Miracle Mile", "Brookside", "Victory Park", "Pacific Avenue"], adjacent: ["Lincoln Village"], profile: "historic", terrain: "century-old homes with original systems, and Delta humidity on the west side" },
+  { name: "Stockton", slug: "stockton", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "San Joaquin County", blurb: "We offer remodeling services for Stockton's older homes and newer neighborhoods.", permit: "the City of Stockton Community Development Building Division", era: "grand pre-war homes in the older districts alongside post-war and newer north-side tracts", hoods: ["Miracle Mile", "Brookside", "Victory Park", "Spanos Park"], adjacent: ["Lincoln Village"], profile: "historic", terrain: "century-old homes with original systems, and Delta humidity on the west side" },
   // Solano County
-  { name: "Rio Vista", slug: "rio-vista", county: "Solano County", blurb: "We offer remodeling and concrete services in Rio Vista, including downtown, Trilogy and Riverwalk.", permit: "the City of Rio Vista Building Department", era: "an older river-town core with newer active-adult development at Trilogy", hoods: ["Downtown Rio Vista", "Trilogy", "Riverwalk"], profile: "delta", terrain: "Delta wind, river humidity and soft soils near the waterfront" },
+  { name: "Rio Vista", slug: "rio-vista", county: "Solano County", blurb: "We offer remodeling and concrete services in Rio Vista, including downtown, Trilogy and Riverwalk.", permit: "the City of Rio Vista Building Department", era: "older river-town homes downtown and newer active-adult development at Trilogy", hoods: ["Downtown Rio Vista", "Trilogy", "Riverwalk"], profile: "delta", terrain: "Delta wind, river humidity and soft soils near the waterfront" },
   { name: "Fairfield", slug: "fairfield", county: "Solano County", blurb: "We offer remodeling, painting and concrete services for Fairfield homes.", permit: "the City of Fairfield Building Division", era: "1960s–80s ranch tracts with newer development toward Green Valley", hoods: ["Green Valley", "Cordelia", "Rancho Solano", "Village 5"], profile: "postwar", terrain: "the Cordelia wind gap, which is hard on exterior paint and roofing" },
   { name: "Vacaville", slug: "vacaville", county: "Solano County", blurb: "Our Vacaville services include kitchen and bathroom remodeling, ADUs and concrete work.", permit: "the City of Vacaville Building Division", era: "1970s–2000s subdivisions plus older homes near the historic downtown", hoods: ["Browns Valley", "North Village", "Downtown Vacaville", "Cheyenne"], profile: "modern", terrain: "hot dry summers and larger lots that suit outdoor living and shade structures" },
   { name: "Vallejo", slug: "vallejo", county: "Solano County", blurb: "We offer whole-home remodeling for Vallejo's Victorian, Craftsman and mid-century homes.", permit: "the City of Vallejo Building Division", era: "Victorian and Craftsman heritage stock alongside wartime and post-war housing", hoods: ["Heritage District", "St. Vincent's Hill", "Glen Cove", "Hiddenbrooke"], profile: "historic", terrain: "waterfront exposure, older foundations and historic districts with added review" },
   { name: "Benicia", slug: "benicia", county: "Solano County", blurb: "We offer remodeling services for Benicia's historic downtown homes and waterside properties.", permit: "the City of Benicia Building Division", era: "pre-1900 and Victorian homes in one of California's oldest towns", hoods: ["Old Town Benicia", "Southampton", "Waterfront District"], profile: "historic", terrain: "salt air off the strait and historic-district review on many downtown properties" },
   // Napa County
-  { name: "Napa", slug: "napa", county: "Napa County", blurb: "We offer remodeling, outdoor living and ADU projects across Napa.", permit: "the City of Napa Building Division", era: "Victorian and Craftsman homes downtown with newer development on the outskirts", hoods: ["Old Town Napa", "Alta Heights", "Browns Valley", "Carneros edge"], profile: "historic", terrain: "seismic retrofit considerations and wildfire-zone rules" },
+  { name: "Napa", slug: "napa", terrainFor: ["additions-adus", "whole-home-remodeling"], county: "Napa County", blurb: "We offer remodeling, outdoor living and ADU projects across Napa.", permit: "the City of Napa Building Division", era: "Victorian and Craftsman homes downtown with newer development on the outskirts", hoods: ["Old Town Napa", "Alta Heights", "Browns Valley", "Westwood"], profile: "historic", terrain: "seismic retrofit considerations and wildfire-zone rules" },
   { name: "American Canyon", slug: "american-canyon", county: "Napa County", blurb: "We offer kitchen, flooring and backyard updates in American Canyon.", permit: "the City of American Canyon Building Division", era: "homes built from the 1990s onward, many with original builder finishes", hoods: ["Vintage Ranch", "Napa Junction", "Canyon Creek"], profile: "modern", terrain: "bay-edge wind exposure and newer residential construction" },
 ];
 
 export const SERVICES = [
   {
     name: "Kitchen Remodeling", slug: "kitchen-remodeling",
-    short: "Kitchen layout, cabinetry, stone, lighting and fixtures, installed by our crew.",
-    img: "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
+    phrase: "kitchen remodeling", project: "kitchen remodel", card: "Layout, cabinets, stone and lighting",
+    short: "Kitchen layout, cabinetry, stone, lighting and fixtures, handled as one project.",
+    img: "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp",
     imgAlt: "Remodeled kitchen with custom island and stone countertops",
     body: [
       "We remodel kitchens from layout through installation: wall changes, cabinetry, stone and quartz counters, and lighting placed for cooking and everyday use.",
-      "Our crew handles plumbing, electrical, drywall, flooring and paint. We coordinate the work with one schedule and one point of contact.",
+      "We handle plumbing, electrical, drywall, flooring and paint as part of the job, with one schedule and one point of contact.",
     ],
-    features: ["Full kitchen gut-and-rebuild remodels", "Custom & semi-custom cabinetry installation", "Stone, quartz & butcher-block countertops", "Kitchen islands & layout changes", "Tile backsplashes & under-cabinet lighting", "In-house plumbing & electrical rough-in", "Appliance installation & venting", "Radiant heated flooring add-ons"],
+    features: ["Full kitchen gut-and-rebuild remodels", "Custom & semi-custom cabinetry installation", "Stone, quartz & butcher-block countertops", "Kitchen islands & layout changes", "Tile backsplashes & under-cabinet lighting", "Plumbing & electrical rough-in", "Appliance installation & venting", "Radiant heated flooring add-ons"],
     faqs: [
-      { q: "How long does a kitchen remodel take?", a: "A pull-and-replace kitchen typically runs 3–5 weeks; a full layout change with structural work runs 6–10 weeks. You'll get a written schedule with your estimate. Our in-house trades coordinate the work." },
+      { q: "How long does a kitchen remodel take?", a: "A pull-and-replace kitchen typically runs 3–5 weeks; a full layout change with structural work runs 6–10 weeks. You'll get a written schedule with your estimate." },
       { q: "Do I need permits for a kitchen remodel in {CITY}?", a: "Yes — if plumbing, electrical or walls are moving, a kitchen remodel in {CITY} needs a permit. AZ Elevated Builders handles permitting in {CITY} as part of the job, including plans and inspections." },
       { q: "What does a kitchen remodel cost?", a: "It depends on scope and finishes, which is why every project starts with a free on-site estimate and a written scope. Financing options are available, and all work carries our written warranty of up to five years." },
     ],
   },
   {
     name: "Bathroom Remodeling", slug: "bathroom-remodeling",
+    phrase: "bathroom remodeling", project: "bathroom remodel", card: "Tile, showers, vanities and heated floors",
     short: "Bathroom remodeling with tile, stone, steam showers and heated floors, including waterproofing and plumbing.",
     img: "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
     imgAlt: "Modern remodeled bathroom with walk-in shower and custom tile",
@@ -110,79 +112,84 @@ export const SERVICES = [
       "We plan bathroom remodels around waterproofing, shower-pan slope and wall support, then install the tile, stone and fixtures you choose.",
       "We also install steam showers, saunas and radiant heated floors, coordinating waterproofing, plumbing and electrical work during the remodel.",
     ],
-    features: ["Full bathroom gut remodels", "Walk-in showers & frameless glass", "Steam showers & sauna installation", "Radiant heated bathroom floors", "Custom tile & natural stone work", "Vanities, counters & storage built-ins", "In-house plumbing & electrical", "Primary-suite bath additions"],
+    features: ["Full bathroom gut remodels", "Walk-in showers & frameless glass", "Steam showers & sauna installation", "Radiant heated bathroom floors", "Custom tile & natural stone work", "Vanities, counters & storage built-ins", "Plumbing & electrical", "Primary-suite bath additions"],
     faqs: [
       { q: "How long does a bathroom remodel take?", a: "A standard full remodel runs 2–4 weeks. Steam showers, saunas or layout changes add time, and your written schedule will show it before we start." },
-      { q: "Can you add a steam shower or heated floors to an existing bathroom in {CITY}?", a: "Yes. AZ Elevated Builders installs steam showers and heated floors in existing {CITY} bathrooms. We size the steam generator, waterproof the enclosure properly and run the electrical in-house." },
+      { q: "Can you add a steam shower or heated floors to an existing bathroom in {CITY}?", a: "Yes. AZ Elevated Builders installs steam showers and heated floors in existing bathrooms in {CITY}. We size the steam generator, waterproof the enclosure properly and handle the electrical." },
       { q: "Do you handle permits and inspections?", a: "Yes. AZ Elevated Builders handles all permits and inspections as part of the job — bathroom remodels involving plumbing or electrical changes are permitted and inspected, and we manage the entire process." },
     ],
   },
   {
     name: "Whole-Home Remodeling", slug: "whole-home-remodeling",
-    short: "Interior and exterior remodeled as one project — layout, systems, finishes and paint under one crew.",
-    img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
+    phrase: "whole-home remodeling", project: "whole-home remodel", card: "Interior and exterior under one contract",
+    short: "Interior and exterior remodeled as one project — layout, systems, finishes and paint under one contract.",
+    img: "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
     imgAlt: "Open-plan whole home remodel with new flooring and glazing",
     body: [
       "A whole-home remodel can update the layout, kitchen, bathrooms, flooring, systems and finishes in one project. We plan the work in sequence and coordinate the trades.",
-      "Older homes can need repairs to plumbing, wiring or framing once walls are opened. Our in-house trades assess those conditions and discuss any changes to the scope and schedule with you.",
+      "Older homes can need repairs to plumbing, wiring or framing once walls are opened. We assess those conditions and discuss any changes to the scope and schedule with you.",
     ],
     features: ["Full interior renovations", "Exterior remodels & curb-appeal packages", "Layout changes & wall removal", "Plumbing & electrical updates", "Flooring, drywall, paint & trim", "Kitchen + bath combination scopes", "Energy & comfort upgrades", "Design collaboration available"],
     faqs: [
       { q: "How do you price a whole-home remodel?", a: "We walk the house with you, build a written scope room by room, and price it line by line — free. You'll know what's included, what's optional and what the schedule looks like before signing anything." },
       { q: "Can we live in the house during the remodel?", a: "Often, yes — many clients stay in the house during a whole-home remodel. AZ Elevated Builders sequences the work by zone so part of the house stays livable, keeps job sites clean daily, and explains when a phase is better done with the house empty." },
-      { q: "Do you work with designers in {CITY}?", a: "Yes. AZ Elevated Builders works with designers on {CITY} projects — bring your own designer or plans, or we can loop in a designer we trust. Either way, the drawings, the schedule and the build stay coordinated under one roof." },
+      { q: "Do you work with designers in {CITY}?", a: "Yes. AZ Elevated Builders works with designers on projects in {CITY} — bring your own designer or plans, or we can loop in a designer we trust. Either way, the drawings, the schedule and the build stay coordinated under one roof." },
     ],
   },
   {
     name: "Home Additions & ADUs", slug: "additions-adus",
+    phrase: "home additions and ADUs", project: "addition or ADU", card: "From feasibility and permits to move-in",
     short: "Home additions and ADUs, from feasibility and permits through construction.",
     img: "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp",
     imgAlt: "Detached ADU guest house with pool at dusk",
     body: [
-      "We design and build primary-suite additions, kitchen expansions, family rooms and second-story additions. Rooflines, windows and finishes are planned to work with the existing house.",
+      "We build primary-suite additions, kitchen expansions, family rooms and second-story additions, working from your designer's plans or with a designer we bring in. Rooflines, windows and finishes are planned to work with the existing house.",
       "An ADU can provide space for family or a rental unit. We handle feasibility, California's ADU requirements, local permitting and utilities through final inspection.",
     ],
     features: ["Room additions & home extensions", "Primary suite & bath additions", "Detached & attached ADUs", "Garage conversions", "Feasibility & permit management", "Utility connections & upsizing", "Full kitchens & baths in every unit", "Finish levels matched to the main house"],
     faqs: [
-      { q: "Are ADUs legal in {CITY}?", a: "Yes — ADUs are legal in {CITY}. California law requires cities to allow ADUs on most residential lots, and {CITY} processes them under those state rules. We confirm setbacks, size limits and utility requirements for your specific parcel during the free feasibility visit." },
+      { q: "Are ADUs legal in {CITY}?", a: "Yes — ADUs are legal in {CITY}. California law requires cities and counties to allow ADUs on most residential lots and to process them under state rules. We confirm setbacks, size limits and utility requirements for your specific parcel during the free feasibility visit." },
       { q: "What does an ADU cost to build?", a: "It varies with size, site and finish level — a garage conversion is a different project than a detached new build. We price it in a written scope after walking your property, and financing options are available." },
-      { q: "How long does an addition take?", a: "Design and permitting typically run 2–4 months depending on the city; construction runs 3–6 months for most additions and detached ADUs. We provide a written schedule and keep you updated weekly." },
+      { q: "How long does an addition take?", a: "Plans and permitting typically run 2–4 months depending on the city; construction runs 3–6 months for most additions and detached ADUs. We provide a written schedule and keep you updated weekly." },
     ],
   },
   {
     name: "Concrete & Driveways", slug: "concrete-driveways",
-    short: "Driveways, patios, walkways and retaining walls — formed, poured and finished by our own crew.",
-    img: "/assets/projects/walnut-creek-exterior__after-wide-1200.webp",
+    phrase: "concrete driveways, patios and walkways", project: "concrete", card: "Patios, walkways and retaining walls, poured on site",
+    short: "Driveways, patios, walkways and retaining walls — formed, poured and finished on site.",
+    img: "/assets/projects/stamped-driveway__pattern-wide-1200.webp",
     imgAlt: "Modern home exterior with new concrete driveway and walkways",
     body: [
-      "Our crew builds driveways, patios, walkways, slabs and retaining walls. We plan base compaction, reinforcement and joints for the site and the way the concrete will be used.",
+      "We build driveways, patios, walkways, slabs and retaining walls. We plan base compaction, reinforcement and joints for the site and the way the concrete will be used.",
       "We pour standard broom finish, exposed aggregate, and stamped and colored finishes, and we tie new flatwork into drainage so water moves away from the house instead of under it.",
     ],
     features: ["New concrete driveways & extensions", "Patios & outdoor living slabs", "Walkways, steps & porches", "Retaining walls", "Stamped, colored & exposed aggregate finishes", "Old concrete demo & haul-off", "Proper base prep & reinforcement", "Drainage integration"],
     faqs: [
       { q: "How long before I can use my new driveway?", a: "Foot traffic in 24–48 hours, vehicles in about 7 days as the slab cures toward full strength. We'll give you exact numbers for your pour and weather." },
-      { q: "How fast can you pour a driveway in {CITY}?", a: "Driveways are one of our quickest turnarounds — most tear-out-and-repour projects in {CITY} run 3–5 working days from demo to finished pour, weather permitting." },
-      { q: "Do you build retaining walls?", a: "Yes. AZ Elevated Builders builds retaining walls — engineered where height requires it, with proper drainage behind the wall. We plan drainage behind the wall as part of the installation." },
+      { q: "How fast can you pour a driveway in {CITY}?", a: "Driveways are one of our quickest turnarounds — a typical tear-out-and-repour in {CITY} takes about three working days on site, weather permitting. Extra demolition, drainage work or a stamped finish can add days, and the slab keeps curing after we leave." },
+      { q: "Do you build retaining walls?", a: "Yes. AZ Elevated Builders builds retaining walls — engineered where height requires it, with proper drainage behind the wall." },
     ],
   },
   {
     name: "Interior & Exterior Painting", slug: "painting",
-    short: "Full-prep painting inside and out — 22 years on the brush, straight lines, quality coatings.",
+    phrase: "interior and exterior painting", project: "painting", card: "Full prep, clean lines, quality coatings",
+    short: "Full-prep painting inside and out, with straight lines and quality coatings.",
     img: "/assets/projects/concept__painting-exterior-repaint-wide-1200.webp",
     imgAlt: "Freshly painted home exterior at dusk",
     body: [
-      "Our lead painter has 22 years of experience. We wash, scrape, sand, patch and prime as needed, then apply coatings to manufacturer specifications with careful masking and edging.",
+      "We wash, scrape, sand, patch and prime as needed, then apply coatings to manufacturer specifications with careful masking and edging.",
       "Exterior painting updates the appearance of a home and helps protect siding and trim from sun and rain.",
     ],
     features: ["Full exterior repaints", "Interior walls, ceilings & trim", "Cabinet painting & refinishing", "Stucco, siding & trim repair before paint", "Complete prep: wash, scrape, patch, prime", "Premium coatings & color consultation", "Clean masking & daily site cleanup", "Fast, scheduled turnarounds"],
     faqs: [
       { q: "How long does an exterior repaint take?", a: "Most single-family exteriors run 4–7 working days including prep and dry time between coats. Larger homes or heavy repair scopes take longer — the written schedule comes with your free estimate." },
       { q: "What paint brands do you use?", a: "Premium lines from major manufacturers, chosen for the surface and exposure — and we're happy to match a brand or color spec you already have. Every coating is applied to manufacturer spec so warranties hold." },
-      { q: "Do you paint in winter in {CITY}?", a: "Yes. AZ Elevated Builders paints exteriors through the winter in {CITY} — the season has plenty of paintable windows. We track temperature and moisture and schedule exterior coats when conditions let the coating cure properly." },
+      { q: "Do you paint in winter in {CITY}?", a: "Yes. AZ Elevated Builders paints exteriors through the winter in {CITY} — winter here has plenty of dry, mild stretches for exterior coats. We track temperature and moisture and schedule exterior coats when conditions let the coating cure properly." },
     ],
   },
   {
     name: "Flooring Installation", slug: "flooring",
+    phrase: "flooring installation", project: "flooring", card: "Hardwood, tile, laminate and radiant heat",
     short: "Hardwood, engineered, tile and laminate — plus radiant heat — installed flat, tight and clean.",
     img: "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp",
     imgAlt: "Newly installed flooring in a remodeled home",
@@ -194,33 +201,35 @@ export const SERVICES = [
     faqs: [
       { q: "Which flooring is right for my project?", a: "It depends on the room, the traffic and the look you want — solid hardwood refinishes for generations, engineered handles moisture swings better, tile wins wet rooms, laminate and LVP take a beating for less. We'll walk options and samples at the free estimate." },
       { q: "How long does flooring installation take?", a: "Most single-room installs run 1–3 days; whole-home flooring runs about a week depending on prep. Materials may need days on-site to acclimate first — we build that into the schedule." },
-      { q: "Do you level uneven floors in older {CITY} homes?", a: "Yes. AZ Elevated Builders levels uneven floors before installing — settling and out-of-flat slabs are standard in older {CITY} housing stock. We grind or self-level before install, because flooring is only as good as what's under it." },
+      { q: "Do you level uneven floors in older homes in {CITY}?", a: "Yes. AZ Elevated Builders levels uneven floors before installing — settling and out-of-flat slabs are standard in older housing stock in {CITY}. We grind or self-level before install, because flooring is only as good as what's under it." },
     ],
   },
   {
     name: "Drywall Installation & Repair", slug: "drywall",
-    short: "Drywall installation, taping, texturing and repairs by a specialist with 20 years of experience.",
+    phrase: "drywall installation and repair", project: "drywall", card: "Hanging, taping, texture and repairs",
+    short: "Drywall installation, taping, texturing and repairs, finished flat and matched to the walls around it.",
     img: "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp",
     imgAlt: "Clean finished interior walls in a remodeled home",
     body: [
-      "Our drywall specialist has 20 years of experience in installation, finishing and repairs. We prepare flat surfaces, finish corners and match surrounding textures.",
+      "We prepare flat surfaces, finish corners and match surrounding textures.",
       "We hang, tape, texture and finish drywall for remodels and standalone projects, including repairs to existing walls and ceilings.",
     ],
     features: ["New drywall for remodels & additions", "Water & fire damage repair", "Texture matching — orange peel, knockdown, smooth", "Level 5 smooth finishes", "Ceiling repair & popcorn removal", "Soundproofing & insulation upgrades", "Patching after plumbing/electrical work", "Paint-ready finishing"],
     faqs: [
       { q: "Can you match my existing wall texture?", a: "Yes. AZ Elevated Builders matches existing wall textures. Orange peel, knockdown, hand troweled or smooth, the patch should disappear after paint." },
-      { q: "Do you remove popcorn ceilings in {CITY}?", a: "Yes, with one important step first. On any home built before 1978 the ceiling texture must be tested for asbestos before removal. If it tests positive we bring in a certified abatement contractor; if it is clean, our crew scrapes, skims and refinishes to a smooth or light texture in {CITY}. We leave the room ready for paint." },
+      { q: "Do you remove popcorn ceilings in {CITY}?", a: "Yes, with one important step first. On any home built before 1978 the ceiling texture must be tested for asbestos before removal. If it tests positive we bring in a certified abatement contractor; if it is clean, we scrape, skim and refinish to a smooth or light texture in {CITY}. We leave the room ready for paint." },
       { q: "How fast can a repair be done?", a: "Small patches are often same-day with a return visit for texture and touch-up after drying. Larger repairs run 2–4 days because mud needs to dry between coats." },
     ],
   },
   {
     name: "Cabinetry & Countertops", slug: "cabinetry-countertops",
+    phrase: "cabinetry and countertops", project: "cabinetry and countertop", card: "Custom and semi-custom, with stone and quartz tops",
     short: "Custom and semi-custom cabinets with stone and quartz countertops.",
-    img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
+    img: "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
     imgAlt: "Custom kitchen cabinetry with stone countertops",
     body: [
       "We specify, order, template and install cabinets and countertops together, coordinating cabinet alignment, counter levels and seam placement.",
-      "We help you choose custom or semi-custom cabinetry to suit the space and budget. Our finish carpenters handle the installation.",
+      "We help you choose custom or semi-custom cabinetry to suit the space and budget.",
     ],
     features: ["Custom & semi-custom cabinetry", "Cabinet refacing & hardware upgrades", "Quartz, granite & natural stone counters", "Butcher block & specialty surfaces", "Precision templating & installation", "Built-ins, pantries & storage systems", "Bathroom vanities", "Soft-close & organization upgrades"],
     faqs: [
@@ -231,22 +240,24 @@ export const SERVICES = [
   },
   {
     name: "Finish Carpentry & Trim", slug: "finish-carpentry-trim",
+    phrase: "finish carpentry and trim", project: "trim and carpentry", card: "Baseboards, casing, built-ins and stairs",
     short: "Baseboards, casing, wainscot, built-ins and stairs, fitted to your home.",
     img: "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
     imgAlt: "Finish carpentry and interior trim",
     body: [
-      "Our finish carpenters install and repair baseboards, door and window casing, crown molding, wainscot, paneling, shelves, built-ins and stair details. We fit each piece to the surrounding walls and prepare it for paint or stain.",
+      "We install and repair baseboards, door and window casing, crown molding, wainscot, paneling, shelves, built-ins and stair details. We fit each piece to the surrounding walls and prepare it for paint or stain.",
       "Trim work can be included with a remodel, repaint or flooring project, or scheduled separately.",
     ],
     features: ["Baseboards & door/window casing", "Crown molding", "Wainscot, board-and-batten & paneling", "Custom built-ins & floating shelves", "Stair rails, treads & skirt boards", "Interior door replacement & hanging", "Mantels & feature walls", "Paint-grade & stain-grade work"],
     faqs: [
-      { q: "Can you match existing trim profiles?", a: "Yes, in most cases AZ Elevated Builders can match your existing trim profile. Between stock profiles, combinations and custom knives for larger runs, we can match the existing trim. Bring us a cutoff or we'll pull a profile on site." },
+      { q: "Can you match existing trim profiles?", a: "Yes, in most cases AZ Elevated Builders can match your existing trim profile. We work from stock profiles, combinations of them, or custom knives for larger runs. Bring us a cutoff or we'll pull a profile on site." },
       { q: "What does trim work cost?", a: "Cost depends on the amount of trim, profile complexity and installation conditions. We measure the space and provide a free estimate." },
-      { q: "Do you do standalone trim projects in {CITY}?", a: "Yes. AZ Elevated Builders takes standalone trim projects in {CITY} — a base-casing-and-doors package is one of the fastest ways to lift an entire {CITY} home, usually inside a week." },
+      { q: "Do you do standalone trim projects in {CITY}?", a: "Yes. AZ Elevated Builders takes standalone trim projects in {CITY} — a base-casing-and-doors package is one of the fastest ways to lift an entire home, usually inside a week." },
     ],
   },
   {
     name: "Steam Showers, Saunas & Heated Floors", slug: "steam-showers-saunas",
+    phrase: "steam showers, saunas and heated floors", project: "steam shower, sauna or heated floor", card: "Waterproofing and electrical work included",
     short: "Steam showers, saunas and radiant heated floors, including waterproofing and electrical installation.",
     img: "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp",
     imgAlt: "Spa bathroom with steam shower and warm stone finishes",
@@ -254,7 +265,7 @@ export const SERVICES = [
       "Steam showers, saunas and heated floors require coordinated waterproofing, electrical work and equipment sizing. We plan those requirements with the room layout.",
       "We install vapor-sealed enclosures, correctly sized steam generators, dedicated circuits and accessible controls. Our work carries a written warranty of up to five years.",
     ],
-    features: ["Steam shower design & construction", "Steam generator sizing & installation", "Indoor & outdoor sauna builds", "Radiant heated floors — bathrooms, kitchens & more", "Full vapor-sealed waterproofing", "Dedicated electrical circuits & controls", "Tile & stone enclosure finishes", "Integration with full bath remodels"],
+    features: ["Steam shower construction", "Steam generator sizing & installation", "Indoor & outdoor sauna builds", "Radiant heated floors — bathrooms, kitchens & more", "Full vapor-sealed waterproofing", "Dedicated electrical circuits & controls", "Tile & stone enclosure finishes", "Integration with full bath remodels"],
     faqs: [
       { q: "Can a steam shower go in my existing bathroom?", a: "Yes, in most cases a steam shower can be added to an existing bathroom. The enclosure needs to be sealed and sized to the generator, and we confirm both at the free estimate. We plan the required plumbing, electrical and waterproofing changes before installation." },
       { q: "Are heated floors expensive to run?", a: "Running cost depends on the heated area, system wattage, thermostat schedule and your electricity rate. We review the system specifications with you when planning the installation." },
@@ -263,16 +274,17 @@ export const SERVICES = [
   },
   {
     name: "Pergolas & Outdoor Living", slug: "pergolas-outdoor-living",
-    short: "Pergolas, patios, landscaping and outdoor rooms, designed and built together.",
-    img: "/assets/projects/concept__pergolas-outdoor-living-wood-pergola-patio-wide-1200.webp",
+    phrase: "pergolas and outdoor living spaces", project: "backyard", card: "Patios, landscaping and outdoor rooms in one project",
+    short: "Pergolas, patios, landscaping and outdoor rooms, built as one project.",
+    img: "/assets/projects/concept__pergolas-outdoor-living-outdoor-kitchen-patio-wide-1200.webp",
     imgAlt: "Backyard pergola and outdoor living space at dusk",
     body: [
-      "We design and build pergolas, patio covers, outdoor kitchens, concrete patios and landscaping as one coordinated project.",
-      "Our concrete, carpentry and electrical crews coordinate footings, patio drainage, lighting and power connections.",
+      "We build pergolas, patio covers, outdoor kitchens, concrete patios and landscaping as one coordinated project, working from your designer's plans or with a designer we bring in.",
+      "We coordinate the footings, patio drainage, lighting and power connections.",
     ],
-    features: ["Custom pergolas & patio covers", "Concrete patios & outdoor slabs", "Outdoor kitchens & BBQ islands", "Landscaping & planting design", "Low-voltage & string lighting", "Fences, gates & privacy screens", "Drainage & irrigation", "Full backyard transformations"],
+    features: ["Custom pergolas & patio covers", "Concrete patios & outdoor slabs", "Outdoor kitchens & BBQ islands", "Landscaping & planting", "Low-voltage & string lighting", "Fences, gates & privacy screens", "Drainage & irrigation", "Full backyard transformations"],
     faqs: [
-      { q: "Do pergolas need permits in {CITY}?", a: "It depends. Whether a pergola needs a permit in {CITY} comes down to size, height and attachment to the house — {CITY} exempts some smaller detached structures. We confirm requirements for your design and pull the permit when one's needed." },
+      { q: "Do pergolas need permits in {CITY}?", a: "Whether a pergola needs a permit in {CITY} depends on its size, its height and whether it attaches to the house. Each city sets its own rules, and many exempt small detached structures. We check your city's rules for your design and pull the permit when one is needed." },
       { q: "Wood or aluminum pergola?", a: "Wood offers a natural finish and flexible detailing; aluminum generally needs less maintenance. We build both and can help you compare appearance, upkeep and site exposure." },
       { q: "Can you do the whole backyard — concrete, pergola and landscaping?", a: "Yes. AZ Elevated Builders can include concrete, a pergola and landscaping in one backyard project. We coordinate grades, drainage, footings and planting in the same plan." },
     ],
@@ -281,9 +293,9 @@ export const SERVICES = [
 
 // Intro sentence variants keyed by (cityIdx + serviceIdx) % 3 — keeps 480 pages from opening identically
 export const OPENERS = [
-  (s, c) => `AZ Elevated Builders provides ${s.name.toLowerCase()} in ${c.name}. We're a family-run, CA-licensed contractor based in Brentwood. Contact us for a free on-site estimate.`,
-  (s, c) => `We offer ${s.name.toLowerCase()} in ${c.name}, ${c.county}. Our family-run crew is based in Brentwood, with 15+ years of experience in each trade.`,
-  (s, c) => `Planning ${s.name.toLowerCase()} in ${c.name}? AZ Elevated Builders offers free estimates with a written scope. Our work carries a written warranty of up to five years.`,
+  (s, c) => `${s.short} Free on-site estimates in ${c.name} and across ${c.county}.`,
+  (s, c) => `Thinking about ${s.phrase} for your ${c.name} home? We start with a free on-site visit and a written scope, so you know what's included before work begins.`,
+  (s, c) => `In ${c.name}, we handle ${s.phrase} from the first site visit to the final walkthrough, with one schedule and one point of contact.`,
 ];
 
 /* ============================================================
@@ -295,10 +307,12 @@ export const OPENERS = [
 export const SERVICE_LOCAL = {
   "kitchen-remodeling": {
     permit: "Kitchens almost always trip the permit threshold — moving a sink or range means plumbing, gas and electrical inspections, and we pull and carry those for you.",
+    permitClose: "",
     terrain: "We plan dust control, appliance staging and any temporary kitchen setup before work begins.",
   },
   "bathroom-remodeling": {
     permit: "Bathroom permits hinge on whether plumbing moves and whether the exhaust and circuits meet current code. We coordinate the paperwork and inspections.",
+    permitClose: "",
     terrain: "We plan waterproofing details and allow time for materials to dry between coats.",
   },
   "whole-home-remodeling": {
@@ -310,46 +324,55 @@ export const SERVICE_LOCAL = {
     terrain: "We assess foundations, drainage and space on the lot when planning an addition or detached unit.",
   },
   "concrete-driveways": {
-    permit: "Flatwork often needs less review than interior work, but anything touching drainage, the right-of-way or a retaining wall does — we confirm before we form.",
-    terrain: "Soil and site conditions inform base preparation, reinforcement and joint placement.",
+    permit: "Flatwork often needs less review than interior work, but anything touching drainage, the right-of-way or a retaining wall can need its own permit or review — we confirm before we form.",
+    permitClose: "When a permit is needed, we handle the application and coordinate inspections.",
+    terrain: "We check soil type and slope on site, since clay soils and hillside grades change how deep we excavate and how the new slab drains.",
   },
   "painting": {
     permit: "Repaints rarely need a permit.",
-    terrain: "Exterior coatings need the right temperature and moisture conditions to cure properly. We account for both when choosing products and scheduling the work.",
+    permitClose: "If prep turns up repairs that do need one, we pull it and schedule the inspection.",
+    terrain: "Exterior coatings need the right temperature and moisture to cure properly, so we choose products and schedule each coat around the weather.",
   },
   "flooring": {
     permit: "Flooring itself is usually permit-exempt, which keeps the timeline short — though we flag it when subfloor or structural repair changes that.",
+    permitClose: "When a permit is needed, we handle the application and the inspections.",
     terrain: "Humidity and moisture conditions help determine which flooring materials suit the space.",
   },
   "drywall": {
     permit: "Drywall work is typically permit-exempt unless it accompanies structural or electrical changes, so repairs can often start within days.",
+    permitClose: "When a permit is needed, we handle the application and the inspections.",
     terrain: "Seasonal movement can cause recurring cracks. We assess the surrounding surfaces before planning the repair.",
   },
   "cabinetry-countertops": {
     permit: "Cabinet and counter replacement usually needs no permit on its own.",
+    permitClose: "If plumbing or wiring moves as part of the job, we pull the permit and coordinate the inspections.",
     terrain: "We consider humidity and temperature changes when selecting cabinet materials and finishes.",
   },
   "finish-carpentry-trim": {
     permit: "Trim work needs no permit, so it is one of the easiest projects to schedule and one of the fastest to finish.",
+    permitClose: "",
+    permitHeading: "Permits",
     terrain: "We allow wood trim to acclimate and plan joints to accommodate movement.",
   },
   "steam-showers-saunas": {
     permit: "Steam and sauna installations mean dedicated circuits and sealed assemblies, so they are permitted and inspected — we handle both.",
+    permitClose: "",
     terrain: "We plan vapor sealing and ventilation to manage moisture around steam and sauna installations.",
   },
   "pergolas-outdoor-living": {
     permit: "Whether a structure needs a permit comes down to size, height and attachment to the house — we confirm the threshold before design is final.",
+    permitClose: "When a permit is needed, we handle the application and coordinate inspections.",
     terrain: "We consider orientation, shade, wind exposure and footing requirements when planning outdoor structures.",
   },
 };
 
 // Rotated so the closing pitch is not byte-identical across 480 pages.
 export const WHY_VARIANTS = [
-  (c) => `Our family-run crew serves ${c.name}, with 15+ years of experience in each trade. Estimates are free, financing is available, and our work carries a written warranty of up to five years.`,
+  (c) => `Our family-run team serves ${c.name}, and most of our crew have more than 15 years in their trade. Estimates are free, financing is available, and our work carries a written warranty of up to five years.`,
   (c) => `For your ${c.name} project, we provide a free estimate and a written scope before work begins. You'll have one point of contact throughout the job and a written warranty of up to five years.`,
   (c) => `We review your ${c.name} project with you and prepare a written estimate. Financing is available, and our work carries a written warranty of up to five years.`,
   (c) => `Contact us to schedule a walkthrough in ${c.name}. We provide free estimates, a written schedule and a warranty of up to five years.`,
-  (c) => `Your ${c.name} project starts with a free on-site estimate and written scope. Our crew coordinates the trades, keeps the site clean and provides a written warranty of up to five years.`,
+  (c) => `Your ${c.name} project starts with a free on-site estimate and written scope. We coordinate the trades, keep the site clean and provide a written warranty of up to five years.`,
 ];
 
 // Several images per service, rotated by city so neighboring pages don't
@@ -365,7 +388,7 @@ export const PHOTO_ALT = {
   "/assets/projects/concept__painting-interior-room-wide-1200.webp": "Empty freshly painted living room with warm white walls, white trim and baseboards, two black double-hung windows above a white oak bench, and light oak flooring in morning sun",
   "/assets/projects/concept__painting-painted-cabinetry-wide-1200.webp": "Kitchen wall of sage green painted shaker cabinets with brass knobs, a white quartz countertop, a white square-tile backsplash and an undermount sink with a brass faucet beneath a window",
   "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp": "Empty living room with smooth white walls and ceiling, recessed lights, a black-framed window, light oak flooring and a hallway opening, with morning sun across the back wall",
-  "/assets/projects/concept__drywall-taped-mudded-in-progress-wide-1200.webp": "Bedroom partway through drywall finishing, with taped and first-coated seams, spotted screws, a masked window and rosin paper on the floor, with a bucket, mud pan, tape roll and pole sander",
+  "/assets/projects/concept__drywall-taped-seams-wide-1200.webp": "Bedroom midway through drywall finishing, with taped horizontal seams, spotted screw heads, a masked window and rosin paper on the floor",
   "/assets/projects/concept__drywall-seamless-wall-repair-wide-1200.webp": "Kitchen wall with a sanded drywall patch ready for primer, beside white shaker cabinets with brass hardware and quartz counters, with a mud pan, taping knife and sanding sponge on a drop cloth",
   "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp": "Detached single-story backyard cottage with white board-and-batten siding, black windows, a black half-glass entry door under a small bracketed overhang, a wall lantern and a concrete walkway lined with lavender and ornamental grasses beneath a large oak",
   "/assets/projects/concept__additions-adus-matched-single-story-addition-wide-1200.webp": "Rear view of a single-story ranch house with a gable-end addition clad in matching white lap siding, black French doors, black double-hung windows, a wall lantern and a new concrete patio facing a lawn and redwood lattice-top fence",
@@ -376,27 +399,36 @@ export const PHOTO_ALT = {
   "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp": "Walk-in steam shower with floor-to-ceiling frameless glass, light grey large-format porcelain tile, a floating tiled bench, a long wall niche, a matte black ceiling rain head and a handheld shower on a slide bar",
   "/assets/projects/concept__steam-showers-saunas-cedar-home-sauna-wide-1200.webp": "Indoor cedar sauna with a glass front and door, an L-shaped slatted bench with warm under-bench lighting, a stainless electric heater with stones behind a wood guard rail, and a slatted duckboard floor",
   // Real AZ job photos.
+  "/assets/projects/stamped-driveway__pattern-wide-1200.webp": "Stamped concrete driveway by AZ Elevated Builders in a gray ashlar stone pattern with saw-cut control joints, beside a planter curb",
+  "/assets/projects/walnut-creek-backyard__first-section-wide-1200.webp": "Overhead drone view of a Walnut Creek backyard: one slab section poured and floated inside wooden forms, with a curved light-capped block retaining wall along the dug-out area",
   "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp": "Bathroom remodeled by AZ Elevated Builders with a floating wood vanity, trough sink, wall-mounted faucets and a backlit mirror",
   "/assets/projects/interior-remodel__walk-in-shower-wide-1200.webp": "Walk-in shower by AZ Elevated Builders with large-format tile, a fixed glass panel, a recessed niche and a linear drain",
-  "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp": "Living space remodeled by AZ Elevated Builders with a wood slat divider, built-in cabinetry, wood floors and a quartz counter",
+  "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp": "Living space remodeled by AZ Elevated Builders with a wood slat divider, built-in cabinetry, wood floors and a stone-look counter",
   "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp": "Lafayette primary bathroom remodeled by AZ Elevated Builders",
-  "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp": "Oakland kitchen remodeled by AZ Elevated Builders with a live-edge table, wood floors and white shaker cabinetry",
+  "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp": "Oakland kitchen remodeled by AZ Elevated Builders with white shaker cabinets, a tiled range wall and oak floors",
   "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp": "Farmhouse sink under a window in an Oakland kitchen remodeled by AZ Elevated Builders",
   "/assets/projects/oakland-kitchen-bath__kitchen-range-wall-wide-1200.webp": "White shaker cabinets, stone counters and zellige backsplash in an AZ Elevated Builders kitchen remodel in Oakland",
   "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp": "Run of white shaker cabinets with brass knobs over wood floors in an Oakland kitchen by AZ Elevated Builders",
-  "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp": "Wood flooring through an Oakland kitchen remodeled by AZ Elevated Builders",
+  "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp": "Oakland kitchen remodeled by AZ Elevated Builders, with wood flooring running past the range and a live-edge counter with stools",
   "/assets/projects/oakland-kitchen-bath__kitchen-pendant-wide-1200.webp": "Open Oakland kitchen remodeled by AZ Elevated Builders, with wood floors, a live-edge table and stainless appliances",
   "/assets/projects/oakland-kitchen-bath__kitchen-corner-wide-1200.webp": "Kitchen corner with shaker cabinets and under-cabinet lighting in an Oakland remodel by AZ Elevated Builders",
-  "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp": "Lafayette primary bathroom by AZ Elevated Builders with a walnut floating vanity, makeup station and glass-enclosed shower",
+  "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp": "Lafayette bathroom by AZ Elevated Builders with a raised wood vanity, one undermount sink, an attached makeup desk and a glass-enclosed shower with a bench",
   "/assets/projects/lafayette-primary-bath__makeup-desk-wide-1200.webp": "Built-in walnut makeup desk in a Lafayette primary bathroom by AZ Elevated Builders",
   "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp": "Porch and exterior trim on an AZ Elevated Builders project in Walnut Creek",
 };
 
+// Where AZ has a real job in that city, its photo leads that city's page.
+export const CITY_PHOTOS = {
+  "walnut-creek": { "concrete-driveways": "/assets/projects/walnut-creek-backyard__first-section-wide-1200.webp" },
+  oakland: { "kitchen-remodeling": "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp" },
+  lafayette: { "bathroom-remodeling": "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp" },
+};
+
 export const SERVICE_IMAGES = {
   "kitchen-remodeling": [
-    "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
     "/assets/projects/oakland-kitchen-bath__kitchen-sink-window-wide-1200.webp",
-    "/assets/projects/oakland-kitchen-bath__kitchen-range-wall-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
+    "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
   ],
   "bathroom-remodeling": [
     "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
@@ -404,17 +436,18 @@ export const SERVICE_IMAGES = {
     "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp",
   ],
   "whole-home-remodeling": [
+    "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp",
     "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
-    "/assets/projects/oakland-kitchen-bath__kitchen-corner-wide-1200.webp",
-    "/assets/projects/oakland-kitchen-bath__kitchen-pendant-wide-1200.webp",
   ],
   "additions-adus": [
     "/assets/projects/concept__additions-adus-detached-backyard-adu-wide-1200.webp",
     "/assets/projects/concept__additions-adus-matched-single-story-addition-wide-1200.webp",
     "/assets/projects/concept__additions-adus-adu-interior-kitchenette-wide-1200.webp",
   ],
+  // Walnut Creek's own page keeps its in-progress slab photo (CITY_PHOTOS);
+  // other cities lead with the finished stamped driveway.
   "concrete-driveways": [
-    "/assets/projects/walnut-creek-exterior__after-wide-1200.webp",
+    "/assets/projects/stamped-driveway__pattern-wide-1200.webp",
   ],
   "painting": [
     "/assets/projects/concept__painting-exterior-repaint-wide-1200.webp",
@@ -423,30 +456,26 @@ export const SERVICE_IMAGES = {
   ],
   "flooring": [
     "/assets/projects/oakland-kitchen-bath__kitchen-floor-wide-1200.webp",
-    "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
-    "/assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp",
+    "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
   ],
   "drywall": [
     "/assets/projects/concept__drywall-level5-finished-room-wide-1200.webp",
-    "/assets/projects/concept__drywall-taped-mudded-in-progress-wide-1200.webp",
+    "/assets/projects/concept__drywall-taped-seams-wide-1200.webp",
     "/assets/projects/concept__drywall-seamless-wall-repair-wide-1200.webp",
   ],
   "cabinetry-countertops": [
     "/assets/projects/oakland-kitchen-bath__kitchen-cabinet-run-wide-1200.webp",
     "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp",
-    "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
+    "/assets/projects/interior-remodel__floating-vanity-wide-1200.webp",
   ],
   "finish-carpentry-trim": [
     "/assets/projects/interior-remodel__slat-wall-living-wide-1200.webp",
-    "/assets/projects/walnut-creek-exterior__porch-trim-wide-1200.webp",
-    "/assets/projects/lafayette-primary-bath__makeup-desk-wide-1200.webp",
   ],
   "steam-showers-saunas": [
     "/assets/projects/concept__steam-showers-saunas-steam-shower-enclosure-wide-1200.webp",
     "/assets/projects/concept__steam-showers-saunas-cedar-home-sauna-wide-1200.webp",
   ],
   "pergolas-outdoor-living": [
-    "/assets/projects/concept__pergolas-outdoor-living-wood-pergola-patio-wide-1200.webp",
     "/assets/projects/concept__pergolas-outdoor-living-outdoor-kitchen-patio-wide-1200.webp",
     "/assets/projects/concept__pergolas-outdoor-living-covered-patio-golden-hour-wide-1200.webp",
   ],
@@ -476,12 +505,12 @@ export const PROFILE_NOTES = {
   "additions-adus": {
     historic: "For an addition to a historic home, we review the siding, window proportions and roof pitch to plan compatible details. We also check whether neighborhood design review applies.",
     postwar: "Some post-war properties have space for an addition or ADU. We assess the lot and any existing garage during the feasibility review.",
-    modern: "Newer lots can be compact and may require HOA architectural review alongside city permits. We consider both during design.",
+    modern: "Lots in newer neighborhoods can be compact, and HOA architectural review may apply alongside local permits. We consider both during design.",
     delta: "Additions near the Delta need attention to foundations and drainage because of soil conditions and the water table. We assess these during feasibility planning.",
   },
   "concrete-driveways": {
     historic: "For an older driveway, we assess the slab, base and drainage before recommending repair or replacement.",
-    postwar: "Cracking, settlement and drainage problems can develop as a driveway ages. Replacement includes evaluating the base and planning reinforcement and joints for the site.",
+    postwar: "Cracking, settlement and drainage problems can develop as a driveway ages. We check whether cracks come from tree roots, a failed base or water running under the slab, then recommend repair or full replacement.",
     modern: "We assess newer driveways for damage, drainage and available space when planning an extension or replacement.",
     delta: "Soil movement near the Delta can affect concrete slabs. We plan base preparation, slab thickness and joint placement around the site conditions.",
   },

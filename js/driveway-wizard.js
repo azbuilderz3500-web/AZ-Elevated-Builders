@@ -43,7 +43,13 @@
     field.setAttribute("aria-invalid", "true");
     field.setAttribute("aria-describedby", note.id);
     field.setAttribute("data-wizard-invalid", "");
-    if (focus) field.focus();
+    if (focus) {
+      field.focus({ preventScroll: true });
+      // Keep Continue and the message above the phone call bar (the html
+      // scroll-padding allows for it), instead of jumping the page up.
+      form.querySelector(".wizard-actions").scrollIntoView({ block: "nearest", behavior: "instant" });
+      note.scrollIntoView({ block: "nearest", behavior: "instant" });
+    }
     return false;
   }
 
@@ -74,9 +80,19 @@
     if (focus) {
       const heading = steps[current].querySelector("legend");
       heading.focus({ preventScroll: true });
-      const bounds = form.closest(".drive-estimate").getBoundingClientRect();
+      // Bring the step (progress bar, question, Continue) into view rather than
+      // the whole card, which pushed Continue under the phone call bar.
+      const target = form.querySelector(".wizard-progress:not([hidden])") || form.closest(".drive-estimate");
+      const bounds = target.getBoundingClientRect();
       if (bounds.top < 0 || bounds.top > window.innerHeight / 2) {
-        form.closest(".drive-estimate").scrollIntoView({ block: "start", behavior: "instant" });
+        target.scrollIntoView({ block: "start", behavior: "instant" });
+      } else {
+        // Lift the step just enough that Continue/Send clears the phone call bar.
+        // Only ever scrolls down, and never past the progress bar.
+        const bar = document.querySelector(".drive-bar");
+        const floor = bar && getComputedStyle(bar).display !== "none" ? bar.getBoundingClientRect().top : window.innerHeight;
+        const lift = Math.min((next.hidden ? submit : next).getBoundingClientRect().bottom + 12 - floor, bounds.top - 12);
+        if (lift > 0) window.scrollBy({ top: lift, behavior: "instant" });
       }
     }
     if (motion && !reducedMotion.matches && steps[current].animate) {
@@ -148,7 +164,11 @@
       form.querySelector(".wizard-panels").hidden = true;
       form.querySelector(".wizard-actions").hidden = true;
       form.querySelector(".wizard-reassurance").hidden = true;
-      form.querySelector(".wizard-success").hidden = false;
+      const success = form.querySelector(".wizard-success");
+      success.hidden = false;
+      // leads.js then focuses the (visually hidden) status line, which scrolls;
+      // settle on the visible message after that, clear of the call bar.
+      requestAnimationFrame(() => success.scrollIntoView({ block: "center", behavior: "instant" }));
       progress.setAttribute("aria-label", "Estimate request sent");
       progressItems.forEach(item => { item.classList.add("is-complete"); item.removeAttribute("aria-current"); });
     }

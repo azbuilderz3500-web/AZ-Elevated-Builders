@@ -10,19 +10,34 @@
 
   const beats = [...section.querySelectorAll("[data-beat]")];
   const setBeat = (p) => {
-    const i = p < 0.34 ? 0 : p < 0.74 ? 1 : 2;
+    // "As built." only once the picture is the finished photo, not part sketch.
+    const i = p < 0.34 ? 0 : p < 0.94 ? 1 : 2;
     beats.forEach((b, k) => b.classList.toggle("on", k === i));
     section.style.setProperty("--morph-p", p.toFixed(3));
   };
   setBeat(0);
 
   // Anything goes wrong (offline CDN, old browser): show the finished room.
+  // The heading and steps describe the sketch-to-photo motion, so the still
+  // version says what it is: the finished room.
   const fallback = () => {
     section.classList.add("is-static");
     const poster = section.querySelector(".scrub__poster");
-    if (poster && poster.dataset.final) poster.src = poster.dataset.final;
+    if (poster && poster.dataset.final) {
+      poster.src = poster.dataset.final;
+      poster.alt = poster.alt.replace(/, shown first as a sketch$/, "");
+    }
+    const h = section.querySelector("#drawn-heading");
+    if (h) h.textContent = "The finished room.";
+    const note = section.querySelector(".morph__note");
+    if (note) note.textContent = "Interior remodel by AZ Elevated Builders.";
+    beats.slice(0, -1).forEach((b) => { b.hidden = true; });
     setBeat(1);
   };
+
+  // Reduce Motion: no scrub, so don't fetch GSAP or the 60 frames at all;
+  // show the finished room straight away.
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { fallback(); return; }
 
   const GSAP = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/";
   const load = (src) => new Promise((ok, fail) => {
@@ -45,6 +60,10 @@
       const scrub = createScrollScrub({
         container: section,
         manifest: section.dataset.manifest,
+        // Phones get the 640-wide frames. The automatic pick wanted 90% pixel
+        // coverage and sent Plus/Max phones the 6.5 MB desktop set, which
+        // looks no sharper in a frame that size.
+        variant: window.matchMedia("(max-width: 600px), (max-height: 500px)").matches ? "mobile" : "auto",
         gsap: window.gsap,
         ScrollTrigger: window.ScrollTrigger,
         fit: "cover",

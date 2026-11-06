@@ -115,7 +115,7 @@ function build() {
 
 /* --------------------------------- picker -------------------------------- */
 const picker = (items, folders, src, opt = {}) => `<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>${opt.client ? "Choose your photos — AZ Elevated Builders" : "Photo finalizer — AZ Elevated Builders"}</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>${opt.client ? "Choose your photos — AZ Elevated Builders" : "Photo finalizer — AZ Elevated Builders"}</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font:14px/1.5 -apple-system,system-ui,sans-serif;background:#14161c;color:#eee}

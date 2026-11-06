@@ -39,12 +39,14 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
 <main class="drive" id="main" tabindex="-1">
   <section class="drive-hero" aria-labelledby="drive-title">
     <div class="drive-estimate" id="estimate">
-      <p class="drive-badge"><span aria-hidden="true">${iconBadge}</span>CSLB #1106795 &middot; Licensed &amp; insured</p>
+      <p class="drive-brand"><img class="brandmark" src="/assets/brand/mark-white.svg" alt="" width="96" height="77"><img class="brandword" src="/assets/brand/wordmark-white.svg" alt="AZ Elevated Builders" width="132" height="30"></p>
+      <p class="drive-badge"><span aria-hidden="true">${iconBadge}</span>CSLB #1106795 &middot; Licensed &amp; bonded</p>
       <h1 id="drive-title">Get your free driveway estimate.</h1>
       <p class="drive-hero__intro">Tell us about your driveway. We call back <strong>within two hours</strong>, Mon&ndash;Fri, 8am&ndash;6pm.</p>
       <form data-lead data-wizard data-source="driveway-landing" data-success="Thank you. Your request is in. We will call you back within two hours, Monday to Friday, 8am to 6pm. Need us sooner? Call ${brand.phone} below." class="drive-form" method="post">
         <input type="hidden" name="service" value="Concrete driveway replacement">
         <input type="hidden" name="details">
+        <div class="lead-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="azeb_check" tabindex="-1" autocomplete="off"></label></div>
         <ol class="wizard-progress" aria-label="Estimate steps" hidden>${['Project', 'Size', 'Location', 'Contact'].map((label, i) => `<li${i === 0 ? ' aria-current="step"' : ''}><span class="wizard-progress__number" aria-hidden="true">${i + 1}</span><span>${label}</span></li>`).join('')}</ol>
         <div class="wizard-panels">
           <fieldset class="wizard-step" data-step="0">
@@ -61,14 +63,14 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
             <div class="wizard-choices wizard-choices--size">
               ${choice('size', 'Single-car width', 'Single-car', 'One car wide', garage(1))}
               ${choice('size', 'Two-car width', 'Two-car', 'Two cars wide', garage(2))}
-              ${choice('size', 'Three-plus-car width', 'Three or more', 'A wider driveway', garage(3))}
+              ${choice('size', 'Three-plus-car width', 'Three or more', 'Three cars or wider', garage(3))}
               ${choice('size', 'Not sure', 'Not sure yet', 'We measure it on site', ruler)}
             </div>
             <p class="wizard-error" id="wizard-error-1" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="2">
             <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 3 of 4 / Project location</span>Where is the driveway?</legend>
-            <label class="lead-field">Project city<input name="city" list="driveway-cities" autocomplete="address-level2" maxlength="100" required placeholder="Start typing your city"></label>
+            <div class="lead-field"><label for="dw-city">Project city</label><input id="dw-city" name="city" list="driveway-cities" autocomplete="address-level2" maxlength="100" required placeholder="Start typing your city"></div>
             <datalist id="driveway-cities">${cities.map(city => `<option value="${esc(city.name)}"></option>`).join('')}</datalist>
             <p class="wizard-error" id="wizard-error-2" hidden></p>
             <fieldset class="wizard-timing"><legend>When would you like to start? <span>(optional)</span></legend><div class="wizard-timing__options">${['As soon as practical', 'In 1&ndash;3 months', 'Just planning'].map(value => `<label><input type="radio" name="timing" value="${value}"><span>${value}</span></label>`).join('')}</div></fieldset>
@@ -76,9 +78,9 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
           <fieldset class="wizard-step" data-step="3">
             <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 4 of 4 / Where to reach you</span>Who should we call?</legend>
             <div class="wizard-contact">
-              <label class="lead-field">Your name<input name="name" autocomplete="name" maxlength="100" required placeholder="Your name"></label>
-              <label class="lead-field">Phone number<input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></label>
-              <label class="lead-field lead-field--wide">Email<input type="email" name="email" autocomplete="email" inputmode="email" maxlength="150" required placeholder="you@example.com"></label>
+              <div class="lead-field"><label for="dw-name">Your name</label><input id="dw-name" name="name" autocomplete="name" maxlength="100" required placeholder="Your name"></div>
+              <div class="lead-field"><label for="dw-phone">Phone number</label><input id="dw-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></div>
+              <div class="lead-field lead-field--wide"><label for="dw-email">Email</label><input id="dw-email" type="email" name="email" autocomplete="email" inputmode="email" maxlength="150" required placeholder="you@example.com"></div>
             </div>
             <div class="wizard-review" hidden><p>Review your project details</p><dl>
               <div><dt>Project</dt><dd data-review="project"></dd><button type="button" data-edit="0" aria-label="Edit project">Edit</button></div>
@@ -86,7 +88,7 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
               <div><dt>Location</dt><dd data-review="city"></dd><button type="button" data-edit="2" aria-label="Edit location and timing">Edit</button></div>
               <div><dt>Timing</dt><dd data-review="timing"></dd></div>
             </dl></div>
-            <details class="drive-details"><summary>Anything else we should know? <span>(optional)</span></summary><label class="lead-field">Project notes<textarea name="notes" rows="2" maxlength="1500" placeholder="Damage, access, a finish you like&hellip;"></textarea></label></details>
+            <details class="drive-details"><summary>Anything else we should know? <span>(optional)</span></summary><div class="lead-field"><label for="dw-notes">Project notes</label><textarea id="dw-notes" name="notes" rows="2" maxlength="1500" placeholder="Damage, access, a finish you like&hellip;"></textarea></div></details>
             <p class="lead-privacy">By submitting, you ask AZ Elevated Builders to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
           </fieldset>
         </div>

@@ -8,7 +8,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { drivewayBody } from "./build-driveway.mjs";
-import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES, PHOTO_ALT } from "./data/site-data.mjs";
+import { BRAND, CITIES, SERVICES, OPENERS, SERVICE_LOCAL, WHY_VARIANTS, SERVICE_IMAGES, PROFILE_NOTES, PHOTO_ALT, CITY_PHOTOS } from "./data/site-data.mjs";
 
 // Join a list into readable prose: "a, b and c"
 const listPhrase = (arr) =>
@@ -96,11 +96,37 @@ const srcsetFor = (url) => {
   return [480, 800, 1200, 1600].map((w) => `${base}${join}w=${w} ${w}w`).join(", ");
 };
 // Share previews need an absolute URL, and JPEG reaches every platform
-// (several link unfurlers still drop WebP).
-const shareImage = (url) => url.startsWith("/assets/projects/")
-  ? BRAND.domain + url.replace(/\.webp$/, ".jpg")
-  : url;
-const concretePhoto = "/assets/projects/walnut-creek-exterior__after-wide-1600.webp";
+// (several link unfurlers still drop WebP). A shared link has no room for the
+// on-page "Illustration" note, so pages whose banner is an AI illustration
+// share the real yard-sign photo instead (TEMPORARY: swap with the homepage hero once the sign is reprinted with LIC 1106795).
+const SHARE_FALLBACK = "/assets/projects/yard-sign__home-front-1200.jpg";
+const shareImage = (url) => {
+  const u = url.includes("/concept__") ? SHARE_FALLBACK : url;
+  return u.startsWith("/assets/projects/") ? BRAND.domain + u.replace(/\.webp$/, ".jpg") : u;
+};
+// Service-page banner. AI illustrations (concept__ files, used only where AZ has
+// no job photo yet) carry a visible note and an "Illustration:" alt, so nobody
+// reads them as a specific AZ project.
+const isIllustration = (url) => url.includes("/concept__");
+const banner = (url, alt, note = PHOTO_NOTE[url] || "") => {
+  const ill = isIllustration(url);
+  const a = ill && !/^Illustration/i.test(alt) ? `Illustration: ${alt}` : alt;
+  const caption = ill ? "Illustration of this kind of project, not a photo of a specific AZ job." : note;
+  return `<div class="page-img"><img src="${url}" srcset="${srcsetFor(url)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(a)}" fetchpriority="high" decoding="async" /></div>${caption ? `
+  <p class="page-img__note">${esc(caption)}</p>` : ""}`;
+};
+// A real photo that needs a word of context wherever it appears.
+const PHOTO_NOTE = {
+  "/assets/projects/walnut-creek-backyard__first-section-wide-1200.webp": "Our Walnut Creek backyard slab, in progress: the first section is poured.",
+};
+// City hubs where AZ has a photographed job lead with that job.
+const CITY_JOBS = {
+  oakland: { img: "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.webp", note: "Our kitchen and bath remodel in Oakland." },
+  "walnut-creek": { img: "/assets/projects/walnut-creek-backyard__first-section-wide-1200.webp", note: "Our Walnut Creek backyard slab, in progress: the first section is poured." },
+  lafayette: { img: "/assets/projects/lafayette-primary-bath__vanity-run-wide-1200.webp", note: "Our primary bathroom remodel in Lafayette." },
+};
+// Services where the site, slope and weather change the plan; interior jobs skip that paragraph.
+const EXTERIOR = new Set(["concrete-driveways", "painting", "pergolas-outdoor-living", "additions-adus", "whole-home-remodeling"]);
 const SIZES = "(max-width: 900px) 100vw, 900px";
 
 const PHONE_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.2z"/></svg>`;
@@ -114,14 +140,38 @@ const actionBar = `
     Free Estimate</a>
 </div>`;
 
-// Short inline lead form — the SEO pages are landing pages, so the form lives on the page
-const leadForm = (context) => `
+// The estimate form's fields, shared by the homepage pop-up and every landing
+// page so the two can't drift apart. Every field is required: Alfonso calls back
+// knowing the job, the place and the timing instead of starting from a name.
+// Service and city pages arrive with what the page already knows filled in.
+// `azeb_check` is a honeypot: hidden from people and screen readers, named so
+// browser autofill leaves it alone, and anything typed into it marks a bot.
+// Labels sit beside their controls (for/id) rather than wrapping them, so the
+// error text leads.js adds after a control is not read as part of its name.
+const PROJECT_TYPES = [...SERVICES.map((s) => s.name), "Something else"];
+const TIMELINES = ["As soon as possible", "Within 1–3 months", "In 3–6 months", "Just planning for now"];
+const field = (id, label, control, wide = false) =>
+  `<div class="lead-field${wide ? " lead-field--wide" : ""}"><label for="${id}">${label}</label>${control}</div>`;
+const estimateFields = ({ service = "", city = "" } = {}) => `<p class="lead-required">All fields are required.</p>
+    <div class="lead-grid">
+      ${field("lead-name", "Your name", `<input id="lead-name" type="text" name="name" maxlength="100" placeholder="First and last name" required autocomplete="name">`)}
+      ${field("lead-phone", "Phone number", `<input id="lead-phone" type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel">`)}
+      ${field("lead-email", "Email", `<input id="lead-email" type="email" name="email" maxlength="150" placeholder="you@example.com" required autocomplete="email" inputmode="email">`)}
+      ${field("lead-city", "Project city", `<input id="lead-city" type="text" name="city" list="lead-cities" maxlength="100" placeholder="Start typing your city" required autocomplete="address-level2"${city ? ` value="${esc(city)}"` : ""}>`)}
+      ${field("lead-service", "Type of project", `<select id="lead-service" name="service" required><option value=""${service ? "" : " selected"}>Choose one</option>${PROJECT_TYPES.map((p) => `<option${p === service ? " selected" : ""}>${esc(p)}</option>`).join("")}</select>`)}
+      ${field("lead-timeline", "When would you like to start?", `<select id="lead-timeline" name="timeline" required><option value="" selected>Choose one</option>${TIMELINES.map((t) => `<option>${esc(t)}</option>`).join("")}</select>`)}
+      ${field("lead-details", "Tell us about the project", `<textarea id="lead-details" name="details" rows="4" minlength="20" maxlength="2000" required aria-describedby="lead-details-hint" placeholder="Which rooms or areas, the rough size, and what you'd like changed."></textarea><span class="lead-hint" id="lead-details-hint">A sentence or two (at least 20 characters). Please leave out links.</span>`, true)}
+    </div>
+    <datalist id="lead-cities">${CITIES.map((c) => `<option value="${esc(c.name)}"></option>`).join("")}</datalist>
+    <div class="lead-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="azeb_check" tabindex="-1" autocomplete="off"></label></div>`;
+
+// Inline lead form — the SEO pages are landing pages, so the form lives on the page
+const leadForm = ({ service, city } = {}) => `
 <section class="leadform" id="estimate">
   <h2>Get a free estimate</h2>
-  <p>Leave your name and number. We'll call you back within one business day.</p>
+  <p>Tell us about the project and we'll call you back within one business day. Hablamos español.</p>
   <form class="leadform__form" data-lead data-source="website-service" method="post">
-    <label class="lead-field">Your name<input type="text" name="name" maxlength="100" placeholder="Your name" required autocomplete="name"></label>
-    <label class="lead-field">Phone number<input type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel"></label>
+    ${estimateFields({ service, city })}
     <button type="submit" class="btn btn--solid" disabled>Request My Free Estimate</button>
     <p class="lead-privacy">By submitting, you ask ${esc(BRAND.name)} to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
     <p class="lead-status" data-lead-status role="status" aria-live="polite" tabindex="-1"></p>
@@ -144,13 +194,37 @@ const nav = `
       <a href="/#contact">Contact</a>
     </nav>
     <a class="nav__call" href="tel:${BRAND.phoneHref}" aria-label="Call ${esc(BRAND.name)} at ${esc(BRAND.phone)}" data-cta="nav-call">${PHONE_SVG}</a>
+    <button class="nav__menu" id="menuBtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Open menu"><span></span><span></span><span></span></button>
     <a class="nav__cta-desk" href="tel:${BRAND.phoneHref}" data-cta="nav-cta">${PHONE_SVG} ${esc(BRAND.phone)}</a>
   </div>
-</header>`;
+</header>
+<div class="menu" id="menu" aria-hidden="true" inert>
+  <div class="menu__inner">
+    <nav class="menu__links" aria-label="Menu">
+      <a href="/">Home</a>
+      <a href="/#work">Our work</a>
+      <a href="/services/">Services</a>
+      <a href="/service-areas/">Service areas</a>
+      <a href="#estimate">Free estimate</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <div class="menu__meta">
+      <div class="menu__meta-block">
+        <span class="label">Contact</span>
+        <a href="tel:${BRAND.phoneHref}" data-cta="menu-call">${esc(BRAND.phone)}</a>
+        <a href="mailto:${BRAND.email}">${esc(BRAND.email)}</a>
+      </div>
+      <div class="menu__meta-block">
+        <span class="label">Company</span>
+        <p>${esc(BRAND.city)}, California<br>${esc(BRAND.license)}<br>Hablamos español</p>
+      </div>
+    </div>
+  </div>
+</div>`;
 
 const trustStrip = `
 <div class="trust-strip">
-  <span class="stars" aria-hidden="true">★★★★★</span><span>5.0 Google Reviews</span>
+  <span class="stars" aria-hidden="true">★★★★★</span><span>5.0 from 6 Google reviews</span>
   <span class="dot">·</span><span>CA Licensed &amp; Bonded</span>
   <span class="dot">·</span><span>Free Estimates</span>
   <span class="dot">·</span><span>Warranties up to 5 Years</span>
@@ -166,15 +240,18 @@ const ctaBand = (line) => `
   <a class="btn btn--outline" href="mailto:${BRAND.email}">Email Us</a>
 </section>`;
 
+// Separators are their own elements, so a wrapped footer line never ends on a dot.
+const SEP = ' <span class="sep" aria-hidden="true">·</span> ';
 const renderFooter = (leadEndpoint = BRAND.leadWebhook) => `
 <div class="page-footer-pad"></div>
 <footer class="simple-footer">
-  <span>© 2026 ${BRAND.name} · ${BRAND.city}, ${BRAND.state} · ${BRAND.license}</span>
-  <span><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a> · <a href="mailto:${BRAND.email}">${BRAND.email}</a> · <a href="/services/">Services</a> · <a href="/service-areas/">Service Areas</a> · <a href="/privacy.html">Privacy</a> · <a href="/">Home</a></span>
+  <span><span>© 2026 ${BRAND.name}</span>${SEP}<span>${BRAND.city}, ${BRAND.state}</span>${SEP}<span>${BRAND.license}</span></span>
+  <span><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a>${SEP}<a class="foot-email" href="mailto:${BRAND.email}">${BRAND.email}</a>${SEP}<a href="/services/">Services</a>${SEP}<a href="/service-areas/">Service Areas</a>${SEP}<a href="/privacy.html">Privacy</a>${SEP}<a href="/">Home</a></span>
   <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="nofollow noopener">To The Max Media</a></span>
 </footer>
 <script>window.AZEB_LEAD_ENDPOINT=${JSON.stringify(leadEndpoint || "")};</script>
 <script defer src="/js/leads.js?v=${createHash("sha1").update(readFileSync(join(ROOT, "js/leads.js"))).digest("hex").slice(0, 8)}"></script>
+<script defer src="/js/nav.js?v=${createHash("sha1").update(readFileSync(join(ROOT, "js/nav.js"))).digest("hex").slice(0, 8)}"></script>
 </body>
 </html>`;
 const footer = renderFooter();
@@ -231,10 +308,13 @@ const breadcrumbLd = (items) => ({
   })),
 });
 
+// Uppercase headings would show "ADUs" as "ADUS". In visible text only (not tags, attributes,
+// scripts, JSON-LD, <title>, <option> or <textarea>), the plural s gets its own lowercase span.
+const keepPluralS = (html) => html.replace(/<(script|style|title|option|textarea)\b[\s\S]*?<\/\1>|<[^>]*>|\bADUs\b/g, (m) => (m === "ADUs" ? 'ADU<span class="lc">s</span>' : m));
 const write = (relPath, html) => {
   const full = join(ROOT, relPath);
   mkdirSync(dirname(full), { recursive: true });
-  writeFileSync(full, html.replace(/[ \t]+$/gm, ""));
+  writeFileSync(full, (relPath.endsWith(".html") ? keepPluralS(html) : html).replace(/[ \t]+$/gm, ""));
   return relPath;
 };
 
@@ -246,15 +326,16 @@ CITIES.forEach((city, ci) => {
   SERVICES.forEach((svc, si) => {
     const path = `/service-areas/${city.slug}/${svc.slug}/`;
     const title = `${svc.name} in ${city.name}, CA | ${BRAND.name}`;
-    const desc = `${svc.name} in ${city.name}, CA. ${BRAND.name} is a family-run, licensed general contractor working across ${listPhrase(city.hoods.slice(0, 3))}. Free estimates, 15+ years per trade, written warranty up to 5 years. Call ${BRAND.phone}.`;
+    // Phone number early: Google cuts descriptions at about 155 characters.
+    const desc = `${svc.name} in ${city.name}, CA. Free estimates: ${BRAND.phone}. Family-run, licensed, based in Brentwood. Warranty up to 5 years.`;
     const lens = SERVICE_LOCAL[svc.slug];
     const profileNote = PROFILE_NOTES[svc.slug][city.profile];
     // rotate the hero photo so adjacent city pages don't share an image
     const imgSet = SERVICE_IMAGES[svc.slug] || [svc.img];
-    const img = imgSet[ci % imgSet.length];
+    const img = CITY_PHOTOS[city.slug]?.[svc.slug] || imgSet[ci % imgSet.length];
     const isHome = city.slug === "brentwood";
     const opener = isHome
-      ? `${BRAND.name} provides ${svc.name.toLowerCase()} in ${city.name}. We're a family-run, CA-licensed contractor based here in Brentwood. Contact us for a free on-site estimate.`
+      ? `${svc.short} We're based right here in Brentwood, so a free on-site estimate is easy to arrange.`
       : OPENERS[(ci + si) % OPENERS.length](svc, city);
     const otherSvcs = SERVICES.filter((s) => s.slug !== svc.slug);
     const nearby = CITIES.filter((c) => c.county === city.county && c.slug !== city.slug).slice(0, 6);
@@ -292,7 +373,7 @@ CITIES.forEach((city, ci) => {
       },
     ];
 
-    const html = head({ title, desc, path, jsonld, image: svc.slug === "concrete-driveways" ? concretePhoto : img }) + nav + `
+    const html = head({ title, desc, path, jsonld, image: img }) + nav + `
 <main class="page" id="main" tabindex="-1">
   ${crumbs([
     { label: "Home", href: "/" },
@@ -305,23 +386,22 @@ CITIES.forEach((city, ci) => {
     <p class="lede">${esc(opener)}</p>
   </div>
   <div class="answer-box">
-    <p class="answer-box__q">Who offers ${esc(svc.name.toLowerCase())} in ${esc(city.name)}, CA?</p>
-    <p class="answer-box__a"><strong>${esc(BRAND.name)}</strong> provides ${esc(svc.name.toLowerCase())} in ${esc(city.name)}, California. We are a family-run, licensed and insured general contractor ${isHome
+    <p class="answer-box__q">Who offers ${esc(svc.phrase)} in ${esc(city.name)}, CA?</p>
+    <p class="answer-box__a"><strong>${esc(BRAND.name)}</strong> provides ${esc(svc.phrase)} in ${esc(city.name)}, California. We are a family-run, licensed and bonded general contractor ${isHome
       ? `based in ${esc(city.name)}, serving the surrounding ${esc(city.county)} area`
-      : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, every trade on our crew has 15+ years of experience, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
+      : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, most of our crew have more than 15 years in their trade, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "AZ Elevated Builders concrete work at the Walnut Creek exterior project" : (PHOTO_ALT[img] || svc.imgAlt))}" fetchpriority="high" decoding="async" /></div>
+  ${banner(img, PHOTO_ALT[img] || svc.imgAlt)}
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
 
     <h2>Planning your project in ${esc(city.name)}</h2>
-    <p>${esc(city.blurb)}</p>
     <p>The local housing includes ${esc(city.era)}. ${esc(profileNote)}</p>
-    <p>We serve ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}.${city.adjacent ? ` We also cover neighboring ${esc(listPhrase(city.adjacent))}. These unincorporated areas handle permits through ${esc(city.county)}.` : ""} Project planning here accounts for ${esc(city.terrain)}. ${esc(lens.terrain)}</p>
+    <p>We serve ${esc(city.name)}, including ${esc(listPhrase(city.hoods))}.${city.adjacent ? ` We also cover neighboring ${esc(listPhrase(city.adjacent))}. ${city.adjacent.length === 1 ? "This unincorporated area handles" : "These unincorporated areas handle"} permits through ${esc(city.county)}.` : ""}${EXTERIOR.has(svc.slug) ? `${!city.terrainFor || city.terrainFor.includes(svc.slug) ? ` Project planning here accounts for ${esc(city.terrain)}.` : ""} ${esc(lens.terrain)}` : ""}</p>
 
-    <h2>Permits and inspections in ${esc(city.name)}</h2>
-    <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)} We handle the permit application and coordinate inspections.</p>
+    <h2>${esc(lens.permitHeading || "Permits and inspections")} in ${esc(city.name)}</h2>
+    <p>Permits for work in ${esc(city.name)} go through ${esc(city.permit)}. ${esc(lens.permit)}${(lens.permitClose ?? "We handle the permit application and coordinate inspections.") ? " " + esc(lens.permitClose ?? "We handle the permit application and coordinate inspections.") : ""}</p>
 
     <h2>What's included</h2>
     <ul>
@@ -333,7 +413,7 @@ CITIES.forEach((city, ci) => {
   </div>
   <div class="prose"><h2>Frequently asked questions</h2></div>
   <div class="faq">
-    ${svc.faqs.map((f) => `<details><summary>${esc(f.q.replaceAll("{CITY}", city.name))}</summary><p>${esc(f.a.replaceAll("{CITY}", city.name))}</p></details>`).join("\n    ")}
+    ${svc.faqs.map((f) => `<details><summary><span>${esc(f.q.replaceAll("{CITY}", city.name))}</span></summary><p>${esc(f.a.replaceAll("{CITY}", city.name))}</p></details>`).join("\n    ")}
   </div>
   <div class="prose">
     <h2>More services in ${esc(city.name)}</h2>
@@ -345,8 +425,8 @@ CITIES.forEach((city, ci) => {
       ${nearby.map((c) => `<a class="chip" href="/service-areas/${c.slug}/${svc.slug}/">${esc(c.name)}</a>`).join("\n      ")}
     </div>` : ""}
   </div>
-  ${leadForm(`${svc.name.toLowerCase()} in ${city.name}`)}
-  ${ctaBand(`Tell us about your ${svc.name.toLowerCase()} project in ${city.name}.`)}
+  ${leadForm({ service: svc.name, city: city.name })}
+  ${ctaBand(`Tell us about your ${svc.project} project in ${city.name}.`)}
 </main>` + actionBar + footer;
 
     urls.push(path);
@@ -356,23 +436,26 @@ CITIES.forEach((city, ci) => {
   /* ---------- city hub ---------- */
   const cityPath = `/service-areas/${city.slug}/`;
   const cityTitle = `Home Remodeling & Construction in ${city.name}, CA | ${BRAND.name}`;
-  const cityDesc = `General contractor serving ${city.name}, CA — kitchen & bathroom remodels, whole-home remodeling, ADUs, concrete driveways, painting, flooring and more. Family-run, CA-licensed, free estimates.`;
+  const cityDesc = `Remodeling and construction in ${city.name}, CA: kitchens, baths, ADUs, driveways and more. Family-run, licensed, based in Brentwood. Free estimates.`;
+  // Cities where AZ has a photographed job lead with it; the rest share the yard-sign photo.
+  const ownJob = CITY_JOBS[city.slug];
   const cityHtml = head({
-    title: cityTitle, desc: cityDesc, path: cityPath,
+    title: cityTitle, desc: cityDesc, path: cityPath, image: ownJob ? ownJob.img : SHARE_FALLBACK,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Service Areas", href: "/service-areas/" }, { label: city.name }])],
   }) + nav + `
 <main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Service Areas", href: "/service-areas/" }, { label: city.name }])}
   <div class="page-hero">
     <h1>Remodeling &amp; Construction<br><em>in ${esc(city.name)}, CA</em></h1>
-    <p class="lede">${esc(city.blurb)} Our family-run crew handles individual rooms and whole-home projects, with 15+ years of experience in each trade.</p>
+    <p class="lede">${esc(city.blurb)} Our family-run team handles individual rooms and whole-home projects, and most of our crew have more than 15 years in their trade.</p>
   </div>
   ${trustStrip}
+  ${ownJob ? banner(ownJob.img, PHOTO_ALT[ownJob.img] || ownJob.note, ownJob.note) : ""}
   <div class="prose"><h2>Our services in ${esc(city.name)}</h2></div>
   <div class="city-grid">
-    ${SERVICES.map((s) => `<a href="/service-areas/${city.slug}/${s.slug}/"><span><span class="name">${esc(s.name)}</span><span class="county">${esc(s.short.split("—")[0].trim())}</span></span><span class="arrow">↗</span></a>`).join("\n    ")}
+    ${SERVICES.map((s) => `<a href="/service-areas/${city.slug}/${s.slug}/"><span><span class="name">${esc(s.name)}</span><span class="card-note">${esc(s.card)}</span></span><span class="arrow">↗</span></a>`).join("\n    ")}
   </div>
-  ${leadForm(`project in ${city.name}`)}
+  ${leadForm({ city: city.name })}
   ${ctaBand(`Planning a project in ${city.name}?`)}
 </main>` + actionBar + footer;
 
@@ -385,36 +468,36 @@ CITIES.forEach((city, ci) => {
 SERVICES.forEach((svc) => {
   const path = `/services/${svc.slug}/`;
   const title = `${svc.name} — East Bay & Beyond | ${BRAND.name}`;
-  const desc = `${svc.short} ${BRAND.name} serves Brentwood and 40 cities across the East Bay, Tri-Valley, Delta and North Bay. Free estimates.`;
+  const desc = `${svc.short} Based in Brentwood. Free estimates: ${BRAND.phone}.`;
   const html = head({
-    title, desc, path, image: svc.slug === "concrete-driveways" ? concretePhoto : svc.img,
+    title, desc, path, image: svc.img,
     jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])],
   }) + nav + `
 <main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Services", href: "/services/" }, { label: svc.name }])}
   <div class="page-hero">
-    <h1>${esc(svc.name)}<br><em>East Bay &amp; Beyond</em></h1>
+    <h1>${esc(svc.name)}<br><em>in the East Bay</em></h1>
     <p class="lede">${esc(svc.short)} Based in Brentwood and serving a 60-mile radius across Contra Costa, Alameda, San Joaquin, Solano and Napa counties.</p>
   </div>
   ${trustStrip}
-  <div class="page-img"><img src="${svc.slug === "concrete-driveways" ? concretePhoto : svc.img}" srcset="${srcsetFor(svc.slug === "concrete-driveways" ? concretePhoto : svc.img)}" sizes="${SIZES}" width="1600" height="900" alt="${esc(svc.slug === "concrete-driveways" ? "Completed AZ Elevated Builders exterior project with concrete driveway in Walnut Creek" : (PHOTO_ALT[svc.img] || svc.imgAlt))}" fetchpriority="high" decoding="async" /></div>
+  ${banner(svc.img, PHOTO_ALT[svc.img] || svc.imgAlt)}
   <div class="prose">
     ${svc.body.map((p) => `<p>${esc(p)}</p>`).join("\n    ")}
     <h2>What's included</h2>
     <ul>
       ${svc.features.map((f) => `<li>${esc(f)}</li>`).join("\n      ")}
     </ul>
-    <h2>Where we offer ${esc(svc.name.toLowerCase())}</h2>
+    <h2>Where we offer ${esc(svc.phrase)}</h2>
     <div class="chip-grid">
       ${CITIES.map((c) => `<a class="chip" href="/service-areas/${c.slug}/${svc.slug}/">${esc(c.name)}</a>`).join("\n      ")}
     </div>
   </div>
   <section aria-labelledby="service-faq"><div class="prose"><h2 id="service-faq">Frequently asked questions</h2></div><div class="faq">
-    ${svc.faqs.map((f) => `<details><summary>${esc(f.q.replaceAll("{CITY}", "the East Bay"))}</summary><p>${esc(f.a.replaceAll("{CITY}", "the East Bay"))}</p></details>`).join("\n    ")}
+    ${svc.faqs.map((f) => `<details><summary><span>${esc(f.q.replaceAll("{CITY}", "the East Bay"))}</span></summary><p>${esc(f.a.replaceAll("{CITY}", "the East Bay"))}</p></details>`).join("\n    ")}
   </div></section>
-  ${svc.slug === "concrete-driveways" ? `<div class="prose"><h2>Replacing an existing driveway?</h2><p>See our <a href="/driveway-replacement/">concrete driveway replacement guide and estimate form</a> for demolition, preparation, finish options and what affects the cost.</p></div>` : ""}
-  ${leadForm(svc.name.toLowerCase())}
-  ${ctaBand(`Tell us about your ${svc.name.toLowerCase()} project.`)}
+  ${svc.slug === "concrete-driveways" ? `<div class="prose"><h2>Replacing an existing driveway?</h2><p><a href="/driveway-replacement/">Request a driveway replacement estimate</a> with our short four-step form.</p></div>` : ""}
+  ${leadForm({ service: svc.name })}
+  ${ctaBand(`Tell us about your ${svc.project} project.`)}
 </main>` + actionBar + footer;
 
   urls.push(path);
@@ -426,8 +509,8 @@ SERVICES.forEach((svc) => {
 const counties = [...new Set(CITIES.map((c) => c.county))];
 const areasHtml = head({
   title: `Service Areas — East Bay, Tri-Valley, Delta & North Bay | ${BRAND.name}`,
-  desc: `${BRAND.name} serves 40 cities within 60 miles of Brentwood, CA — across Contra Costa, Alameda, San Joaquin, Solano and Napa counties. Find remodeling and construction services in your city.`,
-  path: "/service-areas/",
+  desc: `${BRAND.name} serves 40 cities within 60 miles of Brentwood, CA, across Contra Costa, Alameda, San Joaquin, Solano and Napa counties. Free estimates.`,
+  path: "/service-areas/", image: SHARE_FALLBACK,
   jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Service Areas" }])],
 }) + nav + `
 <main class="page" id="main" tabindex="-1">
@@ -439,10 +522,10 @@ const areasHtml = head({
   ${trustStrip}
   ${counties.map((county) => `
   <div class="prose"><h2>${esc(county)}</h2></div>
-  <div class="city-grid">
+  <div class="city-grid city-grid--names">
     ${CITIES.filter((c) => c.county === county).map((c) => `<a href="/service-areas/${c.slug}/"><span><span class="name">${esc(c.name)}</span></span><span class="arrow">↗</span></a>`).join("\n    ")}
   </div>`).join("\n")}
-  ${leadForm("")}
+  ${leadForm()}
   ${ctaBand("Don't see your city? If it's within an hour of Brentwood, call us anyway.")}
 </main>` + actionBar + footer;
 
@@ -453,26 +536,48 @@ write("service-areas/index.html", areasHtml);
 
 const servicesHtml = head({
   title: `Remodeling & Construction Services — East Bay | ${BRAND.name}`,
-  desc: `Every service ${BRAND.name} offers across the East Bay: kitchen and bathroom remodeling, whole-home remodels, additions and ADUs, concrete driveways, painting, flooring, drywall, cabinetry and more. Free estimates.`,
-  path: "/services/",
+  desc: `Kitchen and bath remodeling, whole-home remodels, ADUs, driveways, painting, flooring and more from ${BRAND.name}. Free estimates: ${BRAND.phone}.`,
+  path: "/services/", image: SHARE_FALLBACK,
   jsonld: [orgLd, breadcrumbLd([{ label: "Home", href: "/" }, { label: "Services" }])],
 }) + nav + `
 <main class="page" id="main" tabindex="-1">
   ${crumbs([{ label: "Home", href: "/" }, { label: "Services" }])}
   <div class="page-hero">
     <h1>Our<br><em>Services</em></h1>
-    <p class="lede">Our family-run crew provides interior and exterior remodeling from ${esc(BRAND.city)}, California, with 15+ years of experience in each trade. Estimates are free, and our work carries a written warranty of up to five years.</p>
+    <p class="lede">Our family-run team provides interior and exterior remodeling from ${esc(BRAND.city)}, California, and most of our crew have more than 15 years in their trade. Estimates are free, and our work carries a written warranty of up to five years.</p>
   </div>
   ${trustStrip}
   <div class="city-grid">
-    ${SERVICES.map((s) => `<a href="/services/${s.slug}/"><span><span class="name">${esc(s.name)}</span><span class="county">${esc(s.short.split("—")[0].trim())}</span></span><span class="arrow">↗</span></a>`).join("\n    ")}
+    ${SERVICES.map((s) => `<a href="/services/${s.slug}/"><span><span class="name">${esc(s.name)}</span><span class="card-note">${esc(s.card)}</span></span><span class="arrow">↗</span></a>`).join("\n    ")}
   </div>
-  ${leadForm("")}
+  ${leadForm()}
   ${ctaBand("Not sure which service you need? Describe the project and we'll tell you.")}
 </main>` + actionBar + footer;
 
 urls.push("/services/");
 write("services/index.html", servicesHtml);
+
+/* ---------- custom 404: Netlify serves /404.html for any unmatched path ---------- */
+// Kept out of `urls`, so it is not in the sitemap or llms.txt.
+const notFoundHtml = head({
+  title: `Page not found | ${BRAND.name}`,
+  desc: `That page isn't on the ${BRAND.name} site. Browse our services and service areas, or call ${BRAND.phone}.`,
+  path: "/404.html", robots: "noindex, follow", image: SHARE_FALLBACK,
+  jsonld: [orgLd],
+}) + nav + `
+<main class="page" id="main" tabindex="-1">
+  <div class="page-hero">
+    <h1>That page<br><em>isn't here.</em></h1>
+    <p class="lede">The link may be old or mistyped. Everything we do is one tap away below, or call us at <a href="tel:${BRAND.phoneHref}" data-cta="404-call">${esc(BRAND.phone)}</a>.</p>
+  </div>
+  <div class="city-grid">
+    <a href="/"><span><span class="name">Home</span><span class="card-note">Our recent projects and how we work</span></span><span class="arrow">↗</span></a>
+    <a href="/services/"><span><span class="name">Services</span><span class="card-note">Kitchens, baths, ADUs, concrete and more</span></span><span class="arrow">↗</span></a>
+    <a href="/service-areas/"><span><span class="name">Service areas</span><span class="card-note">40 cities within 60 miles of Brentwood</span></span><span class="arrow">↗</span></a>
+  </div>
+  ${leadForm()}
+</main>` + actionBar + footer;
+write("404.html", notFoundHtml);
 
 /* ---------- focused Google Ads destination ---------- */
 const drivewayCssHash = createHash("sha1").update(readFileSync(join(ROOT, "css/driveway.css"))).digest("hex").slice(0, 8);
@@ -482,7 +587,7 @@ const drivewayHtml = head({
   desc: `Concrete driveway replacement across the East Bay, Tri-Valley, Delta, Solano and Napa areas. Serving ${CITIES.length} communities. Request a free on-site estimate.`,
   path: "/driveway-replacement/",
   robots: "noindex, follow",
-  image: BRAND.domain + "/assets/projects/stamped-driveway__after-wide-1200.jpg",
+  image: BRAND.domain + "/assets/projects/stamped-driveway__pattern-wide-1200.jpg",
   jsonld: [orgLd, { "@context": "https://schema.org", "@type": "Service", name: "Concrete driveway replacement", provider: { "@id": BRAND.entityId }, areaServed: CITIES.map(city => `${city.name}, CA`) }],
   extraStyles: `<link rel="stylesheet" href="/css/driveway.css?v=${drivewayCssHash}">`,
   ads: true,
@@ -525,9 +630,9 @@ write("_headers",
 // Optional machine-readable summary; Google Search does not use llms.txt for ranking.
 const llms = `# ${BRAND.name}
 
-> Family-run, licensed and insured general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
+> Family-owned, licensed and bonded general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
 
-Key facts: free on-site estimates with a written scope; written warranty of up to 5 years on all work; financing available; every trade on the crew has 15+ years of experience in that specific trade; the team speaks English and Spanish (hablamos español). Services include kitchen and bathroom remodeling, whole-home remodels, additions and ADUs, concrete driveways and retaining walls, interior and exterior painting, flooring, drywall, cabinetry and countertops, finish carpentry, steam showers and saunas, and outdoor living. Business hours Monday-Friday 8am-6pm.
+Key facts: free on-site estimates with a written scope; written warranty of up to 5 years on all work; financing available; most of the crew have more than 15 years of experience in their trade; the team speaks English and Spanish (hablamos español). Services include kitchen and bathroom remodeling, whole-home remodels, additions and ADUs, concrete driveways and retaining walls, interior and exterior painting, flooring, drywall, cabinetry and countertops, finish carpentry, steam showers and saunas, and outdoor living. Business hours Monday-Friday 8am-6pm.
 
 ## Services
 
@@ -558,6 +663,8 @@ for (const file of ["main.js", "leads.js", "lenis.min.js", "morph.js", "scroll-s
   const hash = createHash("sha1").update(readFileSync(join(ROOT, "js", file))).digest("hex").slice(0, 8);
   home = home.replace(new RegExp(`/js/${file.replaceAll(".", "\\.")}(?:\\?v=[a-f0-9]+)?`, "g"), `/js/${file}?v=${hash}`);
 }
+// The pop-up form on the homepage uses the same fields as every landing page.
+home = home.replace(/<!-- lead-fields -->[\s\S]*?<!-- \/lead-fields -->/, `<!-- lead-fields -->\n    ${estimateFields()}\n    <!-- /lead-fields -->`);
 home = home.replace(/<script>window\.AZEB_LEAD_ENDPOINT=.*?;<\/script>/, `<script>window.AZEB_LEAD_ENDPOINT=${JSON.stringify(BRAND.leadWebhook || "")};</script>`);
 home = home.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(orgLd)}</script>`);
-writeFileSync(homePath, home);
+writeFileSync(homePath, keepPluralS(home));

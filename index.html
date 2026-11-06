@@ -17,18 +17,18 @@
   <meta property="og:description" content="Family-run, CA-licensed general contractor in Brentwood. Kitchens, baths, whole-home remodels, ADUs, concrete and painting across the East Bay. Free estimates." />
   <meta property="og:url" content="https://azelevatedbuilders.com/" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://azelevatedbuilders.com/assets/projects/walnut-creek-exterior__after-wide-1200.jpg" />
+  <meta property="og:image" content="https://azelevatedbuilders.com/assets/projects/yard-sign__home-front-1200.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="800" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AZ Elevated Builders — East Bay Remodeling &amp; Construction" />
   <meta name="twitter:description" content="Family-run, CA-licensed general contractor in Brentwood. Free estimates, warranties up to 5 years. Hablamos español." />
-  <meta name="twitter:image" content="https://azelevatedbuilders.com/assets/projects/walnut-creek-exterior__after-wide-1200.jpg" />
+  <meta name="twitter:image" content="https://azelevatedbuilders.com/assets/projects/yard-sign__home-front-1200.jpg" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/InterTight-var.woff2" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Inter-var.woff2" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Y4CM5S793"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-5Y4CM5S793");</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=f0600096" />
+  <link rel="stylesheet" href="/css/style.min.css?v=8e4b1fbc" />
   <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
   <link rel="alternate icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
@@ -42,8 +42,8 @@
         "acceptedAnswer": { "@type": "Answer", "text": "AZ Elevated Builders is based in Brentwood, California and serves a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties — including Antioch, Oakley, Discovery Bay, Concord, Walnut Creek, Danville, San Ramon, Livermore, Tracy, Oakland, Berkeley and Napa." } },
       { "@type": "Question", "name": "Does AZ Elevated Builders offer free estimates?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every project starts with a free on-site estimate that includes a written scope and a proposed schedule. Financing options are also available." } },
-      { "@type": "Question", "name": "Is AZ Elevated Builders licensed and insured?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. AZ Elevated Builders is a licensed, bonded and insured California general contractor based in Brentwood, and every trade on the crew has 15 or more years of experience in that specific trade." } },
+      { "@type": "Question", "name": "Is AZ Elevated Builders licensed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. AZ Elevated Builders is a licensed and bonded California general contractor (CSLB #1106795) based in Brentwood, and most of the crew have more than 15 years of experience in their trade." } },
       { "@type": "Question", "name": "What warranty does AZ Elevated Builders provide?",
         "acceptedAnswer": { "@type": "Answer", "text": "All work carries a written warranty of up to five years." } },
       { "@type": "Question", "name": "Does AZ Elevated Builders speak Spanish?",
@@ -81,7 +81,9 @@
   </header>
 
   <!-- ============ MENU ============ -->
-  <div class="menu" id="menu" aria-hidden="true" inert>
+  <!-- data-lenis-prevent: smooth scrolling is stopped while the menu is open;
+       without it, a menu taller than the screen could not be swiped. -->
+  <div class="menu" id="menu" data-lenis-prevent aria-hidden="true" inert>
     <div class="menu__inner">
       <div class="menu__links">
         <a href="#top">Home</a>
@@ -111,13 +113,17 @@
     <!-- ============ OPENING — full bleed ============ -->
     <section class="open">
       <div class="open__bg" data-parallax="0.10">
-        <img src="/assets/projects/walnut-creek-exterior__after-wide-1600.webp"
-             srcset="/assets/projects/walnut-creek-exterior__after-wide-800.webp 800w,
-                     /assets/projects/walnut-creek-exterior__after-wide-1200.webp 1200w,
-                     /assets/projects/walnut-creek-exterior__after-wide-1600.webp 1600w"
-             sizes="100vw" width="1600" height="1067"
-             fetchpriority="high" decoding="async"
-             alt="Completed exterior remodel with new concrete walkway and retaining wall in Walnut Creek, California">
+        <!-- Yard-sign photo: replace with the reprinted sign when it arrives. -->
+        <picture>
+          <source media="(max-width: 900px)"
+                  srcset="/assets/projects/yard-sign__home-front-tall-480.webp 480w, /assets/projects/yard-sign__home-front-tall-800.webp 800w, /assets/projects/yard-sign__home-front-tall-1200.webp 1200w"
+                  sizes="100vw" width="1200" height="1600">
+          <img src="/assets/projects/yard-sign__home-front-1600.webp"
+               srcset="/assets/projects/yard-sign__home-front-800.webp 800w, /assets/projects/yard-sign__home-front-1200.webp 1200w, /assets/projects/yard-sign__home-front-1600.webp 1600w"
+               sizes="100vw" width="1600" height="1067"
+               fetchpriority="high" decoding="async"
+               alt="AZ Elevated Builders yard sign on the front lawn of a two-story stucco home with wood garage doors">
+        </picture>
       </div>
 
       <div class="open__meta">
@@ -135,7 +141,7 @@
             <span class="line"><span>construction.</span></span>
           </h1>
           <p class="open__sub">Family-run general contractor based in Brentwood. We remodel kitchens,
-          bathrooms and entire homes, and build additions, ADUs and concrete driveways
+          bathrooms and entire homes, and build additions, ADU<span class="lc">s</span> and concrete driveways
           throughout the East Bay.</p>
           <div class="open__cta">
             <a class="btn btn--solid" href="tel:+19258123150" data-cta="hero-call">Call (925) 812-3150</a>
@@ -143,8 +149,8 @@
           </div>
         </div>
         <div class="open__side">
-          <div class="open__stat"><strong>5.0</strong><span>Google rating</span></div>
-          <div class="open__stat"><strong>15+</strong><span>Years per trade</span></div>
+          <div class="open__stat"><strong>5.0</strong><span>6 Google reviews</span></div>
+          <div class="open__stat"><strong>15+</strong><span>Years of crew experience</span></div>
           <div class="open__stat"><strong>Up to 5 yr</strong><span>Written warranty</span></div>
           <div class="open__stat"><strong>Sí</strong><span>Hablamos español</span></div>
         </div>
@@ -155,134 +161,130 @@
     <section class="work2" id="work">
       <div class="sec-head r-up">
         <h2 class="sec-head__h2">Recent projects.</h2>
-        <p class="sec-head__note">Explore exterior improvements, kitchen remodels and bathroom renovations in Walnut Creek, Oakland, Lafayette and Pittsburg.</p>
+        <p class="sec-head__note">Real AZ jobs, photographed on site.</p>
       </div>
 
-      <!-- Case study 1: full progression -->
       <article class="case">
         <header class="case__head">
-          <h3>Front yard, driveway &amp; retaining wall</h3>
-          <p class="case__meta">Walnut Creek · Concrete &amp; exterior · Completed 2026</p>
+          <h3>Backyard slab pour</h3>
+          <p class="case__meta">Walnut Creek · Concrete · Progress photos, summer 2026</p>
         </header>
         <div class="case__strip">
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/walnut-creek-exterior__before-bare-yard-480.webp 480w, /assets/projects/walnut-creek-exterior__before-bare-yard-800.webp 800w, /assets/projects/walnut-creek-exterior__before-bare-yard-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__before-bare-yard-800.webp"
-                 alt="Bare graded front yard before construction in Walnut Creek">
-            <figcaption><span class="tag tag--before">Before</span> Front yard before construction</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/walnut-creek-backyard__graded-yard-480.webp 480w, /assets/projects/walnut-creek-backyard__graded-yard-800.webp 800w, /assets/projects/walnut-creek-backyard__graded-yard-1200.webp 1200w, /assets/projects/walnut-creek-backyard__graded-yard-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-backyard__graded-yard-800.webp"
+                 alt="Bare dirt backyard with tire tracks and a soil mound in front of a stepped, light-capped block retaining wall and wood fence, seen from under a covered patio">
+            <figcaption>Bare dirt yard, block wall in place</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/walnut-creek-exterior__crew-pour-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-pour-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-pour-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-pour-800.webp"
-                 alt="AZ Elevated Builders crew placing concrete on site">
-            <figcaption><span class="tag">During</span> Forming and pouring</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/walnut-creek-backyard__forms-rebar-480.webp 480w, /assets/projects/walnut-creek-backyard__forms-rebar-800.webp 800w, /assets/projects/walnut-creek-backyard__forms-rebar-1200.webp 1200w, /assets/projects/walnut-creek-backyard__forms-rebar-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-backyard__forms-rebar-800.webp"
+                 alt="Drone view straight down on a Walnut Creek backyard: wood forms laid out inside a curved block retaining wall, a rebar grid over gravel in one bay and the concrete pump hose in place">
+            <figcaption>Forms and rebar set</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/walnut-creek-exterior__finishing-slab-480.webp 480w, /assets/projects/walnut-creek-exterior__finishing-slab-800.webp 800w, /assets/projects/walnut-creek-exterior__finishing-slab-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__finishing-slab-800.webp"
-                 alt="Finishing fresh concrete with a trowel">
-            <figcaption><span class="tag">During</span> Hand-finishing the slab</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/walnut-creek-backyard__pour-screed-480.webp 480w, /assets/projects/walnut-creek-backyard__pour-screed-800.webp 800w, /assets/projects/walnut-creek-backyard__pour-screed-1200.webp 1200w, /assets/projects/walnut-creek-backyard__pour-screed-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-backyard__pour-screed-800.webp"
+                 alt="Crew placing and leveling wet concrete inside wood forms beside a curved block retaining wall, seen at an angle from a drone">
+            <figcaption>Placing and screeding concrete</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/walnut-creek-exterior__after-retaining-wall-480.webp 480w, /assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp 800w, /assets/projects/walnut-creek-exterior__after-retaining-wall-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp"
-                 alt="Completed retaining wall, railing and concrete walkway">
-            <figcaption><span class="tag tag--after">After</span> Wall, railing, walkway</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/walnut-creek-backyard__first-section-480.webp 480w, /assets/projects/walnut-creek-backyard__first-section-800.webp 800w, /assets/projects/walnut-creek-backyard__first-section-1200.webp 1200w, /assets/projects/walnut-creek-backyard__first-section-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-backyard__first-section-800.webp"
+                 alt="Drone view straight down on the first slab section poured and floated smooth inside wood forms, with a second formed bay and the rest of the yard still bare dirt">
+            <figcaption>First slab section poured</figcaption>
           </figure>
         </div>
       </article>
 
-      <!-- Case study 2 -->
       <article class="case">
         <header class="case__head">
           <h3>Kitchen &amp; two bathrooms</h3>
-          <p class="case__meta">Oakland · Whole-floor remodel · Completed 2026</p>
+          <p class="case__meta">Oakland · Kitchen &amp; bath remodel</p>
         </header>
         <div class="case__strip">
-          <figure class="case__shot case__shot--wide r-clip">
-            <img loading="lazy" decoding="async" width="1200" height="1800"
-                 srcset="/assets/projects/oakland-kitchen-bath__kitchen-wide-480.webp 480w, /assets/projects/oakland-kitchen-bath__kitchen-wide-800.webp 800w, /assets/projects/oakland-kitchen-bath__kitchen-wide-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__kitchen-wide-800.webp"
-                 alt="Remodeled white kitchen with island, brass fixtures and wood floors in Oakland">
-            <figcaption>Kitchen — shaker cabinetry, quartz, brass</figcaption>
+          <figure class="case__shot r-clip">
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/oakland-kitchen-bath__kitchen-overview-480.webp 480w, /assets/projects/oakland-kitchen-bath__kitchen-overview-800.webp 800w, /assets/projects/oakland-kitchen-bath__kitchen-overview-1200.webp 1200w, /assets/projects/oakland-kitchen-bath__kitchen-overview-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__kitchen-overview-800.webp"
+                 alt="Remodeled kitchen with a tiled backsplash and stainless hood over the range at left, a glass exterior door at the back, and white cabinets with a stainless dishwasher along the window wall at right. A live-edge table with four stools stands in the foreground and hides the sink.">
+            <figcaption>Kitchen overview: range wall to window</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-480.webp 480w, /assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.webp 800w, /assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__kitchen-farmhouse-sink-800.webp"
-                 alt="Farmhouse sink under a window with brass tap">
-            <figcaption>Farmhouse sink &amp; window run</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/oakland-kitchen-bath__apron-sink-480.webp 480w, /assets/projects/oakland-kitchen-bath__apron-sink-800.webp 800w, /assets/projects/oakland-kitchen-bath__apron-sink-1200.webp 1200w, /assets/projects/oakland-kitchen-bath__apron-sink-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__apron-sink-800.webp"
+                 alt="White single-basin apron-front sink set in white cabinets under a bay window, with a gooseneck faucet, a pale stone-look counter and backsplash, and a stainless dishwasher at right.">
+            <figcaption>Apron-front sink under the window</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/oakland-kitchen-bath__bath-green-wide-480.webp 480w, /assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp 800w, /assets/projects/oakland-kitchen-bath__bath-green-wide-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp"
-                 alt="Bathroom with green zellige tile, brass shower fixtures and glass enclosure">
-            <figcaption>Green zellige guest bath</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/oakland-kitchen-bath__pink-shower-480.webp 480w, /assets/projects/oakland-kitchen-bath__pink-shower-800.webp 800w, /assets/projects/oakland-kitchen-bath__pink-shower-1200.webp 1200w, /assets/projects/oakland-kitchen-bath__pink-shower-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__pink-shower-800.webp"
+                 alt="Bathroom with a walk-in shower lined in glossy pink tile, with two recessed niches, gold-tone fixtures and a gold-tone framed sliding glass door, over a white hexagon tile floor. A toilet and a wood-tone vanity are at left.">
+            <figcaption>Pink-tile bath with glass shower</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/oakland-kitchen-bath__bath-terracotta-480.webp 480w, /assets/projects/oakland-kitchen-bath__bath-terracotta-800.webp 800w, /assets/projects/oakland-kitchen-bath__bath-terracotta-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__bath-terracotta-800.webp"
-                 alt="Bathroom with terracotta zellige tile and brass fixtures">
-            <figcaption>Terracotta zellige bath</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/oakland-kitchen-bath__green-tub-shower-480.webp 480w, /assets/projects/oakland-kitchen-bath__green-tub-shower-800.webp 800w, /assets/projects/oakland-kitchen-bath__green-tub-shower-1200.webp 1200w, /assets/projects/oakland-kitchen-bath__green-tub-shower-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/oakland-kitchen-bath__green-tub-shower-800.webp"
+                 alt="Alcove tub-shower under a sloped ceiling, lined in glossy green tile with some tan pieces, with a gold-tone showerhead, handheld shower on a slide bar, grab bar and gold-tone framed sliding glass doors.">
+            <figcaption>Green-tile bath with tub-shower</figcaption>
           </figure>
         </div>
       </article>
 
-      <!-- Case study 3 -->
       <article class="case">
         <header class="case__head">
-          <h3>Bathroom remodels</h3>
-          <p class="case__meta">Lafayette &amp; Pittsburg · Completed 2026</p>
+          <h3>Lafayette bathroom</h3>
+          <p class="case__meta">Lafayette · Shower, two vanities and makeup desk</p>
         </header>
         <div class="case__strip">
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/lafayette-primary-bath__quartzite-shower-480.webp 480w, /assets/projects/lafayette-primary-bath__quartzite-shower-800.webp 800w, /assets/projects/lafayette-primary-bath__quartzite-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__quartzite-shower-800.webp"
-                 alt="Walk-in shower clad in book-matched quartzite with bench seat">
-            <figcaption>Book-matched quartzite shower</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/lafayette-primary-bath__slab-shower-480.webp 480w, /assets/projects/lafayette-primary-bath__slab-shower-800.webp 800w, /assets/projects/lafayette-primary-bath__slab-shower-1200.webp 1200w, /assets/projects/lafayette-primary-bath__slab-shower-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__slab-shower-800.webp"
+                 alt="Walk-in shower behind a frameless glass door, with veined cream slab walls, a long slab bench, a mosaic-tile niche, a square rain head and a hand shower">
+            <figcaption>Walk-in shower with bench</figcaption>
           </figure>
           <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="533"
-                 srcset="/assets/projects/lafayette-primary-bath__wide-vanity-shower-480.webp 480w, /assets/projects/lafayette-primary-bath__wide-vanity-shower-800.webp 800w, /assets/projects/lafayette-primary-bath__wide-vanity-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__wide-vanity-shower-800.webp"
-                 alt="Primary bathroom with walnut vanity and glass shower enclosure">
-            <figcaption>Walnut vanity, double basin</figcaption>
-          </figure>
-          <figure class="case__shot r-clip">
-            <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-480.webp 480w, /assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.webp 800w, /assets/projects/lafayette-primary-bath__vanity-backlit-mirror-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__vanity-backlit-mirror-800.webp"
-                 alt="Backlit mirror above a walnut vanity">
-            <figcaption>Backlit mirror &amp; makeup station</figcaption>
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/lafayette-primary-bath__vanity-mirror-480.webp 480w, /assets/projects/lafayette-primary-bath__vanity-mirror-800.webp 800w, /assets/projects/lafayette-primary-bath__vanity-mirror-1200.webp 1200w, /assets/projects/lafayette-primary-bath__vanity-mirror-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__vanity-mirror-800.webp"
+                 alt="Wood-look vanity with one undermount sink and a chrome faucet under a backlit mirror and two black-framed transom windows, next to a corner makeup desk with a white stool">
+            <figcaption>Vanity under a backlit mirror</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1200"
-                 srcset="/assets/projects/pittsburg-bath__onyx-shower-480.webp 480w, /assets/projects/pittsburg-bath__onyx-shower-800.webp 800w, /assets/projects/pittsburg-bath__onyx-shower-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/pittsburg-bath__onyx-shower-800.webp"
-                 alt="Shower clad in dark onyx-look porcelain with bronze fixtures">
-            <figcaption>Pittsburg · onyx-look shower</figcaption>
+                 srcset="/assets/projects/lafayette-primary-bath__two-vanities-480.webp 480w, /assets/projects/lafayette-primary-bath__two-vanities-800.webp 800w, /assets/projects/lafayette-primary-bath__two-vanities-1200.webp 1200w, /assets/projects/lafayette-primary-bath__two-vanities-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__two-vanities-800.webp"
+                 alt="L-shaped vanity layout: a vanity with one undermount sink under a backlit mirror on the back wall, a lower corner makeup desk with a stool, and a second vanity counter with its own sink in the foreground">
+            <figcaption>Two vanities, corner makeup desk</figcaption>
+          </figure>
+          <figure class="case__shot r-clip">
+            <img loading="lazy" decoding="async" width="800" height="1067"
+                 srcset="/assets/projects/lafayette-primary-bath__shower-niche-480.webp 480w, /assets/projects/lafayette-primary-bath__shower-niche-800.webp 800w, /assets/projects/lafayette-primary-bath__shower-niche-1200.webp 1200w, /assets/projects/lafayette-primary-bath__shower-niche-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/lafayette-primary-bath__shower-niche-800.webp"
+                 alt="Recessed shower niche backed with beveled mosaic tile in gray, taupe and brown, with slab returns and shelf and a chrome-framed control panel beside it">
+            <figcaption>Mosaic-tile shower niche</figcaption>
           </figure>
         </div>
       </article>
 
-      <!-- Case study 4 -->
       <article class="case">
         <header class="case__head">
-          <h3>Open living space &amp; primary bath</h3>
-          <p class="case__meta">Interior remodel · Living &amp; bath</p>
+          <h3>Open living area &amp; bathroom</h3>
+          <p class="case__meta">Interior · Living area &amp; bath</p>
         </header>
         <div class="case__strip case__strip--three">
           <figure class="case__shot case__shot--lead r-clip">
             <img loading="lazy" decoding="async" width="800" height="1067"
-                 srcset="/assets/projects/interior-remodel__slat-wall-living-480.webp 480w, /assets/projects/interior-remodel__slat-wall-living-800.webp 800w, /assets/projects/interior-remodel__slat-wall-living-1200.webp 1200w, /assets/projects/interior-remodel__slat-wall-living-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" src="/assets/projects/interior-remodel__slat-wall-living-800.webp"
-                 alt="Open living area with a floor-to-ceiling wood slat divider, built-in cabinetry and a white quartz counter">
-            <figcaption>Slat-wall divider &amp; built-ins</figcaption>
+                 srcset="/assets/projects/interior-remodel__slat-divider-480.webp 480w, /assets/projects/interior-remodel__slat-divider-800.webp 800w, /assets/projects/interior-remodel__slat-divider-1200.webp 1200w, /assets/projects/interior-remodel__slat-divider-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" src="/assets/projects/interior-remodel__slat-divider-800.webp"
+                 alt="Living area with a floor-to-ceiling light wood-tone slat divider, matching built-in cabinets and a wood-tone plank floor">
+            <figcaption>Slat divider &amp; built-ins</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1067"
                  srcset="/assets/projects/interior-remodel__floating-vanity-480.webp 480w, /assets/projects/interior-remodel__floating-vanity-800.webp 800w, /assets/projects/interior-remodel__floating-vanity-1200.webp 1200w, /assets/projects/interior-remodel__floating-vanity-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 33vw" src="/assets/projects/interior-remodel__floating-vanity-800.webp"
-                 alt="Bathroom with a floating wood vanity, wide trough sink, wall-mounted black faucets and a backlit mirror">
+                 alt="Bathroom with a floating light wood-tone vanity, one long trough sink with two wall-mounted black faucets, a backlit mirror and a wall-hung toilet">
             <figcaption>Floating vanity &amp; trough sink</figcaption>
           </figure>
           <figure class="case__shot r-clip">
             <img loading="lazy" decoding="async" width="800" height="1067"
                  srcset="/assets/projects/interior-remodel__walk-in-shower-480.webp 480w, /assets/projects/interior-remodel__walk-in-shower-800.webp 800w, /assets/projects/interior-remodel__walk-in-shower-1200.webp 1200w, /assets/projects/interior-remodel__walk-in-shower-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 33vw" src="/assets/projects/interior-remodel__walk-in-shower-800.webp"
-                 alt="Walk-in shower with large-format stone-look tile, a fixed glass panel, a recessed niche and a linear drain">
+                 alt="Walk-in shower with large-format stone-look tile, a fixed glass panel, a long recessed niche, black fixtures and a linear drain">
             <figcaption>Walk-in shower, large-format tile</figcaption>
           </figure>
         </div>
@@ -297,10 +299,10 @@
              aria-labelledby="drawn-heading">
       <div class="scrub__stage morph__stage">
         <div class="morph__copy">
-          <h2 class="sec-head__h2" id="drawn-heading">From the plan to the finished room.</h2>
+          <h2 class="sec-head__h2" id="drawn-heading">From sketch to finished room.</h2>
           <ol class="morph__beats">
-            <li data-beat>The plan.</li>
-            <li data-beat>Oak, stone and light.</li>
+            <li data-beat>The sketch.</li>
+            <li data-beat>Wood, stone and light.</li>
             <li data-beat>As built.</li>
           </ol>
           <p class="morph__note">Interior remodel by AZ Elevated Builders. The sketch is an illustration; the last frame is the finished room.</p>
@@ -308,7 +310,7 @@
         <div class="morph__frame">
           <img class="scrub__poster" src="/assets/morph/slat-wall-v1/poster.webp"
                data-final="/assets/morph/slat-wall-v1/final.webp" width="800" height="1067" loading="lazy" decoding="async"
-               alt="Living space remodeled by AZ Elevated Builders, with a wood slat divider, built-in oak cabinetry and a quartz counter, shown first as a sketch">
+               alt="Living space remodeled by AZ Elevated Builders, with a wood slat divider, built-in wood-tone cabinetry and a stone-look counter, shown first as a sketch">
           <canvas class="scrub__canvas" aria-hidden="true"></canvas>
         </div>
       </div>
@@ -317,14 +319,14 @@
     <!-- ============ CINEMATIC BAND ============ -->
     <section class="band">
       <div class="band__bg" data-parallax="0.18">
-        <img loading="lazy" decoding="async" width="1600" height="2844"
-             srcset="/assets/projects/walnut-creek-exterior__aerial-site-480.webp 480w, /assets/projects/walnut-creek-exterior__aerial-site-800.webp 800w, /assets/projects/walnut-creek-exterior__aerial-site-1200.webp 1200w, /assets/projects/walnut-creek-exterior__aerial-site-1600.webp 1600w" sizes="100vw"
-             src="/assets/projects/walnut-creek-exterior__aerial-site-1200.webp"
-             alt="Aerial view of an AZ Elevated Builders concrete pour in progress">
+        <img loading="lazy" decoding="async" width="1600" height="652"
+             srcset="/assets/projects/stamped-driveway__pattern-wide-480.webp 480w, /assets/projects/stamped-driveway__pattern-wide-800.webp 800w, /assets/projects/stamped-driveway__pattern-wide-1200.webp 1200w, /assets/projects/stamped-driveway__pattern-wide-1600.webp 1600w" sizes="100vw"
+             src="/assets/projects/stamped-driveway__pattern-wide-1200.webp"
+             alt="Stamped concrete driveway by AZ Elevated Builders in a gray ashlar stone pattern with saw-cut control joints">
       </div>
       <div class="band__inner">
-        <h2 class="r-up">Concrete work<br><em>in Walnut Creek.</em></h2>
-        <p class="r-up" style="--i:1">Driveway, retaining wall &amp; front yard improvements</p>
+        <h2 class="r-up">Concrete, formed<br><em>and poured on site.</em></h2>
+        <p class="r-up" style="--i:1">Stamped concrete driveway by AZ Elevated Builders</p>
       </div>
     </section>
 
@@ -335,15 +337,15 @@
         <p class="sec-head__note">Our team coordinates plumbing, electrical, drywall, tile, cabinetry and painting throughout your project.</p>
       </div>
       <ul class="index__list">
-          <li><a class="index__row" href="/services/kitchen-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-wide-800.webp"><span class="index__name">Kitchen Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/bathroom-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__bath-green-wide-800.webp"><span class="index__name">Bathroom Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/whole-home-remodeling/" data-preview="/assets/projects/interior-remodel__slat-wall-living-800.webp"><span class="index__name">Whole-Home Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/additions-adus/" data-preview="/assets/projects/walnut-creek-exterior__after-front-800.webp"><span class="index__name">Additions &amp; ADUs</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/concrete-driveways/" data-preview="/assets/projects/walnut-creek-exterior__finishing-slab-800.webp"><span class="index__name">Concrete &amp; Driveways</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/painting/" data-preview="/assets/projects/walnut-creek-exterior__after-retaining-wall-800.webp"><span class="index__name">Interior &amp; Exterior Paint</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/flooring/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-run-800.webp"><span class="index__name">Flooring</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/cabinetry-countertops/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-island-800.webp"><span class="index__name">Cabinetry &amp; Countertops</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a class="index__row" href="/services/" data-preview="/assets/projects/walnut-creek-exterior__crew-pour-800.webp"><span class="index__name">All services</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/kitchen-remodeling/" data-preview="/assets/projects/oakland-kitchen-bath__apron-sink-800.webp"><span class="index__name">Kitchen Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/bathroom-remodeling/" data-preview="/assets/projects/lafayette-primary-bath__slab-shower-800.webp"><span class="index__name">Bathroom Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/whole-home-remodeling/" data-preview="/assets/projects/interior-remodel__slat-divider-800.webp"><span class="index__name">Whole-Home Remodeling</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/additions-adus/" data-preview="/assets/projects/concept__additions-adus-detached-backyard-adu-wide-800.webp"><span class="index__name">Additions &amp; ADU<span class="lc">s</span></span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/concrete-driveways/" data-preview="/assets/projects/stamped-driveway__pattern-wide-800.webp"><span class="index__name">Concrete &amp; Driveways</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/painting/" data-preview="/assets/projects/concept__painting-interior-room-wide-800.webp"><span class="index__name">Interior &amp; Exterior Paint</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/flooring/" data-preview="/assets/projects/oakland-kitchen-bath__oak-floor-800.webp"><span class="index__name">Flooring</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/cabinetry-countertops/" data-preview="/assets/projects/oakland-kitchen-bath__kitchen-overview-800.webp"><span class="index__name">Cabinetry &amp; Countertops</span><span class="index__go" aria-hidden="true">↗</span></a></li>
+          <li><a class="index__row" href="/services/" data-preview="/assets/projects/oakland-kitchen-bath__pink-shower-800.webp"><span class="index__name">All services</span><span class="index__go" aria-hidden="true">↗</span></a></li>
       </ul>
       <div class="index__preview" id="idxPreview" aria-hidden="true"><img alt="" decoding="async"></div>
     </section>
@@ -351,18 +353,20 @@
     <!-- ============ CREW — the thing a studio site can't show ============ -->
     <section class="crew" id="crew">
       <div class="crew__art r-clip">
-        <img loading="lazy" decoding="async" width="800" height="1200"
-             srcset="/assets/projects/walnut-creek-exterior__crew-grading-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-grading-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-grading-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-grading-800.webp"
-             alt="AZ Elevated Builders crew member grading a site by hand">
-        <img loading="lazy" decoding="async" width="800" height="1200"
-             srcset="/assets/projects/walnut-creek-exterior__crew-portrait-480.webp 480w, /assets/projects/walnut-creek-exterior__crew-portrait-800.webp 800w, /assets/projects/walnut-creek-exterior__crew-portrait-1200.webp 1200w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-exterior__crew-portrait-800.webp"
-             alt="AZ Elevated Builders crew member on a job site in Walnut Creek">
+        <img loading="lazy" decoding="async" width="800" height="1067"
+             srcset="/assets/projects/walnut-creek-backyard__pour-crew-480.webp 480w, /assets/projects/walnut-creek-backyard__pour-crew-800.webp 800w, /assets/projects/walnut-creek-backyard__pour-crew-1200.webp 1200w, /assets/projects/walnut-creek-backyard__pour-crew-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/walnut-creek-backyard__pour-crew-800.webp"
+             alt="Four workers placing concrete from a pump hose over a rebar grid on a Walnut Creek job">
+        <!-- Yard-sign photo: replace with the reprinted sign when it arrives. -->
+        <img loading="lazy" decoding="async" width="800" height="1067"
+             srcset="/assets/projects/yard-sign__home-front-tall-480.webp 480w, /assets/projects/yard-sign__home-front-tall-800.webp 800w, /assets/projects/yard-sign__home-front-tall-1200.webp 1200w, /assets/projects/yard-sign__home-front-tall-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 25vw" src="/assets/projects/yard-sign__home-front-tall-800.webp"
+             alt="AZ Elevated Builders yard sign with the new logo on the front lawn of a two-story home">
+        <p class="crew__note">Pour day in Walnut Creek, and our new yard sign</p>
       </div>
       <div class="crew__copy r-up">
         <h2 class="sec-head__h2">Family-run.<br>Based in Brentwood.</h2>
         <p>Alfonso Zavala leads AZ Elevated Builders, a family-run general contractor
-        serving Brentwood and the East Bay. Each trade on the crew has at least
-        15 years of experience in that specialty.</p>
+        serving Brentwood and the East Bay. Most of the crew have more than
+        15 years in their trade.</p>
         <p>We start with an on-site estimate and written scope, then coordinate
         the trades, schedule and inspections through the final walkthrough.</p>
         <a class="btn btn--outline" href="tel:+19258123150" data-cta="crew-call">Talk to Alfonso</a>
@@ -386,7 +390,7 @@
     <section class="areas">
       <div class="sec-head r-up">
         <p class="sec-head__kicker">Where we work</p>
-        <h2 class="sec-head__h2">60 miles<br>from Brentwood.</h2>
+        <h2 class="sec-head__h2">Within 60 miles<br>of Brentwood.</h2>
       </div>
       <p class="areas__links">
         <a href="/service-areas/brentwood/">Brentwood</a><a href="/service-areas/antioch/">Antioch</a><a href="/service-areas/oakley/">Oakley</a><a href="/service-areas/discovery-bay/">Discovery Bay</a><a href="/service-areas/concord/">Concord</a><a href="/service-areas/walnut-creek/">Walnut Creek</a><a href="/service-areas/danville/">Danville</a><a href="/service-areas/san-ramon/">San Ramon</a><a href="/service-areas/lafayette/">Lafayette</a><a href="/service-areas/orinda/">Orinda</a><a href="/service-areas/livermore/">Livermore</a><a href="/service-areas/pleasanton/">Pleasanton</a><a href="/service-areas/oakland/">Oakland</a><a href="/service-areas/berkeley/">Berkeley</a><a href="/service-areas/tracy/">Tracy</a><a href="/service-areas/napa/">Napa</a>
@@ -394,7 +398,7 @@
       </p>
     </section>
 
-    <section class="home-faq" aria-labelledby="faq-heading"><h2 id="faq-heading" class="sec-head__h2">Frequently asked questions.</h2><div class="faq"><details><summary>What areas does AZ Elevated Builders serve?</summary><p>AZ Elevated Builders is based in Brentwood, California and serves a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties — including Antioch, Oakley, Discovery Bay, Concord, Walnut Creek, Danville, San Ramon, Livermore, Tracy, Oakland, Berkeley and Napa.</p></details><details><summary>Does AZ Elevated Builders offer free estimates?</summary><p>Yes. Every project starts with a free on-site estimate that includes a written scope and a proposed schedule. Financing options are also available.</p></details><details><summary>Is AZ Elevated Builders licensed and insured?</summary><p>Yes. AZ Elevated Builders is a licensed, bonded and insured California general contractor based in Brentwood, and every trade on the crew has 15 or more years of experience in that specific trade.</p></details><details><summary>What warranty does AZ Elevated Builders provide?</summary><p>All work carries a written warranty of up to five years.</p></details><details><summary>Does AZ Elevated Builders speak Spanish?</summary><p>Yes — the team speaks both English and Spanish. Hablamos español.</p></details></div></section>
+    <section class="home-faq" aria-labelledby="faq-heading"><h2 id="faq-heading" class="sec-head__h2">Frequently asked questions.</h2><div class="faq"><details><summary>What areas does AZ Elevated Builders serve?</summary><p>AZ Elevated Builders is based in Brentwood, California and serves a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties — including Antioch, Oakley, Discovery Bay, Concord, Walnut Creek, Danville, San Ramon, Livermore, Tracy, Oakland, Berkeley and Napa.</p></details><details><summary>Does AZ Elevated Builders offer free estimates?</summary><p>Yes. Every project starts with a free on-site estimate that includes a written scope and a proposed schedule. Financing options are also available.</p></details><details><summary>Is AZ Elevated Builders licensed?</summary><p>Yes. AZ Elevated Builders is a licensed and bonded California general contractor (CSLB #1106795) based in Brentwood, and most of the crew have more than 15 years of experience in their trade.</p></details><details><summary>What warranty does AZ Elevated Builders provide?</summary><p>All work carries a written warranty of up to five years.</p></details><details><summary>Does AZ Elevated Builders speak Spanish?</summary><p>Yes — the team speaks both English and Spanish. Hablamos español.</p></details></div></section>
 
   </main>
 
@@ -428,7 +432,7 @@
     </div>
     <div class="foot__legal">
       <span>© 2026 AZ Elevated Builders. All rights reserved.</span>
-      <span>Licensed · Bonded · Insured</span>
+      <span>Licensed · Bonded</span>
       <span class="foot__credit">Website by <a href="https://tothemaxmedia.com" target="_blank" rel="nofollow noopener">To The Max Media</a></span>
     </div>
   </footer>
@@ -452,19 +456,29 @@
   </div>
 
   <!-- ============ CONTACT MODAL ============ -->
-  <div class="modal" id="contactModal" aria-hidden="true" inert role="dialog" aria-label="Request a free estimate">
+  <!-- data-lenis-prevent: smooth scrolling is stopped while the pop-up is open,
+       and without this it also swallowed swipes and wheel scrolls inside it. -->
+  <div class="modal" id="contactModal" data-lenis-prevent aria-hidden="true" inert role="dialog" aria-label="Request a free estimate">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel">
       <button class="modal__close" data-close aria-label="Close">✕</button>
       <h2>Get your free estimate</h2>
-      <p class="modal__sub">Leave your name and number. We'll call you back within one business day. Hablamos español.</p>
+      <p class="modal__sub">Tell us about the project and we'll call you back within one business day. Hablamos español.</p>
       <form class="modal__form" id="estimateForm" data-lead data-source="website-modal" method="post">
-        <label class="lead-field">Your name<input type="text" name="name" maxlength="100" placeholder="Your name" required autocomplete="name" enterkeyhint="next"></label>
-        <label class="lead-field">Phone number<input type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel" enterkeyhint="send"></label>
-        <details class="modal__more">
-          <summary>Add project details (optional)</summary>
-          <textarea rows="3" name="details" maxlength="2000" placeholder="What are you looking to build or remodel?" aria-label="Project details"></textarea>
-        </details>
+    <!-- lead-fields -->
+    <p class="lead-required">All fields are required.</p>
+    <div class="lead-grid">
+      <div class="lead-field"><label for="lead-name">Your name</label><input id="lead-name" type="text" name="name" maxlength="100" placeholder="First and last name" required autocomplete="name"></div>
+      <div class="lead-field"><label for="lead-phone">Phone number</label><input id="lead-phone" type="tel" name="phone" maxlength="25" placeholder="(925) 555-0123" required autocomplete="tel" inputmode="tel"></div>
+      <div class="lead-field"><label for="lead-email">Email</label><input id="lead-email" type="email" name="email" maxlength="150" placeholder="you@example.com" required autocomplete="email" inputmode="email"></div>
+      <div class="lead-field"><label for="lead-city">Project city</label><input id="lead-city" type="text" name="city" list="lead-cities" maxlength="100" placeholder="Start typing your city" required autocomplete="address-level2"></div>
+      <div class="lead-field"><label for="lead-service">Type of project</label><select id="lead-service" name="service" required><option value="" selected>Choose one</option><option>Kitchen Remodeling</option><option>Bathroom Remodeling</option><option>Whole-Home Remodeling</option><option>Home Additions &amp; ADUs</option><option>Concrete &amp; Driveways</option><option>Interior &amp; Exterior Painting</option><option>Flooring Installation</option><option>Drywall Installation &amp; Repair</option><option>Cabinetry &amp; Countertops</option><option>Finish Carpentry &amp; Trim</option><option>Steam Showers, Saunas &amp; Heated Floors</option><option>Pergolas &amp; Outdoor Living</option><option>Something else</option></select></div>
+      <div class="lead-field"><label for="lead-timeline">When would you like to start?</label><select id="lead-timeline" name="timeline" required><option value="" selected>Choose one</option><option>As soon as possible</option><option>Within 1–3 months</option><option>In 3–6 months</option><option>Just planning for now</option></select></div>
+      <div class="lead-field lead-field--wide"><label for="lead-details">Tell us about the project</label><textarea id="lead-details" name="details" rows="4" minlength="20" maxlength="2000" required aria-describedby="lead-details-hint" placeholder="Which rooms or areas, the rough size, and what you'd like changed."></textarea><span class="lead-hint" id="lead-details-hint">A sentence or two (at least 20 characters). Please leave out links.</span></div>
+    </div>
+    <datalist id="lead-cities"><option value="Brentwood"></option><option value="Oakley"></option><option value="Antioch"></option><option value="Discovery Bay"></option><option value="Pittsburg"></option><option value="Concord"></option><option value="Clayton"></option><option value="Walnut Creek"></option><option value="Pleasant Hill"></option><option value="Martinez"></option><option value="Lafayette"></option><option value="Orinda"></option><option value="Moraga"></option><option value="Alamo"></option><option value="Danville"></option><option value="San Ramon"></option><option value="Richmond"></option><option value="El Cerrito"></option><option value="Oakland"></option><option value="Berkeley"></option><option value="Alameda"></option><option value="San Leandro"></option><option value="Castro Valley"></option><option value="Hayward"></option><option value="Dublin"></option><option value="Pleasanton"></option><option value="Livermore"></option><option value="Fremont"></option><option value="Tracy"></option><option value="Mountain House"></option><option value="Lathrop"></option><option value="Manteca"></option><option value="Stockton"></option><option value="Rio Vista"></option><option value="Fairfield"></option><option value="Vacaville"></option><option value="Vallejo"></option><option value="Benicia"></option><option value="Napa"></option><option value="American Canyon"></option></datalist>
+    <div class="lead-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="azeb_check" tabindex="-1" autocomplete="off"></label></div>
+    <!-- /lead-fields -->
         <button type="submit" class="btn btn--solid" disabled>Request My Free Estimate <span aria-hidden="true">→</span></button>
         <p class="lead-privacy">By submitting, you ask AZ Elevated Builders to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
         <p class="lead-status" data-lead-status role="status" aria-live="polite" tabindex="-1"></p>
@@ -477,9 +491,9 @@
   <noscript><style>#fab, #contactModal { display:none }</style></noscript>
 
   <script>window.AZEB_LEAD_ENDPOINT="https://hook.us2.make.com/iva9bps6bve2k4lodckbgu266qets1yr";</script>
-  <script defer src="/js/leads.js?v=58466834"></script>
+  <script defer src="/js/leads.js?v=540671b2"></script>
   <script defer src="/js/lenis.min.js?v=e0264eed"></script>
-  <script defer src="/js/main.js?v=72da0926"></script>
-  <script defer src="/js/morph.js?v=2479340d"></script>
+  <script defer src="/js/main.js?v=be8e27be"></script>
+  <script defer src="/js/morph.js?v=44b0a86d"></script>
 </body>
 </html>

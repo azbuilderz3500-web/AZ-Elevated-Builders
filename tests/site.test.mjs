@@ -186,3 +186,15 @@ test('no internal notes about the sign or missing photos in public page source',
   const home = read('index.html');
   assert.ok(!/does not exist|No before\/after pair|captions say only what is visible|not yet confirmed|one sink|11066795/.test(home));
 });
+
+test('no page advertises that the contractor is bonded or insured (CSLB advertising rules; insurance unconfirmed)', () => {
+  // CSLB Advertising Guidelines: "The law prevents you from noting in your
+  // advertising or any presentation to the public that you are bonded."
+  // (B&P 7071.13, 7027.4(b)). Liability insurance is not confirmed either.
+  const rootPages = readdirSync(root).filter(f => f.endsWith('.html')).map(file => ({ file, html: read(file) }));
+  for (const { file, html } of [...pages, ...rootPages, { file: 'llms.txt', html: read('llms.txt') }]) {
+    const text = html.replace(/<[^>]+>/g, ' ');
+    assert.ok(!/\bbonded\b/i.test(text), `${file}: bonded`);
+    assert.ok(!/\binsured\b/i.test(text), `${file}: insured`);
+  }
+});

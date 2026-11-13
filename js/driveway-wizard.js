@@ -10,12 +10,23 @@
   const back = form.querySelector("[data-back]");
   const submit = form.querySelector('button[type="submit"]');
   const status = form.querySelector("[data-lead-status]");
+  const privacy = form.querySelector(".lead-privacy");
+  // Funnel events for GA4 (no contact data): where do visitors stop?
+  const STEP_NAMES = ["project", "size", "location", "contact"];
+  const reached = new Set([0]);
+  const report = (event, params = {}) => {
+    if (typeof window.gtag === "function") window.gtag("event", event, { lead_source: "driveway-landing", ...params });
+  };
+  form.addEventListener("change", () => report("wizard_start"), { once: true });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let current = 0;
   let editing = false;
   let busy = false;
   let complete = false;
   let animation;
+  let stepShownAt = 0;   // when the current step appeared (guards double taps)
+  let lastPointer = "";  // "mouse", "touch" or "pen" from the latest press
+  form.addEventListener("pointerdown", event => { lastPointer = event.pointerType; }, true);
   const value = name => form.elements.namedItem(name)?.value.trim() || "";
 
   function clearError(index) {
@@ -61,6 +72,7 @@
 
   function show(index, { focus = true, motion = false } = {}) {
     if (busy || complete) return;
+    if (index !== current) stepShownAt = performance.now();
     const direction = index < current ? -1 : 1;
     current = index;
     animation?.cancel();
@@ -76,7 +88,9 @@
     next.hidden = current === steps.length - 1;
     next.innerHTML = `${editing ? 'Save &amp; review' : 'Continue'} <span aria-hidden="true">→</span>`;
     submit.hidden = current !== steps.length - 1;
+    if (privacy) privacy.hidden = current !== steps.length - 1;
     updateReview();
+    if (!reached.has(current)) { reached.add(current); report("wizard_step", { step_number: current + 1, step_name: STEP_NAMES[current] }); }
     if (focus) {
       const heading = steps[current].querySelector("legend");
       heading.focus({ preventScroll: true });
@@ -120,15 +134,31 @@
     status.textContent = "";
     show(target, { motion: event.detail > 0 });
   });
-  form.querySelectorAll("[data-edit]").forEach(button => {
-    button.addEventListener("click", event => {
-      if (busy || complete) return;
-      editing = true;
-      status.textContent = "";
-      show(Number(button.dataset.edit), { motion: event.detail > 0 });
+  steps.forEach((step, index) => step.addEventListener("input", () => clearError(index)));
+  // Touch and mouse: choosing an option on step 1 or 2 moves straight on, so
+  // nobody has to find Continue under the phone call bar. Keyboard users
+  // (arrow keys also change a radio) keep using Continue.
+  // Desktop mouse users have no call bar in the way and keep using Continue.
+  steps.slice(0, 2).forEach((step, index) => {
+    // A double tap must not pick an option on the step that just appeared.
+    step.addEventListener("click", event => {
+      if (lastPointer !== "mouse" && event.detail > 0 && performance.now() - stepShownAt < 500 && event.target.closest(".wizard-choice")) event.preventDefault();
+    }, true);
+    step.addEventListener("pointerup", event => {
+      const choice = event.target.closest(".wizard-choice");
+      if (!choice || event.pointerType === "mouse" || performance.now() - stepShownAt < 500) return;
+      setTimeout(() => {
+        if (current === index && !busy && !complete && choice.querySelector("input").checked) advance(true);
+      }, 180);
     });
   });
-  steps.forEach((step, index) => step.addEventListener("input", () => clearError(index)));
+  // "Change" on the last step starts again at step 1 with the answers kept.
+  form.querySelector("[data-restart]")?.addEventListener("click", event => {
+    if (busy || complete) return;
+    editing = false;
+    status.textContent = "";
+    show(0, { motion: event.detail > 0 });
+  });
 
   // Capture Enter as well as clicks before the shared delivery handler can run.
   form.addEventListener("submit", event => {
@@ -161,6 +191,7 @@
     form.querySelectorAll(".wizard-actions button").forEach(button => { button.disabled = busy || complete; });
     if (complete) {
       animation?.cancel();
+      if (privacy) privacy.hidden = true;
       form.querySelector(".wizard-panels").hidden = true;
       form.querySelector(".wizard-actions").hidden = true;
       form.querySelector(".wizard-reassurance").hidden = true;
@@ -176,6 +207,6 @@
   // All fields remain visible if enhancement fails; the call fallback always works.
   form.classList.add("is-wizard-ready");
   progress.hidden = false;
-  form.querySelector(".wizard-review").hidden = false;
+  form.querySelector(".wizard-summary").hidden = false;
   show(0, { focus: false });
 })();

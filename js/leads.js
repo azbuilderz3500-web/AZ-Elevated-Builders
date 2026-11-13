@@ -174,6 +174,7 @@
         // An error inside a closed "optional notes" panel must be visible.
         const panel = invalid.closest("details");
         if (panel) panel.open = true;
+        track("lead_invalid", source);
         invalid.focus(); return;
       }
 
@@ -236,6 +237,7 @@
         status.textContent = successText;
         track("generate_lead", source, leadId);
       } catch (err) {
+        track("lead_error", source);
         status.textContent = err.name === "AbortError"
           ? "We couldn’t confirm delivery. Your details are still here. Please call (925) 812-3150 below, or try again."
           : "Your request didn’t send. Your details are still here. Try again or call (925) 812-3150 below.";

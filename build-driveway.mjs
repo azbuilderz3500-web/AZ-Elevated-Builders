@@ -15,7 +15,6 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
   const photo = (name, alt, height = 1800, eager = false) => `<img src="/assets/projects/${name}-1200.webp" srcset="/assets/projects/${name}-480.webp 480w, /assets/projects/${name}-800.webp 800w, /assets/projects/${name}-1200.webp 1200w, /assets/projects/${name}-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 46vw" width="1200" height="${height}" alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
   const assurance = (icon, title, body) => `<li><span class="drive-assure__icon" aria-hidden="true">${icon}</span><div><strong>${title}</strong><span>${body}</span></div></li>`;
-  const iconBadge = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.2 7.9 8 9 4.8-1.1 8-4.6 8-9V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>`;
   const iconScope = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`;
   const iconClock = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg>`;
 
@@ -40,8 +39,14 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
   <section class="drive-hero" aria-labelledby="drive-title">
     <div class="drive-estimate" id="estimate">
       <p class="drive-brand"><img class="brandmark" src="/assets/brand/mark-white.svg" alt="" width="96" height="77"><img class="brandword" src="/assets/brand/wordmark-white.svg" alt="AZ Elevated Builders" width="132" height="30"></p>
-      <p class="drive-badge"><span aria-hidden="true">${iconBadge}</span>CSLB #1106795 &middot; Licensed &amp; bonded</p>
       <h1 id="drive-title">Get your free driveway estimate.</h1>
+      <ul class="drive-proof">
+        <li><a href="#reviews"><span class="drive-proof__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> ${brand.reviews.rating} &middot; ${brand.reviews.count} Google reviews</a></li>
+        <li>CSLB Lic. #1106795 &middot; Licensed general contractor</li>
+      </ul>
+      <ul class="drive-proof drive-proof--offer">
+        <li>Free on-site estimate</li><li>Warranty up to 5 years</li><li>Financing available</li><li>Family-owned</li><li>Hablamos espa&ntilde;ol</li>
+      </ul>
       <p class="drive-hero__intro">Tell us about your driveway. We call back <strong>within two hours</strong>, Mon&ndash;Fri, 8am&ndash;6pm.</p>
       <form data-lead data-wizard data-source="driveway-landing" data-success="Thank you. Your request is in. We will call you back within two hours, Monday to Friday, 8am to 6pm. Need us sooner? Call ${brand.phone} below." class="drive-form" method="post">
         <input type="hidden" name="service" value="Concrete driveway replacement">
@@ -50,7 +55,7 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
         <ol class="wizard-progress" aria-label="Estimate steps" hidden>${['Project', 'Size', 'Location', 'Contact'].map((label, i) => `<li${i === 0 ? ' aria-current="step"' : ''}><span class="wizard-progress__number" aria-hidden="true">${i + 1}</span><span>${label}</span></li>`).join('')}</ol>
         <div class="wizard-panels">
           <fieldset class="wizard-step" data-step="0">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 1 of 4 / Your project</span>What are we replacing?</legend>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 1 of 4 / Your project</span>What are we replacing?<span class="wizard-hint">Choose one to continue</span></legend>
             <div class="wizard-choices">
               ${choice('project', 'Replace my driveway', 'Replace my driveway', 'Remove and replace the existing concrete.', sketch('replace'))}
               ${choice('project', 'Replace and widen', 'Replace &amp; widen', 'Replace the concrete and add parking space.', sketch('widen'))}
@@ -59,7 +64,7 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
             <p class="wizard-error" id="wizard-error-0" hidden></p>
           </fieldset>
           <fieldset class="wizard-step" data-step="1">
-            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 2 of 4 / Driveway size</span>About how wide is it?</legend>
+            <legend class="wizard-heading" tabindex="-1"><span class="wizard-eyebrow">Step 2 of 4 / Driveway size</span>About how wide is it?<span class="wizard-hint">Choose one to continue</span></legend>
             <div class="wizard-choices wizard-choices--size">
               ${choice('size', 'Single-car width', 'Single-car', 'One car wide', garage(1))}
               ${choice('size', 'Two-car width', 'Two-car', 'Two cars wide', garage(2))}
@@ -82,23 +87,34 @@ export function drivewayBody({ brand, cities, phoneIcon, footer, wizardScript })
               <div class="lead-field"><label for="dw-phone">Phone number</label><input id="dw-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="(925) 555-0123"></div>
               <div class="lead-field lead-field--wide"><label for="dw-email">Email</label><input id="dw-email" type="email" name="email" autocomplete="email" inputmode="email" maxlength="150" required placeholder="you@example.com"></div>
             </div>
-            <div class="wizard-review" hidden><p>Review your project details</p><dl>
-              <div><dt>Project</dt><dd data-review="project"></dd><button type="button" data-edit="0" aria-label="Edit project">Edit</button></div>
-              <div><dt>Size</dt><dd data-review="size"></dd><button type="button" data-edit="1" aria-label="Edit driveway size">Edit</button></div>
-              <div><dt>Location</dt><dd data-review="city"></dd><button type="button" data-edit="2" aria-label="Edit location and timing">Edit</button></div>
-              <div><dt>Timing</dt><dd data-review="timing"></dd></div>
-            </dl></div>
+            <p class="wizard-summary" hidden><span data-review="project"></span> &middot; <span data-review="size"></span> &middot; <span data-review="city"></span><button type="button" class="wizard-summary__edit" data-restart aria-label="Change project, size or city">Change</button></p>
             <details class="drive-details"><summary>Anything else we should know? <span>(optional)</span></summary><div class="lead-field"><label for="dw-notes">Project notes</label><textarea id="dw-notes" name="notes" rows="2" maxlength="1500" placeholder="Damage, access, a finish you like&hellip;"></textarea></div></details>
-            <p class="lead-privacy">By submitting, you ask AZ Elevated Builders to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
           </fieldset>
         </div>
         <div class="wizard-actions"><button class="wizard-back" type="button" data-back hidden><span aria-hidden="true">&larr;</span> Back</button><button type="button" class="btn btn--solid wizard-next" data-next hidden>Continue <span aria-hidden="true">&rarr;</span></button><button type="submit" class="btn btn--solid" disabled>Request my free estimate</button></div>
         <p class="wizard-reassurance">Free &middot; No obligation &middot; Takes about 2 minutes</p>
+        <p class="lead-privacy">By submitting, you ask AZ Elevated Builders to contact you about your project. <a href="/privacy.html">Privacy policy</a>.</p>
         <div class="wizard-success" hidden><span class="wizard-success__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><h3>Your request is in.</h3><p>We will call you back within two hours, Monday to Friday, 8am to 6pm.</p></div>
         <p class="lead-status" data-lead-status role="status" aria-live="polite" tabindex="-1"></p>
       </form>
       <noscript><p>Please call us to request your estimate.</p></noscript>
       <a class="drive-form-call" href="tel:${brand.phoneHref}" data-cta="driveway-form">Prefer to talk? ${brand.phone}</a>
+    </div>
+  </section>
+
+  <section class="drive-work" id="work" aria-labelledby="work-title">
+    <h2 id="work-title">Photos from AZ Elevated Builders jobs</h2>
+    <figure class="drive-shot">
+      <img src="/assets/projects/stamped-driveway__pattern-wide-1200.webp" srcset="/assets/projects/stamped-driveway__pattern-wide-480.webp 480w, /assets/projects/stamped-driveway__pattern-wide-800.webp 800w, /assets/projects/stamped-driveway__pattern-wide-1200.webp 1200w, /assets/projects/stamped-driveway__pattern-wide-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 1000px" width="1200" height="489" loading="lazy" decoding="async" alt="Stamped concrete driveway by AZ Elevated Builders in a gray ashlar stone pattern with saw-cut control joints, beside a planter curb">
+      <figcaption>Finished: a stamped concrete driveway in a gray ashlar stone pattern, with saw-cut control joints.</figcaption>
+    </figure>
+    <figure class="drive-shot drive-shot--progress">
+      <img src="/assets/projects/walnut-creek-backyard__forms-rebar-800.webp" srcset="/assets/projects/walnut-creek-backyard__forms-rebar-480.webp 480w, /assets/projects/walnut-creek-backyard__forms-rebar-800.webp 800w, /assets/projects/walnut-creek-backyard__forms-rebar-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 640px" width="1200" height="1600" loading="lazy" decoding="async" alt="Drone view straight down on a Walnut Creek backyard: wood forms laid out inside a curved block retaining wall, a rebar grid over gravel in one bay and the concrete pump hose in place">
+      <figcaption>In progress, a Walnut Creek backyard slab: forms and rebar set over a gravel base before the pour.</figcaption>
+    </figure>
+    <div class="drive-reviews" id="reviews">
+      <p class="drive-reviews__score"><span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> ${brand.reviews.rating} from ${brand.reviews.count} Google reviews</p>
+      <a href="${brand.gbp}" target="_blank" rel="noopener" data-cta="driveway-reviews">Read them on Google</a>
     </div>
   </section>
 

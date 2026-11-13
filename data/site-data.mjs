@@ -11,6 +11,9 @@ export const BRAND = {
   city: "Brentwood",
   state: "CA",
   license: "CSLB Lic. # 1106795",
+  // Public Google Maps listing (Business Profile), checked 2026-11-12: 5.0 from 6 reviews.
+  gbp: "https://www.google.com/maps?cid=17202034293579155865",
+  reviews: { rating: "5.0", count: 6 },
   // Single canonical entity node every page points at, so Google and AI
   // assistants resolve all 534 pages to one business.
   // Lead destination. Paste the Make custom-webhook URL here and rebuild —
@@ -29,7 +32,6 @@ export const BRAND = {
   adsConversionId: "AW-17025083840",
   adsConversionLabel: "",
   entityId: "https://azelevatedbuilders.com/#organization",
-  gbp: "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
   sameAs: [
     "https://www.google.com/maps/place/Az+Elevated+Builders/data=!4m2!3m1!1s0x0:0xeeb9e70cbadf8999",
     // TODO: add real Instagram / Facebook / Yelp / Houzz URLs when supplied

@@ -98,8 +98,9 @@ const srcsetFor = (url) => {
 // Share previews need an absolute URL, and JPEG reaches every platform
 // (several link unfurlers still drop WebP). A shared link has no room for the
 // on-page "Illustration" note, so pages whose banner is an AI illustration
-// share the real yard-sign photo instead (TEMPORARY: swap with the homepage hero once the sign is reprinted with LIC 1106795).
-const SHARE_FALLBACK = "/assets/projects/yard-sign__home-front-1200.jpg";
+// share a real finished job instead: the Oakland kitchen. (Not the yard-sign
+// photo: the sign prints a wrong license number until it is reprinted.)
+const SHARE_FALLBACK = "/assets/projects/oakland-kitchen-bath__kitchen-table-wide-1200.jpg";
 const shareImage = (url) => {
   const u = url.includes("/concept__") ? SHARE_FALLBACK : url;
   return u.startsWith("/assets/projects/") ? BRAND.domain + u.replace(/\.webp$/, ".jpg") : u;
@@ -225,7 +226,7 @@ const nav = `
 const trustStrip = `
 <div class="trust-strip">
   <span class="stars" aria-hidden="true">★★★★★</span><span>5.0 from 6 Google reviews</span>
-  <span class="dot">·</span><span>CA Licensed &amp; Bonded</span>
+  <span class="dot">·</span><span>CA Licensed · CSLB #1106795</span>
   <span class="dot">·</span><span>Free Estimates</span>
   <span class="dot">·</span><span>Warranties up to 5 Years</span>
   <span class="dot">·</span><span>Financing Available</span>
@@ -387,7 +388,7 @@ CITIES.forEach((city, ci) => {
   </div>
   <div class="answer-box">
     <p class="answer-box__q">Who offers ${esc(svc.phrase)} in ${esc(city.name)}, CA?</p>
-    <p class="answer-box__a"><strong>${esc(BRAND.name)}</strong> provides ${esc(svc.phrase)} in ${esc(city.name)}, California. We are a family-run, licensed and bonded general contractor ${isHome
+    <p class="answer-box__a"><strong>${esc(BRAND.name)}</strong> provides ${esc(svc.phrase)} in ${esc(city.name)}, California. We are a family-run, licensed general contractor (CSLB #1106795) ${isHome
       ? `based in ${esc(city.name)}, serving the surrounding ${esc(city.county)} area`
       : `based in ${esc(BRAND.city)}, serving ${esc(city.name)} and the surrounding ${esc(city.county)} area`}. Estimates are free, most of our crew have more than 15 years in their trade, and all work carries a written warranty of up to five years. We speak English and Spanish. Call <a href="tel:${BRAND.phoneHref}" data-cta="answer-call">${esc(BRAND.phone)}</a>.</p>
   </div>
@@ -437,7 +438,7 @@ CITIES.forEach((city, ci) => {
   const cityPath = `/service-areas/${city.slug}/`;
   const cityTitle = `Home Remodeling & Construction in ${city.name}, CA | ${BRAND.name}`;
   const cityDesc = `Remodeling and construction in ${city.name}, CA: kitchens, baths, ADUs, driveways and more. Family-run, licensed, based in Brentwood. Free estimates.`;
-  // Cities where AZ has a photographed job lead with it; the rest share the yard-sign photo.
+  // Cities where AZ has a photographed job lead with it; the rest share SHARE_FALLBACK (the Oakland kitchen).
   const ownJob = CITY_JOBS[city.slug];
   const cityHtml = head({
     title: cityTitle, desc: cityDesc, path: cityPath, image: ownJob ? ownJob.img : SHARE_FALLBACK,
@@ -630,7 +631,7 @@ write("_headers",
 // Optional machine-readable summary; Google Search does not use llms.txt for ranking.
 const llms = `# ${BRAND.name}
 
-> Family-owned, licensed and bonded general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
+> Family-owned, licensed general contractor (CSLB #1106795) based in ${BRAND.city}, California, serving a 60-mile radius across the East Bay, Tri-Valley, Delta, Solano and Napa counties. Founded and run by Alfonso Zavala. Phone ${BRAND.phone} · ${BRAND.email}.
 
 Key facts: free on-site estimates with a written scope; written warranty of up to 5 years on all work; financing available; most of the crew have more than 15 years of experience in their trade; the team speaks English and Spanish (hablamos español). Services include kitchen and bathroom remodeling, whole-home remodels, additions and ADUs, concrete driveways and retaining walls, interior and exterior painting, flooring, drywall, cabinetry and countertops, finish carpentry, steam showers and saunas, and outdoor living. Business hours Monday-Friday 8am-6pm.
 

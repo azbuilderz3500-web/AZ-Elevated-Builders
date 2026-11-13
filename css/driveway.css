@@ -239,3 +239,49 @@
   .lead-field--wide { grid-column: auto; }
 }
 .drive-steps h2 { text-wrap: balance; }
+
+/* Landing audit 2026-11-12. Proof on the first screen (P1-4). */
+.drive-proof { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; margin: .7rem 0 0; padding: 0; font-size: .8125rem; color: var(--copy); }
+.drive-proof + .drive-proof { margin-top: .35rem; }
+.drive-proof li { display: inline-flex; align-items: center; gap: .35rem; }
+.drive-proof a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.drive-proof__stars { color: var(--gold); letter-spacing: .05em; }
+.drive-hero__intro { margin-top: .8rem; }
+/* The wizard fits a phone screen (P1-3): a hint instead of hunting for
+   Continue, a one-line summary on step 4, and tighter spacing so Continue
+   and Send clear the call bar. */
+.wizard-hint { display: block; font-family: var(--font-body); font-size: .8125rem; font-weight: 400; letter-spacing: 0; color: var(--copy); margin-top: .35rem; }
+.wizard-summary { margin: 1rem 0 .25rem; font-size: .8125rem; color: #c9d0dc; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; }
+.wizard-summary__edit { border: 0; background: none; color: var(--gold); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; min-width: 44px; font: inherit; cursor: pointer; }
+.drive-form > .lead-privacy { text-align: center; margin-top: .5rem; }
+@media (max-width: 900px) {
+  .drive-hero { padding-top: .75rem; }
+  .drive-estimate { padding: 1rem 1.1rem 1.1rem; }
+  .drive-brand { margin-bottom: .6rem; }
+  .drive-brand .brandmark { width: auto; height: 30px; }
+  .drive-brand .brandword { width: auto; height: 22px; }
+  .drive h1 { font-size: 1.65rem; line-height: 1.1; }
+  .drive-hero__intro { margin: .55rem 0 1rem; font-size: .875rem; line-height: 1.5; }
+  .wizard-progress { margin-bottom: 1rem; }
+  .wizard-progress li { padding-bottom: .55rem; }
+  .wizard-heading { font-size: 1.45rem; margin-bottom: .6rem; }
+  .wizard-choices { gap: .5rem; }
+  .wizard-choice__surface { min-height: 66px; padding: .55rem .75rem; }
+  .wizard-sketch { width: 44px; height: 38px; }
+  .wizard-choices--size .wizard-choice__surface { min-height: 104px; padding: .7rem .5rem; }
+  .wizard-garage { height: 38px; }
+  .wizard-actions { margin-top: 1rem; }
+  .drive-bar { padding-top: .45rem; padding-bottom: calc(.45rem + env(safe-area-inset-bottom)); }
+  .drive-bar a { min-height: 46px; }
+}
+/* Real work and the review score, below the form (P1-5). */
+.drive-work { max-width: 1100px; margin: auto; padding: clamp(2.5rem, 5vw, 4rem) 5vw 0; }
+.drive-work h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 1.25rem; text-wrap: balance; }
+.drive-shot { margin: 0 0 1.25rem; }
+.drive-shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.drive-shot--progress img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 40%; max-width: 640px; }
+.drive-work figcaption { margin-top: .55rem; font-size: .8125rem; line-height: 1.55; color: var(--copy); }
+.drive-reviews { margin-top: .5rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
+.drive-reviews__score { font-weight: 600; }
+.drive-reviews__score span { color: var(--gold); letter-spacing: .05em; }
+.drive-reviews a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center; }
